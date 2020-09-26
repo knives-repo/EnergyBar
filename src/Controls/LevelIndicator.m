@@ -54,7 +54,7 @@
 
             NSView* view = [[NSView alloc] initWithFrame:rc];
             [view setWantsLayer:YES];
-            [view.layer setBackgroundColor:[[NSColor colorFromHex:0x808080] CGColor]];
+            [view.layer setBackgroundColor:[[NSColor colorFromHex:0x757575] CGColor]];
             [self addSubview:view];
 
         } else {
