@@ -14,5 +14,5 @@
 #import <Cocoa/Cocoa.h>
 #import "CustomWidget.h"
 
-@interface VolumeControlWidget : CustomWidget
+@interface VolumeWidget : CustomWidget
 @end

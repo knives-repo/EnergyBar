@@ -38,7 +38,7 @@
         [control setWidth:64 forSegment:i];
     }
     
-    self.customizationLabel = @"Volume Control";
+    self.customizationLabel = @"Volume";
     self.view = control;
     
     [AudioControl sharedInstanceOutput];

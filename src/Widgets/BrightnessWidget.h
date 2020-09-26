@@ -14,5 +14,5 @@
 #import <Cocoa/Cocoa.h>
 #import "CustomWidget.h"
 
-@interface BrightnessControlWidget : CustomWidget
+@interface BrightnessWidget : CustomWidget
 @end

@@ -53,12 +53,16 @@
 		3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CFECA102122611F00BB58E9 /* LoginItem.c */; };
 		405B467A219A3CCA0006DC16 /* LockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 405B4678219A3CCA0006DC16 /* LockWidget.m */; };
 		405B467C219A3D2D0006DC16 /* login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405B467B219A3D2D0006DC16 /* login.framework */; };
-		8D33B986251E6BC0006AFCC9 /* VolumeControlWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeControlWidget.m */; };
+		8D33B986251E6BC0006AFCC9 /* VolumeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */; };
 		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; };
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
 		8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245B251F6F35004FF191 /* LevelIndicator.m */; };
 		8D9D245F251F8D2B004FF191 /* NSColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */; };
-		8DE31D13251EFE7E004E835B /* BrigthnessControlWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessControlWidget.m */; };
+		8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D2464251FB14D004FF191 /* BacklightWidget.m */; };
+		8D9D2467251FB372004FF191 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9D2466251FB372004FF191 /* IOKit.framework */; };
+		8D9D246A251FBA27004FF191 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9D2468251FBA27004FF191 /* CoreFoundation.framework */; };
+		8D9D246B251FBA27004FF191 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9D2469251FBA27004FF191 /* CoreGraphics.framework */; };
+		8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -158,8 +162,8 @@
 		405B4678219A3CCA0006DC16 /* LockWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockWidget.m; sourceTree = "<group>"; };
 		405B4679219A3CCA0006DC16 /* LockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockWidget.h; sourceTree = "<group>"; };
 		405B467B219A3D2D0006DC16 /* login.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = login.framework; path = ../../../../../../System/Library/PrivateFrameworks/login.framework; sourceTree = "<group>"; };
-		8D33B984251E6BC0006AFCC9 /* VolumeControlWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeControlWidget.h; sourceTree = "<group>"; };
-		8D33B985251E6BC0006AFCC9 /* VolumeControlWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeControlWidget.m; sourceTree = "<group>"; };
+		8D33B984251E6BC0006AFCC9 /* VolumeWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeWidget.h; sourceTree = "<group>"; };
+		8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeWidget.m; sourceTree = "<group>"; };
 		8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicMuteWidget.m; sourceTree = "<group>"; };
 		8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicMuteWidget.h; sourceTree = "<group>"; };
 		8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezelWindow.h; sourceTree = "<group>"; };
@@ -168,8 +172,13 @@
 		8D9D245B251F6F35004FF191 /* LevelIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelIndicator.m; sourceTree = "<group>"; };
 		8D9D245D251F8D2B004FF191 /* NSColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Hex.h"; sourceTree = "<group>"; };
 		8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Hex.m"; sourceTree = "<group>"; };
-		8DE31D11251EFE7E004E835B /* BrightnessControlWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessControlWidget.h; sourceTree = "<group>"; };
-		8DE31D12251EFE7E004E835B /* BrigthnessControlWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrigthnessControlWidget.m; sourceTree = "<group>"; };
+		8D9D2463251FB14D004FF191 /* BacklightWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BacklightWidget.h; sourceTree = "<group>"; };
+		8D9D2464251FB14D004FF191 /* BacklightWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BacklightWidget.m; sourceTree = "<group>"; };
+		8D9D2466251FB372004FF191 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		8D9D2468251FBA27004FF191 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		8D9D2469251FBA27004FF191 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8DE31D11251EFE7E004E835B /* BrightnessWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessWidget.h; sourceTree = "<group>"; };
+		8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrigthnessWidget.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,10 +188,13 @@
 			files = (
 				405B467C219A3D2D0006DC16 /* login.framework in Frameworks */,
 				3C83DB48211D851700FC2F53 /* CoreBrightness.framework in Frameworks */,
+				8D9D246A251FBA27004FF191 /* CoreFoundation.framework in Frameworks */,
 				3CE58CE72162B79700633D5D /* DisplayServices.framework in Frameworks */,
+				8D9D2467251FB372004FF191 /* IOKit.framework in Frameworks */,
 				3CA1DD88212D3F7A00D95DE1 /* MediaRemote.framework in Frameworks */,
 				3C01F8F02161CE7400FFD2C6 /* SkyLight.framework in Frameworks */,
 				3C3464C221471797001F45BB /* WeatherKit.framework in Frameworks */,
+				8D9D246B251FBA27004FF191 /* CoreGraphics.framework in Frameworks */,
 				3C665D0221619E870004D9EC /* OctoFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,8 +310,10 @@
 			children = (
 				3C4013C0211BBC8D00C47B66 /* ActiveAppWidget.h */,
 				3C4013C1211BBC8D00C47B66 /* ActiveAppWidget.m */,
-				8DE31D11251EFE7E004E835B /* BrightnessControlWidget.h */,
-				8DE31D12251EFE7E004E835B /* BrigthnessControlWidget.m */,
+				8D9D2463251FB14D004FF191 /* BacklightWidget.h */,
+				8D9D2464251FB14D004FF191 /* BacklightWidget.m */,
+				8DE31D11251EFE7E004E835B /* BrightnessWidget.h */,
+				8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */,
 				3C5D0FCC2119210000769A39 /* ClockWidget.h */,
 				3C5D0FCD2119210000769A39 /* ClockWidget.m */,
 				3C102D4921197ED700FFB2CF /* ControlWidget.h */,
@@ -318,8 +332,8 @@
 				3CA1DD85212D3DB200D95DE1 /* NowPlayingWidget.m */,
 				3C400078236CC6A3000261FF /* TodoWidget.h */,
 				3C400077236CC6A3000261FF /* TodoWidget.m */,
-				8D33B984251E6BC0006AFCC9 /* VolumeControlWidget.h */,
-				8D33B985251E6BC0006AFCC9 /* VolumeControlWidget.m */,
+				8D33B984251E6BC0006AFCC9 /* VolumeWidget.h */,
+				8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */,
 				3C3464BD21465319001F45BB /* WeatherWidget.h */,
 				3C3464BE21465319001F45BB /* WeatherWidget.m */,
 			);
@@ -329,6 +343,9 @@
 		3C83DB46211D851600FC2F53 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D9D2468251FBA27004FF191 /* CoreFoundation.framework */,
+				8D9D2469251FBA27004FF191 /* CoreGraphics.framework */,
+				8D9D2466251FB372004FF191 /* IOKit.framework */,
 				405B467B219A3D2D0006DC16 /* login.framework */,
 				3C83DB47211D851700FC2F53 /* CoreBrightness.framework */,
 				3CE58CE62162B79700633D5D /* DisplayServices.framework */,
@@ -456,7 +473,7 @@
 				8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */,
 				3C9E264A211E2A9F0042C2E8 /* Brightness.c in Sources */,
 				3CDF1EB4211A3B9500739051 /* DockWidget.m in Sources */,
-				8D33B986251E6BC0006AFCC9 /* VolumeControlWidget.m in Sources */,
+				8D33B986251E6BC0006AFCC9 /* VolumeWidget.m in Sources */,
 				8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */,
 				3C046013211D7C66003EB021 /* KeyEvent.c in Sources */,
 				3C38622A214989B500A8C37B /* PowerStatus.m in Sources */,
@@ -465,13 +482,14 @@
 				3C200ECF212DFF390000B04D /* FixedSizeLabel.m in Sources */,
 				8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */,
 				3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */,
-				8DE31D13251EFE7E004E835B /* BrigthnessControlWidget.m in Sources */,
+				8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */,
 				8D9D245F251F8D2B004FF191 /* NSColor+Hex.m in Sources */,
 				3C4013C2211BBC8D00C47B66 /* ActiveAppWidget.m in Sources */,
 				3CACC7632126772700662AB1 /* FSNotify.c in Sources */,
 				3C102D482119641500FFB2CF /* CustomWidget.m in Sources */,
 				3C3464BF21465319001F45BB /* WeatherWidget.m in Sources */,
 				3CA851A0212B84B000585D29 /* NSTouchBar+SystemModal.m in Sources */,
+				8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */,
 				3C5D0FCE2119210000769A39 /* ClockWidget.m in Sources */,
 				3C6CCA38211B824000D019F4 /* TouchBarController.m in Sources */,
 				3C5032E32139C8E900305593 /* ImageTitleView.m in Sources */,

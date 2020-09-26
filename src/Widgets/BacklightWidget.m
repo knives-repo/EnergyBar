@@ -1,5 +1,5 @@
 /**
- * @file BrightnessControlWidget.m
+ * @file BacklightWidget.m
  *
  * @copyright 2018-2019 Bill Zissimopoulos
  */
@@ -11,20 +11,20 @@
  * Foundation.
  */
 
-#import "BrightnessControlWidget.h"
+#import "BacklightWidget.h"
 #import "Brightness.h"
 #import "BezelWindow.h"
 
-#define BrightnessAdjustIncrement			 (1.0/16.0)
+#define BacklightAdjustIncrement			 (1.0/16.0)
 
-@implementation BrightnessControlWidget
+@implementation BacklightWidget
 
 - (void)commonInit
 {
     NSSegmentedControl *control = [NSSegmentedControl
         segmentedControlWithImages:[NSArray arrayWithObjects:
-            [NSImage imageNamed:@"BrightnessDown"],
-            [NSImage imageNamed:@"BrightnessUp"],
+            [NSImage imageNamed:@"KeyboardBrightnessDown"],
+            [NSImage imageNamed:@"KeyboardBrightnessUp"],
             nil]
         trackingMode:NSSegmentSwitchTrackingMomentary
         target:self
@@ -37,15 +37,15 @@
         [control setWidth:64 forSegment:i];
     }
     
-    self.customizationLabel = @"Brigthness Control";
+    self.customizationLabel = @"Backlight";
     self.view = control;
     
 }
 
 - (void)adjustBrightnessBy:(double)delta {
-    double brgt = GetDisplayBrightness(0);
+    double brgt = GetKeyboardBrightness();
     brgt = MAX(0, MIN(1, brgt + delta));
-    SetDisplayBrightness(0, brgt);
+    SetKeyboardBrightness(brgt);
     [BezelWindow showWithType:kBrightness andValue:brgt];
 }
 
@@ -56,11 +56,11 @@
     {
         case 0:
             // brightness down
-            [self adjustBrightnessBy:-BrightnessAdjustIncrement];
+            [self adjustBrightnessBy:-BacklightAdjustIncrement];
             break;
         case 1:
             // brightness up
-            [self adjustBrightnessBy:+BrightnessAdjustIncrement];
+            [self adjustBrightnessBy:+BacklightAdjustIncrement];
             break;
     }
 }
