@@ -131,11 +131,13 @@
     [iconView setImageScaling:NSImageScaleProportionallyUpOrDown];
     [self.contentView addSubview:iconView];
     
-    NSLevelIndicator* levelIndicator = [[NSLevelIndicator alloc] initWithFrame:NSMakeRect(INDICATOR_MARGIN, INDICATOR_MARGIN, WIDTH-2*INDICATOR_MARGIN, INDICATOR_HEIGHT)];
-    [levelIndicator setMaxValue:INDICATOR_CELLS];
-    [levelIndicator setIntValue:INDICATOR_CELLS*self.value];
-    [levelIndicator setFillColor:[NSColor colorWithWhite:1.0 alpha:0.9]];
-    [self.contentView addSubview:levelIndicator];
+    if (value >= 0) {
+        NSLevelIndicator* levelIndicator = [[NSLevelIndicator alloc] initWithFrame:NSMakeRect(INDICATOR_MARGIN, INDICATOR_MARGIN, WIDTH-2*INDICATOR_MARGIN, INDICATOR_HEIGHT)];
+        [levelIndicator setMaxValue:INDICATOR_CELLS];
+        [levelIndicator setIntValue:INDICATOR_CELLS*self.value];
+        [levelIndicator setFillColor:[NSColor colorWithWhite:1.0 alpha:0.9]];
+        [self.contentView addSubview:levelIndicator];
+    }
     
 }
 

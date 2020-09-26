@@ -95,7 +95,7 @@
 {
     BOOL mute = ![AudioControl sharedInstanceInput].mute;
     [AudioControl sharedInstanceInput].mute = mute;
-    [BezelWindow showWithType:(mute ? kAudioInputMute : kAudioInputOn) andValue:0];
+    [BezelWindow showWithType:(mute ? kAudioInputMute : kAudioInputOn) andValue:-1];
 
 }
 

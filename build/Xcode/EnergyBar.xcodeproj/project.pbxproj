@@ -53,11 +53,10 @@
 		3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CFECA102122611F00BB58E9 /* LoginItem.c */; };
 		405B467A219A3CCA0006DC16 /* LockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 405B4678219A3CCA0006DC16 /* LockWidget.m */; };
 		405B467C219A3D2D0006DC16 /* login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405B467B219A3D2D0006DC16 /* login.framework */; };
-		8D33B986251E6BC0006AFCC9 /* ExpandedControlWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* ExpandedControlWidget.m */; };
+		8D33B986251E6BC0006AFCC9 /* VolumeControlWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeControlWidget.m */; };
 		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; };
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
-		8D33B9AA251EF4D1006AFCC9 /* ControlWidgetLevelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A9251EF4D1006AFCC9 /* ControlWidgetLevelView.m */; };
-		8D33B9AD251EF5CE006AFCC9 /* ControlWidgetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9AC251EF5CE006AFCC9 /* ControlWidgetView.m */; };
+		8DE31D13251EFE7E004E835B /* BrigthnessControlWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessControlWidget.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -157,16 +156,14 @@
 		405B4678219A3CCA0006DC16 /* LockWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockWidget.m; sourceTree = "<group>"; };
 		405B4679219A3CCA0006DC16 /* LockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockWidget.h; sourceTree = "<group>"; };
 		405B467B219A3D2D0006DC16 /* login.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = login.framework; path = ../../../../../../System/Library/PrivateFrameworks/login.framework; sourceTree = "<group>"; };
-		8D33B984251E6BC0006AFCC9 /* ExpandedControlWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandedControlWidget.h; sourceTree = "<group>"; };
-		8D33B985251E6BC0006AFCC9 /* ExpandedControlWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandedControlWidget.m; sourceTree = "<group>"; };
+		8D33B984251E6BC0006AFCC9 /* VolumeControlWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeControlWidget.h; sourceTree = "<group>"; };
+		8D33B985251E6BC0006AFCC9 /* VolumeControlWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeControlWidget.m; sourceTree = "<group>"; };
 		8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicMuteWidget.m; sourceTree = "<group>"; };
 		8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicMuteWidget.h; sourceTree = "<group>"; };
 		8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezelWindow.h; sourceTree = "<group>"; };
 		8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezelWindow.m; sourceTree = "<group>"; };
-		8D33B9A8251EF4D1006AFCC9 /* ControlWidgetLevelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlWidgetLevelView.h; sourceTree = "<group>"; };
-		8D33B9A9251EF4D1006AFCC9 /* ControlWidgetLevelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlWidgetLevelView.m; sourceTree = "<group>"; };
-		8D33B9AB251EF5CE006AFCC9 /* ControlWidgetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlWidgetView.h; sourceTree = "<group>"; };
-		8D33B9AC251EF5CE006AFCC9 /* ControlWidgetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlWidgetView.m; sourceTree = "<group>"; };
+		8DE31D11251EFE7E004E835B /* BrightnessControlWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessControlWidget.h; sourceTree = "<group>"; };
+		8DE31D12251EFE7E004E835B /* BrigthnessControlWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrigthnessControlWidget.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,7 +278,7 @@
 				3C6CCA37211B824000D019F4 /* TouchBarController.m */,
 				3C163BC52118F1C500F015EC /* main.m */,
 			);
-			indentWidth = 2;
+			indentWidth = 4;
 			name = Source;
 			path = ../../src;
 			sourceTree = SOURCE_ROOT;
@@ -293,6 +290,8 @@
 			children = (
 				3C4013C0211BBC8D00C47B66 /* ActiveAppWidget.h */,
 				3C4013C1211BBC8D00C47B66 /* ActiveAppWidget.m */,
+				8DE31D11251EFE7E004E835B /* BrightnessControlWidget.h */,
+				8DE31D12251EFE7E004E835B /* BrigthnessControlWidget.m */,
 				3C5D0FCC2119210000769A39 /* ClockWidget.h */,
 				3C5D0FCD2119210000769A39 /* ClockWidget.m */,
 				3C102D4921197ED700FFB2CF /* ControlWidget.h */,
@@ -303,8 +302,6 @@
 				3CDF1EB2211A3B9400739051 /* DockWidget.m */,
 				3C102D4C2119872800FFB2CF /* EscKeyWidget.h */,
 				3C102D4D2119872800FFB2CF /* EscKeyWidget.m */,
-				8D33B984251E6BC0006AFCC9 /* ExpandedControlWidget.h */,
-				8D33B985251E6BC0006AFCC9 /* ExpandedControlWidget.m */,
 				405B4679219A3CCA0006DC16 /* LockWidget.h */,
 				405B4678219A3CCA0006DC16 /* LockWidget.m */,
 				8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */,
@@ -313,6 +310,8 @@
 				3CA1DD85212D3DB200D95DE1 /* NowPlayingWidget.m */,
 				3C400078236CC6A3000261FF /* TodoWidget.h */,
 				3C400077236CC6A3000261FF /* TodoWidget.m */,
+				8D33B984251E6BC0006AFCC9 /* VolumeControlWidget.h */,
+				8D33B985251E6BC0006AFCC9 /* VolumeControlWidget.m */,
 				3C3464BD21465319001F45BB /* WeatherWidget.h */,
 				3C3464BE21465319001F45BB /* WeatherWidget.m */,
 			);
@@ -338,10 +337,6 @@
 			children = (
 				8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */,
 				8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */,
-				8D33B9A8251EF4D1006AFCC9 /* ControlWidgetLevelView.h */,
-				8D33B9A9251EF4D1006AFCC9 /* ControlWidgetLevelView.m */,
-				8D33B9AB251EF5CE006AFCC9 /* ControlWidgetView.h */,
-				8D33B9AC251EF5CE006AFCC9 /* ControlWidgetView.m */,
 			);
 			indentWidth = 4;
 			path = Controls;
@@ -451,7 +446,7 @@
 				8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */,
 				3C9E264A211E2A9F0042C2E8 /* Brightness.c in Sources */,
 				3CDF1EB4211A3B9500739051 /* DockWidget.m in Sources */,
-				8D33B986251E6BC0006AFCC9 /* ExpandedControlWidget.m in Sources */,
+				8D33B986251E6BC0006AFCC9 /* VolumeControlWidget.m in Sources */,
 				3C046013211D7C66003EB021 /* KeyEvent.c in Sources */,
 				3C38622A214989B500A8C37B /* PowerStatus.m in Sources */,
 				3C1F652122B1BF4E00F795D3 /* NSObject+MethodSwizzling.m in Sources */,
@@ -459,10 +454,10 @@
 				3C200ECF212DFF390000B04D /* FixedSizeLabel.m in Sources */,
 				8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */,
 				3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */,
+				8DE31D13251EFE7E004E835B /* BrigthnessControlWidget.m in Sources */,
 				3C4013C2211BBC8D00C47B66 /* ActiveAppWidget.m in Sources */,
 				3CACC7632126772700662AB1 /* FSNotify.c in Sources */,
 				3C102D482119641500FFB2CF /* CustomWidget.m in Sources */,
-				8D33B9AD251EF5CE006AFCC9 /* ControlWidgetView.m in Sources */,
 				3C3464BF21465319001F45BB /* WeatherWidget.m in Sources */,
 				3CA851A0212B84B000585D29 /* NSTouchBar+SystemModal.m in Sources */,
 				3C5D0FCE2119210000769A39 /* ClockWidget.m in Sources */,
@@ -477,7 +472,6 @@
 				3C1A5678211D6B7D008E1F9F /* AppBarController.m in Sources */,
 				3CA8519D212B832100585D29 /* NSWorkspace+Finder.m in Sources */,
 				3C01F8F32161D07800FFD2C6 /* Appearance.m in Sources */,
-				8D33B9AA251EF4D1006AFCC9 /* ControlWidgetLevelView.m in Sources */,
 				3CA1DD8B212D3FC000D95DE1 /* NowPlaying.m in Sources */,
 				3C102D4E2119872800FFB2CF /* EscKeyWidget.m in Sources */,
 				3C8E4133212F81A60010C2B3 /* AudioControl.m in Sources */,

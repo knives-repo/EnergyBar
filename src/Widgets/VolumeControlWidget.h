@@ -1,5 +1,5 @@
 /**
- * @file ControlWidget.h
+ * @file VolumeControlWidget.h
  *
  * @copyright 2018-2019 Bill Zissimopoulos
  */
@@ -14,5 +14,5 @@
 #import <Cocoa/Cocoa.h>
 #import "CustomWidget.h"
 
-@interface ExpandedControlWidget : CustomWidget
+@interface VolumeControlWidget : CustomWidget
 @end
