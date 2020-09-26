@@ -76,9 +76,7 @@
 
 - (void)audioControlNotification:(NSNotification *)notification
 {
-    NSSegmentedControl *control = [self.view viewWithTag:'ctrl'];
-    [control setImage:[self volumeMuteImage] forSegment:4];
-    
+    [self.view setImage:[self volumeMuteImage] forSegment:2];
 }
 
 - (void)adjustVolumeBy:(double)delta {
@@ -95,7 +93,7 @@
     [AudioControl sharedInstanceOutput].mute = mute;
     double vol = mute ? 0 : [AudioControl sharedInstanceOutput].volume;
     [BezelWindow showWithType:(mute ? kAudioOutputMute : kAudioOutputVolume) andValue:vol];
-    
+
 }
 
 - (void)click:(id)sender

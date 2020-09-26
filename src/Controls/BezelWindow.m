@@ -8,6 +8,7 @@
 
 #import "BezelWindow.h"
 #import "LevelIndicator.h"
+#import "NSColor+Hex.h"
 
 #define WIDTH 200
 #define HEIGHT 200
@@ -24,7 +25,17 @@
 @synthesize value;
 
 + (BOOL) isDarkMode {
-    return FALSE;
+    if (@available(macOS 10.14, *)) {
+        NSView* view = [[NSView alloc] init];
+        NSAppearance* appearance = view.effectiveAppearance;
+        NSAppearanceName basicAppearance = [appearance bestMatchFromAppearancesWithNames:@[
+            NSAppearanceNameAqua,
+            NSAppearanceNameDarkAqua
+        ]];
+        return [basicAppearance isEqualToString:NSAppearanceNameDarkAqua];
+    } else {
+        return NO;
+    }
 }
 
 + (void) showWithType:(BezelType) type andValue:(float) value {
@@ -139,7 +150,11 @@
         WIDTH - 2 * ICON_MARGIN, HEIGHT - 2 * ICON_MARGIN
     )];
     [iconView setImage:[NSImage imageNamed:[self imageName]]];
-    //[iconView setAlphaValue:[[self imageName] hasPrefix:@"NS"] ? 1.0 : 0.6];
+    if (@available(macOS 10.14, *)) {
+        if ([BezelWindow isDarkMode]) {
+            [iconView setContentTintColor:[NSColor colorFromHex:0x888888]];
+        }
+    }
     [iconView setImageScaling:NSImageScaleProportionallyUpOrDown];
     [self.contentView addSubview:iconView];
     

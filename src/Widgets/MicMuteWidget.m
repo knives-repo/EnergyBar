@@ -15,8 +15,7 @@
 #import "ImageTitleView.h"
 #import "AudioControl.h"
 #import "BezelWindow.h"
-
-#define NSColorFromRGB(rgbValue) [NSColor colorWithCalibratedRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#import "NSColor+Hex.h"
 
 @interface MicMuteWidgetView : ImageTitleView
 @end
@@ -86,7 +85,7 @@
 {
     BOOL mute = [AudioControl sharedInstanceInput].mute;
     NSImage* image = mute ? _micOffImage : _micOnImage;
-    NSColor* bgColor = mute ? [NSColor redColor] : NSColorFromRGB(0x008000);
+    NSColor* bgColor = mute ? [NSColor redColor] : [NSColor colorFromHex:0x008000];
     [((ImageTitleView*) self.view) setImage:image];
     self.view.layer.backgroundColor = [bgColor CGColor];
 }

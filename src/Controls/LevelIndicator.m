@@ -8,6 +8,7 @@
 
 #import "LevelIndicator.h"
 #import "BezelWindow.h"
+#import "NSColor+Hex.h"
 
 #define MAX_CELLS 16
 #define PADDING 1
@@ -46,14 +47,28 @@
     int x = PADDING;
     int cells = round(MAX_CELLS * self.value);
     for (int i=0; i<cells; i++) {
+        
         NSRect rc = NSMakeRect(x, PADDING, width, height);
-        NSVisualEffectView* view = [[NSVisualEffectView alloc] initWithFrame:rc];
-        [view setWantsLayer:YES];
-        [view setBlendingMode:NSVisualEffectBlendingModeBehindWindow];
-        [view setMaterial:([BezelWindow isDarkMode] ? NSVisualEffectMaterialDark : NSVisualEffectMaterialLight)];
-        [view setState:NSVisualEffectStateActive];
-        [view.layer setBackgroundColor:[[NSColor whiteColor] CGColor]];
-        [self addSubview:view];
+
+        if ([BezelWindow isDarkMode]) {
+
+            NSView* view = [[NSView alloc] initWithFrame:rc];
+            [view setWantsLayer:YES];
+            [view.layer setBackgroundColor:[[NSColor colorFromHex:0x808080] CGColor]];
+            [self addSubview:view];
+
+        } else {
+
+            NSVisualEffectView* view = [[NSVisualEffectView alloc] initWithFrame:rc];
+            [view setWantsLayer:YES];
+            [view setBlendingMode:NSVisualEffectBlendingModeBehindWindow];
+            [view setMaterial:NSVisualEffectMaterialLight];
+            [view setState:NSVisualEffectStateActive];
+            [view.layer setBackgroundColor:[[NSColor colorWithCalibratedWhite:1.0 alpha:1.0] CGColor]];
+            [self addSubview:view];
+            
+        }
+       
         x += width + PADDING;
     }
 }
@@ -61,8 +76,10 @@
 - (void)drawRect:(NSRect)dirtyRect {
     
     // fill
-    [[NSColor blackColor] setFill];
-    NSRectFill(dirtyRect);
+    if ([BezelWindow isDarkMode] == NO) {
+        [[NSColor blackColor] setFill];
+        NSRectFill(dirtyRect);
+    }
 
     // default
     [super drawRect:dirtyRect];
