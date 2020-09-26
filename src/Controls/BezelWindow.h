@@ -25,6 +25,8 @@ typedef enum {
 
 @interface BezelWindow : NSWindow
 
++ (BOOL) isDarkMode;
+
 + (void) showWithType:(BezelType) type andValue:(float) value;
 
 @property (assign) BezelType type;

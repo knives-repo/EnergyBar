@@ -7,20 +7,25 @@
 //
 
 #import "BezelWindow.h"
+#import "LevelIndicator.h"
 
 #define WIDTH 200
 #define HEIGHT 200
 #define BOTTOM_MARGIN 140
 #define CORNER_RADIUS 18
+#define ICON_MARGIN 40
 #define INDICATOR_MARGIN 20
 #define INDICATOR_HEIGHT 8
-#define INDICATOR_CELLS 16
 #define FADE_DELAY 2
 
 @implementation BezelWindow
 
 @synthesize type;
 @synthesize value;
+
++ (BOOL) isDarkMode {
+    return FALSE;
+}
 
 + (void) showWithType:(BezelType) type andValue:(float) value {
     
@@ -80,7 +85,9 @@
     [self setReleasedWhenClosed:YES];
     [self setLevel:CGShieldingWindowLevel()];
     [self setIgnoresMouseEvents:YES];
-    [self setAppearance:[NSAppearance appearanceNamed:NSAppearanceNameVibrantDark]];
+    [self setAppearance:
+     [NSAppearance appearanceNamed:([BezelWindow isDarkMode] ? NSAppearanceNameVibrantDark : NSAppearanceNameVibrantLight)]
+     ];
     [self setOpaque:NO];
     [self setBackgroundColor:[NSColor clearColor]];
     
@@ -97,7 +104,7 @@
     NSVisualEffectView* view = [[NSVisualEffectView alloc] init];
     [view setWantsLayer:YES];
     [view setBlendingMode:NSVisualEffectBlendingModeBehindWindow];
-    [view setMaterial:NSVisualEffectMaterialDark];
+    [view setMaterial:([BezelWindow isDarkMode] ? NSVisualEffectMaterialDark : NSVisualEffectMaterialLight)];
     [view setState:NSVisualEffectStateActive];
     [view setMaskImage:[self roundedRectMaskOfSize:NSMakeSize(WIDTH, HEIGHT) andCornerRadius:CORNER_RADIUS]];
     return view;
@@ -111,7 +118,7 @@
     NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(0, 0, size.width, size.height)
                                                          xRadius:cornerRadius
                                                          yRadius:cornerRadius];
-    [[NSColor blackColor] set];
+    [[NSColor colorWithCalibratedWhite:([BezelWindow isDarkMode] ? 0 : 1) alpha:1.0] set];
     [path fill];
     
     [mask unlockFocus];
@@ -125,17 +132,22 @@
 - (void) addComponents {
     
     [self.contentView setWantsLayer:YES];
+    //[self.contentView.layer setBackgroundColor:[[NSColor colorWithCalibratedWhite:0 alpha:0.15] CGColor]];
     
-    NSImageView* iconView = [[NSImageView alloc] initWithFrame:NSMakeRect(WIDTH/4, HEIGHT/4, WIDTH/2, HEIGHT/2)];
+    NSImageView* iconView = [[NSImageView alloc] initWithFrame:NSMakeRect(
+        ICON_MARGIN, ICON_MARGIN + (value >= 0 ? INDICATOR_MARGIN : 0) / 2,
+        WIDTH - 2 * ICON_MARGIN, HEIGHT - 2 * ICON_MARGIN
+    )];
     [iconView setImage:[NSImage imageNamed:[self imageName]]];
+    //[iconView setAlphaValue:[[self imageName] hasPrefix:@"NS"] ? 1.0 : 0.6];
     [iconView setImageScaling:NSImageScaleProportionallyUpOrDown];
     [self.contentView addSubview:iconView];
     
+    
+    
     if (value >= 0) {
-        NSLevelIndicator* levelIndicator = [[NSLevelIndicator alloc] initWithFrame:NSMakeRect(INDICATOR_MARGIN, INDICATOR_MARGIN, WIDTH-2*INDICATOR_MARGIN, INDICATOR_HEIGHT)];
-        [levelIndicator setMaxValue:INDICATOR_CELLS];
-        [levelIndicator setIntValue:INDICATOR_CELLS*self.value];
-        [levelIndicator setFillColor:[NSColor colorWithWhite:1.0 alpha:0.9]];
+        LevelIndicator* levelIndicator = [[LevelIndicator alloc] initWithFrame:NSMakeRect(INDICATOR_MARGIN, INDICATOR_MARGIN, WIDTH-2*INDICATOR_MARGIN, INDICATOR_HEIGHT)];
+        [levelIndicator setValue:self.value];
         [self.contentView addSubview:levelIndicator];
     }
     

@@ -56,6 +56,7 @@
 		8D33B986251E6BC0006AFCC9 /* VolumeControlWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeControlWidget.m */; };
 		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; };
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
+		8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245B251F6F35004FF191 /* LevelIndicator.m */; };
 		8DE31D13251EFE7E004E835B /* BrigthnessControlWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessControlWidget.m */; };
 /* End PBXBuildFile section */
 
@@ -161,7 +162,9 @@
 		8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicMuteWidget.m; sourceTree = "<group>"; };
 		8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicMuteWidget.h; sourceTree = "<group>"; };
 		8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezelWindow.h; sourceTree = "<group>"; };
-		8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezelWindow.m; sourceTree = "<group>"; };
+		8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezelWindow.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
+		8D9D245A251F6F35004FF191 /* LevelIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelIndicator.h; sourceTree = "<group>"; };
+		8D9D245B251F6F35004FF191 /* LevelIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelIndicator.m; sourceTree = "<group>"; };
 		8DE31D11251EFE7E004E835B /* BrightnessControlWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessControlWidget.h; sourceTree = "<group>"; };
 		8DE31D12251EFE7E004E835B /* BrigthnessControlWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrigthnessControlWidget.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -337,6 +340,8 @@
 			children = (
 				8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */,
 				8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */,
+				8D9D245A251F6F35004FF191 /* LevelIndicator.h */,
+				8D9D245B251F6F35004FF191 /* LevelIndicator.m */,
 			);
 			indentWidth = 4;
 			path = Controls;
@@ -447,6 +452,7 @@
 				3C9E264A211E2A9F0042C2E8 /* Brightness.c in Sources */,
 				3CDF1EB4211A3B9500739051 /* DockWidget.m in Sources */,
 				8D33B986251E6BC0006AFCC9 /* VolumeControlWidget.m in Sources */,
+				8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */,
 				3C046013211D7C66003EB021 /* KeyEvent.c in Sources */,
 				3C38622A214989B500A8C37B /* PowerStatus.m in Sources */,
 				3C1F652122B1BF4E00F795D3 /* NSObject+MethodSwizzling.m in Sources */,

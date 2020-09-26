@@ -85,8 +85,8 @@
     double vol = [AudioControl sharedInstanceOutput].volume;
     vol = MAX(0, MIN(1,vol + delta));
     [AudioControl sharedInstanceOutput].volume = vol;
-    [AudioControl sharedInstanceOutput].mute = (vol == 0);
-    [BezelWindow showWithType:kAudioOutputVolume andValue:vol];
+    [AudioControl sharedInstanceOutput].mute = (vol < VolumeAdjustIncrement*0.9);
+    [BezelWindow showWithType:([AudioControl sharedInstanceOutput].mute ? kAudioOutputMute : kAudioOutputVolume) andValue:vol];
 }
 
 - (void)mute {
