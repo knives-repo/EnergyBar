@@ -43,10 +43,10 @@
 }
 
 - (void)adjustBrightnessBy:(double)delta {
-    double brgt = GetKeyboardBrightness();
-    brgt = MAX(0, MIN(1, brgt + delta));
-    SetKeyboardBrightness(brgt);
-    [BezelWindow showWithType:kBrightness andValue:brgt];
+    //double brgt = GetKeyboardBrightness();
+    //brgt = MAX(0, MIN(1, brgt + delta));
+    //SetKeyboardBrightness(brgt);
+    //[BezelWindow showWithType:kBrightness andValue:brgt];
 }
 
 - (void)click:(id)sender
