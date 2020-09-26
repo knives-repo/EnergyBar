@@ -55,9 +55,11 @@
         @"NowPlaying",
         @"Todo",
         @"Control",
+        @"ExpandedControl",
         @"Weather",
         @"Clock",
         @"Lock",
+        @"MicMute",
         NSTouchBarItemIdentifierFlexibleSpace,
         nil];
 

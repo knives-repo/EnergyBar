@@ -20,6 +20,8 @@
 #import "NSTouchBar+SystemModal.h"
 #import "NowPlaying.h"
 #import "TouchBarController.h"
+#import "ControlWidgetView.h"
+#import "ControlWidgetLevelView.h"
 
 #define MaxPanDistance                  50.0
 
@@ -273,7 +275,7 @@
 
 - (BOOL)presentWithPlacement:(NSInteger)placement
 {
-    double value = [AudioControl sharedInstance].volume;
+    double value = [AudioControl sharedInstanceOutput].volume;
     if (isnan(value))
         value = 0.5;
 
@@ -309,134 +311,8 @@
     [self resetTimer];
 
     NSSliderTouchBarItem *item = [self.touchBar itemForIdentifier:@"VolumeSlider"];
-    [AudioControl sharedInstance].volume = item.slider.doubleValue;
-    [AudioControl sharedInstance].mute = item.slider.doubleValue < 1.0 / (16 * 4);
-}
-@end
-
-@interface ControlWidgetLevelView : NSView
-@property (getter=value, setter=setValue:) double value;
-@property (getter=indicatorWidth, setter=setIndicatorWidth:) CGFloat indicatorWidth;
-@property (assign) CGFloat inset;
-@property (retain) NSColor *backgroundColor;
-@property (retain) NSColor *foregroundColor;
-@end
-
-@implementation ControlWidgetLevelView
-{
-    double _value;
-    CGFloat _indicatorWidth;
-    NSInteger _tag;
-}
-
-- (void)dealloc
-{
-    self.backgroundColor = nil;
-    self.foregroundColor = nil;
-
-    [super dealloc];
-}
-
-- (void)drawRect:(NSRect)rect
-{
-    NSColor *backgroundColor = self.backgroundColor;
-    NSColor *foregroundColor = self.foregroundColor;
-
-    if (nil == backgroundColor)
-        backgroundColor = [NSColor clearColor];
-    if (nil == foregroundColor)
-    {
-        if (@available(macOS 10.14, *))
-            foregroundColor = [NSColor controlAccentColor];
-        else
-            foregroundColor = [NSColor systemBlueColor];
-    }
-
-    rect = self.bounds;
-
-    [backgroundColor setFill];
-    NSRectFillUsingOperation(rect, NSCompositingOperationSourceOver);
-
-    CGFloat inset = self.inset;
-    rect = NSInsetRect(rect, inset, inset);
-
-    CGFloat indicatorWidth = self.indicatorWidth;
-    if (0 > indicatorWidth)
-    {
-        CGFloat maxX = NSMaxX(rect);
-        indicatorWidth = -indicatorWidth;
-        rect.size.width = MIN(indicatorWidth, rect.size.width);
-        rect.origin.x = maxX - rect.size.width;
-    }
-    else if (0 < indicatorWidth)
-        rect.size.width = MIN(indicatorWidth, rect.size.width);
-
-    [foregroundColor set];
-    CGFloat level = self.value;
-    CGFloat x = rect.origin.x + level * rect.size.width;
-    CGFloat y = rect.origin.y + level * rect.size.height;
-    NSBezierPath *path = [NSBezierPath bezierPath];
-    [path moveToPoint:rect.origin];
-    [path lineToPoint:NSMakePoint(x, NSMinY(rect))];
-    [path lineToPoint:NSMakePoint(x, y)];
-    [path closePath];
-    [path fill];
-}
-
-- (double)value
-{
-    return _value;
-}
-
-- (void)setValue:(double)value
-{
-    if (_value == value)
-        return;
-
-    _value = value;
-    [self setNeedsDisplay:YES];
-}
-
-- (CGFloat)indicatorWidth
-{
-    return _indicatorWidth;
-}
-
-- (void)setIndicatorWidth:(CGFloat)value
-{
-    if (_indicatorWidth == value)
-        return;
-
-    _indicatorWidth = value;
-    [self setNeedsDisplay:YES];
-}
-
-- (NSInteger)tag
-{
-    return _tag;
-}
-
-- (void)setTag:(NSInteger)value
-{
-    _tag = value;
-}
-@end
-
-@interface ControlWidgetView : NSView
-@end
-
-@implementation ControlWidgetView
-- (NSSize)intrinsicContentSize
-{
-    return [[self.subviews firstObject] intrinsicContentSize];
-}
-
-- (void)resizeSubviewsWithOldSize:(NSSize)size
-{
-    NSView *view = [self.subviews lastObject];
-    NSRect rect = view.frame;
-    rect.origin.y = (self.bounds.size.height - rect.size.height) / 2;
-    view.frame = rect;
+    [AudioControl sharedInstanceOutput].volume = item.slider.doubleValue;
+    [AudioControl sharedInstanceOutput].mute = item.slider.doubleValue < 1.0 / (16 * 4);
 }
 @end
 
@@ -497,7 +373,7 @@
     self.view = view;
 
     [NowPlaying sharedInstance];
-    [AudioControl sharedInstance];
+    [AudioControl sharedInstanceOutput];
 }
 
 - (void)dealloc
@@ -540,7 +416,7 @@
 
 - (NSImage *)volumeMuteImage
 {
-    BOOL mute = [AudioControl sharedInstance].mute;
+    BOOL mute = [AudioControl sharedInstanceOutput].mute;
     return [NSImage imageNamed:mute ? @"VolumeMuteOn" : @"VolumeMuteOff"];
 }
 
@@ -571,7 +447,7 @@
         [self.volumeBarController present];
         break;
     case 3:
-        [AudioControl sharedInstance].mute = ![AudioControl sharedInstance].mute;
+        [AudioControl sharedInstanceOutput].mute = ![AudioControl sharedInstanceOutput].mute;
         break;
     }
 }
@@ -618,7 +494,7 @@
         break;
     case 2:
         _pressKind = 'audi';
-        value = [AudioControl sharedInstance].volume;
+        value = [AudioControl sharedInstanceOutput].volume;
         break;
     default:
         return;
@@ -665,8 +541,8 @@
         break;
     case 'audi':
         level.value = isnan(value) ? 0.5 : value;
-        [AudioControl sharedInstance].volume = value;
-        [AudioControl sharedInstance].mute = value < 1.0 / (16 * 4);
+        [AudioControl sharedInstanceOutput].volume = value;
+        [AudioControl sharedInstanceOutput].mute = value < 1.0 / (16 * 4);
         break;
     }
 }

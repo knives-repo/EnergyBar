@@ -53,6 +53,11 @@
 		3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CFECA102122611F00BB58E9 /* LoginItem.c */; };
 		405B467A219A3CCA0006DC16 /* LockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 405B4678219A3CCA0006DC16 /* LockWidget.m */; };
 		405B467C219A3D2D0006DC16 /* login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405B467B219A3D2D0006DC16 /* login.framework */; };
+		8D33B986251E6BC0006AFCC9 /* ExpandedControlWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* ExpandedControlWidget.m */; };
+		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; };
+		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
+		8D33B9AA251EF4D1006AFCC9 /* ControlWidgetLevelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A9251EF4D1006AFCC9 /* ControlWidgetLevelView.m */; };
+		8D33B9AD251EF5CE006AFCC9 /* ControlWidgetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9AC251EF5CE006AFCC9 /* ControlWidgetView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -152,6 +157,16 @@
 		405B4678219A3CCA0006DC16 /* LockWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockWidget.m; sourceTree = "<group>"; };
 		405B4679219A3CCA0006DC16 /* LockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockWidget.h; sourceTree = "<group>"; };
 		405B467B219A3D2D0006DC16 /* login.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = login.framework; path = ../../../../../../System/Library/PrivateFrameworks/login.framework; sourceTree = "<group>"; };
+		8D33B984251E6BC0006AFCC9 /* ExpandedControlWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandedControlWidget.h; sourceTree = "<group>"; };
+		8D33B985251E6BC0006AFCC9 /* ExpandedControlWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandedControlWidget.m; sourceTree = "<group>"; };
+		8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicMuteWidget.m; sourceTree = "<group>"; };
+		8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicMuteWidget.h; sourceTree = "<group>"; };
+		8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezelWindow.h; sourceTree = "<group>"; };
+		8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezelWindow.m; sourceTree = "<group>"; };
+		8D33B9A8251EF4D1006AFCC9 /* ControlWidgetLevelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlWidgetLevelView.h; sourceTree = "<group>"; };
+		8D33B9A9251EF4D1006AFCC9 /* ControlWidgetLevelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlWidgetLevelView.m; sourceTree = "<group>"; };
+		8D33B9AB251EF5CE006AFCC9 /* ControlWidgetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlWidgetView.h; sourceTree = "<group>"; };
+		8D33B9AC251EF5CE006AFCC9 /* ControlWidgetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlWidgetView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,29 +190,29 @@
 		3C04600E211D7C43003EB021 /* System */ = {
 			isa = PBXGroup;
 			children = (
-				3C1F651F22B1BF4E00F795D3 /* NSObject+MethodSwizzling.h */,
-				3C1F652022B1BF4E00F795D3 /* NSObject+MethodSwizzling.m */,
 				3C01F8F12161D07800FFD2C6 /* Appearance.h */,
 				3C01F8F22161D07800FFD2C6 /* Appearance.m */,
 				3C8E4131212F81A60010C2B3 /* AudioControl.h */,
 				3C8E4132212F81A60010C2B3 /* AudioControl.m */,
-				3C9E2648211E2A9F0042C2E8 /* Brightness.h */,
 				3C9E2649211E2A9F0042C2E8 /* Brightness.c */,
+				3C9E2648211E2A9F0042C2E8 /* Brightness.h */,
 				3C83DB45211D7FDB00FC2F53 /* CBBlueLightClient.h */,
-				3CACC7622126772700662AB1 /* FSNotify.h */,
 				3CACC7612126772700662AB1 /* FSNotify.c */,
-				3C046010211D7C66003EB021 /* KeyEvent.h */,
+				3CACC7622126772700662AB1 /* FSNotify.h */,
 				3C04600F211D7C66003EB021 /* KeyEvent.c */,
+				3C046010211D7C66003EB021 /* KeyEvent.h */,
 				3C6944CE212E922F0082E3BF /* Log.h */,
-				3CFECA112122611F00BB58E9 /* LoginItem.h */,
 				3CFECA102122611F00BB58E9 /* LoginItem.c */,
+				3CFECA112122611F00BB58E9 /* LoginItem.h */,
+				3CA1DD8A212D3FC000D95DE1 /* NowPlaying.h */,
+				3CA1DD89212D3FC000D95DE1 /* NowPlaying.m */,
 				3C1DF6BA2162D83B006A1EBF /* NSGlobalPreferenceTransition.h */,
+				3C1F651F22B1BF4E00F795D3 /* NSObject+MethodSwizzling.h */,
+				3C1F652022B1BF4E00F795D3 /* NSObject+MethodSwizzling.m */,
 				3CA8519F212B84B000585D29 /* NSTouchBar+SystemModal.h */,
 				3CA8519E212B84B000585D29 /* NSTouchBar+SystemModal.m */,
 				3CA8519B212B832100585D29 /* NSWorkspace+Finder.h */,
 				3CA8519C212B832100585D29 /* NSWorkspace+Finder.m */,
-				3CA1DD8A212D3FC000D95DE1 /* NowPlaying.h */,
-				3CA1DD89212D3FC000D95DE1 /* NowPlaying.m */,
 				3C386228214989B500A8C37B /* PowerStatus.h */,
 				3C386229214989B500A8C37B /* PowerStatus.m */,
 				3C3464C021470F65001F45BB /* WeatherKit.h */,
@@ -243,6 +258,7 @@
 		3C163BB92118F17700F015EC /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				8D33B9A1251ED9C6006AFCC9 /* Controls */,
 				3C04600E211D7C43003EB021 /* System */,
 				3C5D0FCB211920E500769A39 /* Widgets */,
 				3C1A5676211D6B7D008E1F9F /* AppBarController.h */,
@@ -265,9 +281,12 @@
 				3C6CCA37211B824000D019F4 /* TouchBarController.m */,
 				3C163BC52118F1C500F015EC /* main.m */,
 			);
+			indentWidth = 2;
 			name = Source;
 			path = ../../src;
 			sourceTree = SOURCE_ROOT;
+			tabWidth = 1;
+			usesTabs = 0;
 		};
 		3C5D0FCB211920E500769A39 /* Widgets */ = {
 			isa = PBXGroup;
@@ -284,8 +303,12 @@
 				3CDF1EB2211A3B9400739051 /* DockWidget.m */,
 				3C102D4C2119872800FFB2CF /* EscKeyWidget.h */,
 				3C102D4D2119872800FFB2CF /* EscKeyWidget.m */,
+				8D33B984251E6BC0006AFCC9 /* ExpandedControlWidget.h */,
+				8D33B985251E6BC0006AFCC9 /* ExpandedControlWidget.m */,
 				405B4679219A3CCA0006DC16 /* LockWidget.h */,
 				405B4678219A3CCA0006DC16 /* LockWidget.m */,
+				8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */,
+				8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */,
 				3CA1DD84212D3DB200D95DE1 /* NowPlayingWidget.h */,
 				3CA1DD85212D3DB200D95DE1 /* NowPlayingWidget.m */,
 				3C400078236CC6A3000261FF /* TodoWidget.h */,
@@ -309,6 +332,21 @@
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
+		};
+		8D33B9A1251ED9C6006AFCC9 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */,
+				8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */,
+				8D33B9A8251EF4D1006AFCC9 /* ControlWidgetLevelView.h */,
+				8D33B9A9251EF4D1006AFCC9 /* ControlWidgetLevelView.m */,
+				8D33B9AB251EF5CE006AFCC9 /* ControlWidgetView.h */,
+				8D33B9AC251EF5CE006AFCC9 /* ControlWidgetView.m */,
+			);
+			indentWidth = 4;
+			path = Controls;
+			sourceTree = "<group>";
+			tabWidth = 1;
 		};
 /* End PBXGroup section */
 
@@ -338,7 +376,7 @@
 		3C163B8D2118EF2900F015EC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Bill Zissimopoulos";
 				TargetAttributes = {
 					3C163B942118EF2900F015EC = {
@@ -410,17 +448,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */,
 				3C9E264A211E2A9F0042C2E8 /* Brightness.c in Sources */,
 				3CDF1EB4211A3B9500739051 /* DockWidget.m in Sources */,
+				8D33B986251E6BC0006AFCC9 /* ExpandedControlWidget.m in Sources */,
 				3C046013211D7C66003EB021 /* KeyEvent.c in Sources */,
 				3C38622A214989B500A8C37B /* PowerStatus.m in Sources */,
 				3C1F652122B1BF4E00F795D3 /* NSObject+MethodSwizzling.m in Sources */,
 				3C8ED9F4213E3974006C11A3 /* EdgeWindowController.m in Sources */,
 				3C200ECF212DFF390000B04D /* FixedSizeLabel.m in Sources */,
+				8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */,
 				3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */,
 				3C4013C2211BBC8D00C47B66 /* ActiveAppWidget.m in Sources */,
 				3CACC7632126772700662AB1 /* FSNotify.c in Sources */,
 				3C102D482119641500FFB2CF /* CustomWidget.m in Sources */,
+				8D33B9AD251EF5CE006AFCC9 /* ControlWidgetView.m in Sources */,
 				3C3464BF21465319001F45BB /* WeatherWidget.m in Sources */,
 				3CA851A0212B84B000585D29 /* NSTouchBar+SystemModal.m in Sources */,
 				3C5D0FCE2119210000769A39 /* ClockWidget.m in Sources */,
@@ -435,6 +477,7 @@
 				3C1A5678211D6B7D008E1F9F /* AppBarController.m in Sources */,
 				3CA8519D212B832100585D29 /* NSWorkspace+Finder.m in Sources */,
 				3C01F8F32161D07800FFD2C6 /* Appearance.m in Sources */,
+				8D33B9AA251EF4D1006AFCC9 /* ControlWidgetLevelView.m in Sources */,
 				3CA1DD8B212D3FC000D95DE1 /* NowPlaying.m in Sources */,
 				3C102D4E2119872800FFB2CF /* EscKeyWidget.m in Sources */,
 				3C8E4133212F81A60010C2B3 /* AudioControl.m in Sources */,
@@ -516,6 +559,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -574,6 +618,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -610,7 +655,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.7;
-				DEVELOPMENT_TEAM = PU493TQJJ3;
+				DEVELOPMENT_TEAM = TP8BYQ64C4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -641,7 +686,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.7;
-				DEVELOPMENT_TEAM = PU493TQJJ3;
+				DEVELOPMENT_TEAM = TP8BYQ64C4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
