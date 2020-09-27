@@ -65,6 +65,10 @@
 		8D9D24882520381A004FF191 /* Outlook.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24872520381A004FF191 /* Outlook.m */; };
 		8D9D248E2520BAA9004FF191 /* OutlookCalendarWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D248D2520BAA9004FF191 /* OutlookCalendarWidget.m */; };
 		8D9D24902520BC26004FF191 /* OutlookEvents.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9D248F2520BC26004FF191 /* OutlookEvents.xib */; };
+		8D9D24D52521239C004FF191 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24D42521239C004FF191 /* main.m */; };
+		8D9D24E3252124DE004FF191 /* OutlookEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24E2252124DE004FF191 /* OutlookEvent.m */; };
+		8D9D24E4252124DE004FF191 /* OutlookEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24E2252124DE004FF191 /* OutlookEvent.m */; };
+		8D9D24EE2521311C004FF191 /* ImageTileWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24ED2521311C004FF191 /* ImageTileWidget.m */; };
 		8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */; };
 		AF95C8ADCA2ED9B5705D7BB6 /* Pods_EnergyBars_EnergyBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */; };
 /* End PBXBuildFile section */
@@ -80,6 +84,15 @@
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D9D24D02521239C004FF191 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -189,6 +202,12 @@
 		8D9D248C2520BAA9004FF191 /* OutlookCalendarWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutlookCalendarWidget.h; sourceTree = "<group>"; };
 		8D9D248D2520BAA9004FF191 /* OutlookCalendarWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookCalendarWidget.m; sourceTree = "<group>"; };
 		8D9D248F2520BC26004FF191 /* OutlookEvents.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutlookEvents.xib; sourceTree = "<group>"; };
+		8D9D24D22521239C004FF191 /* OutlookTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OutlookTests; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D9D24D42521239C004FF191 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8D9D24E1252124DE004FF191 /* OutlookEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutlookEvent.h; sourceTree = "<group>"; };
+		8D9D24E2252124DE004FF191 /* OutlookEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookEvent.m; sourceTree = "<group>"; };
+		8D9D24EC2521311C004FF191 /* ImageTileWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageTileWidget.h; sourceTree = "<group>"; };
+		8D9D24ED2521311C004FF191 /* ImageTileWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageTileWidget.m; sourceTree = "<group>"; };
 		8DE31D11251EFE7E004E835B /* BrightnessWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessWidget.h; sourceTree = "<group>"; };
 		8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrigthnessWidget.m; sourceTree = "<group>"; };
 		A7C49C788382A2D1AD12F453 /* Pods-EnergyBars-EnergyBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBars-EnergyBar.release.xcconfig"; path = "Target Support Files/Pods-EnergyBars-EnergyBar/Pods-EnergyBars-EnergyBar.release.xcconfig"; sourceTree = "<group>"; };
@@ -214,6 +233,13 @@
 				8D9D246B251FBA27004FF191 /* CoreGraphics.framework in Frameworks */,
 				3C665D0221619E870004D9EC /* OctoFeed.framework in Frameworks */,
 				AF95C8ADCA2ED9B5705D7BB6 /* Pods_EnergyBars_EnergyBar.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D9D24CF2521239C004FF191 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +274,8 @@
 				3CA8519C212B832100585D29 /* NSWorkspace+Finder.m */,
 				8D9D248625203819004FF191 /* Outlook.h */,
 				8D9D24872520381A004FF191 /* Outlook.m */,
+				8D9D24E1252124DE004FF191 /* OutlookEvent.h */,
+				8D9D24E2252124DE004FF191 /* OutlookEvent.m */,
 				3C386228214989B500A8C37B /* PowerStatus.h */,
 				3C386229214989B500A8C37B /* PowerStatus.m */,
 				3C3464C021470F65001F45BB /* WeatherKit.h */,
@@ -261,6 +289,7 @@
 				3CBBF7CA237A26D4001376F8 /* EnergyBar.entitlements */,
 				3C163BB82118F15D00F015EC /* Resource */,
 				3C163BB92118F17700F015EC /* Source */,
+				8D9D24D32521239C004FF191 /* OutlookTests */,
 				3C163B962118EF2900F015EC /* Products */,
 				3C83DB46211D851600FC2F53 /* Frameworks */,
 				418983CF5C3471F50A8DEA1A /* Pods */,
@@ -271,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				3C163B952118EF2900F015EC /* EnergyBar.app */,
+				8D9D24D22521239C004FF191 /* OutlookTests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -346,6 +376,8 @@
 				3CDF1EB2211A3B9400739051 /* DockWidget.m */,
 				3C102D4C2119872800FFB2CF /* EscKeyWidget.h */,
 				3C102D4D2119872800FFB2CF /* EscKeyWidget.m */,
+				8D9D24EC2521311C004FF191 /* ImageTileWidget.h */,
+				8D9D24ED2521311C004FF191 /* ImageTileWidget.m */,
 				405B4679219A3CCA0006DC16 /* LockWidget.h */,
 				405B4678219A3CCA0006DC16 /* LockWidget.m */,
 				8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */,
@@ -409,6 +441,14 @@
 			sourceTree = "<group>";
 			tabWidth = 1;
 		};
+		8D9D24D32521239C004FF191 /* OutlookTests */ = {
+			isa = PBXGroup;
+			children = (
+				8D9D24D42521239C004FF191 /* main.m */,
+			);
+			path = OutlookTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -433,6 +473,23 @@
 			productReference = 3C163B952118EF2900F015EC /* EnergyBar.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8D9D24D12521239C004FF191 /* OutlookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D9D24D62521239C004FF191 /* Build configuration list for PBXNativeTarget "OutlookTests" */;
+			buildPhases = (
+				8D9D24CE2521239C004FF191 /* Sources */,
+				8D9D24CF2521239C004FF191 /* Frameworks */,
+				8D9D24D02521239C004FF191 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OutlookTests;
+			productName = OutlookTests;
+			productReference = 8D9D24D22521239C004FF191 /* OutlookTests */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -450,6 +507,9 @@
 							};
 						};
 					};
+					8D9D24D12521239C004FF191 = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
 				};
 			};
 			buildConfigurationList = 3C163B902118EF2900F015EC /* Build configuration list for PBXProject "EnergyBar" */;
@@ -466,6 +526,7 @@
 			projectRoot = "";
 			targets = (
 				3C163B942118EF2900F015EC /* EnergyBar */,
+				8D9D24D12521239C004FF191 /* OutlookTests */,
 			);
 		};
 /* End PBXProject section */
@@ -571,6 +632,7 @@
 				3C102D482119641500FFB2CF /* CustomWidget.m in Sources */,
 				3C3464BF21465319001F45BB /* WeatherWidget.m in Sources */,
 				3CA851A0212B84B000585D29 /* NSTouchBar+SystemModal.m in Sources */,
+				8D9D24E3252124DE004FF191 /* OutlookEvent.m in Sources */,
 				8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */,
 				8D9D248E2520BAA9004FF191 /* OutlookCalendarWidget.m in Sources */,
 				3C5D0FCE2119210000769A39 /* ClockWidget.m in Sources */,
@@ -591,6 +653,16 @@
 				3CA1DD86212D3DB200D95DE1 /* NowPlayingWidget.m in Sources */,
 				3C102D4B21197ED700FFB2CF /* ControlWidget.m in Sources */,
 				3C163BC62118F1C500F015EC /* AppController.m in Sources */,
+				8D9D24EE2521311C004FF191 /* ImageTileWidget.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D9D24CE2521239C004FF191 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D9D24D52521239C004FF191 /* main.m in Sources */,
+				8D9D24E4252124DE004FF191 /* OutlookEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -815,6 +887,35 @@
 			};
 			name = Release;
 		};
+		8D9D24D72521239C004FF191 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TP8BYQ64C4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8D9D24D82521239C004FF191 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TP8BYQ64C4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -832,6 +933,15 @@
 			buildConfigurations = (
 				3C163BA72118EF2A00F015EC /* Debug */,
 				3C163BA82118EF2A00F015EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D9D24D62521239C004FF191 /* Build configuration list for PBXNativeTarget "OutlookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D9D24D72521239C004FF191 /* Debug */,
+				8D9D24D82521239C004FF191 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

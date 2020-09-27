@@ -7,7 +7,11 @@
 //
 
 #import "OutlookCalendarWidget.h"
+#import "ImageTileWidget.h"
+#import "OutlookEvent.h"
 #import "Outlook.h"
+
+#define FETCH_CALENDAR_EVERY_SECONDS 5*60
 
 @interface NextEventsWidgetView : NSView
 
@@ -86,8 +90,8 @@
     
 }
 
-- (void) showEvent:(NSDictionary*) jsonEvent {
-    self.event = [[OutlookEvent alloc] initWithJson:jsonEvent];
+- (void) showEvent:(OutlookEvent*) event {
+    self.event = event;
     [self update];
 }
 
@@ -96,6 +100,7 @@
         NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
         [view.timeView setStringValue:self.event.startTimeDesc];
         [view.titleView setStringValue:self.event.title];
+        [view.joinButton setHidden:!self.event.isCurrent];
     });
 }
 
@@ -109,11 +114,18 @@
 @property (retain) NextEventWidget* nextEventWidget;
 @property (retain) NSTimer* refreshTimer;
 @property (retain) Outlook* outlook;
+@property (retain) NSDate* lastFetch;
 @end
 
 @implementation OutlookCalendarWidget
 
 - (void)commonInit {
+
+    // no connection
+    [self addWidget:[[ImageTileWidget alloc] initWithIdentifier:@"signin" title:@"No connection"]];
+
+    // no event
+    [self addWidget:[[ImageTileWidget alloc] initWithIdentifier:@"enjoy" title:@"No events"]];
 
     // add widgets
     self.nextEventWidget = [[[NextEventWidget alloc] initWithIdentifier:@"_NextEvents"] autorelease];
@@ -123,9 +135,17 @@
     self.outlook = [[Outlook alloc] init];
 }
 
+- (void)tapAction:(id)sender {
+    
+}
+
 - (void)viewWillAppear {
-    [NSTimer timerWithTimeInterval:5 repeats:YES block:^(NSTimer * _Nonnull timer) {
+    [NSTimer scheduledTimerWithTimeInterval:15 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        if (self.lastFetch == nil || fabs([self.lastFetch timeIntervalSinceNow]) > FETCH_CALENDAR_EVERY_SECONDS) {
             [self loadEvents];
+        } else {
+            [self.nextEventWidget update];
+        }
     }];
     [self loadEvents];
 }
@@ -133,13 +153,24 @@
 - (void)loadEvents {
     [self.outlook loadCurrentAccount:^{
             if (self.outlook.currentAccount == nil) {
-                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setActiveIndex:0];
+                });
             } else {
                 [self.outlook getCalendarEvents:^(NSDictionary * jsonCalendar) {
-                    NSArray* events = [jsonCalendar objectForKey:@"value"];
-                    if (events != nil && events.count > 0) {
-                        NSDictionary* event = [events objectAtIndex:0];
-                        [self.nextEventWidget showEvent:event];
+                    self.lastFetch = [[NSDate alloc] init];
+                    NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
+                    NSArray* events = [OutlookEvent listFromJson:jsonEvents];
+                    OutlookEvent* event = [OutlookEvent findSoonestEvent:events];
+                    if (event != nil) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self setActiveIndex:2];
+                            [self.nextEventWidget showEvent:event];
+                        });
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self setActiveIndex:1];
+                        });
                     }
                 }];
             }

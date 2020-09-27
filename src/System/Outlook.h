@@ -25,25 +25,4 @@ typedef void (^ _Nullable JsonCompletionBlock)(NSDictionary*);
 
 @end
 
-typedef enum {
-    Free,
-    Busy,
-    Tentative,
-    OutOfOffice,
-    Unknown
-} ShowAs;
-
-@interface OutlookEvent : NSObject
-
-@property (retain) NSString* title;
-@property (retain) NSDate* startTime;
-@property (assign) ShowAs showAs;
-@property (retain) NSString* webLink;
-@property (retain) NSString* joinUrl;
-
-- (id) initWithJson:(NSDictionary*) jsonEvent;
-- (NSString*) startTimeDesc;
-
-@end
-
 NS_ASSUME_NONNULL_END

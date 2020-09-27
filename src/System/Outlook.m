@@ -8,11 +8,8 @@
 
 #import "Outlook.h"
 
-#define IsValid(x) (x != nil && [x isKindOfClass:[NSNull class]] == NO)
-
 #define CALENDAR_LIST_OFFSET_START -10*60
 #define CALENDAR_LIST_OFFSET_END 24*60*60
-#define CALENDAR_CLOSE_EVENT_DELTA 2*60*60
 
 NSString* kClientID = @"82ac6221-a570-439c-a965-040443a5036c";
 NSString* kAuthority = @"https://login.microsoftonline.com/common";
@@ -257,136 +254,11 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     // now do it
     [self acquireTokenSilently:^{
         [self getContent:uri withHeaders:headers completionBlock:^(NSDictionary* jsonObject) {
-            NSLog(@"%@", jsonObject);
+            //NSLog(@"%@", jsonObject);
             completionBlock(jsonObject);
         }];
     }];
 
-}
-
-@end
-
-@interface NSDictionary(Json)
-- (NSString*) getJsonValue:(NSString*) key;
-- (NSString*) getJsonValue:(NSString*) key sub:(NSString*) subkey;
-@end
-
-@implementation NSDictionary(Json)
-
-- (NSString*) getJsonValue:(NSString*) key {
-    id value = [self objectForKey:key];
-    return (IsValid(value) ? value : nil);
-}
-
-- (NSString*) getJsonValue:(NSString*) key sub:(NSString*) subkey {
-    NSDictionary* dict = [self objectForKey:key];
-    return (IsValid(dict) ? [dict getJsonValue:subkey] : nil);
-}
-
-@end
-
-@implementation OutlookEvent
-
-- (id) initWithJson:(NSDictionary*) jsonEvent {
-    
-    // start with easy one
-    self = [super init];
-    self.title = [jsonEvent getJsonValue:@"subject"];
-    self.webLink = [jsonEvent getJsonValue:@"webLink"];
-    
-    // show as
-    self.showAs = Unknown;
-    NSString* jsonShowAs = [jsonEvent getJsonValue:@"showAs"];
-    if ([jsonShowAs caseInsensitiveCompare:@"free"] == NSOrderedSame) {
-        self.showAs = Free;
-    } else if ([jsonShowAs caseInsensitiveCompare:@"busy"] == NSOrderedSame) {
-        self.showAs = Busy;
-    } else if ([jsonShowAs caseInsensitiveCompare:@"tentative"] == NSOrderedSame) {
-        self.showAs = Tentative;
-    } else if ([jsonShowAs caseInsensitiveCompare:@"oof"] == NSOrderedSame) {
-        self.showAs = OutOfOffice;
-    } else if ([jsonShowAs caseInsensitiveCompare:@"workingelsewhere"] == NSOrderedSame) {
-        self.showAs = Busy;
-    }
-    
-    // date: 2020-09-28T01:00:00.0000000
-    NSString* jsonDate = [jsonEvent getJsonValue:@"start" sub:@"dateTime"];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
-    self.startTime = [dateFormatter dateFromString:jsonDate];
-    
-    // join url
-    self.joinUrl = [jsonEvent getJsonValue:@"onlineMeetingUrl"];
-    if (IsValid(self.joinUrl) == NO) {
-        self.joinUrl = [jsonEvent getJsonValue:@"onlineMeeting" sub:@"joinUrl"];
-    }
-    if (IsValid(self.joinUrl) == NO) {
-
-        // parse body for teams
-        NSString* body = [jsonEvent getJsonValue:@"body" sub:@"content"];
-        NSRange rangeStart = [body rangeOfString:@"https://teams.microsoft.com/l/meetup-join/"];
-        if (rangeStart.location != NSNotFound) {
-            NSRange rangeEnd = [body rangeOfString:@"\"" options:0 range:NSMakeRange(rangeStart.location, body.length - rangeStart.location)];
-            if (rangeEnd.location != NSNotFound) {
-                self.joinUrl = [body substringWithRange:NSMakeRange(rangeStart.location, rangeEnd.location - rangeStart.location)];
-            }
-        }
-    }
-
-    // done
-    return self;
-    
-}
-
-- (NSString*) startTimeDesc {
-    
-    // debug
-    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian] autorelease];
-    NSDateComponents *components = [[[NSDateComponents alloc] init] autorelease];
-    [components setYear:2020];
-    [components setMonth:9];
-    [components setDay:27];
-    [components setHour:15];
-    [components setHour:20];
-    NSDate* now = [calendar dateFromComponents:components];
-
-    
-    // needed to compare
-    //NSDate* now = [[NSDate alloc] initW
-    NSTimeInterval interval = [self.startTime timeIntervalSinceDate:now];
-    
-    // tell time diff
-    if (interval <= CALENDAR_CLOSE_EVENT_DELTA) {
-        
-        int minutes = interval / 60;
-        int hours = minutes / 60;
-        minutes = minutes - hours * 60;
-        if (hours == 0) {
-            return [NSString stringWithFormat:@"In %d minutes", minutes];
-        } else {
-            return [NSString stringWithFormat:@"In %dh%d", hours, minutes];
-        }
-        
-    }
-    
-    // need a time formatter
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterNoStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    
-    // get components
-    NSDateComponents* nowComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:now];
-    NSDateComponents* eventComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:self.startTime];
-    
-    // if same day
-    if (eventComponents.day == nowComponents.day) {
-        return [NSString stringWithFormat:@"Today, %@", [dateFormatter stringFromDate:self.startTime]];
-    } else if (eventComponents.day == nowComponents.day + 1) {
-        return [NSString stringWithFormat:@"Tomorrow, %@", [dateFormatter stringFromDate:self.startTime]];
-    } else {
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        return [dateFormatter stringFromDate:self.startTime];
-    }
 }
 
 @end
