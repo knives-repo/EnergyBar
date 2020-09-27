@@ -91,10 +91,13 @@
     return [OutlookEvent dateDiffDescriptionBetween:[[NSDate alloc] init] and:self.startTime];
 }
 
-- (BOOL) isCurrent {
+- (NSTimeInterval) intervalWithNow {
     NSDate* now = [[NSDate alloc] init];
-    NSTimeInterval interval = [self.startTime timeIntervalSinceDate:now];
-    return interval <= EVENT_CURRENT_DELTA;
+    return [self.startTime timeIntervalSinceDate:now];
+}
+
+- (BOOL) isCurrent {
+    return [self intervalWithNow] <= EVENT_CURRENT_DELTA;
 }
 
 + (NSArray*) listFromJson:(NSArray*) jsonArray {
@@ -168,6 +171,12 @@
     // best
     OutlookEvent* soonest = nil;
     for (OutlookEvent* event in events) {
+        
+        // discard old events
+        NSTimeInterval interval = [event intervalWithNow];
+        if (interval < -EVENT_NOW_DELTA) {
+            continue;
+        }
         
         // first is best
         if (soonest == nil) {

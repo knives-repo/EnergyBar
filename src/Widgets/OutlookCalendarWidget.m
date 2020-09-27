@@ -20,6 +20,7 @@
 @property (assign) IBOutlet NSTextField *timeView;
 @property (assign) IBOutlet NSTextField *titleView;
 @property (assign) IBOutlet NSButton *joinButton;
+@property (assign) IBOutlet NSLayoutConstraint *joinButtonWidthConstraint;
 
 @end
 
@@ -100,7 +101,7 @@
         NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
         [view.timeView setStringValue:self.event.startTimeDesc];
         [view.titleView setStringValue:self.event.title];
-        [view.joinButton setHidden:!self.event.isCurrent];
+        [view.joinButtonWidthConstraint setConstant:(self.event.isCurrent ? 48 : 0)];
     });
 }
 
@@ -122,7 +123,7 @@
 - (void)commonInit {
 
     // no connection
-    [self addWidget:[[ImageTileWidget alloc] initWithIdentifier:@"signin" title:@"No connection"]];
+    [self addWidget:[[ImageTileWidget alloc] initWithIdentifier:@"signin" title:@"No connection" icon:[NSImage imageNamed:NSImageNameUserAccounts]]];
 
     // no event
     [self addWidget:[[ImageTileWidget alloc] initWithIdentifier:@"enjoy" title:@"No events"]];

@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="contentView" destination="c22-O7-iKe" id="dZm-8r-Ti3"/>
                 <outlet property="joinButton" destination="jZd-iJ-kI4" id="dcQ-DX-rdc"/>
+                <outlet property="joinButtonWidthConstraint" destination="3ay-tx-G3P" id="ciD-p5-tj2"/>
                 <outlet property="showAsView" destination="RSB-v4-1wi" id="PCZ-E0-So6"/>
                 <outlet property="timeView" destination="5Tj-vO-qSS" id="blR-jz-eyD"/>
                 <outlet property="titleView" destination="6ZQ-Ws-RNL" id="nOj-nO-kEl"/>

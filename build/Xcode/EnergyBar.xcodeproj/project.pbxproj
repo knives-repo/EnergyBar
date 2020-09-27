@@ -313,10 +313,10 @@
 				3CEE0C2B211D599400CFD6B2 /* BrightnessBar.xib */,
 				3C01F8EE2161B93000FFD2C6 /* BrightnessBar-Mojave.xib */,
 				3CF113962138769D005B1350 /* FolderBar.xib */,
+				8D9D248F2520BC26004FF191 /* OutlookEvents.xib */,
 				3CD1EBC0211D680A001DC22F /* VolumeBar.xib */,
 				3C163BBD2118F1A800F015EC /* Info.plist */,
 				3CDF1EB5211A650700739051 /* defaults.plist */,
-				8D9D248F2520BC26004FF191 /* OutlookEvents.xib */,
 			);
 			name = Resource;
 			path = ../../rsc;
