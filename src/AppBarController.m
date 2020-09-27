@@ -54,6 +54,7 @@
         @"ActiveApp",
         @"NowPlaying",
         @"Todo",
+        @"OutlookCalendar",
         @"Control",
         @"Brightness",
         //@"Backlight",

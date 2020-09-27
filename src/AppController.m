@@ -22,6 +22,7 @@
 #import "TodoWidget.h"
 #import "TouchBarController.h"
 #import "WeatherWidget.h"
+#import "Outlook.h"
 
 static const NSTimeInterval IgnoresAccidentalTouchesDuration = 0.3;
 
@@ -38,6 +39,9 @@ static const NSTimeInterval IgnoresAccidentalTouchesDuration = 0.3;
 @property (assign) IBOutlet NSButton *toggleMacOSDockButton;
 @property (assign) IBOutlet NSButton *loginItemButton;
 @property (assign) IBOutlet NSButton *sourceLinkButton;
+@property (assign) IBOutlet NSTextField *outlookStatusLabel;
+@property (assign) IBOutlet NSButton *outlookSignInButton;
+@property (assign) IBOutlet NSButton *outlookSignOutButton;
 @end
 
 static void AppControllerFSNotify(const char *path, void *data)
@@ -49,6 +53,7 @@ static void AppControllerFSNotify(const char *path, void *data)
 {
     void *_stream;
     id _keyEventMonitor;
+    Outlook* outlook;
 }
 
 - (void)dealloc
@@ -144,6 +149,12 @@ static void AppControllerFSNotify(const char *path, void *data)
         [alert runModal];
         [NSApp terminate:nil];
     }
+    
+    // init outlook
+    outlook = [[Outlook alloc] init];
+    [outlook loadCurrentAccount:^{
+        [self updateOutlookStatus];
+    }];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
@@ -498,4 +509,32 @@ static void AppControllerFSNotify(const char *path, void *data)
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
     [[NSUserDefaults standardUserDefaults] setObject:version forKey:@"LastVersion"];
 }
+
+- (void)updateOutlookStatus {
+    if (outlook.currentAccount == nil) {
+        [self.outlookStatusLabel setStringValue:@"Not connected"];
+        [self.outlookSignInButton setEnabled:YES];
+        [self.outlookSignOutButton setEnabled:NO];
+    } else {
+        [self.outlookStatusLabel setStringValue:outlook.currentAccount.username];
+        [self.outlookSignInButton setEnabled:NO];
+        [self.outlookSignOutButton setEnabled:YES];
+    }
+}
+
+- (IBAction)outlookSignIn:(id)sender
+{
+    [outlook signIn:^(NSDictionary* profile) {
+        NSLog(@"[CONNECT] %@", profile);
+        [self updateOutlookStatus];
+    }];
+}
+
+- (IBAction)outlookSignOut:(id)sender
+{
+    [outlook signOut:^() {
+        [self updateOutlookStatus];
+    }];
+}
+
 @end

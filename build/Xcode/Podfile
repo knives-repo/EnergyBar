@@ -1,0 +1,15 @@
+# Uncomment the next line to define a global platform for your project
+platform :macos, '10.13'
+
+abstract_target 'EnergyBars' do
+
+	# Targets
+	target 'EnergyBar'
+ 
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for EnergyBar
+  pod 'MSAL'
+
+end

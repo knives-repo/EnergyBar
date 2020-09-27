@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -62,7 +62,11 @@
 		8D9D2467251FB372004FF191 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9D2466251FB372004FF191 /* IOKit.framework */; };
 		8D9D246A251FBA27004FF191 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9D2468251FBA27004FF191 /* CoreFoundation.framework */; };
 		8D9D246B251FBA27004FF191 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9D2469251FBA27004FF191 /* CoreGraphics.framework */; };
+		8D9D24882520381A004FF191 /* Outlook.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24872520381A004FF191 /* Outlook.m */; };
+		8D9D248E2520BAA9004FF191 /* OutlookCalendarWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D248D2520BAA9004FF191 /* OutlookCalendarWidget.m */; };
+		8D9D24902520BC26004FF191 /* OutlookEvents.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9D248F2520BC26004FF191 /* OutlookEvents.xib */; };
 		8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */; };
+		AF95C8ADCA2ED9B5705D7BB6 /* Pods_EnergyBars_EnergyBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,6 +84,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		10FB0F0A499EB9571D640745 /* Pods-EnergyBars-EnergyBar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBars-EnergyBar.debug.xcconfig"; path = "Target Support Files/Pods-EnergyBars-EnergyBar/Pods-EnergyBars-EnergyBar.debug.xcconfig"; sourceTree = "<group>"; };
 		3C01F8ED2161B93000FFD2C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/BrightnessBar-Mojave.xib"; sourceTree = "<group>"; };
 		3C01F8EF2161CE7400FFD2C6 /* SkyLight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkyLight.framework; path = ../../../../../../System/Library/PrivateFrameworks/SkyLight.framework; sourceTree = "<group>"; };
 		3C01F8F12161D07800FFD2C6 /* Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appearance.h; sourceTree = "<group>"; };
@@ -162,6 +167,8 @@
 		405B4678219A3CCA0006DC16 /* LockWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockWidget.m; sourceTree = "<group>"; };
 		405B4679219A3CCA0006DC16 /* LockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockWidget.h; sourceTree = "<group>"; };
 		405B467B219A3D2D0006DC16 /* login.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = login.framework; path = ../../../../../../System/Library/PrivateFrameworks/login.framework; sourceTree = "<group>"; };
+		47E79DF6587D2DB95D7A0EDA /* Pods-EnergyBar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBar.debug.xcconfig"; path = "Target Support Files/Pods-EnergyBar/Pods-EnergyBar.debug.xcconfig"; sourceTree = "<group>"; };
+		79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnergyBars_EnergyBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D33B984251E6BC0006AFCC9 /* VolumeWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeWidget.h; sourceTree = "<group>"; };
 		8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeWidget.m; sourceTree = "<group>"; };
 		8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicMuteWidget.m; sourceTree = "<group>"; };
@@ -177,8 +184,18 @@
 		8D9D2466251FB372004FF191 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		8D9D2468251FBA27004FF191 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		8D9D2469251FBA27004FF191 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8D9D248625203819004FF191 /* Outlook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Outlook.h; sourceTree = "<group>"; };
+		8D9D24872520381A004FF191 /* Outlook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Outlook.m; sourceTree = "<group>"; };
+		8D9D248C2520BAA9004FF191 /* OutlookCalendarWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutlookCalendarWidget.h; sourceTree = "<group>"; };
+		8D9D248D2520BAA9004FF191 /* OutlookCalendarWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookCalendarWidget.m; sourceTree = "<group>"; };
+		8D9D248F2520BC26004FF191 /* OutlookEvents.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutlookEvents.xib; sourceTree = "<group>"; };
 		8DE31D11251EFE7E004E835B /* BrightnessWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessWidget.h; sourceTree = "<group>"; };
 		8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrigthnessWidget.m; sourceTree = "<group>"; };
+		A7C49C788382A2D1AD12F453 /* Pods-EnergyBars-EnergyBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBars-EnergyBar.release.xcconfig"; path = "Target Support Files/Pods-EnergyBars-EnergyBar/Pods-EnergyBars-EnergyBar.release.xcconfig"; sourceTree = "<group>"; };
+		BA5F7D03B6732C1261166980 /* Pods_EnergyBars_EnergyBarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnergyBars_EnergyBarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF544AEAB8FD234F46D45319 /* Pods-EnergyBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBar.release.xcconfig"; path = "Target Support Files/Pods-EnergyBar/Pods-EnergyBar.release.xcconfig"; sourceTree = "<group>"; };
+		C627D4E711EACD1BD93954F3 /* Pods-EnergyBars-EnergyBarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBars-EnergyBarTests.release.xcconfig"; path = "Target Support Files/Pods-EnergyBars-EnergyBarTests/Pods-EnergyBars-EnergyBarTests.release.xcconfig"; sourceTree = "<group>"; };
+		CD0519C1A1FFEA0D2CA716AE /* Pods-EnergyBars-EnergyBarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBars-EnergyBarTests.debug.xcconfig"; path = "Target Support Files/Pods-EnergyBars-EnergyBarTests/Pods-EnergyBars-EnergyBarTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +213,7 @@
 				3C3464C221471797001F45BB /* WeatherKit.framework in Frameworks */,
 				8D9D246B251FBA27004FF191 /* CoreGraphics.framework in Frameworks */,
 				3C665D0221619E870004D9EC /* OctoFeed.framework in Frameworks */,
+				AF95C8ADCA2ED9B5705D7BB6 /* Pods_EnergyBars_EnergyBar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +246,8 @@
 				3CA8519E212B84B000585D29 /* NSTouchBar+SystemModal.m */,
 				3CA8519B212B832100585D29 /* NSWorkspace+Finder.h */,
 				3CA8519C212B832100585D29 /* NSWorkspace+Finder.m */,
+				8D9D248625203819004FF191 /* Outlook.h */,
+				8D9D24872520381A004FF191 /* Outlook.m */,
 				3C386228214989B500A8C37B /* PowerStatus.h */,
 				3C386229214989B500A8C37B /* PowerStatus.m */,
 				3C3464C021470F65001F45BB /* WeatherKit.h */,
@@ -243,6 +263,7 @@
 				3C163BB92118F17700F015EC /* Source */,
 				3C163B962118EF2900F015EC /* Products */,
 				3C83DB46211D851600FC2F53 /* Frameworks */,
+				418983CF5C3471F50A8DEA1A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -265,6 +286,7 @@
 				3CD1EBC0211D680A001DC22F /* VolumeBar.xib */,
 				3C163BBD2118F1A800F015EC /* Info.plist */,
 				3CDF1EB5211A650700739051 /* defaults.plist */,
+				8D9D248F2520BC26004FF191 /* OutlookEvents.xib */,
 			);
 			name = Resource;
 			path = ../../rsc;
@@ -330,6 +352,8 @@
 				8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */,
 				3CA1DD84212D3DB200D95DE1 /* NowPlayingWidget.h */,
 				3CA1DD85212D3DB200D95DE1 /* NowPlayingWidget.m */,
+				8D9D248C2520BAA9004FF191 /* OutlookCalendarWidget.h */,
+				8D9D248D2520BAA9004FF191 /* OutlookCalendarWidget.m */,
 				3C400078236CC6A3000261FF /* TodoWidget.h */,
 				3C400077236CC6A3000261FF /* TodoWidget.m */,
 				8D33B984251E6BC0006AFCC9 /* VolumeWidget.h */,
@@ -353,8 +377,23 @@
 				3C01F8EF2161CE7400FFD2C6 /* SkyLight.framework */,
 				3C3464C121471797001F45BB /* WeatherKit.framework */,
 				3C665D0021619E7A0004D9EC /* OctoFeed.framework */,
+				79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */,
+				BA5F7D03B6732C1261166980 /* Pods_EnergyBars_EnergyBarTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		418983CF5C3471F50A8DEA1A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				47E79DF6587D2DB95D7A0EDA /* Pods-EnergyBar.debug.xcconfig */,
+				BF544AEAB8FD234F46D45319 /* Pods-EnergyBar.release.xcconfig */,
+				10FB0F0A499EB9571D640745 /* Pods-EnergyBars-EnergyBar.debug.xcconfig */,
+				A7C49C788382A2D1AD12F453 /* Pods-EnergyBars-EnergyBar.release.xcconfig */,
+				CD0519C1A1FFEA0D2CA716AE /* Pods-EnergyBars-EnergyBarTests.debug.xcconfig */,
+				C627D4E711EACD1BD93954F3 /* Pods-EnergyBars-EnergyBarTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		8D33B9A1251ED9C6006AFCC9 /* Controls */ = {
@@ -377,11 +416,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C163BA62118EF2A00F015EC /* Build configuration list for PBXNativeTarget "EnergyBar" */;
 			buildPhases = (
+				E76D8AAECC92558C9BF12000 /* [CP] Check Pods Manifest.lock */,
 				3C163B912118EF2900F015EC /* Sources */,
 				3C163B922118EF2900F015EC /* Frameworks */,
 				3C163B932118EF2900F015EC /* Resources */,
 				3C665D0421619E880004D9EC /* Embed Frameworks */,
 				3C3545AD212A990500C476AB /* Set Build Number */,
+				CDC8F6600030E8FE07FBF809 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -434,6 +475,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D9D24902520BC26004FF191 /* OutlookEvents.xib in Resources */,
 				3CD1EBBE211D680A001DC22F /* VolumeBar.xib in Resources */,
 				3CEE0C29211D599400CFD6B2 /* BrightnessBar.xib in Resources */,
 				3CF113942138769D005B1350 /* FolderBar.xib in Resources */,
@@ -463,6 +505,45 @@
 			shellScript = "plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nversion=$(/usr/libexec/PlistBuddy -c \"Print :CFBundleShortVersionString\" \"$plist\")\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $version.$(date +%y%j)\" \"$plist\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CDC8F6600030E8FE07FBF809 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EnergyBars-EnergyBar/Pods-EnergyBars-EnergyBar-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EnergyBars-EnergyBar/Pods-EnergyBars-EnergyBar-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EnergyBars-EnergyBar/Pods-EnergyBars-EnergyBar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E76D8AAECC92558C9BF12000 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EnergyBars-EnergyBar-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -472,6 +553,7 @@
 			files = (
 				8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */,
 				3C9E264A211E2A9F0042C2E8 /* Brightness.c in Sources */,
+				8D9D24882520381A004FF191 /* Outlook.m in Sources */,
 				3CDF1EB4211A3B9500739051 /* DockWidget.m in Sources */,
 				8D33B986251E6BC0006AFCC9 /* VolumeWidget.m in Sources */,
 				8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */,
@@ -490,6 +572,7 @@
 				3C3464BF21465319001F45BB /* WeatherWidget.m in Sources */,
 				3CA851A0212B84B000585D29 /* NSTouchBar+SystemModal.m in Sources */,
 				8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */,
+				8D9D248E2520BAA9004FF191 /* OutlookCalendarWidget.m in Sources */,
 				3C5D0FCE2119210000769A39 /* ClockWidget.m in Sources */,
 				3C6CCA38211B824000D019F4 /* TouchBarController.m in Sources */,
 				3C5032E32139C8E900305593 /* ImageTitleView.m in Sources */,
@@ -583,7 +666,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -642,7 +725,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -670,6 +753,7 @@
 		};
 		3C163BA72118EF2A00F015EC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10FB0F0A499EB9571D640745 /* Pods-EnergyBars-EnergyBar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -680,7 +764,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.7;
 				DEVELOPMENT_TEAM = TP8BYQ64C4;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -701,6 +785,7 @@
 		};
 		3C163BA82118EF2A00F015EC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7C49C788382A2D1AD12F453 /* Pods-EnergyBars-EnergyBar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -711,7 +796,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.7;
 				DEVELOPMENT_TEAM = TP8BYQ64C4;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
