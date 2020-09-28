@@ -31,7 +31,7 @@ typedef enum {
 
 + (NSArray*) listFromJson:(NSArray*) jsonArray;
 
-+ (OutlookEvent*) findSoonestEvent:(NSArray*) events;
++ (OutlookEvent*) findSoonestEvent:(NSArray*) events busyOnly:(BOOL) busyOnly;
 
 - (id) initWithJson:(NSDictionary*) jsonEvent;
 - (NSString*) startTimeDesc;

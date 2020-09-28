@@ -10,6 +10,7 @@
 #import "ImageTileWidget.h"
 #import "OutlookEvent.h"
 #import "Outlook.h"
+#import "NSColor+Hex.h"
 
 #define FETCH_CALENDAR_EVERY_SECONDS 5*60
 
@@ -52,7 +53,6 @@
     // more setup
     [self.showAsView setWantsLayer:YES];
     [self.showAsView.layer setCornerRadius:2.0];
-    [self.showAsView.layer setBackgroundColor:[[NSColor blueColor] CGColor]];
     
 }
 
@@ -68,9 +68,13 @@
 
 @end
 
-
 @interface NextEventWidget : CustomWidget
-@property (retain) OutlookEvent* event;
+
+@property (retain) NSArray* events;
+@property (readonly,retain) OutlookEvent* event;
+
+- (void) update;
+
 @end
 
 @implementation NextEventWidget
@@ -91,17 +95,44 @@
     
 }
 
-- (void) showEvent:(OutlookEvent*) event {
-    self.event = event;
+- (void) showEvents:(NSArray*) events {
+    self.events = events;
     [self update];
 }
 
 - (void) update {
+
+    // select event to show
+    BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
+    self->_event = [OutlookEvent findSoonestEvent:self.events busyOnly:busyOnly];
+
+    // update
     dispatch_async(dispatch_get_main_queue(), ^{
+
+        // basic
         NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
         [view.timeView setStringValue:self.event.startTimeDesc];
         [view.titleView setStringValue:self.event.title];
         [view.joinButtonWidthConstraint setConstant:(self.event.isCurrent ? 48 : 0)];
+        
+        // show as
+        switch (self.event.showAs) {
+            case Unknown:
+                [view.showAsView.layer setBackgroundColor:[[NSColor grayColor] CGColor]];
+                break;
+            case Free:
+                [view.showAsView.layer setBackgroundColor:[[NSColor whiteColor] CGColor]];
+                break;
+            case Tentative:
+                [view.showAsView.layer setBackgroundColor:[[NSColor colorFromHex:0x7fb2ee] CGColor]];
+                break;
+            case Busy:
+                [view.showAsView.layer setBackgroundColor:[[NSColor colorFromHex:0x0078d4] CGColor]];
+                break;
+            case OutOfOffice:
+                [view.showAsView.layer setBackgroundColor:[[NSColor purpleColor] CGColor]];
+                break;
+        }
     });
 }
 
@@ -138,7 +169,7 @@
                                                           title:@"No events"] autorelease]];
     
     // add widgets
-    self.nextEventWidget = [[[NextEventWidget alloc] initWithIdentifier:@"_OutlookNextEvents"] autorelease];
+    self.nextEventWidget = [[[NextEventWidget alloc] initWithIdentifier:@"_OutlookNextEvent"] autorelease];
     [self addWidget:self.nextEventWidget];
     
     // init outlook
@@ -184,11 +215,10 @@
                 self.lastFetch = [[NSDate alloc] init];
                 NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
                 NSArray* events = [OutlookEvent listFromJson:jsonEvents];
-                OutlookEvent* event = [OutlookEvent findSoonestEvent:events];
-                if (event != nil) {
+                [self.nextEventWidget showEvents:events];
+                if (self.nextEventWidget.event != nil) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self setActiveIndex:2];
-                        [self.nextEventWidget showEvent:event];
                     });
                 } else {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -202,6 +232,12 @@
 
 - (void)viewWillDisappear {
     [self.refreshTimer invalidate];
+}
+
+- (void)update {
+    if (self.activeIndex == 2) {
+        [self.nextEventWidget update];
+    }
 }
 
 @end

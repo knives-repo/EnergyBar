@@ -22,6 +22,7 @@
 #import "TodoWidget.h"
 #import "TouchBarController.h"
 #import "WeatherWidget.h"
+#import "OutlookCalendarWidget.h"
 #import "Outlook.h"
 
 static const NSTimeInterval IgnoresAccidentalTouchesDuration = 0.3;
@@ -535,6 +536,12 @@ static void AppControllerFSNotify(const char *path, void *data)
     [outlook signOut:^() {
         [self updateOutlookStatus];
     }];
+}
+
+- (IBAction)outlookWidgetSettingsChange:(id)sender
+{
+    OutlookCalendarWidget* widget = [self.touchBarController.touchBar itemForIdentifier:@"OutlookCalendar"];
+    [widget update];
 }
 
 @end

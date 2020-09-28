@@ -146,22 +146,20 @@
     [dateFormatter setDateStyle:NSDateFormatterNoStyle];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
-    // close
-    if (interval <= EVENT_CLOSE_DELTA) {
-        if (eventComponents.day == nowComponents.day) {
-            return [NSString stringWithFormat:@"Today, %@", [dateFormatter stringFromDate:date]];
-        } else if (eventComponents.day == nowComponents.day + 1) {
-            return [NSString stringWithFormat:@"Tomorrow, %@", [dateFormatter stringFromDate:date]];
-        }
+    // final
+    if (eventComponents.day == nowComponents.day) {
+        return [NSString stringWithFormat:@"Today, %@", [dateFormatter stringFromDate:date]];
+    } else if (eventComponents.day == nowComponents.day + 1) {
+        return [NSString stringWithFormat:@"Tomorrow, %@", [dateFormatter stringFromDate:date]];
+    } else {
+        // default
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        return [dateFormatter stringFromDate:date];
     }
-    
-    // default
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    return [dateFormatter stringFromDate:date];
 
 }
 
-+ (OutlookEvent*) findSoonestEvent:(NSArray*) events {
++ (OutlookEvent*) findSoonestEvent:(NSArray*) events busyOnly:(BOOL)busyOnly {
     
     // check
     if (events == nil || events.count == 0) {
@@ -175,6 +173,11 @@
         // discard old events
         NSTimeInterval interval = [event intervalWithNow];
         if (interval < -EVENT_NOW_DELTA) {
+            continue;
+        }
+        
+        // only busy
+        if (busyOnly && event.showAs != Busy) {
             continue;
         }
         
