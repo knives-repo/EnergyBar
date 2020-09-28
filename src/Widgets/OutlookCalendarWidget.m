@@ -13,6 +13,7 @@
 #import "NSColor+Hex.h"
 
 #define FETCH_CALENDAR_EVERY_SECONDS 5*60
+#define RESET_AFTER_USER_NEXT 10
 
 @interface NextEventsWidgetView : NSView
 
@@ -23,6 +24,7 @@
 @property (assign) IBOutlet NSTextField *timeView;
 @property (assign) IBOutlet NSTextField *titleView;
 @property (assign) IBOutlet NSButton *joinButton;
+@property (assign) IBOutlet NSButton *nextButton;
 @property (assign) IBOutlet NSLayoutConstraint *joinButtonWidthConstraint;
 
 @end
@@ -73,6 +75,7 @@
 @interface NextEventWidget : CustomWidget
 
 @property (retain) NSArray* events;
+@property (retain) NSTimer* resetTimer;
 @property (readonly,retain) OutlookEvent* event;
 
 - (void) update;
@@ -105,19 +108,37 @@
     [view.joinButton setTarget:self];
     [view.joinButton setAction:@selector(onJoin:)];
     
+    // next nexts
+    [view.nextButton setTarget:self];
+    [view.nextButton setAction:@selector(onNext:)];
+    
 }
 
 - (void) showEvents:(NSArray*) events {
     self.events = events;
-    [self update];
+    [self selectEvent];
 }
 
-- (void) update {
+- (void) selectEvent {
 
     // select event to show
     BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
     self->_event = [OutlookEvent findSoonestEvent:self.events busyOnly:busyOnly];
+    
+    // and show it
+    [self update];
+}
 
+- (void) refresh {
+    if (self.resetTimer != nil) {
+        [self selectEvent];
+    } else {
+        [self update];
+    }
+}
+
+- (void) update {
+    
     // update
     dispatch_async(dispatch_get_main_queue(), ^{
 
@@ -127,7 +148,7 @@
         [view.titleView setStringValue:self.event.title];
         
         // join button
-        if (self.event.isCurrent && self.event.joinUrl != nil) {
+        if (/*self.event.isCurrent && */self.event.joinUrl != nil) {
             if (self.event.isWebEx) {
                 [view.joinButtonWidthConstraint setConstant:32];
             } else if (self.event.isTeams) {
@@ -184,8 +205,39 @@
     OutlookEvent* newEvent = [OutlookEvent findSoonestEvent:self.events busyOnly:!busyOnly];
     if (newEvent != self.event) {
         [[NSUserDefaults standardUserDefaults] setBool:!busyOnly forKey:@"outlookBusyOnly"];
-        [self update];
+        [self selectEvent];
     }
+}
+
+- (void) onNext:(id) sender {
+    
+    // first clear reset timer
+    if (self.resetTimer != nil) {
+        [self.resetTimer invalidate];
+    }
+    
+    // now set it
+    self.resetTimer = [NSTimer scheduledTimerWithTimeInterval:RESET_AFTER_USER_NEXT repeats:NO block:^(NSTimer * _Nonnull timer) {
+        [self selectEvent];
+        self.resetTimer = nil;
+    }];
+
+    // find current and show next
+    BOOL showNext = NO;
+    for (OutlookEvent* event in self.events) {
+        if (showNext) {
+            self->_event = event;
+            [self update];
+            return;
+        }
+        if (event == self.event) {
+            showNext = YES;
+        }
+    }
+    
+    // show 1st
+    self->_event = [self.events firstObject];
+    [self update];
 }
 
 @end
@@ -241,7 +293,7 @@
         if (self.lastFetch == nil || fabs([self.lastFetch timeIntervalSinceNow]) > FETCH_CALENDAR_EVERY_SECONDS) {
             [self loadEvents];
         } else {
-            [self.nextEventWidget update];
+            [self.nextEventWidget refresh];
         }
     }];
     [self loadEvents];
@@ -258,7 +310,10 @@
                 self.lastFetch = [[NSDate alloc] init];
                 NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
                 NSArray* events = [OutlookEvent listFromJson:jsonEvents];
-                [self.nextEventWidget showEvents:events];
+                //for (OutlookEvent* event in events) {
+                //    NSLog(@"%@", event.title);
+                //}
+                [self.nextEventWidget showEvents:[events sortedArrayUsingSelector:@selector(compare:)]];
                 if (self.nextEventWidget.event != nil) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self setActiveIndex:2];

@@ -232,18 +232,21 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     NSString* path = @"v1.0/me/calendar/calendarView";
     NSString* select = @"$select=organizer,start,showAs,subject,body,onlineMeeting,onlineMeetingUrl,webLink";
     NSString* orderBy = @"$orderBy=start/dateTime,showAs";
+    NSString* count = @"$top=50";
     
     // filter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm'Z'"];
     NSDate* now = [[NSDate alloc] init];
     NSDate* start = [now dateByAddingTimeInterval:CALENDAR_LIST_OFFSET_START];
     NSDate* end = [now dateByAddingTimeInterval:CALENDAR_LIST_OFFSET_END];
     NSString* filter = [NSString stringWithFormat:@"startDateTime=%@&endDateTime=%@",
                         [dateFormatter stringFromDate:start], [dateFormatter stringFromDate:end]];
+    NSLog(@"%@", filter);
 
     // done
-    NSString* uri = [NSString stringWithFormat:@"https://graph.microsoft.com/%@?%@&%@&%@", path, filter, select, orderBy];
+    NSString* uri = [NSString stringWithFormat:@"https://graph.microsoft.com/%@?%@&%@&%@&%@", path, filter, select, orderBy, count];
     //NSLog(@"%@", uri);
 
     // timezone

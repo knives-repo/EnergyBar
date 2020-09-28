@@ -13,6 +13,7 @@
                 <outlet property="joinButton" destination="jZd-iJ-kI4" id="dcQ-DX-rdc"/>
                 <outlet property="joinButtonWidthConstraint" destination="3ay-tx-G3P" id="ciD-p5-tj2"/>
                 <outlet property="linkWellView" destination="eQM-CB-Tgs" id="cvF-bZ-mi3"/>
+                <outlet property="nextButton" destination="7hd-JG-2Ci" id="LRM-Y5-wPi"/>
                 <outlet property="showAsView" destination="RSB-v4-1wi" id="PCZ-E0-So6"/>
                 <outlet property="timeView" destination="5Tj-vO-qSS" id="blR-jz-eyD"/>
                 <outlet property="titleView" destination="6ZQ-Ws-RNL" id="nOj-nO-kEl"/>
@@ -21,7 +22,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="32"/>
+            <rect key="frame" x="0.0" y="0.0" width="435" height="32"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="RSB-v4-1wi" userLabel="ShowAs">
@@ -31,7 +32,7 @@
                     </constraints>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Tj-vO-qSS" userLabel="Time">
-                    <rect key="frame" x="22" y="19" width="216" height="13"/>
+                    <rect key="frame" x="22" y="19" width="319" height="13"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Event Time" id="T4v-X3-mc9">
                         <font key="font" metaFont="system" size="10"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -39,7 +40,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6ZQ-Ws-RNL" userLabel="Description">
-                    <rect key="frame" x="22" y="4" width="216" height="15"/>
+                    <rect key="frame" x="22" y="4" width="319" height="15"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="duQ-Zx-M6Z">
                         <font key="font" metaFont="systemBold" size="12"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -47,7 +48,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jZd-iJ-kI4" userLabel="Join">
-                    <rect key="frame" x="238" y="-1" width="60" height="32"/>
+                    <rect key="frame" x="341" y="-1" width="60" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="48" id="3ay-tx-G3P"/>
                     </constraints>
@@ -60,16 +61,28 @@
                     <rect key="frame" x="0.0" y="0.0" width="72" height="32"/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="eQM-CB-Tgs" userLabel="Link Well">
-                    <rect key="frame" x="72" y="0.0" width="164" height="32"/>
+                    <rect key="frame" x="72" y="0.0" width="267" height="32"/>
                 </customView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7hd-JG-2Ci" userLabel="Next Event">
+                    <rect key="frame" x="397" y="-1" width="36" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="M8l-BB-vV8"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSTouchBarGoDownTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="RTG-n5-hPv">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="RSB-v4-1wi" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="8" id="4e5-eX-x6N"/>
                 <constraint firstItem="6ZQ-Ws-RNL" firstAttribute="leading" secondItem="5am-XJ-1U8" secondAttribute="trailing" constant="-48" id="6XI-h3-USG"/>
                 <constraint firstAttribute="bottom" secondItem="RSB-v4-1wi" secondAttribute="bottom" id="B6o-my-WPB"/>
+                <constraint firstAttribute="trailing" secondItem="7hd-JG-2Ci" secondAttribute="trailing" constant="8" id="DUJ-FU-Lqn"/>
                 <constraint firstItem="eQM-CB-Tgs" firstAttribute="leading" secondItem="5am-XJ-1U8" secondAttribute="trailing" id="IG8-oW-y3q"/>
-                <constraint firstAttribute="trailing" secondItem="jZd-iJ-kI4" secondAttribute="trailing" constant="8" id="OT3-n9-96h"/>
+                <constraint firstItem="7hd-JG-2Ci" firstAttribute="leading" secondItem="jZd-iJ-kI4" secondAttribute="trailing" constant="8" id="OT3-n9-96h"/>
                 <constraint firstItem="6ZQ-Ws-RNL" firstAttribute="leading" secondItem="RSB-v4-1wi" secondAttribute="trailing" constant="8" id="Qtd-Ds-IAd"/>
+                <constraint firstItem="7hd-JG-2Ci" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="RdY-lx-IYI"/>
                 <constraint firstItem="6ZQ-Ws-RNL" firstAttribute="top" secondItem="5Tj-vO-qSS" secondAttribute="bottom" id="Vxy-QX-aDk"/>
                 <constraint firstItem="RSB-v4-1wi" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="aDs-Pb-H1v"/>
                 <constraint firstItem="jZd-iJ-kI4" firstAttribute="leading" secondItem="6ZQ-Ws-RNL" secondAttribute="trailing" constant="8" id="cJg-Of-5fy"/>
@@ -84,7 +97,10 @@
                 <constraint firstItem="5Tj-vO-qSS" firstAttribute="leading" secondItem="RSB-v4-1wi" secondAttribute="trailing" constant="8" id="u0G-Iu-nf6"/>
                 <constraint firstAttribute="bottom" secondItem="5am-XJ-1U8" secondAttribute="bottom" id="zTX-vo-q3Q"/>
             </constraints>
-            <point key="canvasLocation" x="-404" y="158"/>
+            <point key="canvasLocation" x="-336.5" y="158"/>
         </customView>
     </objects>
+    <resources>
+        <image name="NSTouchBarGoDownTemplate" width="16" height="30"/>
+    </resources>
 </document>

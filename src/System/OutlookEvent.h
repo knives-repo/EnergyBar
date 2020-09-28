@@ -20,6 +20,7 @@ typedef enum {
 
 @interface OutlookEvent : NSObject
 
+@property (retain) NSString* uid;
 @property (retain) NSString* title;
 @property (retain) NSDate* startTime;
 @property (assign) ShowAs showAs;

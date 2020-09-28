@@ -41,6 +41,7 @@
     
     // start with easy one
     self = [super init];
+    self.uid = [jsonEvent getJsonValue:@"id"];
     self.title = [jsonEvent getJsonValue:@"subject"];
     self.webLink = [jsonEvent getJsonValue:@"webLink"];
     
@@ -128,6 +129,28 @@
 - (BOOL) isWebEx {
     return [self.joinUrl localizedCaseInsensitiveContainsString:@"webex.com"];
 }
+
+- (NSComparisonResult) compare:(OutlookEvent*) other {
+    
+    // same
+    if ([self.uid isEqualToString:other.uid]) {
+        return NSOrderedSame;
+    }
+    
+    // date is first
+    NSComparisonResult dateCompare = [self.startTime compare:other.startTime];
+    if (dateCompare != NSOrderedSame) {
+        return dateCompare;
+    }
+    
+    // busy first
+    int diff = self.showAs - other.showAs;
+    if (diff > 0) return NSOrderedAscending;
+    if (diff < 0) return NSOrderedDescending;
+    return NSOrderedSame;
+    
+}
+
 
 + (NSArray*) listFromJson:(NSArray*) jsonArray {
     NSMutableArray* array = [NSMutableArray array];
