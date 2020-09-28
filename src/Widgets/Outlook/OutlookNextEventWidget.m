@@ -55,7 +55,7 @@
     
     // more setup
     [self.showAsView setWantsLayer:YES];
-    [self.showAsView.layer setCornerRadius:2.0];
+    [self.showAsView.layer setCornerRadius:4.0];
     
 }
 
