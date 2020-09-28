@@ -10,8 +10,7 @@
 #import "NSColor+Hex.h"
 #import "Outlook.h"
 
-
-#define RESET_AFTER_USER_NEXT 10
+#define RESET_AFTER_USER_NEXT 5
 
 @interface NextEventsWidgetView : NSView
 
@@ -131,7 +130,7 @@
 }
 
 - (void) refresh {
-    if (self.resetTimer != nil) {
+    if (self.resetTimer == nil || self.resetTimer.isValid == NO) {
         [self selectEvent];
     } else {
         [self update];
