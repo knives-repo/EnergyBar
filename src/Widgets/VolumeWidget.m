@@ -1,5 +1,5 @@
 /**
- * @file VolumeControlWidget.m
+ * @file VolumeWidget.m
  *
  * @copyright 2018-2019 Bill Zissimopoulos
  */

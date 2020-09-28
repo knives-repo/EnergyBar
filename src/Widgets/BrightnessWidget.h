@@ -1,5 +1,5 @@
 /**
- * @file BrightnessControlWidget.h
+ * @file BrightnessWidget.h
  *
  * @copyright 2018-2019 Bill Zissimopoulos
  */

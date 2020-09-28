@@ -1,5 +1,5 @@
 /**
- * @file VolumeControlWidget.h
+ * @file VolumeWidget.h
  *
  * @copyright 2018-2019 Bill Zissimopoulos
  */
