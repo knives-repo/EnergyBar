@@ -14,6 +14,7 @@
 #import "BrightnessWidget.h"
 #import "Brightness.h"
 #import "BezelWindow.h"
+#import "MediaKeys.h"
 
 #define BrightnessAdjustIncrement			 (1.0/16.0)
 
@@ -56,11 +57,13 @@
     {
         case 0:
             // brightness down
-            [self adjustBrightnessBy:-BrightnessAdjustIncrement];
+            HIDPostAuxKeyPress(NX_KEYTYPE_BRIGHTNESS_DOWN);
+            //[self adjustBrightnessBy:-BrightnessAdjustIncrement];
             break;
         case 1:
             // brightness up
-            [self adjustBrightnessBy:+BrightnessAdjustIncrement];
+            HIDPostAuxKeyPress(NX_KEYTYPE_BRIGHTNESS_UP);
+            //[self adjustBrightnessBy:+BrightnessAdjustIncrement];
             break;
     }
 }

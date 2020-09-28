@@ -14,6 +14,7 @@
 #import "VolumeWidget.h"
 #import "AudioControl.h"
 #import "BezelWindow.h"
+#import "MediaKeys.h"
 
 #define VolumeAdjustIncrement					 (1.0/16.0)
 
@@ -103,14 +104,17 @@
     {
         case 0:
             // volume down
-            [self adjustVolumeBy:-VolumeAdjustIncrement];
+            HIDPostAuxKeyPress(NX_KEYTYPE_SOUND_DOWN);
+            //[self adjustVolumeBy:-VolumeAdjustIncrement];
             break;
         case 1:
             // volume up
-            [self adjustVolumeBy:+VolumeAdjustIncrement];
+            HIDPostAuxKeyPress(NX_KEYTYPE_SOUND_UP);
+            //[self adjustVolumeBy:+VolumeAdjustIncrement];
             break;
         case 2:
-            [self mute];
+            HIDPostAuxKeyPress(NX_KEYTYPE_MUTE);
+            //[self mute];
             break;
     }
 }
