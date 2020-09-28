@@ -19,10 +19,24 @@
 
 #define VolumeAdjustIncrement					 (1.0/16.0)
 
+@interface VolumeWidget() {
+    NSInteger activeSegment;
+    NSTimer* repeatTimer;
+    BOOL triggered;
+}
+
+@end
+
 @implementation VolumeWidget
 
 - (void)commonInit
 {
+
+    NSPressGestureRecognizer *shortPress = [[[NSPressGestureRecognizer alloc]
+        initWithTarget:self action:@selector(shortPressAction:)] autorelease];
+    shortPress.allowedTouchTypes = NSTouchTypeMaskDirect;
+    shortPress.minimumPressDuration = 0;
+
     NSSegmentedControl *control = [NSSegmentedControl
         segmentedControlWithImages:[NSArray arrayWithObjects:
             [NSImage imageNamed:NSImageNameTouchBarAudioOutputVolumeLowTemplate],
@@ -30,13 +44,14 @@
             [self volumeMuteImage],
             nil]
         trackingMode:NSSegmentSwitchTrackingMomentary
-        target:self
-        action:@selector(click:)];
+        target:nil action:nil];
     control.translatesAutoresizingMaskIntoConstraints = NO;
     control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     control.tag = 'ctrl';
     
     [control setSegmentsWidth:WIDGET_STANDARD_WIDTH];
+
+    [control addGestureRecognizer:shortPress];
 
     self.customizationLabel = @"Volume";
     self.view = control;
@@ -96,30 +111,75 @@
 
 }
 
-- (void)click:(id)sender
+- (void)shortPressAction:(NSGestureRecognizer *)recognizer
 {
-    NSSegmentedControl *control = sender;
-    switch (control.selectedSegment)
+    switch (recognizer.state)
     {
-        case 0:
-            // volume down
-            [BezelWindow hide];
-            PostAuxKeyPress(NX_KEYTYPE_SOUND_DOWN);
-            //[self adjustVolumeBy:-VolumeAdjustIncrement];
-            break;
-        case 1:
-            // volume up
-            [BezelWindow hide];
-            PostAuxKeyPress(NX_KEYTYPE_SOUND_UP);
-            //[self adjustVolumeBy:+VolumeAdjustIncrement];
-            break;
-        case 2:
-            // mute
-            [BezelWindow hide];
-            PostAuxKeyPress(NX_KEYTYPE_MUTE);
-            //[self mute];
-            break;
+    case NSGestureRecognizerStateBegan:
+        [self shortPressBegan:recognizer];
+        break;
+    case NSGestureRecognizerStateChanged:
+        [self shortPressChanged:recognizer];
+        break;
+    case NSGestureRecognizerStateEnded:
+    case NSGestureRecognizerStateCancelled:
+        [self shortPressEnded:recognizer];
+        break;
+    default:
+        return;
     }
+}
+
+- (void)shortPressBegan:(NSGestureRecognizer *)recognizer
+{
+    // get active segment
+    NSPoint point = [recognizer locationInView:self.view];
+    activeSegment = [self.view segmentForX:point.x];
+    triggered = NO;
+    
+    // special
+    if (activeSegment == 2) {
+        PostAuxKeyPress(NX_KEYTYPE_MUTE);
+        return;
+    }
+    
+    // set timer
+    repeatTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        if (activeSegment == 0) {
+            PostAuxKeyPress(NX_KEYTYPE_SOUND_DOWN);
+            triggered = YES;
+        } else if (activeSegment == 1) {
+            PostAuxKeyPress(NX_KEYTYPE_SOUND_UP);
+            triggered = YES;
+        }
+    }];
+    [repeatTimer fire];
+    
+    // hide bezel window
+    [BezelWindow hide];
+}
+
+- (void)shortPressChanged:(NSGestureRecognizer *)recognizer
+{
+}
+
+- (void)shortPressEnded:(NSGestureRecognizer *)recognizer
+{
+    // key up
+    if (activeSegment == 0) {
+        if (triggered == NO) {
+            PostAuxKeyPress(NX_KEYTYPE_SOUND_DOWN);
+        }
+    } else if (activeSegment == 1) {
+        if (triggered == NO) {
+            PostAuxKeyPress(NX_KEYTYPE_SOUND_UP);
+        }
+    }
+
+    // done
+    activeSegment = -1;
+    [repeatTimer invalidate];
+
 }
 
 @end
