@@ -17,6 +17,8 @@
 @interface NextEventsWidgetView : NSView
 
 @property (assign) IBOutlet NSView *contentView;
+@property (assign) IBOutlet NSView *busyWellView;
+@property (assign) IBOutlet NSView *linkWellView;
 @property (assign) IBOutlet NSView *showAsView;
 @property (assign) IBOutlet NSTextField *timeView;
 @property (assign) IBOutlet NSTextField *titleView;
@@ -58,7 +60,7 @@
 
 - (NSSize)intrinsicContentSize
 {
-    return NSMakeSize(250, NSViewNoIntrinsicMetric);
+    return NSMakeSize(300, NSViewNoIntrinsicMetric);
 }
 
 - (void) layout {
@@ -89,9 +91,15 @@
     view.layer.backgroundColor = [[NSColor colorWithWhite:0.0 alpha:0.5] CGColor];
     self.view = view;
     
-    // title opens weblink
-    [view.titleView setTarget:self];
-    [view.titleView setAction:@selector(onTap:)];
+    // busy tap well
+    NSGestureRecognizer* busyTapRecognizer = [[[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(onToggleBusy:)] autorelease];
+    busyTapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
+    [view.busyWellView addGestureRecognizer:busyTapRecognizer];
+    
+    // busy tap well
+    NSGestureRecognizer* linkTapRecognizer = [[[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(onLink:)] autorelease];
+    linkTapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
+    [view.linkWellView addGestureRecognizer:linkTapRecognizer];
     
     // join joins
     [view.joinButton setTarget:self];
@@ -118,9 +126,24 @@
         [view.timeView setStringValue:self.event.startTimeDesc];
         [view.titleView setStringValue:self.event.title];
         
-        // join url
-        [view.joinButtonWidthConstraint setConstant:((self.event.isCurrent && self.event.joinUrl != nil) ? 48 : 0)];
-        
+        // join button
+        if (self.event.isCurrent && self.event.joinUrl != nil) {
+            if (self.event.isWebEx) {
+                [view.joinButtonWidthConstraint setConstant:32];
+            } else if (self.event.isTeams) {
+                [view.joinButtonWidthConstraint setConstant:32];
+                [view.joinButton setImage:[NSImage imageNamed:@"TeamsLogo"]];
+                [view.joinButton setBezelStyle:NSBezelStyleRegularSquare];
+                [view.joinButton setImagePosition:NSImageOnly];
+            } else {
+                [view.joinButtonWidthConstraint setConstant:48];
+                [view.joinButton setBezelStyle:NSRoundedBezelStyle];
+                [view.joinButton setImagePosition:NSNoImage];
+            }
+        } else {
+            [view.joinButtonWidthConstraint setConstant:0];
+        }
+                
         // show as
         switch (self.event.showAs) {
             case Unknown:
@@ -142,7 +165,7 @@
     });
 }
 
-- (void) onTap:(id) sender {
+- (void) onLink:(id) sender {
     if (self.event.webLink != nil) {
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.webLink]];
     }
@@ -151,6 +174,17 @@
 - (void) onJoin:(id)sender {
     if (self.event.joinUrl != nil) {
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.joinUrl]];
+    }
+}
+
+- (void) onToggleBusy:(id) sender {
+    
+    // 1st test if it really makes a difference
+    BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
+    OutlookEvent* newEvent = [OutlookEvent findSoonestEvent:self.events busyOnly:!busyOnly];
+    if (newEvent != self.event) {
+        [[NSUserDefaults standardUserDefaults] setBool:!busyOnly forKey:@"outlookBusyOnly"];
+        [self update];
     }
 }
 
@@ -197,7 +231,6 @@
             break;
             
         case 2:
-            //[self.nextEventWidget onTap:sender];
             break;
     }
     
