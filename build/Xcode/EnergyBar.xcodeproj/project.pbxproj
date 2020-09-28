@@ -53,6 +53,7 @@
 		3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CFECA102122611F00BB58E9 /* LoginItem.c */; };
 		405B467A219A3CCA0006DC16 /* LockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 405B4678219A3CCA0006DC16 /* LockWidget.m */; };
 		405B467C219A3D2D0006DC16 /* login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405B467B219A3D2D0006DC16 /* login.framework */; };
+		8D3015292522282500F0523D /* OutlookNextEventWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3015282522282500F0523D /* OutlookNextEventWidget.m */; };
 		8D33B986251E6BC0006AFCC9 /* VolumeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */; };
 		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; };
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
@@ -182,6 +183,8 @@
 		405B467B219A3D2D0006DC16 /* login.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = login.framework; path = ../../../../../../System/Library/PrivateFrameworks/login.framework; sourceTree = "<group>"; };
 		47E79DF6587D2DB95D7A0EDA /* Pods-EnergyBar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBar.debug.xcconfig"; path = "Target Support Files/Pods-EnergyBar/Pods-EnergyBar.debug.xcconfig"; sourceTree = "<group>"; };
 		79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnergyBars_EnergyBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D3015272522282500F0523D /* OutlookNextEventWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutlookNextEventWidget.h; sourceTree = "<group>"; };
+		8D3015282522282500F0523D /* OutlookNextEventWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookNextEventWidget.m; sourceTree = "<group>"; };
 		8D33B984251E6BC0006AFCC9 /* VolumeWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeWidget.h; sourceTree = "<group>"; };
 		8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeWidget.m; sourceTree = "<group>"; };
 		8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicMuteWidget.m; sourceTree = "<group>"; };
@@ -360,6 +363,7 @@
 		3C5D0FCB211920E500769A39 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				8D3015262522280700F0523D /* Outlook */,
 				3C4013C0211BBC8D00C47B66 /* ActiveAppWidget.h */,
 				3C4013C1211BBC8D00C47B66 /* ActiveAppWidget.m */,
 				8D9D2463251FB14D004FF191 /* BacklightWidget.h */,
@@ -384,8 +388,6 @@
 				8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */,
 				3CA1DD84212D3DB200D95DE1 /* NowPlayingWidget.h */,
 				3CA1DD85212D3DB200D95DE1 /* NowPlayingWidget.m */,
-				8D9D248C2520BAA9004FF191 /* OutlookCalendarWidget.h */,
-				8D9D248D2520BAA9004FF191 /* OutlookCalendarWidget.m */,
 				3C400078236CC6A3000261FF /* TodoWidget.h */,
 				3C400077236CC6A3000261FF /* TodoWidget.m */,
 				8D33B984251E6BC0006AFCC9 /* VolumeWidget.h */,
@@ -426,6 +428,17 @@
 				C627D4E711EACD1BD93954F3 /* Pods-EnergyBars-EnergyBarTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		8D3015262522280700F0523D /* Outlook */ = {
+			isa = PBXGroup;
+			children = (
+				8D9D248C2520BAA9004FF191 /* OutlookCalendarWidget.h */,
+				8D9D248D2520BAA9004FF191 /* OutlookCalendarWidget.m */,
+				8D3015272522282500F0523D /* OutlookNextEventWidget.h */,
+				8D3015282522282500F0523D /* OutlookNextEventWidget.m */,
+			);
+			path = Outlook;
 			sourceTree = "<group>";
 		};
 		8D33B9A1251ED9C6006AFCC9 /* Controls */ = {
@@ -620,6 +633,7 @@
 				8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */,
 				3C046013211D7C66003EB021 /* KeyEvent.c in Sources */,
 				3C38622A214989B500A8C37B /* PowerStatus.m in Sources */,
+				8D3015292522282500F0523D /* OutlookNextEventWidget.m in Sources */,
 				3C1F652122B1BF4E00F795D3 /* NSObject+MethodSwizzling.m in Sources */,
 				3C8ED9F4213E3974006C11A3 /* EdgeWindowController.m in Sources */,
 				3C200ECF212DFF390000B04D /* FixedSizeLabel.m in Sources */,
