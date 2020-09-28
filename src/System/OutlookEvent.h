@@ -40,6 +40,8 @@ typedef enum {
 - (BOOL) isTeams;
 - (BOOL) isWebEx;
 
+- (NSString*) description;
+
 @end
 
 NS_ASSUME_NONNULL_END

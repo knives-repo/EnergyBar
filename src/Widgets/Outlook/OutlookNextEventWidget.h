@@ -14,8 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OutlookNextEventWidget : CustomWidget
 
-@property (retain) NSArray* events;
-@property (retain,nullable) NSTimer* resetTimer;
 @property (readonly,retain) OutlookEvent* event;
 
 - (void) showEvents:(NSArray*) events;

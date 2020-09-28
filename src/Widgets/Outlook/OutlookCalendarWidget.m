@@ -12,6 +12,8 @@
 #import "OutlookEvent.h"
 #import "Outlook.h"
 
+#define DUMP 1
+
 #define FETCH_CALENDAR_EVERY_SECONDS 5*60
 
 @interface OutlookCalendarWidget()
@@ -83,9 +85,11 @@
                 self.lastFetch = [NSDate date];
                 NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
                 NSArray* events = [OutlookEvent listFromJson:jsonEvents];
-                //for (OutlookEvent* event in events) {
-                //    NSLog(@"%@", event.title);
-                //}
+                #if DUMP
+                    for (OutlookEvent* event in events) {
+                        NSLog(@"%@", event);
+                    }
+                #endif
                 [self.nextEventWidget showEvents:[events sortedArrayUsingSelector:@selector(compare:)]];
                 if (self.nextEventWidget.event != nil) {
                     dispatch_async(dispatch_get_main_queue(), ^{

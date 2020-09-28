@@ -13,7 +13,7 @@
 
 #define EVENT_NOW_DELTA 3*60
 #define EVENT_CURRENT_DELTA 5*60
-#define EVENT_SOON_DELTA 2*60*60
+#define EVENT_SOON_DELTA 1*60*60
 #define EVENT_CLOSE_DELTA 4*60*60
 
 @interface NSDictionary(Json)
@@ -36,6 +36,10 @@
 @end
 
 @implementation OutlookEvent
+
+- (NSString*) description {
+    return [NSString stringWithFormat:@"%@: %@", self.startTime, self.title];
+}
 
 - (id) initWithJson:(NSDictionary*) jsonEvent {
     
@@ -224,7 +228,7 @@
         
         // discard old events
         NSTimeInterval interval = [event intervalWithNow];
-        if (interval < -EVENT_NOW_DELTA) {
+        if (interval < -EVENT_CURRENT_DELTA) {
             continue;
         }
         

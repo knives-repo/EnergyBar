@@ -9,6 +9,8 @@
 #import "OutlookNextEventWidget.h"
 #import "NSColor+Hex.h"
 
+#define SafeStringValue(x) (x == nil ? @"" : x)
+
 #define RESET_AFTER_USER_NEXT 10
 
 @interface NextEventsWidgetView : NSView
@@ -31,14 +33,14 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-    [super initWithFrame:frameRect];
+    self = [super initWithFrame:frameRect];
     [self setup];
     return self;
 }
 
 - (id)initWithCoder:(NSCoder *)coder
 {
-    [super initWithCoder:coder];
+    self = [super initWithCoder:coder];
     [self setup];
     return self;
 }
@@ -68,7 +70,19 @@
 
 @end
 
+@interface OutlookNextEventWidget()
+
+@property (retain) NSArray* events;
+@property (retain) NSTimer* resetTimer;
+
+@end
+
 @implementation OutlookNextEventWidget
+
+- (void) dealloc
+{
+    [self.resetTimer invalidate];
+}
 
 - (void)commonInit {
     
@@ -106,7 +120,7 @@
 }
 
 - (void) selectEvent {
-
+    
     // select event to show
     BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
     self->_event = [OutlookEvent findSoonestEvent:self.events busyOnly:busyOnly];
@@ -127,11 +141,11 @@
     
     // update
     dispatch_async(dispatch_get_main_queue(), ^{
-
+        
         // basic
         NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
-        [view.timeView setStringValue:self.event.startTimeDesc];
-        [view.titleView setStringValue:self.event.title];
+        [view.timeView setStringValue:SafeStringValue(self.event.startTimeDesc)];
+        [view.titleView setStringValue:SafeStringValue(self.event.title)];
         
         // join button
         if (self.event.isCurrent && self.event.joinUrl != nil) {
@@ -150,7 +164,7 @@
         } else {
             [view.joinButtonWidthConstraint setConstant:0];
         }
-                
+        
         // show as
         switch (self.event.showAs) {
             case Unknown:
@@ -189,7 +203,7 @@
     // 1st test if it really makes a difference
     BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
     OutlookEvent* newEvent = [OutlookEvent findSoonestEvent:self.events busyOnly:!busyOnly];
-    if (newEvent != self.event) {
+    if (busyOnly == NO || newEvent != self.event) {
         [[NSUserDefaults standardUserDefaults] setBool:!busyOnly forKey:@"outlookBusyOnly"];
         [self selectEvent];
     }
@@ -199,14 +213,12 @@
     
     // first clear reset timer
     [self.resetTimer invalidate];
-    self.resetTimer = nil;
     
     // now set it
     self.resetTimer = [NSTimer scheduledTimerWithTimeInterval:RESET_AFTER_USER_NEXT repeats:NO block:^(NSTimer * _Nonnull timer) {
         [self selectEvent];
-        self.resetTimer = nil;
     }];
-
+    
     // find current and show next
     BOOL showNext = NO;
     for (OutlookEvent* event in self.events) {
