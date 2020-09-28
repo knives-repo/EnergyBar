@@ -1,5 +1,5 @@
 /**
- * @file LockWidget.h
+ * @file MicMuteWidget.h
  *
  * @copyright 2018 Brian Hartvigsen
  */

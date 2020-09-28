@@ -17,23 +17,26 @@
 
 @implementation ImageTileWidget
 
-- (id) initWithIdentifier:(NSString*) identifier title:(NSString*) title {
+- (id) initWithIdentifier:(NSString*) identifier customizationLabel:(NSString*) label title:(NSString*) title {
     self = [super initWithIdentifier:identifier];
+    self.customizationLabel = label;
     self.title = title;
     [self update];
     return self;
 }
 
-- (id) initWithIdentifier:(NSString*) identifier title:(NSString*) title icon:(NSImage*) icon {
+- (id) initWithIdentifier:(NSString*) identifier customizationLabel:(NSString*) label title:(NSString*) title icon:(NSImage*) icon {
     self = [super initWithIdentifier:identifier];
+    self.customizationLabel = label;
     self.title = title;
     self.icon = icon;
     [self update];
     return self;
 }
 
-- (id) initWithIdentifier:(NSString*) identifier title:(NSString*) title icon:(NSImage*) icon subtitle:(NSString*) subtitle {
+- (id) initWithIdentifier:(NSString*) identifier customizationLabel:(NSString*) label title:(NSString*) title icon:(NSImage*) icon subtitle:(NSString*) subtitle {
     self = [super initWithIdentifier:identifier];
+    self.customizationLabel = label;
     self.title = title;
     self.subtitle = subtitle;
     self.icon = icon;

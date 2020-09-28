@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ImageTileWidget : CustomWidget
 
-- (id) initWithIdentifier:(NSString*) identifier title:(NSString*) title;
-- (id) initWithIdentifier:(NSString*) identifier title:(NSString*) title icon:(NSImage*) icon;
-- (id) initWithIdentifier:(NSString*) identifier title:(NSString*) title icon:(NSImage*) icon subtitle:(NSString*) subtitle;
+- (id) initWithIdentifier:(NSString*) identifier customizationLabel:(NSString*) label title:(NSString*) title;
+- (id) initWithIdentifier:(NSString*) identifier customizationLabel:(NSString*) label title:(NSString*) title icon:(NSImage*) icon;
+- (id) initWithIdentifier:(NSString*) identifier customizationLabel:(NSString*) label title:(NSString*) title icon:(NSImage*) icon subtitle:(NSString*) subtitle;
 
 -(void)update;
 
