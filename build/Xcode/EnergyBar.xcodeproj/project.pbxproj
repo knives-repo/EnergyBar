@@ -57,6 +57,8 @@
 		8D33B986251E6BC0006AFCC9 /* VolumeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */; };
 		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; };
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
+		8D4DC4EE2522903F0042A22A /* LightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4ED2522903F0042A22A /* LightWidget.m */; };
+		8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */; };
 		8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245B251F6F35004FF191 /* LevelIndicator.m */; };
 		8D9D245F251F8D2B004FF191 /* NSColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */; };
 		8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D2464251FB14D004FF191 /* BacklightWidget.m */; };
@@ -192,6 +194,10 @@
 		8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezelWindow.h; sourceTree = "<group>"; };
 		8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezelWindow.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		8D4DC4E125226EF40042A22A /* EnergyBar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EnergyBar-Prefix.pch"; sourceTree = "<group>"; };
+		8D4DC4EC2522903F0042A22A /* LightWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightWidget.h; sourceTree = "<group>"; };
+		8D4DC4ED2522903F0042A22A /* LightWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightWidget.m; sourceTree = "<group>"; };
+		8D4DC4F02522911B0042A22A /* NSSegmentedControl+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSSegmentedControl+Utils.h"; sourceTree = "<group>"; };
+		8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSSegmentedControl+Utils.m"; sourceTree = "<group>"; };
 		8D9D245A251F6F35004FF191 /* LevelIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelIndicator.h; sourceTree = "<group>"; };
 		8D9D245B251F6F35004FF191 /* LevelIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelIndicator.m; sourceTree = "<group>"; };
 		8D9D245D251F8D2B004FF191 /* NSColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Hex.h"; sourceTree = "<group>"; };
@@ -338,12 +344,15 @@
 				3C163BC32118F1C500F015EC /* AppController.m */,
 				3C8ED9F2213E3974006C11A3 /* EdgeWindowController.h */,
 				3C8ED9F3213E3974006C11A3 /* EdgeWindowController.m */,
+				8D4DC4E125226EF40042A22A /* EnergyBar-Prefix.pch */,
 				3C200ECD212DFF390000B04D /* FixedSizeLabel.h */,
 				3C200ECE212DFF390000B04D /* FixedSizeLabel.m */,
 				3C080A492139EB0D00EED01D /* FolderController.h */,
 				3C080A4A2139EB0D00EED01D /* FolderController.m */,
 				3C5032E22139C8E900305593 /* ImageTitleView.h */,
 				3C5032E12139C8E900305593 /* ImageTitleView.m */,
+				8D4DC4F02522911B0042A22A /* NSSegmentedControl+Utils.h */,
+				8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */,
 				3C1F652622B1CCA900F795D3 /* NSView+TouchBarHitTest.h */,
 				3C1F652522B1CCA800F795D3 /* NSView+TouchBarHitTest.m */,
 				3CAA9C6B2127B3E000D5B467 /* StringToUrlTransformer.h */,
@@ -353,7 +362,6 @@
 				3C163BC52118F1C500F015EC /* main.m */,
 				8D9D245D251F8D2B004FF191 /* NSColor+Hex.h */,
 				8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */,
-				8D4DC4E125226EF40042A22A /* EnergyBar-Prefix.pch */,
 			);
 			indentWidth = 4;
 			name = Source;
@@ -384,6 +392,8 @@
 				3C102D4D2119872800FFB2CF /* EscKeyWidget.m */,
 				8D9D24EC2521311C004FF191 /* ImageTileWidget.h */,
 				8D9D24ED2521311C004FF191 /* ImageTileWidget.m */,
+				8D4DC4EC2522903F0042A22A /* LightWidget.h */,
+				8D4DC4ED2522903F0042A22A /* LightWidget.m */,
 				405B4679219A3CCA0006DC16 /* LockWidget.h */,
 				405B4678219A3CCA0006DC16 /* LockWidget.m */,
 				8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */,
@@ -638,6 +648,7 @@
 				8D3015292522282500F0523D /* OutlookNextEventWidget.m in Sources */,
 				3C1F652122B1BF4E00F795D3 /* NSObject+MethodSwizzling.m in Sources */,
 				3C8ED9F4213E3974006C11A3 /* EdgeWindowController.m in Sources */,
+				8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */,
 				3C200ECF212DFF390000B04D /* FixedSizeLabel.m in Sources */,
 				8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */,
 				3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */,
@@ -667,6 +678,7 @@
 				3C102D4E2119872800FFB2CF /* EscKeyWidget.m in Sources */,
 				3C8E4133212F81A60010C2B3 /* AudioControl.m in Sources */,
 				3CA1DD86212D3DB200D95DE1 /* NowPlayingWidget.m in Sources */,
+				8D4DC4EE2522903F0042A22A /* LightWidget.m in Sources */,
 				3C102D4B21197ED700FFB2CF /* ControlWidget.m in Sources */,
 				3C163BC62118F1C500F015EC /* AppController.m in Sources */,
 				8D9D24EE2521311C004FF191 /* ImageTileWidget.m in Sources */,

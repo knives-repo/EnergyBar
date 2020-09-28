@@ -15,6 +15,7 @@
 #import "AudioControl.h"
 #import "BezelWindow.h"
 #import "KeyEvent.h"
+#import "NSSegmentedControl+Utils.h"
 
 #define VolumeAdjustIncrement					 (1.0/16.0)
 
@@ -35,10 +36,8 @@
     control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     control.tag = 'ctrl';
     
-    for (int i=0; i<control.segmentCount; i++) {
-        [control setWidth:WIDGET_STANDARD_WIDTH forSegment:i];
-    }
-    
+    [control setSegmentsWidth:WIDGET_STANDARD_WIDTH];
+
     self.customizationLabel = @"Volume";
     self.view = control;
     

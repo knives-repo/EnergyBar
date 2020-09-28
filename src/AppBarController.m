@@ -58,6 +58,7 @@
         @"Control",
         @"Brightness",
         @"Backlight",
+        @"Light",
         @"Volume",
         @"Weather",
         @"Clock",

@@ -13,6 +13,6 @@
 #define IsValidString(x) (IsValid(x) && [x length] > 0)
 #define SafeStringValue(x) (x == nil ? @"" : x)
 
-#define WIDGET_STANDARD_WIDTH 56
+#define WIDGET_STANDARD_WIDTH 64
 
 #endif /* EnergyBar_Prefix_pch */

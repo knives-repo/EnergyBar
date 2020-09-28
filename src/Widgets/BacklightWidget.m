@@ -15,6 +15,7 @@
 #import "Brightness.h"
 #import "BezelWindow.h"
 #import "KeyEvent.h"
+#import "NSSegmentedControl+Utils.h"
 
 @implementation BacklightWidget
 
@@ -32,9 +33,7 @@
     control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     control.tag = 'ctrl';
     
-    for (int i=0; i<control.segmentCount; i++) {
-        [control setWidth:WIDGET_STANDARD_WIDTH forSegment:i];
-    }
+    [control setSegmentsWidth:WIDGET_STANDARD_WIDTH];
     
     self.customizationLabel = @"Backlight";
     self.view = control;
