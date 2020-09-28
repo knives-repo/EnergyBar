@@ -10,6 +10,7 @@
 
 #define CALENDAR_LIST_OFFSET_START -10*60
 #define CALENDAR_LIST_OFFSET_END 24*60*60
+#define CALENDAR_SHOW_TOMMOROW_HOUR_THRESHOLD 15
 
 NSString* kClientID = @"82ac6221-a570-439c-a965-040443a5036c";
 NSString* kAuthority = @"https://login.microsoftonline.com/common";
@@ -240,7 +241,14 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm'Z'"];
     NSDate* now = [[NSDate alloc] init];
     NSDate* start = [now dateByAddingTimeInterval:CALENDAR_LIST_OFFSET_START];
+    
+    // end date: midnight if before
     NSDate* end = [now dateByAddingTimeInterval:CALENDAR_LIST_OFFSET_END];
+    if ([[NSCalendar currentCalendar] components:NSCalendarUnitHour fromDate:now].hour < CALENDAR_SHOW_TOMMOROW_HOUR_THRESHOLD) {
+        end = [[NSCalendar currentCalendar] dateBySettingHour:23 minute:59 second:59 ofDate:now options:0];
+    }
+    
+    // filter
     NSString* filter = [NSString stringWithFormat:@"startDateTime=%@&endDateTime=%@",
                         [dateFormatter stringFromDate:start], [dateFormatter stringFromDate:end]];
     NSLog(@"%@", filter);

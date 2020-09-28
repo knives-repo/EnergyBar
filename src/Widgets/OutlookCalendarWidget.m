@@ -78,7 +78,7 @@
 @property (retain) NSTimer* resetTimer;
 @property (readonly,retain) OutlookEvent* event;
 
-- (void) update;
+- (void) refresh;
 
 @end
 
@@ -214,6 +214,7 @@
     // first clear reset timer
     if (self.resetTimer != nil) {
         [self.resetTimer invalidate];
+        self.resetTimer = nil;
     }
     
     // now set it
