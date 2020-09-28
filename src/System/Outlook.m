@@ -229,7 +229,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
 - (void) getCalendarEvents:(JsonCompletionBlock) completionBlock {
     
     // build url
-    NSString* path = @"v1.0/me/calendar/events";
+    NSString* path = @"v1.0/me/calendar/calendarView";
     NSString* select = @"$select=organizer,start,showAs,subject,body,onlineMeeting,onlineMeetingUrl,webLink";
     NSString* orderBy = @"$orderBy=start/dateTime,showAs";
     
@@ -239,11 +239,12 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     NSDate* now = [[NSDate alloc] init];
     NSDate* start = [now dateByAddingTimeInterval:CALENDAR_LIST_OFFSET_START];
     NSDate* end = [now dateByAddingTimeInterval:CALENDAR_LIST_OFFSET_END];
-    NSString* filter = [NSString stringWithFormat:@"$filter=start/dateTime%%20ge%%20'%@'%%20and%%20start/dateTime%%20lt%%20'%@'",
+    NSString* filter = [NSString stringWithFormat:@"startDateTime=%@&endDateTime=%@",
                         [dateFormatter stringFromDate:start], [dateFormatter stringFromDate:end]];
 
     // done
     NSString* uri = [NSString stringWithFormat:@"https://graph.microsoft.com/%@?%@&%@&%@", path, filter, select, orderBy];
+    //NSLog(@"%@", uri);
 
     // timezone
     NSTimeZone* timezone = [NSTimeZone localTimeZone];

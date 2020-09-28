@@ -105,6 +105,10 @@
     });
 }
 
+- (void) onTap:(id) sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.webLink]];
+}
+
 - (void) onJoin:(id) sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.joinUrl]];
 }
@@ -123,26 +127,38 @@
 - (void)commonInit {
     
     // no connection
-    [self addWidget:[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoSignin"
+    [self addWidget:[[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoSignin"
                                              customizationLabel:@"Outlook Calendar"
                                                           title:@"No connection"
-                                                           icon:[NSImage imageNamed:NSImageNameUserAccounts]]];
+                                                           icon:[NSImage imageNamed:NSImageNameUserAccounts]] autorelease]];
     
     // no event
-    [self addWidget:[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoEvents"
+    [self addWidget:[[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoEvents"
                                              customizationLabel:@"Outlook Calendar"
-                                                          title:@"No events"]];
+                                                          title:@"No events"] autorelease]];
     
     // add widgets
     self.nextEventWidget = [[[NextEventWidget alloc] initWithIdentifier:@"_OutlookNextEvents"] autorelease];
     [self addWidget:self.nextEventWidget];
     
     // init outlook
-    self.outlook = [[Outlook alloc] init];
+    self.outlook = [[[Outlook alloc] init] autorelease];
         
 }
 
 - (void)tapAction:(id)sender {
+    
+    switch (self.activeIndex) {
+        case 0:
+            break;
+            
+        case 1:
+            break;
+            
+        case 2:
+            [self.nextEventWidget onTap:sender];
+            break;
+    }
     
 }
 
