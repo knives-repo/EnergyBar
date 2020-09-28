@@ -10,7 +10,7 @@
 #import "OutlookEvent.h"
 
 NSDate* dateWithOffset(NSTimeInterval interval) {
-	NSDate* now = [[NSDate alloc] init];
+	NSDate* now = [[NSDate date];
 	return [now dateByAddingTimeInterval:interval];
 }
 

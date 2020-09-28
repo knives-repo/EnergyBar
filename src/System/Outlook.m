@@ -239,7 +239,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm'Z'"];
-    NSDate* now = [[NSDate alloc] init];
+    NSDate* now = [NSDate date];
     NSDate* start = [now dateByAddingTimeInterval:CALENDAR_LIST_OFFSET_START];
     
     // end date: midnight if before

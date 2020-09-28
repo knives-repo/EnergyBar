@@ -110,11 +110,11 @@
 }
 
 - (NSString*) startTimeDesc {
-    return [OutlookEvent dateDiffDescriptionBetween:[[NSDate alloc] init] and:self.startTime];
+    return [OutlookEvent dateDiffDescriptionBetween:[NSDate date] and:self.startTime];
 }
 
 - (NSTimeInterval) intervalWithNow {
-    NSDate* now = [[NSDate alloc] init];
+    NSDate* now = [NSDate date];
     return [self.startTime timeIntervalSinceDate:now];
 }
 
