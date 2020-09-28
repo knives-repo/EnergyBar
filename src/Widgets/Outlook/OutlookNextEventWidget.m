@@ -149,24 +149,41 @@
         [view.titleView setStringValue:SafeStringValue(self.event.title)];
         
         // join button
-        if (self.event.isCurrent && self.event.joinUrl != nil) {
-            if (self.event.isWebEx) {
-                [view.joinButtonWidthConstraint setConstant:32];
-                [view.joinButton setImage:[NSImage imageNamed:@"WebexLogo"]];
-                [view.joinButton setBezelStyle:NSBezelStyleRegularSquare];
-                [view.joinButton setImagePosition:NSImageOnly];
-            } else if (self.event.isTeams) {
-                [view.joinButtonWidthConstraint setConstant:32];
-                [view.joinButton setImage:[NSImage imageNamed:@"TeamsLogo"]];
-                [view.joinButton setBezelStyle:NSBezelStyleRegularSquare];
-                [view.joinButton setImagePosition:NSImageOnly];
-            } else {
-                [view.joinButtonWidthConstraint setConstant:48];
-                [view.joinButton setBezelStyle:NSRoundedBezelStyle];
-                [view.joinButton setImagePosition:NSNoImage];
-            }
-        } else {
+        if (self.event.isCurrent == NO || self.event.joinUrl == nil) {
+            
+            // hide the join button
             [view.joinButtonWidthConstraint setConstant:0];
+
+        } else {
+            
+            // image or not
+            NSImage* icon = nil;
+            if (self.event.isWebEx) {
+                icon = [NSImage imageNamed:@"WebexLogo"];
+            } else if (self.event.isTeams) {
+                icon = [NSImage imageNamed:@"TeamsLogo"];
+            }
+            
+            // update
+            if (icon != nil) {
+                [view.joinButton setBezelStyle:NSBezelStyleRegularSquare];
+                [view.joinButton setTransparent:YES];
+                [view.joinButton setImage:icon];
+                [view.joinButton setImagePosition:NSImageOnly];
+                [view.joinButtonWidthConstraint setConstant:32];
+            } else {
+                [view.joinButton setBezelStyle:NSBezelStyleRounded];
+                [view.joinButton setTransparent:NO];
+                [view.joinButton setImagePosition:NSNoImage];
+                [view.joinButtonWidthConstraint setConstant:40];
+
+                // text switches to a gray so force it to white with attibuted title
+                NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[view.joinButton attributedTitle]];
+                [colorTitle addAttribute:NSForegroundColorAttributeName
+                                   value:[NSColor whiteColor]
+                                   range:NSMakeRange(0, view.joinButton.attributedTitle.length)];
+                [view.joinButton setAttributedTitle:colorTitle];
+            }
         }
         
         // show as
