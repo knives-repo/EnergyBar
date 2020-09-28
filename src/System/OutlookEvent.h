@@ -23,10 +23,13 @@ typedef enum {
 @property (retain) NSString* uid;
 @property (retain) NSString* title;
 @property (retain) NSDate* startTime;
+@property (retain) NSDate* endTime;
 @property (assign) ShowAs showAs;
 @property (retain,nullable) NSString* webLink;
 @property (retain,nullable) NSString* joinUrl;
+
 @property (readonly) BOOL isCurrent;
+@property (readonly) BOOL isEnded;
 
 + (NSString*) dateDiffDescriptionBetween:(NSDate*) reference and:(NSDate*) date;
 

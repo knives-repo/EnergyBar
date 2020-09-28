@@ -231,7 +231,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     
     // build url
     NSString* path = @"v1.0/me/calendar/calendarView";
-    NSString* select = @"$select=organizer,start,showAs,subject,body,onlineMeeting,onlineMeetingUrl,webLink";
+    NSString* select = @"$select=subject,organizer,start,end,showAs,body,onlineMeeting,onlineMeetingUrl,webLink";
     NSString* orderBy = @"$orderBy=start/dateTime,showAs";
     NSString* count = @"$top=50";
     

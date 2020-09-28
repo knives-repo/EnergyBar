@@ -64,12 +64,14 @@
         self.showAs = Busy;
     }
     
-    // date: 2020-09-28T01:00:00.0000000
-    NSString* jsonDate = [jsonEvent getJsonValue:@"start" sub:@"dateTime"];
+    // start date: 2020-09-28T01:00:00.0000000
+    NSString* jsonStartDate = [jsonEvent getJsonValue:@"start" sub:@"dateTime"];
+    NSString* jsonEndDate = [jsonEvent getJsonValue:@"end" sub:@"dateTime"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
-    self.startTime = [dateFormatter dateFromString:jsonDate];
-    
+    self.startTime = [dateFormatter dateFromString:jsonStartDate];
+    self.endTime = [dateFormatter dateFromString:jsonEndDate];
+
     // join url basic info
     self.joinUrl = [jsonEvent getJsonValue:@"onlineMeetingUrl"];
     if (IsValidString(self.joinUrl) == NO) {
@@ -118,12 +120,15 @@
 }
 
 - (NSTimeInterval) intervalWithNow {
-    NSDate* now = [NSDate date];
-    return [self.startTime timeIntervalSinceDate:now];
+    return [self.startTime timeIntervalSinceNow];
 }
 
 - (BOOL) isCurrent {
     return [self intervalWithNow] <= EVENT_CURRENT_DELTA;
+}
+
+- (BOOL) isEnded {
+    return [self.endTime timeIntervalSinceNow] < 0;
 }
 
 - (BOOL) isTeams {

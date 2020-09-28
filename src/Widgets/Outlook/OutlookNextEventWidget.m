@@ -151,6 +151,9 @@
         if (self.event.isCurrent && self.event.joinUrl != nil) {
             if (self.event.isWebEx) {
                 [view.joinButtonWidthConstraint setConstant:32];
+                [view.joinButton setImage:[NSImage imageNamed:@"WebexLogo"]];
+                [view.joinButton setBezelStyle:NSBezelStyleRegularSquare];
+                [view.joinButton setImagePosition:NSImageOnly];
             } else if (self.event.isTeams) {
                 [view.joinButtonWidthConstraint setConstant:32];
                 [view.joinButton setImage:[NSImage imageNamed:@"TeamsLogo"]];
@@ -232,7 +235,7 @@
     // find current and show next
     BOOL showNext = NO;
     for (OutlookEvent* event in self.events) {
-        if (showNext) {
+        if (showNext && event.isEnded == NO) {
             self->_event = event;
             [self update];
             return;
