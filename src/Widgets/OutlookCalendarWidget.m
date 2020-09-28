@@ -89,7 +89,11 @@
     view.layer.backgroundColor = [[NSColor colorWithWhite:0.0 alpha:0.5] CGColor];
     self.view = view;
     
-    // more init
+    // title opens weblink
+    [view.titleView setTarget:self];
+    [view.titleView setAction:@selector(onTap:)];
+    
+    // join joins
     [view.joinButton setTarget:self];
     [view.joinButton setAction:@selector(onJoin:)];
     
