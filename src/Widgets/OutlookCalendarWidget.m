@@ -113,7 +113,9 @@
         NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
         [view.timeView setStringValue:self.event.startTimeDesc];
         [view.titleView setStringValue:self.event.title];
-        [view.joinButtonWidthConstraint setConstant:(self.event.isCurrent ? 48 : 0)];
+        
+        // join url
+        [view.joinButtonWidthConstraint setConstant:((self.event.isCurrent && self.event.joinUrl != nil) ? 48 : 0)];
         
         // show as
         switch (self.event.showAs) {
@@ -137,11 +139,15 @@
 }
 
 - (void) onTap:(id) sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.webLink]];
+    if (self.event.webLink != nil) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.webLink]];
+    }
 }
 
-- (void) onJoin:(id) sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.joinUrl]];
+- (void) onJoin:(id)sender {
+    if (self.event.joinUrl != nil) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.joinUrl]];
+    }
 }
 
 @end
@@ -187,7 +193,7 @@
             break;
             
         case 2:
-            [self.nextEventWidget onTap:sender];
+            //[self.nextEventWidget onTap:sender];
             break;
     }
     

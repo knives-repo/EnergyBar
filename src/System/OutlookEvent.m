@@ -9,6 +9,7 @@
 #import "OutlookEvent.h"
 
 #define IsValid(x) (x != nil && [x isKindOfClass:[NSNull class]] == NO)
+#define IsValidString(x) (IsValid(x) && [x length] > 0)
 
 #define EVENT_NOW_DELTA 3*60
 #define EVENT_CURRENT_DELTA 5*60
@@ -64,14 +65,14 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
     self.startTime = [dateFormatter dateFromString:jsonDate];
     
-    // join url
+    // join url basic info
     self.joinUrl = [jsonEvent getJsonValue:@"onlineMeetingUrl"];
-    if (IsValid(self.joinUrl) == NO) {
+    if (IsValidString(self.joinUrl) == NO) {
         self.joinUrl = [jsonEvent getJsonValue:@"onlineMeeting" sub:@"joinUrl"];
     }
-    if (IsValid(self.joinUrl) == NO) {
-
-        // parse body for teams
+    
+    // parse body for teams
+    if (IsValidString(self.joinUrl) == NO) {
         NSString* body = [jsonEvent getJsonValue:@"body" sub:@"content"];
         NSRange rangeStart = [body rangeOfString:@"https://teams.microsoft.com/l/meetup-join/"];
         if (rangeStart.location != NSNotFound) {
@@ -80,6 +81,26 @@
                 self.joinUrl = [body substringWithRange:NSMakeRange(rangeStart.location, rangeEnd.location - rangeStart.location)];
             }
         }
+    }
+    
+    // parse body for webex
+    if (IsValidString(self.joinUrl) == NO) {
+        NSString* body = [jsonEvent getJsonValue:@"body" sub:@"content"];
+        NSRegularExpression *regex = [NSRegularExpression
+            regularExpressionWithPattern:@"https://.*\\.webex.com/.*/j.php[^\"]*"
+            options:NSRegularExpressionCaseInsensitive
+            error:nil];
+        [regex enumerateMatchesInString:body options:0 range:NSMakeRange(0, body.length)
+                             usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
+            self.joinUrl = [[[body substringWithRange:match.range] componentsSeparatedByString:@"\""] objectAtIndex:0];
+            *stop = YES;
+        }];
+
+    }
+    
+    // check
+    if (IsValidString(self.joinUrl) == NO) {
+        [self setJoinUrl:nil];
     }
 
     // done
@@ -98,6 +119,14 @@
 
 - (BOOL) isCurrent {
     return [self intervalWithNow] <= EVENT_CURRENT_DELTA;
+}
+
+- (BOOL) isTeams {
+    return [self.joinUrl localizedCaseInsensitiveContainsString:@"teams.microsoft.com"];
+}
+
+- (BOOL) isWebEx {
+    return [self.joinUrl localizedCaseInsensitiveContainsString:@"webex.com"];
 }
 
 + (NSArray*) listFromJson:(NSArray*) jsonArray {

@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
@@ -26,21 +26,21 @@
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>EnergyBar uses Automation to control various Finder and Calendar actions.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>EnergyBar needs access to your Calendar to get the next TODO item.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2018 Bill Zissimopoulos. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSAppleEventsUsageDescription</key>
-	<string>EnergyBar uses Automation to control various Finder and Calendar actions.</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>EnergyBar needs access to your Calendar to get the next TODO item.</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>EnergyBar needs access to your Reminders to get the next TODO item.</string>
-	<key>OctoRepository</key>
-	<string>github.com/billziss-gh/EnergyBar</string>
 	<key>OctoCheckPeriod</key>
 	<integer>86400</integer>
+	<key>OctoRepository</key>
+	<string>github.com/billziss-gh/EnergyBar</string>
 </dict>
 </plist>

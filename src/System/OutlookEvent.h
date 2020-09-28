@@ -23,8 +23,8 @@ typedef enum {
 @property (retain) NSString* title;
 @property (retain) NSDate* startTime;
 @property (assign) ShowAs showAs;
-@property (retain) NSString* webLink;
-@property (retain) NSString* joinUrl;
+@property (retain,nullable) NSString* webLink;
+@property (retain,nullable) NSString* joinUrl;
 @property (readonly) BOOL isCurrent;
 
 + (NSString*) dateDiffDescriptionBetween:(NSDate*) reference and:(NSDate*) date;
@@ -35,6 +35,9 @@ typedef enum {
 
 - (id) initWithJson:(NSDictionary*) jsonEvent;
 - (NSString*) startTimeDesc;
+
+- (BOOL) isTeams;
+- (BOOL) isWebEx;
 
 @end
 
