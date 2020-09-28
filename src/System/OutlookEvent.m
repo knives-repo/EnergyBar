@@ -134,6 +134,21 @@
     return [self.joinUrl localizedCaseInsensitiveContainsString:@"webex.com"];
 }
 
+- (NSString*) directJoinUrl {
+    
+    // microsoft teams meeting
+    if (self.isTeams) {
+        NSString* directJoinUrl = self.joinUrl;
+        directJoinUrl = [directJoinUrl stringByReplacingOccurrencesOfString:@"https://teams.microsoft.com/" withString:@"msteams:"];
+        directJoinUrl = [directJoinUrl stringByAppendingString:@"&anon=true&launchAgent=join_launcher&type=meetup-join&directDl=true&msLaunch=true&enableMobilePage=true&fqdn=teams.microsoft.com"];
+        return directJoinUrl;
+    }
+    
+    // default
+    return self.joinUrl;
+    
+}
+
 - (NSComparisonResult) compare:(OutlookEvent*) other {
     
     // same

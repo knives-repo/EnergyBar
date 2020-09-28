@@ -36,6 +36,7 @@ typedef enum {
 
 - (id) initWithJson:(NSDictionary*) jsonEvent;
 - (NSString*) startTimeDesc;
+- (NSString*) directJoinUrl;
 
 - (BOOL) isTeams;
 - (BOOL) isWebEx;

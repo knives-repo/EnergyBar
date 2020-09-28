@@ -194,7 +194,17 @@
 
 - (void) onJoin:(id)sender {
     if (self.event.joinUrl != nil) {
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.joinUrl]];
+        
+        // try direct first
+        NSString* joinUrl = self.event.directJoinUrl;
+        NSURL* appURL = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:[NSURL URLWithString:joinUrl]];
+        if (appURL == nil) {
+            joinUrl = self.event.joinUrl;
+        }
+        
+        // now open it
+        NSLog(@"%@", joinUrl);
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:joinUrl]];
     }
 }
 
