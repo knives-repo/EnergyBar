@@ -10,7 +10,6 @@
 #import "NSColor+Hex.h"
 #import "Outlook.h"
 
-#define SafeStringValue(x) (x == nil ? @"" : x)
 
 #define RESET_AFTER_USER_NEXT 10
 

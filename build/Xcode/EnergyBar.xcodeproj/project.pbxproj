@@ -194,6 +194,7 @@
 		8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezelWindow.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		8D4DC4CF2522662A0042A22A /* MediaKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaKeys.h; sourceTree = "<group>"; };
 		8D4DC4D02522662A0042A22A /* MediaKeys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaKeys.m; sourceTree = "<group>"; };
+		8D4DC4E125226EF40042A22A /* EnergyBar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EnergyBar-Prefix.pch"; sourceTree = "<group>"; };
 		8D9D245A251F6F35004FF191 /* LevelIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelIndicator.h; sourceTree = "<group>"; };
 		8D9D245B251F6F35004FF191 /* LevelIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelIndicator.m; sourceTree = "<group>"; };
 		8D9D245D251F8D2B004FF191 /* NSColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Hex.h"; sourceTree = "<group>"; };
@@ -357,6 +358,7 @@
 				3C163BC52118F1C500F015EC /* main.m */,
 				8D9D245D251F8D2B004FF191 /* NSColor+Hex.h */,
 				8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */,
+				8D4DC4E125226EF40042A22A /* EnergyBar-Prefix.pch */,
 			);
 			indentWidth = 4;
 			name = Source;
@@ -861,6 +863,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/../../src/EnergyBar-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/../../rsc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -894,6 +899,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/../../src/EnergyBar-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/../../rsc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

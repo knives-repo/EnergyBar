@@ -1,0 +1,18 @@
+//
+//  EnergyBar-Prefix.pch
+//  EnergyBar
+//
+//  Created by Nicolas Bonamy on 9/28/20.
+//  Copyright © 2020 Bill Zissimopoulos. All rights reserved.
+//
+
+#ifndef EnergyBar_Prefix_pch
+#define EnergyBar_Prefix_pch
+
+#define IsValid(x) (x != nil && [x isKindOfClass:[NSNull class]] == NO)
+#define IsValidString(x) (IsValid(x) && [x length] > 0)
+#define SafeStringValue(x) (x == nil ? @"" : x)
+
+#define WIDGET_STANDARD_WIDTH 56
+
+#endif /* EnergyBar_Prefix_pch */

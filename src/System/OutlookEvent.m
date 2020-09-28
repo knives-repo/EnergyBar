@@ -8,9 +8,6 @@
 
 #import "OutlookEvent.h"
 
-#define IsValid(x) (x != nil && [x isKindOfClass:[NSNull class]] == NO)
-#define IsValidString(x) (IsValid(x) && [x length] > 0)
-
 #define EVENT_NOW_DELTA 3*60
 #define EVENT_CURRENT_DELTA 5*60
 #define EVENT_SOON_DELTA 1*60*60

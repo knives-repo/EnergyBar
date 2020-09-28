@@ -36,7 +36,7 @@
     control.tag = 'ctrl';
     
     for (int i=0; i<control.segmentCount; i++) {
-        [control setWidth:56 forSegment:i];
+        [control setWidth:WIDGET_STANDARD_WIDTH forSegment:i];
     }
     
     self.customizationLabel = @"Volume";
