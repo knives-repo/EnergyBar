@@ -56,11 +56,13 @@
     {
         case 0:
             // brightness down
+            [BezelWindow hide];
             PostAuxKeyPress(NX_KEYTYPE_BRIGHTNESS_DOWN);
             //[self adjustBrightnessBy:-BrightnessAdjustIncrement];
             break;
         case 1:
             // brightness up
+            [BezelWindow hide];
             PostAuxKeyPress(NX_KEYTYPE_BRIGHTNESS_UP);
             //[self adjustBrightnessBy:+BrightnessAdjustIncrement];
             break;

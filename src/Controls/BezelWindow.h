@@ -28,6 +28,7 @@ typedef enum {
 + (BOOL) isDarkMode;
 
 + (void) showWithType:(BezelType) type andValue:(float) value;
++ (void) hide;
 
 @property (assign) BezelType type;
 @property (assign) float value;

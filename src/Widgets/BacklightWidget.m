@@ -47,10 +47,12 @@
     {
         case 0:
             // brightness down
+            [BezelWindow hide];
             PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
             break;
         case 1:
             // brightness up
+            [BezelWindow hide];
             PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
             break;
     }

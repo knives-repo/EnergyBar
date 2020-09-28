@@ -103,15 +103,19 @@
     {
         case 0:
             // volume down
+            [BezelWindow hide];
             PostAuxKeyPress(NX_KEYTYPE_SOUND_DOWN);
             //[self adjustVolumeBy:-VolumeAdjustIncrement];
             break;
         case 1:
             // volume up
+            [BezelWindow hide];
             PostAuxKeyPress(NX_KEYTYPE_SOUND_UP);
             //[self adjustVolumeBy:+VolumeAdjustIncrement];
             break;
         case 2:
+            // mute
+            [BezelWindow hide];
             PostAuxKeyPress(NX_KEYTYPE_MUTE);
             //[self mute];
             break;

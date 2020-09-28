@@ -19,6 +19,9 @@
 #define INDICATOR_HEIGHT 8
 #define FADE_DELAY 2
 
+static BezelWindow* instance = nil;
+static NSTimer* timer = nil;
+
 @implementation BezelWindow
 
 @synthesize type;
@@ -38,18 +41,19 @@
     }
 }
 
-+ (void) showWithType:(BezelType) type andValue:(float) value {
-    
-    static BezelWindow* instance = nil;
-    static NSTimer* timer = nil;
-    
-    // immediatly close previous one
++ (void) hide {
     if (instance != nil) {
         [timer invalidate];
         [instance close];
         instance = nil;
         timer = nil;
     }
+}
+
++ (void) showWithType:(BezelType) type andValue:(float) value {
+    
+    // immediatly close previous one
+    [BezelWindow hide];
     
     // now show new one
     instance = [[BezelWindow alloc] initWithType:type andValue:value];

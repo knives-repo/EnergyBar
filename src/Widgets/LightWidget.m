@@ -13,11 +13,13 @@
 
 #import "LightWidget.h"
 #import "KeyEvent.h"
+#import "BezelWindow.h"
 #import "NSSegmentedControl+Utils.h"
 
 @interface LightWidget() {
     NSInteger activeSegment;
     int lastSlidePosition;
+    BOOL modified;
 }
 
 @end
@@ -76,6 +78,10 @@
     NSPoint point = [recognizer locationInView:self.view];
     activeSegment = [self.view segmentForX:point.x];
     lastSlidePosition = point.x;
+    modified = NO;
+    
+    // hide bezel window
+    [BezelWindow hide];
 }
 
 - (void)shortPressChanged:(NSGestureRecognizer *)recognizer
@@ -94,6 +100,7 @@
     
     // record new position that triggered a change
     lastSlidePosition = point.x;
+    modified = YES;
 
     // process
     switch (activeSegment)
@@ -117,6 +124,20 @@
 
 - (void)shortPressEnded:(NSGestureRecognizer *)recognizer
 {
-
+    // key up
+    if (modified == NO) {
+        switch (activeSegment)
+        {
+            case 0:
+                PostAuxKeyPress(NX_KEYTYPE_BRIGHTNESS_UP);
+                break;
+            case 1:
+                PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+                break;
+        }
+    }
+    
+    // done
+    activeSegment = -1;
 }
 @end
