@@ -57,7 +57,6 @@
 		8D33B986251E6BC0006AFCC9 /* VolumeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */; };
 		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; };
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
-		8D4DC4D12522662B0042A22A /* MediaKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4D02522662A0042A22A /* MediaKeys.m */; };
 		8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245B251F6F35004FF191 /* LevelIndicator.m */; };
 		8D9D245F251F8D2B004FF191 /* NSColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */; };
 		8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D2464251FB14D004FF191 /* BacklightWidget.m */; };
@@ -192,8 +191,6 @@
 		8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicMuteWidget.h; sourceTree = "<group>"; };
 		8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezelWindow.h; sourceTree = "<group>"; };
 		8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezelWindow.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
-		8D4DC4CF2522662A0042A22A /* MediaKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaKeys.h; sourceTree = "<group>"; };
-		8D4DC4D02522662A0042A22A /* MediaKeys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaKeys.m; sourceTree = "<group>"; };
 		8D4DC4E125226EF40042A22A /* EnergyBar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EnergyBar-Prefix.pch"; sourceTree = "<group>"; };
 		8D9D245A251F6F35004FF191 /* LevelIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelIndicator.h; sourceTree = "<group>"; };
 		8D9D245B251F6F35004FF191 /* LevelIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelIndicator.m; sourceTree = "<group>"; };
@@ -270,8 +267,6 @@
 				3C6944CE212E922F0082E3BF /* Log.h */,
 				3CFECA102122611F00BB58E9 /* LoginItem.c */,
 				3CFECA112122611F00BB58E9 /* LoginItem.h */,
-				8D4DC4CF2522662A0042A22A /* MediaKeys.h */,
-				8D4DC4D02522662A0042A22A /* MediaKeys.m */,
 				3CA1DD8A212D3FC000D95DE1 /* NowPlaying.h */,
 				3CA1DD89212D3FC000D95DE1 /* NowPlaying.m */,
 				3C1DF6BA2162D83B006A1EBF /* NSGlobalPreferenceTransition.h */,
@@ -654,7 +649,6 @@
 				3C3464BF21465319001F45BB /* WeatherWidget.m in Sources */,
 				3CA851A0212B84B000585D29 /* NSTouchBar+SystemModal.m in Sources */,
 				8D9D24E3252124DE004FF191 /* OutlookEvent.m in Sources */,
-				8D4DC4D12522662B0042A22A /* MediaKeys.m in Sources */,
 				8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */,
 				8D9D248E2520BAA9004FF191 /* OutlookCalendarWidget.m in Sources */,
 				3C5D0FCE2119210000769A39 /* ClockWidget.m in Sources */,

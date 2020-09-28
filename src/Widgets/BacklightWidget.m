@@ -14,7 +14,7 @@
 #import "BacklightWidget.h"
 #import "Brightness.h"
 #import "BezelWindow.h"
-#import "MediaKeys.h"
+#import "KeyEvent.h"
 
 @implementation BacklightWidget
 
@@ -48,11 +48,11 @@
     {
         case 0:
             // brightness down
-            HIDPostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
             break;
         case 1:
             // brightness up
-            HIDPostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
             break;
     }
 }
