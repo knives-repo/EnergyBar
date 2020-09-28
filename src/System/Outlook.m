@@ -304,31 +304,31 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     // https://docs.microsoft.com/en-us/graph/api/resources/outlookcategory?view=graph-rest-1.0
     //
     return @{
-        @"preset0": [NSColor redColor],
-        @"preset1": [NSColor orangeColor],
-        @"preset2": [NSColor brownColor],
-        @"preset3": [NSColor yellowColor],
-        @"preset4": [NSColor greenColor],
-        @"preset5": [NSColor systemTealColor],
-        @"preset6": [NSColor greenColor],
-        @"preset7": [NSColor blueColor],
-        @"preset8": [NSColor purpleColor],
-        @"preset9": [NSColor redColor],
-        @"preset10": [NSColor redColor],
-        @"preset11": [NSColor redColor],
-        @"preset12": [NSColor grayColor],
-        @"preset13": [NSColor darkGrayColor],
-        @"preset14": [NSColor blackColor],
-        @"preset15": [NSColor redColor],
-        @"preset16": [NSColor redColor],
-        @"preset17": [NSColor redColor],
-        @"preset18": [NSColor redColor],
-        @"preset19": [NSColor redColor],
-        @"preset20": [NSColor redColor],
-        @"preset21": [NSColor redColor],
-        @"preset22": [NSColor redColor],
-        @"preset23": [NSColor redColor],
-        @"preset24": [NSColor redColor],
+        @"preset0": [NSColor redColor],         // Red
+        @"preset1": [NSColor orangeColor],      // Orange
+        @"preset2": [NSColor brownColor],       // Brown
+        @"preset3": [NSColor yellowColor],      // Yellow
+        @"preset4": [NSColor greenColor],       // Green
+        @"preset5": [NSColor systemTealColor],  // Teal
+        @"preset6": [NSColor greenColor],       // Olive
+        @"preset7": [NSColor blueColor],        // Blue
+        @"preset8": [NSColor purpleColor],      // Purple
+        @"preset9": [NSColor redColor],         // Cranberry
+        @"preset10": [NSColor redColor],        // Steel
+        @"preset11": [NSColor redColor],        // DarkSteel
+        @"preset12": [NSColor grayColor],       // Gray
+        @"preset13": [NSColor darkGrayColor],   // DarkGray
+        @"preset14": [NSColor blackColor],      // Black
+        @"preset15": [NSColor redColor],        // DarkRed
+        @"preset16": [NSColor redColor],        // DarkOrange
+        @"preset17": [NSColor redColor],        // DarkBrown
+        @"preset18": [NSColor redColor],        // DarkYellow
+        @"preset19": [NSColor redColor],        // DarkGreen
+        @"preset20": [NSColor redColor],        // DarkTeal
+        @"preset21": [NSColor redColor],        // DarkOlive
+        @"preset22": [NSColor redColor],        // DarkBlue
+        @"preset23": [NSColor redColor],        // DarkPurple
+        @"preset24": [NSColor redColor],        // DarkCranberry
     };
 
 }
