@@ -46,7 +46,7 @@
 - (void) setup {
     
     // load nib
-    NSNib *nib = [[[NSNib alloc] initWithNibNamed:@"OutlookEvents" bundle:nil] autorelease];
+    NSNib *nib = [[NSNib alloc] initWithNibNamed:@"OutlookEvents" bundle:nil];
     [nib instantiateWithOwner:self topLevelObjects:nil];
     [self addSubview:contentView];
     
@@ -74,19 +74,19 @@
     
     // view
     self.customizationLabel = @"Outlook Calendar";
-    NextEventsWidgetView *view = [[[NextEventsWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
+    NextEventsWidgetView *view = [[NextEventsWidgetView alloc] initWithFrame:NSZeroRect];
     view.wantsLayer = YES;
     view.layer.cornerRadius = 8.0;
     view.layer.backgroundColor = [[NSColor colorWithWhite:0.0 alpha:0.5] CGColor];
     self.view = view;
     
     // busy tap well
-    NSGestureRecognizer* busyTapRecognizer = [[[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(onToggleBusy:)] autorelease];
+    NSGestureRecognizer* busyTapRecognizer = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(onToggleBusy:)];
     busyTapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
     [view.busyWellView addGestureRecognizer:busyTapRecognizer];
     
     // busy tap well
-    NSGestureRecognizer* linkTapRecognizer = [[[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(onLink:)] autorelease];
+    NSGestureRecognizer* linkTapRecognizer = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(onLink:)];
     linkTapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
     [view.linkWellView addGestureRecognizer:linkTapRecognizer];
     

@@ -49,8 +49,6 @@
 {
     [[NSNotificationCenter defaultCenter]
      removeObserver:self];
-    
-    [super dealloc];
 }
 
 - (void)viewWillAppear

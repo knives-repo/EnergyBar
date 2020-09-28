@@ -26,22 +26,23 @@
 - (void)commonInit {
     
     // no connection
-    [self addWidget:[[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoSignin"
+    [self addWidget:[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoSignin"
                                              customizationLabel:@"Outlook Calendar"
                                                           title:@"No connection"
-                                                           icon:[NSImage imageNamed:NSImageNameUserAccounts]] autorelease]];
+                                                           icon:[NSImage imageNamed:NSImageNameUserAccounts]]];
     
     // no event
-    [self addWidget:[[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoEvents"
+    [self addWidget:[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoEvents"
                                              customizationLabel:@"Outlook Calendar"
-                                                          title:@"No events"] autorelease]];
+                                                          title:@"Enjoy the rest of your day!"
+                                                            icon:[NSImage imageNamed:NSImageNameMenuOnStateTemplate]]];
     
     // add widgets
-    self.nextEventWidget = [[[OutlookNextEventWidget alloc] initWithIdentifier:@"_OutlookNextEvent"] autorelease];
+    self.nextEventWidget = [[OutlookNextEventWidget alloc] initWithIdentifier:@"_OutlookNextEvent"];
     [self addWidget:self.nextEventWidget];
     
     // init outlook
-    self.outlook = [[[Outlook alloc] init] autorelease];
+    self.outlook = [[Outlook alloc] init];
         
 }
 

@@ -47,7 +47,7 @@
 - (void)commonInit
 {
     // formatting
-    ImageTitleView *view = [[[ImageTitleView alloc] initWithFrame:NSZeroRect] autorelease];
+    ImageTitleView *view = [[ImageTitleView alloc] initWithFrame:NSZeroRect];
     view.wantsLayer = YES;
     view.layer.cornerRadius = 8.0;
     view.layer.backgroundColor = [[NSColor colorWithWhite:0.0 alpha:0.5] CGColor];
