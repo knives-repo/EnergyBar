@@ -98,7 +98,7 @@ static NSImage *weatherImage(uint64_t conditionCode)
 @implementation WeatherWidgetView
 - (NSSize)intrinsicContentSize
 {
-    return NSMakeSize(100, NSViewNoIntrinsicMetric);
+    return NSMakeSize(90, NSViewNoIntrinsicMetric);
 }
 @end
 

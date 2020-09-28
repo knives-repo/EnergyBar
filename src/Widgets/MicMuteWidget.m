@@ -23,7 +23,7 @@
 @implementation MicMuteWidgetView
 - (NSSize)intrinsicContentSize
 {
-    return NSMakeSize(64, NSViewNoIntrinsicMetric);
+    return NSMakeSize(56, NSViewNoIntrinsicMetric);
 }
 @end
 

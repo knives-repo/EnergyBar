@@ -21,19 +21,19 @@
 - (void)commonInit
 {
     NSSegmentedControl *control = [NSSegmentedControl
-        segmentedControlWithImages:[NSArray arrayWithObjects:
-            [NSImage imageNamed:@"KeyboardBrightnessDown"],
-            [NSImage imageNamed:@"KeyboardBrightnessUp"],
-            nil]
-        trackingMode:NSSegmentSwitchTrackingMomentary
-        target:self
-        action:@selector(click:)];
+                                   segmentedControlWithImages:[NSArray arrayWithObjects:
+                                                               [NSImage imageNamed:@"KeyboardBrightnessDown"],
+                                                               [NSImage imageNamed:@"KeyboardBrightnessUp"],
+                                                               nil]
+                                   trackingMode:NSSegmentSwitchTrackingMomentary
+                                   target:self
+                                   action:@selector(click:)];
     control.translatesAutoresizingMaskIntoConstraints = NO;
     control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     control.tag = 'ctrl';
     
     for (int i=0; i<control.segmentCount; i++) {
-        [control setWidth:64 forSegment:i];
+        [control setWidth:56 forSegment:i];
     }
     
     self.customizationLabel = @"Backlight";

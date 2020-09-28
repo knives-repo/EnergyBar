@@ -61,7 +61,7 @@
 
 - (NSSize)intrinsicContentSize
 {
-    return NSMakeSize(300, NSViewNoIntrinsicMetric);
+    return NSMakeSize(280, NSViewNoIntrinsicMetric);
 }
 
 - (void) layout {
