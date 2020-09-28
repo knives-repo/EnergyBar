@@ -70,11 +70,19 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
 }
 
 - (void)acquireTokenSilently:(void (^)(void)) completionBlock {
+    [self acquireTokenSilently:completionBlock fallbackToInteractive:YES];
+}
+
+- (void)acquireTokenSilently:(void (^)(void)) completionBlock fallbackToInteractive:(BOOL) fallbackToInteractive {
     
     // need an account for this
     if (self.currentAccount == nil) {
-        NSLog(@"[SILENT] Redirect to Interactive");
-        [self acquireTokenInteractively:completionBlock];
+        if (fallbackToInteractive) {
+            NSLog(@"[SILENT] Redirect to Interactive");
+            [self acquireTokenInteractively:completionBlock];
+        } else {
+            NSLog(@"[SILENT] Interaction required but fallback disabled");
+        }
         return;
     }
     
@@ -87,11 +95,15 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
         if (error != nil) {
             if (error.domain == MSALErrorDomain) {
                 if (error.code == MSALErrorInteractionRequired) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        NSLog(@"[SILENT] Interaction required");
-                        [self acquireTokenInteractively:completionBlock];
-                        return;
-                    });
+                    if (fallbackToInteractive) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            NSLog(@"[SILENT] Interaction required");
+                            [self acquireTokenInteractively:completionBlock];
+                            return;
+                        });
+                    } else {
+                        NSLog(@"[SILENT] Interaction required but fallback disabled");
+                    }
                 }
             }
             NSLog(@"[SILENT] Error: %@", error);
@@ -226,12 +238,24 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     }];
 }
 
+- (void)getCategories:(JsonCompletionBlock) completionBlock {
+    
+    NSString* uri = @"https://graph.microsoft.com/v1.0/me/outlook/masterCategories";
+    [self acquireTokenSilently:^{
+        [self getContent:uri withHeaders:nil completionBlock:^(NSDictionary* jsonObject) {
+            if (completionBlock != nil) {
+                completionBlock(jsonObject);
+            }
+        }];
+    } fallbackToInteractive:NO];
+
+}
 
 - (void) getCalendarEvents:(JsonCompletionBlock) completionBlock {
     
     // build url
     NSString* path = @"v1.0/me/calendar/calendarView";
-    NSString* select = @"$select=subject,organizer,start,end,showAs,body,onlineMeeting,onlineMeetingUrl,webLink";
+    NSString* select = @"$select=subject,organizer,isAllDay,isCancelled,isOrganizer,start,end,showAs,body,importance,categories,onlineMeeting,onlineMeetingUrl,webLink,responseStatus";
     NSString* orderBy = @"$orderBy=start/dateTime,showAs";
     NSString* count = @"$top=50";
     
@@ -270,6 +294,42 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
             completionBlock(jsonObject);
         }];
     }];
+
+}
+
++ (NSDictionary*) presetColors {
+    
+    //
+    // TODO
+    // https://docs.microsoft.com/en-us/graph/api/resources/outlookcategory?view=graph-rest-1.0
+    //
+    return @{
+        @"preset0": [NSColor redColor],
+        @"preset1": [NSColor orangeColor],
+        @"preset2": [NSColor brownColor],
+        @"preset3": [NSColor yellowColor],
+        @"preset4": [NSColor greenColor],
+        @"preset5": [NSColor systemTealColor],
+        @"preset6": [NSColor greenColor],
+        @"preset7": [NSColor blueColor],
+        @"preset8": [NSColor purpleColor],
+        @"preset9": [NSColor redColor],
+        @"preset10": [NSColor redColor],
+        @"preset11": [NSColor redColor],
+        @"preset12": [NSColor grayColor],
+        @"preset13": [NSColor darkGrayColor],
+        @"preset14": [NSColor blackColor],
+        @"preset15": [NSColor redColor],
+        @"preset16": [NSColor redColor],
+        @"preset17": [NSColor redColor],
+        @"preset18": [NSColor redColor],
+        @"preset19": [NSColor redColor],
+        @"preset20": [NSColor redColor],
+        @"preset21": [NSColor redColor],
+        @"preset22": [NSColor redColor],
+        @"preset23": [NSColor redColor],
+        @"preset24": [NSColor redColor],
+    };
 
 }
 

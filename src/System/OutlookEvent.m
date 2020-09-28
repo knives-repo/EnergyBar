@@ -17,18 +17,18 @@
 #define EVENT_CLOSE_DELTA 4*60*60
 
 @interface NSDictionary(Json)
-- (NSString*) getJsonValue:(NSString*) key;
-- (NSString*) getJsonValue:(NSString*) key sub:(NSString*) subkey;
+- (id) getJsonValue:(NSString*) key;
+- (id) getJsonValue:(NSString*) key sub:(NSString*) subkey;
 @end
 
 @implementation NSDictionary(Json)
 
-- (NSString*) getJsonValue:(NSString*) key {
+- (id) getJsonValue:(NSString*) key {
     id value = [self objectForKey:key];
     return (IsValid(value) ? value : nil);
 }
 
-- (NSString*) getJsonValue:(NSString*) key sub:(NSString*) subkey {
+- (id) getJsonValue:(NSString*) key sub:(NSString*) subkey {
     NSDictionary* dict = [self objectForKey:key];
     return (IsValid(dict) ? [dict getJsonValue:subkey] : nil);
 }
@@ -38,7 +38,7 @@
 @implementation OutlookEvent
 
 - (NSString*) description {
-    return [NSString stringWithFormat:@"%@: %@", self.startTime, self.title];
+    return [NSString stringWithFormat:@"%@: %@ [%@]", self.startTime, self.title, self.categories];
 }
 
 - (id) initWithJson:(NSDictionary*) jsonEvent {
@@ -71,6 +71,9 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
     self.startTime = [dateFormatter dateFromString:jsonStartDate];
     self.endTime = [dateFormatter dateFromString:jsonEndDate];
+    
+    // categories
+    self.categories = [jsonEvent getJsonValue:@"categories"];
 
     // join url basic info
     self.joinUrl = [jsonEvent getJsonValue:@"onlineMeetingUrl"];
@@ -180,6 +183,14 @@
     NSMutableArray* array = [NSMutableArray array];
     if (jsonArray != nil) {
         for (NSDictionary* dict in jsonArray) {
+            
+            // check some flags
+            if ([[dict valueForKey:@"isAllDay"] boolValue] == YES ||
+                [[dict valueForKey:@"isCancelled"] boolValue] == YES) {
+                continue;
+            }
+
+            // do it
             OutlookEvent* event = [[OutlookEvent alloc] initWithJson:dict];
             [array addObject:event];
         }

@@ -74,33 +74,45 @@
 }
 
 - (void)loadEvents {
+    
     [self.outlook loadCurrentAccount:^{
+
+        // need an account
         if (self.outlook.currentAccount == nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self setActiveIndex:0];
             });
-        } else {
-            [self.outlook getCalendarEvents:^(NSDictionary * jsonCalendar) {
-                self.lastFetch = [NSDate date];
-                NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
-                NSArray* events = [OutlookEvent listFromJson:jsonEvents];
-                #if DUMP
-                    for (OutlookEvent* event in events) {
-                        NSLog(@"%@", event);
-                    }
-                #endif
-                [self.nextEventWidget showEvents:[events sortedArrayUsingSelector:@selector(compare:)]];
-                if (self.nextEventWidget.event != nil) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self setActiveIndex:2];
-                    });
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self setActiveIndex:1];
-                    });
-                }
-            }];
+            return;
         }
+        
+        // load categories
+        //[self.outlook getCategories:^(NSDictionary * jsonCategories) {
+        //    NSLog(@"%@", jsonCategories);
+        //    [self.nextEventWidget setCategories:[jsonCategories objectForKey:@"value"]];
+        //}];
+        
+        // load events
+        [self.outlook getCalendarEvents:^(NSDictionary * jsonCalendar) {
+            self.lastFetch = [NSDate date];
+            NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
+            NSArray* events = [OutlookEvent listFromJson:jsonEvents];
+            #if DUMP
+                for (OutlookEvent* event in events) {
+                    NSLog(@"%@", event);
+                }
+            #endif
+            [self.nextEventWidget showEvents:[events sortedArrayUsingSelector:@selector(compare:)]];
+            if (self.nextEventWidget.event != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setActiveIndex:2];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setActiveIndex:1];
+                });
+            }
+        }];
+
     }];
 }
 

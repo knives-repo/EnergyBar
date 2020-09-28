@@ -8,6 +8,7 @@
 
 #import "OutlookNextEventWidget.h"
 #import "NSColor+Hex.h"
+#import "Outlook.h"
 
 #define SafeStringValue(x) (x == nil ? @"" : x)
 
@@ -82,6 +83,7 @@
 - (void) dealloc
 {
     [self.resetTimer invalidate];
+    [super dealloc];
 }
 
 - (void)commonInit {
@@ -180,13 +182,40 @@
                 [view.showAsView.layer setBackgroundColor:[[NSColor colorFromHex:0x7fb2ee] CGColor]];
                 break;
             case Busy:
-                [view.showAsView.layer setBackgroundColor:[[NSColor colorFromHex:0x0078d4] CGColor]];
+                [view.showAsView.layer setBackgroundColor:[[self colorForBusyEvent:self.event] CGColor]];
                 break;
             case OutOfOffice:
                 [view.showAsView.layer setBackgroundColor:[[NSColor purpleColor] CGColor]];
                 break;
         }
     });
+}
+
+- (NSColor*) colorForBusyEvent:(OutlookEvent*) event {
+    
+    // default
+    if (self.categories != nil && event.categories != nil && event.categories.count > 0) {
+
+        // 1st category
+        NSString* category = [event.categories firstObject];
+        
+        // iterate
+        for (NSDictionary* categoryDefinition in self.categories) {
+            if ([[categoryDefinition objectForKey:@"displayName"] isEqualToString:category]) {
+                NSString* color = [categoryDefinition objectForKey:@"color"];
+                NSDictionary* presetColors = [Outlook presetColors];
+                if ([[presetColors allKeys] containsObject:color]) {
+                    return [presetColors objectForKey:color];
+                }
+            }
+        }
+
+    }
+    
+    // default
+    return [NSColor colorFromHex:0x0078d4];
+
+    
 }
 
 - (void) onLink:(id) sender {

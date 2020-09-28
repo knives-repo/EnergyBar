@@ -21,7 +21,11 @@ typedef void (^ _Nullable JsonCompletionBlock)(NSDictionary*);
 - (void)loadCurrentAccount:(voidCompletionBlock) completionBlock;
 - (void)signIn:(JsonCompletionBlock) completionBlock;
 - (void)signOut:(voidCompletionBlock) completionBlock;
+
+//- (void)getCategories:(JsonCompletionBlock) completionBlock;
 - (void)getCalendarEvents:(JsonCompletionBlock) completionBlock;
+
++ (NSDictionary*) presetColors;
 
 @end
 

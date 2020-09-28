@@ -25,6 +25,7 @@ typedef enum {
 @property (retain) NSDate* startTime;
 @property (retain) NSDate* endTime;
 @property (assign) ShowAs showAs;
+@property (assign) NSArray* categories;
 @property (retain,nullable) NSString* webLink;
 @property (retain,nullable) NSString* joinUrl;
 
