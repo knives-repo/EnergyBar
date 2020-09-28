@@ -14,8 +14,7 @@
 #import "BacklightWidget.h"
 #import "Brightness.h"
 #import "BezelWindow.h"
-
-#define BacklightAdjustIncrement			 (1.0/16.0)
+#import "MediaKeys.h"
 
 @implementation BacklightWidget
 
@@ -42,13 +41,6 @@
     
 }
 
-- (void)adjustBrightnessBy:(double)delta {
-    //double brgt = GetKeyboardBrightness();
-    //brgt = MAX(0, MIN(1, brgt + delta));
-    //SetKeyboardBrightness(brgt);
-    //[BezelWindow showWithType:kBrightness andValue:brgt];
-}
-
 - (void)click:(id)sender
 {
     NSSegmentedControl *control = sender;
@@ -56,11 +48,11 @@
     {
         case 0:
             // brightness down
-            [self adjustBrightnessBy:-BacklightAdjustIncrement];
+            HIDPostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
             break;
         case 1:
             // brightness up
-            [self adjustBrightnessBy:+BacklightAdjustIncrement];
+            HIDPostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
             break;
     }
 }

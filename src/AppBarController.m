@@ -57,7 +57,7 @@
         @"OutlookCalendar",
         @"Control",
         @"Brightness",
-        //@"Backlight",
+        @"Backlight",
         @"Volume",
         @"Weather",
         @"Clock",
