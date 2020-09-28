@@ -53,24 +53,24 @@
 		3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CFECA102122611F00BB58E9 /* LoginItem.c */; };
 		405B467A219A3CCA0006DC16 /* LockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 405B4678219A3CCA0006DC16 /* LockWidget.m */; };
 		405B467C219A3D2D0006DC16 /* login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405B467B219A3D2D0006DC16 /* login.framework */; };
-		8D3015292522282500F0523D /* OutlookNextEventWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3015282522282500F0523D /* OutlookNextEventWidget.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8D33B986251E6BC0006AFCC9 /* VolumeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245B251F6F35004FF191 /* LevelIndicator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8D9D245F251F8D2B004FF191 /* NSColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D2464251FB14D004FF191 /* BacklightWidget.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		8D3015292522282500F0523D /* OutlookNextEventWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3015282522282500F0523D /* OutlookNextEventWidget.m */; };
+		8D33B986251E6BC0006AFCC9 /* VolumeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */; };
+		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; };
+		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
+		8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245B251F6F35004FF191 /* LevelIndicator.m */; };
+		8D9D245F251F8D2B004FF191 /* NSColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */; };
+		8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D2464251FB14D004FF191 /* BacklightWidget.m */; };
 		8D9D2467251FB372004FF191 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9D2466251FB372004FF191 /* IOKit.framework */; };
 		8D9D246A251FBA27004FF191 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9D2468251FBA27004FF191 /* CoreFoundation.framework */; };
 		8D9D246B251FBA27004FF191 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9D2469251FBA27004FF191 /* CoreGraphics.framework */; };
-		8D9D24882520381A004FF191 /* Outlook.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24872520381A004FF191 /* Outlook.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8D9D248E2520BAA9004FF191 /* OutlookCalendarWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D248D2520BAA9004FF191 /* OutlookCalendarWidget.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		8D9D24882520381A004FF191 /* Outlook.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24872520381A004FF191 /* Outlook.m */; };
+		8D9D248E2520BAA9004FF191 /* OutlookCalendarWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D248D2520BAA9004FF191 /* OutlookCalendarWidget.m */; };
 		8D9D24902520BC26004FF191 /* OutlookEvents.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9D248F2520BC26004FF191 /* OutlookEvents.xib */; };
 		8D9D24D52521239C004FF191 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24D42521239C004FF191 /* main.m */; };
-		8D9D24E3252124DE004FF191 /* OutlookEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24E2252124DE004FF191 /* OutlookEvent.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		8D9D24E3252124DE004FF191 /* OutlookEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24E2252124DE004FF191 /* OutlookEvent.m */; };
 		8D9D24E4252124DE004FF191 /* OutlookEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24E2252124DE004FF191 /* OutlookEvent.m */; };
-		8D9D24EE2521311C004FF191 /* ImageTileWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24ED2521311C004FF191 /* ImageTileWidget.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		8D9D24EE2521311C004FF191 /* ImageTileWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24ED2521311C004FF191 /* ImageTileWidget.m */; };
+		8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */; };
 		AF95C8ADCA2ED9B5705D7BB6 /* Pods_EnergyBars_EnergyBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */; };
 /* End PBXBuildFile section */
 

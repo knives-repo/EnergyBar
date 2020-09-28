@@ -35,14 +35,14 @@
     self.micOnImage = [NSImage imageNamed:@"MicOn"];
     self.micOffImage = [NSImage imageNamed:@"MicOff"];
     
-    ImageTitleView *view = [[MicMuteWidgetView alloc] initWithFrame:NSZeroRect];
+    ImageTitleView *view = [[[MicMuteWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
     view.wantsLayer = YES;
     view.layer.cornerRadius = 6.0;
     view.imageSize = NSMakeSize(36, 36);
     view.layoutOptions = ImageTitleViewLayoutOptionImage;
     
-    NSClickGestureRecognizer *tapRecognizer = [[NSClickGestureRecognizer alloc]
-                                                initWithTarget:self action:@selector(tapAction:)];
+    NSClickGestureRecognizer *tapRecognizer = [[[NSClickGestureRecognizer alloc]
+                                                initWithTarget:self action:@selector(tapAction:)] autorelease];
     tapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
     [view addGestureRecognizer:tapRecognizer];
     
@@ -57,6 +57,8 @@
 {
     [[NSNotificationCenter defaultCenter]
      removeObserver:self];
+    
+    [super dealloc];
 }
 
 - (void)viewWillAppear
