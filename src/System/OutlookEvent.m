@@ -35,7 +35,7 @@
 @implementation OutlookEvent
 
 - (NSString*) description {
-    return [NSString stringWithFormat:@"%@: %@ [%@]", self.startTime, self.title, self.categories];
+    return [NSString stringWithFormat:@"[EVENT] %@: %@ (%@)", self.startTime, self.title, [self.categories componentsJoinedByString:@"/"]];
 }
 
 - (id) initWithJson:(NSDictionary*) jsonEvent {

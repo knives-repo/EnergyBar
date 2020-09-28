@@ -48,14 +48,14 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     [self.applicationContext getCurrentAccountWithParameters:msalParameters completionBlock:^(MSALAccount * _Nullable account, MSALAccount * _Nullable previousAccount, NSError * _Nullable error) {
 
         if (error != nil) {
-            NSLog(@"[LOAD] Error: %@", error);
+            NSLog(@"[ACCOUNT] Error: %@", error);
         }
         if (account == nil) {
-            NSLog(@"[LOAD] Empty result");
+            NSLog(@"[ACCOUNT] Empty result");
         }
         
         if (error == nil && account != nil) {
-            NSLog(@"[LOAD] Success!");
+            NSLog(@"[ACCOUNT] Success!");
             self.currentAccount = account;
             self.accessToken = nil;
         }
@@ -275,7 +275,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     // filter
     NSString* filter = [NSString stringWithFormat:@"startDateTime=%@&endDateTime=%@",
                         [dateFormatter stringFromDate:start], [dateFormatter stringFromDate:end]];
-    NSLog(@"%@", filter);
+    NSLog(@"[CALENDAR] Filter = %@", filter);
 
     // done
     NSString* uri = [NSString stringWithFormat:@"https://graph.microsoft.com/%@?%@&%@&%@&%@", path, filter, select, orderBy, count];
