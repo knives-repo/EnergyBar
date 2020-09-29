@@ -297,12 +297,18 @@
         // check
         if (curr > (long) self.events.count - 1) {
             if (cycle == NO) {
+                if (showTitle) {
+                    [BezelWindow showWithMessage:@"No next event"];
+                }
                 return;
             }
             curr = 0;
         }
         if (curr == -1) {
             if (cycle == NO) {
+                if (showTitle) {
+                    [BezelWindow showWithMessage:@"No previous event"];
+                }
                 return;
             }
             curr = self.events.count - 1;
