@@ -92,8 +92,12 @@
 
 - (void)tapAction:(id)sender
 {
-    BOOL mute = ![AudioControl sharedInstanceInput].mute;
-    [AudioControl sharedInstanceInput].mute = mute;
+    // modify
+    BOOL mute = [AudioControl sharedInstanceInput].mute;
+    [AudioControl sharedInstanceInput].mute = !mute;
+    
+    // reload to make sure something happened
+    mute = [AudioControl sharedInstanceInput].mute;
     [BezelWindow showWithType:(mute ? kAudioInputMute : kAudioInputOn) andValue:-1];
 
 }
