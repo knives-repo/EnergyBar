@@ -32,6 +32,17 @@
     return (IsValid(dict) ? [dict getJsonValue:subkey] : nil);
 }
 
+- (id) getJsonValue:(NSString*) key sub1:(NSString*) subkey1 sub2:(NSString*) subkey2 {
+    NSDictionary* dict = [self objectForKey:key];
+    if (IsValid(dict)) {
+        dict = [dict objectForKey:subkey1];
+        if (IsValid(dict)) {
+            return [dict getJsonValue:subkey2];
+        }
+    }
+    return nil;
+}
+
 @end
 
 @implementation OutlookEvent
@@ -47,7 +58,12 @@
     self.uid = [jsonEvent getJsonValue:@"id"];
     self.title = [jsonEvent getJsonValue:@"subject"];
     self.webLink = [jsonEvent getJsonValue:@"webLink"];
-    
+    self.cancelled = [[jsonEvent getJsonValue:@"isCancelled"] boolValue];
+
+    // organizer
+    self.organizerName = [jsonEvent getJsonValue:@"organizer" sub1:@"emailAddress" sub2:@"name"];
+    self.organizerEmail = [jsonEvent getJsonValue:@"organizer" sub1:@"emailAddress" sub2:@"address"];
+
     // show as
     self.showAs = ShowAsUnknown;
     NSString* jsonShowAs = [jsonEvent getJsonValue:@"showAs"];
@@ -79,6 +95,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
     self.startTime = [dateFormatter dateFromString:jsonStartDate];
     self.endTime = [dateFormatter dateFromString:jsonEndDate];
+    self.allDay = [[jsonEvent getJsonValue:@"isAllDay"] boolValue];
     
     // categories
     self.categories = [jsonEvent getJsonValue:@"categories"];
@@ -308,14 +325,6 @@
     NSMutableArray* array = [NSMutableArray array];
     if (jsonArray != nil) {
         for (NSDictionary* dict in jsonArray) {
-            
-            // check some flags
-            if ([[dict valueForKey:@"isAllDay"] boolValue] == YES ||
-                [[dict valueForKey:@"isCancelled"] boolValue] == YES) {
-                continue;
-            }
-
-            // do it
             OutlookEvent* event = [[OutlookEvent alloc] initWithJson:dict];
             [array addObject:event];
         }

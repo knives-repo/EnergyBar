@@ -28,11 +28,15 @@ typedef enum {
 
 @property (retain) NSString* uid;
 @property (retain) NSString* title;
+@property (assign) BOOL allDay;
+@property (assign) BOOL cancelled;
 @property (retain) NSDate* startTime;
 @property (retain) NSDate* endTime;
 @property (assign) ShowAs showAs;
 @property (assign) Importance importance;
 @property (retain) NSArray* categories;
+@property (retain) NSString* organizerName;
+@property (retain) NSString* organizerEmail;
 @property (retain,nullable) NSString* webLink;
 @property (retain,nullable) NSString* joinUrl;
 

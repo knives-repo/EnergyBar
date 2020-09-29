@@ -130,15 +130,47 @@
         
         // load events
         [self.outlook getCalendarEvents:^(NSDictionary * jsonCalendar) {
+            
+            // record
             self.lastFetch = [NSDate date];
+            
+            // load
             NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
             NSArray* events = [OutlookEvent listFromJson:jsonEvents];
-            [self.nextEventWidget showEvents:[events sortedArrayUsingSelector:@selector(compare:)]];
+            
+            // filter
+            NSMutableArray* filtered = [NSMutableArray array];
+            for (OutlookEvent* event in events) {
+                
+                // skip cancelled
+                if (event.cancelled == YES) {
+                    continue;
+                }
+                
+                // skip all day events
+                if (event.allDay == YES) {
+                    continue;
+                }
+
+                // skip out of office we do not organize
+                if (event.showAs == ShowAsOutOfOffice) {
+                    if ([event.organizerName isEqualTo:self.outlook.currentAccount.username] == NO) {
+                        continue;
+                    }
+                }
+
+                // valid
+                [filtered addObject:event];
+                
+            }
             #if DUMP
-                for (OutlookEvent* event in events) {
+                for (OutlookEvent* event in filtered) {
                     NSLog(@"%@", event);
                 }
             #endif
+            
+            // now load
+            [self.nextEventWidget showEvents:[filtered sortedArrayUsingSelector:@selector(compare:)]];
             if (self.nextEventWidget.event != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self setActiveIndex:EVENT_INDEX];
