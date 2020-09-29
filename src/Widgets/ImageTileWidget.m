@@ -52,7 +52,7 @@
     view.layer.cornerRadius = 8.0;
     view.layer.backgroundColor = [[NSColor colorWithWhite:0.0 alpha:0.5] CGColor];
     view.imageSize = NSMakeSize(20, 20);
-    view.titleFont = [NSFont boldSystemFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeSmall]];
+    view.titleFont = [NSFont boldSystemFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeRegular-1]];
     view.titleLineBreakMode = NSLineBreakByTruncatingTail;
     view.subtitleFont = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeSmall]];
     view.subtitleLineBreakMode = NSLineBreakByTruncatingTail;

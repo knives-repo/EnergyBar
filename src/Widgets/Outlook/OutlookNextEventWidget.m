@@ -129,6 +129,7 @@
     // select event to show
     BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
     self->_event = [OutlookEvent findSoonestEvent:self.events busyOnly:busyOnly];
+    [self.delegate currentEventChanged:self.event];
     
     // and show it
     [self update];
@@ -277,7 +278,9 @@
 }
 
 - (void) onNext:(id) sender {
-    [self navigate:1 cycle:YES showTitle:NO];
+    if ([self navigate:1 cycle:YES showTitle:NO] == NO) {
+        [BezelWindow showWithMessage:@"No more events"];
+    }
 }
 
 - (BOOL) navigate:(int) direction cycle:(BOOL) cycle showTitle:(BOOL) showTitle

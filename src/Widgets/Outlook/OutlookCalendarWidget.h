@@ -8,10 +8,11 @@
 
 #import "CustomWidget.h"
 #import "OutlookEvent.h"
+#import "OutlookNextEventWidget.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OutlookCalendarWidget : CustomMultiWidget
+@interface OutlookCalendarWidget : CustomMultiWidget<OutlookEventWidgetDelegate>
 - (void)setPressTarget:(id)target action:(SEL)action;
 - (void)updateReloadingAccount:(BOOL) reloadAccount;
 @end

@@ -50,11 +50,12 @@
     // no event
     [self addWidget:[[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoEvents"
                                              customizationLabel:@"Outlook Calendar"
-                                                          title:@"No events"
-                                                            icon:[NSImage imageNamed:NSImageNameMenuOnStateTemplate]] autorelease]];
+                                                          title:@"No events for now!"
+                                                            icon:[NSImage imageNamed:@"Checkmark"]] autorelease]];
     
     // add widgets
     self.nextEventWidget = [[[OutlookNextEventWidget alloc] initWithIdentifier:@"_OutlookNextEvent"] autorelease];
+    [self.nextEventWidget setDelegate:self];
     [self addWidget:self.nextEventWidget];
     
     // init outlook
@@ -68,6 +69,17 @@
     self.action = action;
 }
 
+- (void)currentEventChanged:(nonnull OutlookEvent *)event {
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.nextEventWidget.event != nil) {
+            [self setActiveIndex:EVENT_INDEX];
+        } else {
+            [self setActiveIndex:EMPTY_INDEX];
+        }
+    });
+}
+
 - (void)tapAction:(id)sender {
     
     switch (self.activeIndex) {
@@ -79,6 +91,7 @@
             break;
             
         case EMPTY_INDEX:
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://outlook.office.com/calendar/"]];
             break;
             
         case EVENT_INDEX:
@@ -171,16 +184,7 @@
             
             // now load
             [self.nextEventWidget showEvents:[filtered sortedArrayUsingSelector:@selector(compare:)]];
-            if (self.nextEventWidget.event != nil) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self setActiveIndex:EVENT_INDEX];
-                    [self.nextEventWidget refresh];
-                });
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self setActiveIndex:EMPTY_INDEX];
-                });
-            }
+
         }];
 
     }];
@@ -195,7 +199,7 @@
     // simple: basic config change
     if (reloadAccount == NO) {
         
-        if (self.activeIndex == EVENT_INDEX) {
+        if (self.activeIndex == EVENT_INDEX || self.activeIndex == EMPTY_INDEX) {
             [self.nextEventWidget selectEvent];
         }
         
