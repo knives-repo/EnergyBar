@@ -14,6 +14,11 @@
 
 #define DUMP 1
 
+#define SIGNIN_INDEX 0
+#define LOADING_INDEX 1
+#define EMPTY_INDEX 2
+#define EVENT_INDEX 3
+
 #define FETCH_CALENDAR_EVERY_SECONDS 5*60
 
 @interface OutlookCalendarWidget()
@@ -33,10 +38,17 @@
                                                           title:@"No connection"
                                                            icon:[NSImage imageNamed:NSImageNameUserAccounts]] autorelease]];
     
+    // loading
+    [self addWidget:[[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookLoading"
+                                             customizationLabel:@"Outlook Calendar"
+                                                          title:@"Loading your calendar..."
+                                                           icon:[NSImage imageNamed:@"ActivityIndicator"]] autorelease]];
+    
     // no event
     [self addWidget:[[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoEvents"
                                              customizationLabel:@"Outlook Calendar"
-                                                          title:@"No events"] autorelease]];
+                                                          title:@"No events"
+                                                            icon:[NSImage imageNamed:NSImageNameMenuOnStateTemplate]] autorelease]];
     
     // add widgets
     self.nextEventWidget = [[[OutlookNextEventWidget alloc] initWithIdentifier:@"_OutlookNextEvent"] autorelease];
@@ -50,13 +62,16 @@
 - (void)tapAction:(id)sender {
     
     switch (self.activeIndex) {
-        case 0:
+        case SIGNIN_INDEX:
             break;
             
-        case 1:
+        case LOADING_INDEX:
             break;
             
-        case 2:
+        case EMPTY_INDEX:
+            break;
+            
+        case EVENT_INDEX:
             break;
     }
     
@@ -80,9 +95,14 @@
         // need an account
         if (self.outlook.currentAccount == nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self setActiveIndex:0];
+                [self setActiveIndex:SIGNIN_INDEX];
             });
             return;
+        }
+        
+        // while loading
+        if (self.activeIndex != EVENT_INDEX) {
+            [self setActiveIndex:LOADING_INDEX];
         }
         
         // load categories
@@ -104,11 +124,11 @@
             [self.nextEventWidget showEvents:[events sortedArrayUsingSelector:@selector(compare:)]];
             if (self.nextEventWidget.event != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self setActiveIndex:2];
+                    [self setActiveIndex:EVENT_INDEX];
                 });
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self setActiveIndex:1];
+                    [self setActiveIndex:EMPTY_INDEX];
                 });
             }
         }];
@@ -121,7 +141,7 @@
 }
 
 - (void)update {
-    if (self.activeIndex == 2) {
+    if (self.activeIndex == EVENT_INDEX) {
         [self.nextEventWidget selectEvent];
     }
 }
