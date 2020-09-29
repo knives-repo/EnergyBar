@@ -7,6 +7,7 @@
 //
 
 #import "Outlook.h"
+#import "NSDate+Utils.h"
 
 #define CALENDAR_LIST_OFFSET_START -10*60
 #define CALENDAR_LIST_OFFSET_END 24*60*60
@@ -251,7 +252,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
 
 }
 
-- (void) getCalendarEvents:(JsonCompletionBlock) completionBlock {
+- (void) getCalendarEvents:(ShowTomorrow) showTomorrow completionBlock:(JsonCompletionBlock) completionBlock {
     
     // build url
     NSString* path = @"v1.0/me/calendar/calendarView";
@@ -266,11 +267,12 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     NSDate* now = [NSDate date];
     NSDate* start = [now dateByAddingTimeInterval:CALENDAR_LIST_OFFSET_START];
     
-    // end date: midnight if before
-    NSDate* end = [now dateByAddingTimeInterval:CALENDAR_LIST_OFFSET_END];
-    if ([[NSCalendar currentCalendar] components:NSCalendarUnitHour fromDate:now].hour < CALENDAR_SHOW_TOMMOROW_HOUR_THRESHOLD) {
-        end = [[NSCalendar currentCalendar] dateBySettingHour:23 minute:59 second:59 ofDate:now options:0];
+    // end date: depends on option
+    NSDate* end = now;
+    if (showTomorrow == ShowAlways || (showTomorrow == ShowEvening && [now components].hour >= CALENDAR_SHOW_TOMMOROW_HOUR_THRESHOLD)) {
+        end = [end dateByAddingTimeInterval:24*60*60];
     }
+    end = [[NSCalendar currentCalendar] dateBySettingHour:23 minute:59 second:59 ofDate:end options:0];
     
     // filter
     NSString* filter = [NSString stringWithFormat:@"startDateTime=%@&endDateTime=%@",

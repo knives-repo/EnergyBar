@@ -14,6 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^ _Nullable voidCompletionBlock)(void);
 typedef void (^ _Nullable JsonCompletionBlock)(NSDictionary*);
 
+typedef enum {
+    ShowNever,
+    ShowAlways,
+    ShowEvening
+} ShowTomorrow;
+
 @interface Outlook : NSObject
 
 @property (retain,nullable) MSALAccount* currentAccount;
@@ -23,7 +29,7 @@ typedef void (^ _Nullable JsonCompletionBlock)(NSDictionary*);
 - (void)signOut:(voidCompletionBlock) completionBlock;
 
 //- (void)getCategories:(JsonCompletionBlock) completionBlock;
-- (void)getCalendarEvents:(JsonCompletionBlock) completionBlock;
+- (void)getCalendarEvents:(ShowTomorrow) showTomorrow completionBlock:(JsonCompletionBlock) completionBlock;
 
 + (NSDictionary*) presetColors;
 

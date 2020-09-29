@@ -548,7 +548,7 @@ static void AppControllerFSNotify(const char *path, void *data)
     [outlook signIn:^(NSDictionary* profile) {
         NSLog(@"[CONNECT] %@", profile);
         [self updateOutlookStatus];
-        [self updateOutlookWidgetReloadingAccount:YES];
+        [self updateOutlookWidgetReloadingAccount:YES reloadingEvents:YES];
     }];
 }
 
@@ -556,18 +556,23 @@ static void AppControllerFSNotify(const char *path, void *data)
 {
     [outlook signOut:^() {
         [self updateOutlookStatus];
-        [self updateOutlookWidgetReloadingAccount:YES];
+        [self updateOutlookWidgetReloadingAccount:YES reloadingEvents:YES];
     }];
 }
 
 - (IBAction)outlookWidgetSettingsChange:(id)sender
 {
-    [self updateOutlookWidgetReloadingAccount:NO];
+    [self updateOutlookWidgetReloadingAccount:NO reloadingEvents:NO];
 }
 
-- (void)updateOutlookWidgetReloadingAccount:(BOOL) reloadAccount {
+- (IBAction)outlookWidgetSettingsChangeWithReload:(id)sender
+{
+    [self updateOutlookWidgetReloadingAccount:NO reloadingEvents:YES];
+}
+
+- (void)updateOutlookWidgetReloadingAccount:(BOOL) reloadAccount reloadingEvents:(BOOL) reloadEvents {
     OutlookCalendarWidget* widget = [self.touchBarController.touchBar itemForIdentifier:@"OutlookCalendar"];
-    [widget updateReloadingAccount:reloadAccount];
+    [widget updateReloadingAccount:reloadAccount reloadingEvents:reloadEvents];
 }
 
 @end

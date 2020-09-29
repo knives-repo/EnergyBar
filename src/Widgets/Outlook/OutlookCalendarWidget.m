@@ -142,7 +142,8 @@
         //}];
         
         // load events
-        [self.outlook getCalendarEvents:^(NSDictionary * jsonCalendar) {
+        ShowTomorrow showTomorrow = (ShowTomorrow) [[NSUserDefaults standardUserDefaults] doubleForKey:@"outlookShowTomorrow"];
+        [self.outlook getCalendarEvents:showTomorrow completionBlock:^(NSDictionary * jsonCalendar) {
             
             // record
             self.lastFetch = [NSDate date];
@@ -194,21 +195,20 @@
     [self.refreshTimer invalidate];
 }
 
-- (void)updateReloadingAccount:(BOOL) reloadAccount {
+- (void)updateReloadingAccount:(BOOL) reloadAccount reloadingEvents:(BOOL) reloadEvents {
 
-    // simple: basic config change
-    if (reloadAccount == NO) {
-        
-        if (self.activeIndex == EVENT_INDEX || self.activeIndex == EMPTY_INDEX) {
-            [self.nextEventWidget selectEvent];
-        }
-        
-    } else {
-        
-        // re-fetch everything
+    // clear previous account
+    if (reloadAccount == YES) {
         self.outlook = [[[Outlook alloc] init] autorelease];
+        reloadEvents = YES;
+    }
+    
+    // reload
+    if (reloadEvents == YES) {
+        [self setActiveIndex:LOADING_INDEX];
         [self loadEvents];
-        
+    } else if (self.activeIndex == EVENT_INDEX || self.activeIndex == EMPTY_INDEX) {
+        [self.nextEventWidget selectEvent];
     }
 
 }

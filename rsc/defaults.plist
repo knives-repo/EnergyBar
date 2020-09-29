@@ -165,5 +165,9 @@
 	<true/>
 	<key>weatherShowsFahrenheit</key>
 	<false/>
+	<key>outlookBusyOnly</key>
+	<true/>
+	<key>outlookShowTomorrow</key>
+	<integer>2</integer>
 </dict>
 </plist>
