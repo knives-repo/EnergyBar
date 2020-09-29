@@ -28,7 +28,7 @@
 }
 
 - (NSDateComponents*) components {
-    int units = NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay;
+    int units = NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay;
     units = units | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     return [[NSCalendar currentCalendar] components:units fromDate:self];
 }
@@ -48,9 +48,12 @@
     NSDate* tick = [NSDate date];
     NSDateComponents* components = [tick components];
     
+    // to avoid triggering the past
+    NSInteger safety = 2;
+    
     // calc next second
     NSInteger seconds = components.second;
-    int next = (round((double)seconds / (double)frequency) + 1) * frequency;
+    int next = (round((double)(seconds+safety) / (double)frequency) + 1) * frequency;
     
     // add and done
     return [tick dateByAddingTimeInterval:next - seconds + delta];
