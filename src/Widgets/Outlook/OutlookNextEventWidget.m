@@ -144,7 +144,7 @@
         
         // basic
         NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
-        [view.timeView setStringValue:SafeStringValue(self.event.startTimeDesc)];
+        [view.timeView setStringValue:SafeStringValue(self.event.timingDesc)];
         [view.titleView setStringValue:SafeStringValue(self.event.title)];
         
         // join button

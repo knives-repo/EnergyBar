@@ -39,7 +39,10 @@ typedef enum {
 + (OutlookEvent*) findSoonestEvent:(NSArray*) events busyOnly:(BOOL) busyOnly;
 
 - (id) initWithJson:(NSDictionary*) jsonEvent;
+
 - (NSString*) startTimeDesc;
+- (NSString*) durationDesc;
+- (NSString*) timingDesc;
 - (NSString*) directJoinUrl;
 
 - (BOOL) isTeams;

@@ -119,6 +119,40 @@
     return [OutlookEvent dateDiffDescriptionBetween:[NSDate date] and:self.startTime];
 }
 
+- (NSString*) durationDesc {
+    
+    // need an end time
+    if (self.endTime == nil) {
+        return nil;
+    }
+    
+    // calc
+    NSTimeInterval duration = [self.endTime timeIntervalSinceDate:self.startTime] / 60;
+    int hours = duration / 60;
+    int minutes = duration - hours * 60;
+    if (hours == 0) {
+        return [NSString stringWithFormat:@"%d min", minutes];
+    } else {
+        if (minutes == 0) {
+            return [NSString stringWithFormat:@"%dh", hours];
+        } else {
+            return [NSString stringWithFormat:@"%dh%02d", hours, minutes];
+        }
+    }
+}
+
+- (NSString*) timingDesc {
+    
+    NSString* startDesc = [self startTimeDesc];
+    NSString* durationDesc = [self durationDesc];
+    if (durationDesc == nil) {
+        return startDesc;
+    } else {
+        return [NSString stringWithFormat:@"%@ (%@)", startDesc, durationDesc];
+    }
+    
+}
+
 - (NSTimeInterval) intervalWithNow {
     return [self.startTime timeIntervalSinceNow];
 }
