@@ -136,6 +136,11 @@ static void AppControllerFSNotify(const char *path, void *data)
     [[self.touchBarController.touchBar itemForIdentifier:@"Clock"]
         setPressTarget:self
         action:@selector(showMainWindow:)];
+
+    [[self.touchBarController.touchBar itemForIdentifier:@"OutlookCalendar"]
+        setPressTarget:self
+        action:@selector(showMainWindow:)];
+    
     [self settingsChange:nil];
 
     [NSView loadTouchBarHitTest];
@@ -205,9 +210,23 @@ static void AppControllerFSNotify(const char *path, void *data)
 
 - (void)showMainWindow:(id)sender
 {
+    // show it
     [[NSApp.windows objectAtIndex:0] makeKeyAndOrderFront:nil];
-    if (nil != sender)
+    if (nil != sender) {
         [NSApp activateIgnoringOtherApps:YES];
+    }
+
+    // fake a sender
+    NSButton* view = [[NSButton alloc] init];
+    if ([sender isKindOfClass:[NSNumber class]]) {
+        [view setTag:[sender integerValue]];
+    } else {
+        [view setTag:0];
+    }
+    
+    // switch tab
+    [self toolbarItemAction:view];
+
 }
 
 - (void)fsnotify:(const char *)path
@@ -221,6 +240,7 @@ static void AppControllerFSNotify(const char *path, void *data)
     [self weatherWidgetSettingsChange:nil];
     [self nowPlayingWidgetSettingsChange:nil];
     [self todoWidgetSettingsChange:nil];
+    [self outlookWidgetSettingsChange:nil reloadAccount:NO];
 }
 
 - (IBAction)toolbarItemAction:(id)sender
@@ -528,6 +548,7 @@ static void AppControllerFSNotify(const char *path, void *data)
     [outlook signIn:^(NSDictionary* profile) {
         NSLog(@"[CONNECT] %@", profile);
         [self updateOutlookStatus];
+        [self outlookWidgetSettingsChange:nil reloadAccount:YES];
     }];
 }
 
@@ -535,13 +556,14 @@ static void AppControllerFSNotify(const char *path, void *data)
 {
     [outlook signOut:^() {
         [self updateOutlookStatus];
+        [self outlookWidgetSettingsChange:nil reloadAccount:YES];
     }];
 }
 
-- (IBAction)outlookWidgetSettingsChange:(id)sender
+- (IBAction)outlookWidgetSettingsChange:(id)sender reloadAccount:(BOOL) reloadAccount
 {
     OutlookCalendarWidget* widget = [self.touchBarController.touchBar itemForIdentifier:@"OutlookCalendar"];
-    [widget update];
+    [widget updateReloadingAccount:YES];
 }
 
 @end

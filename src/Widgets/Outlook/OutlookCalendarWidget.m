@@ -26,6 +26,8 @@
 @property (retain) NSTimer* refreshTimer;
 @property (retain) Outlook* outlook;
 @property (retain) NSDate* lastFetch;
+@property (retain) id target;
+@property (assign) SEL action;
 @end
 
 @implementation OutlookCalendarWidget
@@ -35,7 +37,7 @@
     // no connection
     [self addWidget:[[[ImageTileWidget alloc] initWithIdentifier:@"_OutlookNoSignin"
                                              customizationLabel:@"Outlook Calendar"
-                                                          title:@"No connection"
+                                                          title:@"Tap to setup your Microsoft account"
                                                            icon:[NSImage imageNamed:NSImageNameUserAccounts]] autorelease]];
     
     // loading
@@ -59,10 +61,17 @@
         
 }
 
+- (void)setPressTarget:(id)target action:(SEL)action
+{
+    self.target = target;
+    self.action = action;
+}
+
 - (void)tapAction:(id)sender {
     
     switch (self.activeIndex) {
         case SIGNIN_INDEX:
+            [self.target performSelector:self.action withObject:[NSNumber numberWithInt:1]];
             break;
             
         case LOADING_INDEX:
@@ -140,10 +149,23 @@
     [self.refreshTimer invalidate];
 }
 
-- (void)update {
-    if (self.activeIndex == EVENT_INDEX) {
-        [self.nextEventWidget selectEvent];
+- (void)updateReloadingAccount:(BOOL) reloadAccount {
+
+    // simple: basic config change
+    if (reloadAccount == NO) {
+        
+        if (self.activeIndex == EVENT_INDEX) {
+            [self.nextEventWidget selectEvent];
+        }
+        
+    } else {
+        
+        // re-fetch everything
+        self.outlook = [[[Outlook alloc] init] autorelease];
+        [self loadEvents];
+        
     }
+
 }
 
 @end
