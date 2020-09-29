@@ -126,14 +126,8 @@
 {
     // key up
     if (modified == NO) {
-        switch (activeSegment)
-        {
-            case 0:
-                PostAuxKeyPress(NX_KEYTYPE_BRIGHTNESS_UP);
-                break;
-            case 1:
-                PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
-                break;
+        if (activeSegment == 0 || activeSegment == 1) {
+            [BezelWindow showWithMessage:@"Slide your finger over the button to adjust brightness"];
         }
     }
     

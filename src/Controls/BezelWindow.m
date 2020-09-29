@@ -10,14 +10,18 @@
 #import "LevelIndicator.h"
 #import "NSColor+Hex.h"
 
-#define WIDTH 200
-#define HEIGHT 200
 #define BOTTOM_MARGIN 140
 #define CORNER_RADIUS 18
-#define ICON_MARGIN 40
-#define INDICATOR_MARGIN 20
-#define INDICATOR_HEIGHT 8
 #define FADE_DELAY 2
+
+#define HUD_WIDTH 200
+#define HUD_HEIGHT 200
+#define HUD_ICON_MARGIN 40
+#define HUD_INDICATOR_MARGIN 20
+#define HUD_INDICATOR_HEIGHT 8
+
+#define ALERT_WIDTH 600
+#define ALERT_HEIGHT 60
 
 static BezelWindow* instance = nil;
 static NSTimer* timer = nil;
@@ -41,22 +45,21 @@ static NSTimer* timer = nil;
     }
 }
 
-+ (void) hide {
-    if (instance != nil) {
-        [timer invalidate];
-        [instance close];
-        instance = nil;
-        timer = nil;
-    }
++ (void) showWithType:(BezelType) type andValue:(float) value {
+    [BezelWindow show:[[BezelWindow alloc] initWithType:type andValue:value]];
 }
 
-+ (void) showWithType:(BezelType) type andValue:(float) value {
++ (void) showWithMessage:(NSString*) message {
+    [BezelWindow show:[[BezelWindow alloc] initWithMessage:message]];
+}
+
++ (void) show:(BezelWindow*) window {
     
     // immediatly close previous one
     [BezelWindow hide];
     
     // now show new one
-    instance = [[BezelWindow alloc] initWithType:type andValue:value];
+    instance = window;
     [instance makeKeyAndOrderFront:nil];
     
     // auto close
@@ -65,7 +68,16 @@ static NSTimer* timer = nil;
         instance = nil;
         timer = NULL;
     }];
-    
+
+}
+
++ (void) hide {
+    if (instance != nil) {
+        [timer invalidate];
+        [instance close];
+        instance = nil;
+        timer = nil;
+    }
 }
 
 - (void)fadeOut {
@@ -82,50 +94,80 @@ static NSTimer* timer = nil;
     [NSAnimationContext endGrouping];
 }
 
-- (id) initWithType:(BezelType) type andValue:(float) value {
+- (id) initWithFrame:(NSRect) frame forDarkMode:(BOOL) darkMode {
     
-    NSRect screenRect = [[NSScreen mainScreen] frame];
-    NSRect contentRect = NSMakeRect((screenRect.size.width-WIDTH)/2, BOTTOM_MARGIN, WIDTH, HEIGHT);
-    
-    self = [super initWithContentRect:contentRect
+    self = [super initWithContentRect:frame
                             styleMask:NSWindowStyleMaskBorderless
                               backing:NSBackingStoreBuffered
                                 defer:FALSE];
-    
-    [self setContentView:[self makeVisualEffectsBackingView]];
-    
-    [self setMinSize:contentRect.size];
-    [self setMaxSize:contentRect.size];
-    
+    [self setContentView:[self makeVisualEffectsBackingView:frame forDarkMode:darkMode]];
+
+    [self setMinSize:frame.size];
+    [self setMaxSize:frame.size];
+
+    [self setAppearance:
+     [NSAppearance appearanceNamed:(darkMode ? NSAppearanceNameVibrantDark : NSAppearanceNameVibrantLight)]
+     ];
+
     [self setReleasedWhenClosed:YES];
     [self setLevel:CGShieldingWindowLevel()];
     [self setIgnoresMouseEvents:YES];
-    [self setAppearance:
-     [NSAppearance appearanceNamed:([BezelWindow isDarkMode] ? NSAppearanceNameVibrantDark : NSAppearanceNameVibrantLight)]
-     ];
     [self setOpaque:NO];
     [self setBackgroundColor:[NSColor clearColor]];
-    
-    [self setType:type];
-    [self setValue:value];
-    [self addComponents];
     
     return self;
     
 }
 
-- (NSVisualEffectView*) makeVisualEffectsBackingView {
+- (id) initWithType:(BezelType) type andValue:(float) value {
+    
+    NSRect screenRect = [[NSScreen mainScreen] frame];
+    NSRect contentRect = NSMakeRect((screenRect.size.width-HUD_WIDTH)/2, BOTTOM_MARGIN, HUD_WIDTH, HUD_HEIGHT);
+
+    self = [self initWithFrame:contentRect forDarkMode:[BezelWindow isDarkMode]];
+    
+    [self setType:type];
+    [self setValue:value];
+    [self addComponents:contentRect.size];
+    
+    return self;
+    
+}
+
+- (id) initWithMessage:(NSString*) message {
+    
+    NSRect screenRect = [[NSScreen mainScreen] frame];
+    NSRect contentRect = NSMakeRect((screenRect.size.width-ALERT_WIDTH)/2, BOTTOM_MARGIN, ALERT_WIDTH, ALERT_HEIGHT);
+
+    self = [self initWithFrame:contentRect forDarkMode:YES];
+    
+    NSTextField* text = [[NSTextField alloc] initWithFrame:NSMakeRect(0, -12, ALERT_WIDTH, ALERT_HEIGHT)];
+    [text setTextColor:[NSColor whiteColor]];
+    [text setBackgroundColor:[NSColor clearColor]];
+    [text setFont:[NSFont fontWithName:@"Avenir Next" size:20]];
+    [text setAlignment:NSTextAlignmentCenter];
+    [text setStringValue:message];
+    [text setEditable:NO];
+    [text setBezeled:NO];
+
+    [self.contentView addSubview:text];
+    
+    return self;
+
+}
+
+- (NSVisualEffectView*) makeVisualEffectsBackingView:(NSRect) rect forDarkMode:(BOOL) darkMode {
     
     NSVisualEffectView* view = [[NSVisualEffectView alloc] init];
     [view setWantsLayer:YES];
     [view setBlendingMode:NSVisualEffectBlendingModeBehindWindow];
-    [view setMaterial:([BezelWindow isDarkMode] ? NSVisualEffectMaterialDark : NSVisualEffectMaterialLight)];
+    [view setMaterial:(darkMode ? NSVisualEffectMaterialDark : NSVisualEffectMaterialLight)];
     [view setState:NSVisualEffectStateActive];
-    [view setMaskImage:[self roundedRectMaskOfSize:NSMakeSize(WIDTH, HEIGHT) andCornerRadius:CORNER_RADIUS]];
+    [view setMaskImage:[self roundedRectMaskOfSize:rect.size andCornerRadius:CORNER_RADIUS forDarkMode:darkMode]];
     return view;
 }
 
-- (NSImage*) roundedRectMaskOfSize:(NSSize) size andCornerRadius:(float) cornerRadius {
+- (NSImage*) roundedRectMaskOfSize:(NSSize) size andCornerRadius:(float) cornerRadius forDarkMode:(BOOL) darkMode {
     
     NSImage* mask = [[NSImage alloc] initWithSize:size];
     [mask lockFocus];
@@ -133,7 +175,7 @@ static NSTimer* timer = nil;
     NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(0, 0, size.width, size.height)
                                                          xRadius:cornerRadius
                                                          yRadius:cornerRadius];
-    [[NSColor colorWithCalibratedWhite:([BezelWindow isDarkMode] ? 0 : 1) alpha:1.0] set];
+    [[NSColor colorWithCalibratedWhite:(darkMode ? 0 : 1) alpha:1.0] set];
     [path fill];
     
     [mask unlockFocus];
@@ -144,14 +186,15 @@ static NSTimer* timer = nil;
     
 }
 
-- (void) addComponents {
+- (void) addComponents:(NSSize) size {
     
     [self.contentView setWantsLayer:YES];
     //[self.contentView.layer setBackgroundColor:[[NSColor colorWithCalibratedWhite:0 alpha:0.15] CGColor]];
     
+    // icon
     NSImageView* iconView = [[NSImageView alloc] initWithFrame:NSMakeRect(
-        ICON_MARGIN, ICON_MARGIN + (value >= 0 ? INDICATOR_MARGIN : 0) / 2,
-        WIDTH - 2 * ICON_MARGIN, HEIGHT - 2 * ICON_MARGIN
+        HUD_ICON_MARGIN, HUD_ICON_MARGIN + (value >= 0 ? HUD_INDICATOR_MARGIN : 0) / 2,
+        size.width - 2 * HUD_ICON_MARGIN, size.height - 2 * HUD_ICON_MARGIN
     )];
     [iconView setImage:[NSImage imageNamed:[self imageName]]];
     if (@available(macOS 10.14, *)) {
@@ -162,10 +205,12 @@ static NSTimer* timer = nil;
     [iconView setImageScaling:NSImageScaleProportionallyUpOrDown];
     [self.contentView addSubview:iconView];
     
-    
-    
+    // value
     if (value >= 0) {
-        LevelIndicator* levelIndicator = [[LevelIndicator alloc] initWithFrame:NSMakeRect(INDICATOR_MARGIN, INDICATOR_MARGIN, WIDTH-2*INDICATOR_MARGIN, INDICATOR_HEIGHT)];
+        LevelIndicator* levelIndicator = [[LevelIndicator alloc] initWithFrame:NSMakeRect(
+            HUD_INDICATOR_MARGIN, HUD_INDICATOR_MARGIN,
+            size.width-2*HUD_INDICATOR_MARGIN, HUD_INDICATOR_HEIGHT
+        )];
         [levelIndicator setValue:self.value];
         [self.contentView addSubview:levelIndicator];
     }

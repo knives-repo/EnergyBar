@@ -28,6 +28,8 @@ typedef enum {
 + (BOOL) isDarkMode;
 
 + (void) showWithType:(BezelType) type andValue:(float) value;
++ (void) showWithMessage:(NSString*) message;
+
 + (void) hide;
 
 @property (assign) BezelType type;
