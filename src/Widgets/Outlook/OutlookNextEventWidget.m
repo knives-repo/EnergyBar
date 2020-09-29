@@ -315,8 +315,10 @@
         // now get info
         OutlookEvent* event = [self.events objectAtIndex:curr];
         if (event.isEnded == NO && (busyOnly == NO || event.showAs == ShowAsBusy)) {
-            //[BezelWindow showWithMessage:[NSString stringWithFormat:@"%@\n%@", event.startTimeDesc, event.title]];
-            [BezelWindow showWithMessage:event.title];
+            if (showTitle) {
+                //[BezelWindow showWithMessage:[NSString stringWithFormat:@"%@\n%@", event.startTimeDesc, event.title]];
+                [BezelWindow showWithMessage:event.title];
+            }
             self->_event = event;
             [self update];
             return;

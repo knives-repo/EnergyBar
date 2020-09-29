@@ -134,6 +134,7 @@
             if (self.nextEventWidget.event != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self setActiveIndex:EVENT_INDEX];
+                    [self.nextEventWidget refresh];
                 });
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
