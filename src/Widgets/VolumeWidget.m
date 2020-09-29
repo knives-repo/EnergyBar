@@ -21,10 +21,10 @@
 
 @interface VolumeWidget() {
     NSInteger activeSegment;
+    NSTimer* scheduleTimer;
     NSTimer* repeatTimer;
     BOOL triggered;
 }
-
 @end
 
 @implementation VolumeWidget
@@ -142,21 +142,28 @@
         PostAuxKeyPress(NX_KEYTYPE_MUTE);
         return;
     }
-    
-    // set timer
-    repeatTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        if (activeSegment == 0) {
-            PostAuxKeyPress(NX_KEYTYPE_SOUND_DOWN);
-            triggered = YES;
-        } else if (activeSegment == 1) {
-            PostAuxKeyPress(NX_KEYTYPE_SOUND_UP);
-            triggered = YES;
-        }
-    }];
-    [repeatTimer fire];
-    
+
     // hide bezel window
     [BezelWindow hide];
+
+    // process now
+    [self tick];
+
+    // do this on main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        // set timer
+        scheduleTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 repeats:NO block:^(NSTimer * _Nonnull timer) {
+            scheduleTimer = nil;
+            repeatTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+                triggered = YES;
+                [self tick];
+            }];
+            [repeatTimer fire];
+        }];
+    
+    });
+    
 }
 
 - (void)shortPressChanged:(NSGestureRecognizer *)recognizer
@@ -165,21 +172,21 @@
 
 - (void)shortPressEnded:(NSGestureRecognizer *)recognizer
 {
-    // key up
-    if (activeSegment == 0) {
-        if (triggered == NO) {
-            PostAuxKeyPress(NX_KEYTYPE_SOUND_DOWN);
-        }
-    } else if (activeSegment == 1) {
-        if (triggered == NO) {
-            PostAuxKeyPress(NX_KEYTYPE_SOUND_UP);
-        }
-    }
+    // disable timers now
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [scheduleTimer invalidate];
+        [repeatTimer invalidate];
+        scheduleTimer = nil;
+        repeatTimer = nil;
+    });
 
     // done
     activeSegment = -1;
-    [repeatTimer invalidate];
 
+}
+
+- (void)tick {
+    PostAuxKeyPress(activeSegment == 0 ? NX_KEYTYPE_SOUND_DOWN : NX_KEYTYPE_SOUND_UP);
 }
 
 @end
