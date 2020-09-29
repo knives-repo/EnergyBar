@@ -140,13 +140,15 @@ static NSTimer* timer = nil;
     NSRect screenRect = [[NSScreen mainScreen] frame];
     NSRect contentRect = NSMakeRect((screenRect.size.width-ALERT_WIDTH)/2, BOTTOM_MARGIN, ALERT_WIDTH, ALERT_HEIGHT);
 
-    self = [self initWithFrame:contentRect forDarkMode:YES];
+    BOOL darkMode = YES;
+    self = [self initWithFrame:contentRect forDarkMode:darkMode];
     
     NSTextField* text = [[NSTextField alloc] initWithFrame:NSMakeRect(ALERT_MARGIN, -12, ALERT_WIDTH-2*ALERT_MARGIN, ALERT_HEIGHT)];
-    [text setBackgroundColor:[NSColor clearColor]];
+    [text setTextColor:(darkMode ? [NSColor whiteColor] : [NSColor blackColor])];
     [text setFont:[NSFont fontWithName:@"Avenir Next" size:20]];
+    [text setBackgroundColor:[NSColor clearColor]];
     [text setAlignment:NSTextAlignmentCenter];
-    [text setTextColor:[NSColor whiteColor]];
+    [text setMaximumNumberOfLines:1];
     [text setStringValue:message];
     [text setEditable:NO];
     [text setBezeled:NO];
