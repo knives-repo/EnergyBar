@@ -277,9 +277,8 @@
     [self navigate:1 cycle:YES showTitle:NO];
 }
 
-- (void) navigate:(int) direction cycle:(BOOL) cycle showTitle:(BOOL) showTitle
+- (BOOL) navigate:(int) direction cycle:(BOOL) cycle showTitle:(BOOL) showTitle
 {
-    
     // first clear reset timer
     [self.resetTimer invalidate];
     
@@ -297,25 +296,19 @@
         // check
         if (curr > (long) self.events.count - 1) {
             if (cycle == NO) {
-                if (showTitle) {
-                    [BezelWindow showWithMessage:@"No next event"];
-                }
-                return;
+                return FALSE;
             }
             curr = 0;
         }
         if (curr == -1) {
             if (cycle == NO) {
-                if (showTitle) {
-                    [BezelWindow showWithMessage:@"No previous event"];
-                }
-                return;
+                return FALSE;
             }
             curr = self.events.count - 1;
         }
         if (curr == index) {
             // nothing found
-            return;
+            return FALSE;
         }
 
         // now get info
@@ -327,7 +320,7 @@
             }
             self->_event = event;
             [self update];
-            return;
+            return TRUE;
         }
         
         // increment
@@ -371,7 +364,16 @@
 
     // check
     if (abs(delta) > 10) {
-        [self navigate:(delta < 0 ? 1 : -1) cycle:NO showTitle:YES];
+        int direction = (delta < 0 ? 1 : -1);
+        if ([self navigate:direction cycle:NO showTitle:YES] == NO) {
+            if (self.scrolled == NO) {
+                if (direction == -1) {
+                    [BezelWindow showWithMessage:@"No previous event"];
+                } else if (direction == 1) {
+                    [BezelWindow showWithMessage:@"No next event"];
+                }
+            }
+        }
         self.startSlidePoint = point;
         self.scrolled = YES;
     }
