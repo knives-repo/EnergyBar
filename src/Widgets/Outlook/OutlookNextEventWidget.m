@@ -257,13 +257,10 @@
 
 - (void) onToggleBusy:(id) sender {
     
-    // 1st test if it really makes a difference
     BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
-    OutlookEvent* newEvent = [OutlookEvent findSoonestEvent:self.events busyOnly:!busyOnly];
-    if (busyOnly == NO || newEvent != self.event) {
-        [[NSUserDefaults standardUserDefaults] setBool:!busyOnly forKey:@"outlookBusyOnly"];
-        [self selectEvent];
-    }
+    [[NSUserDefaults standardUserDefaults] setBool:!busyOnly forKey:@"outlookBusyOnly"];
+    [self selectEvent];
+
 }
 
 - (void) onNext:(id) sender {
@@ -276,22 +273,33 @@
         [self selectEvent];
     }];
     
-    // find current and show next
-    BOOL showNext = NO;
-    for (OutlookEvent* event in self.events) {
-        if (showNext && event.isEnded == NO) {
+    // find current event
+    BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
+    NSUInteger index = [self.events indexOfObject:self.event];
+    NSUInteger curr = index + 1;
+    while (true) {
+        
+        // check
+        if (curr > self.events.count - 1) {
+            curr = 0;
+        }
+        if (curr == index) {
+            // nothing found
+            return;
+        }
+        
+        // now get info
+        OutlookEvent* event = [self.events objectAtIndex:curr];
+        if (event.isEnded == NO && (busyOnly == NO || event.showAs == Busy)) {
             self->_event = event;
             [self update];
             return;
         }
-        if (event == self.event) {
-            showNext = YES;
-        }
+        
+        // increment
+        curr++;
     }
     
-    // show 1st
-    self->_event = [self.events firstObject];
-    [self update];
 }
 
 @end
