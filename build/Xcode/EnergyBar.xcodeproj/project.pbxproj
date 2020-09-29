@@ -59,6 +59,7 @@
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
 		8D4DC4EE2522903F0042A22A /* LightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4ED2522903F0042A22A /* LightWidget.m */; };
 		8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */; };
+		8D8260072523A1CD006006EB /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8260062523A1CD006006EB /* NSDate+Utils.m */; };
 		8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245B251F6F35004FF191 /* LevelIndicator.m */; };
 		8D9D245F251F8D2B004FF191 /* NSColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */; };
 		8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D2464251FB14D004FF191 /* BacklightWidget.m */; };
@@ -198,6 +199,8 @@
 		8D4DC4ED2522903F0042A22A /* LightWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightWidget.m; sourceTree = "<group>"; };
 		8D4DC4F02522911B0042A22A /* NSSegmentedControl+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSSegmentedControl+Utils.h"; sourceTree = "<group>"; };
 		8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSSegmentedControl+Utils.m"; sourceTree = "<group>"; };
+		8D8260052523A1CD006006EB /* NSDate+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
+		8D8260062523A1CD006006EB /* NSDate+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
 		8D9D245A251F6F35004FF191 /* LevelIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelIndicator.h; sourceTree = "<group>"; };
 		8D9D245B251F6F35004FF191 /* LevelIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelIndicator.m; sourceTree = "<group>"; };
 		8D9D245D251F8D2B004FF191 /* NSColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Hex.h"; sourceTree = "<group>"; };
@@ -351,6 +354,10 @@
 				3C080A4A2139EB0D00EED01D /* FolderController.m */,
 				3C5032E22139C8E900305593 /* ImageTitleView.h */,
 				3C5032E12139C8E900305593 /* ImageTitleView.m */,
+				8D9D245D251F8D2B004FF191 /* NSColor+Hex.h */,
+				8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */,
+				8D8260052523A1CD006006EB /* NSDate+Utils.h */,
+				8D8260062523A1CD006006EB /* NSDate+Utils.m */,
 				8D4DC4F02522911B0042A22A /* NSSegmentedControl+Utils.h */,
 				8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */,
 				3C1F652622B1CCA900F795D3 /* NSView+TouchBarHitTest.h */,
@@ -360,8 +367,6 @@
 				3C6CCA36211B824000D019F4 /* TouchBarController.h */,
 				3C6CCA37211B824000D019F4 /* TouchBarController.m */,
 				3C163BC52118F1C500F015EC /* main.m */,
-				8D9D245D251F8D2B004FF191 /* NSColor+Hex.h */,
-				8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */,
 			);
 			indentWidth = 4;
 			name = Source;
@@ -647,6 +652,7 @@
 				3C38622A214989B500A8C37B /* PowerStatus.m in Sources */,
 				8D3015292522282500F0523D /* OutlookNextEventWidget.m in Sources */,
 				3C1F652122B1BF4E00F795D3 /* NSObject+MethodSwizzling.m in Sources */,
+				8D8260072523A1CD006006EB /* NSDate+Utils.m in Sources */,
 				3C8ED9F4213E3974006C11A3 /* EdgeWindowController.m in Sources */,
 				8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */,
 				3C200ECF212DFF390000B04D /* FixedSizeLabel.m in Sources */,

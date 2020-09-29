@@ -9,10 +9,11 @@
 #import "OutlookCalendarWidget.h"
 #import "OutlookNextEventWidget.h"
 #import "ImageTileWidget.h"
+#import "NSDate+Utils.h"
 #import "OutlookEvent.h"
 #import "Outlook.h"
 
-#define DUMP 1
+#define DUMP 0
 
 #define SIGNIN_INDEX 0
 #define LOADING_INDEX 1
@@ -87,14 +88,21 @@
 }
 
 - (void)viewWillAppear {
-    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:15 repeats:YES block:^(NSTimer * _Nonnull timer) {
+    
+    // we want this to be scheduled every 30 seconds
+    NSDate* fireDate = [NSDate nextTickForEverySeconds:30 withDelta:0];
+    self.refreshTimer = [[NSTimer alloc] initWithFireDate:fireDate interval:15 repeats:YES block:^(NSTimer * _Nonnull timer) {
         if (self.lastFetch == nil || fabs([self.lastFetch timeIntervalSinceNow]) > FETCH_CALENDAR_EVERY_SECONDS) {
             [self loadEvents];
         } else {
             [self.nextEventWidget refresh];
         }
     }];
-    [self loadEvents];
+    [[NSRunLoop currentRunLoop] addTimer:self.refreshTimer forMode:NSDefaultRunLoopMode];
+
+    // do it now
+    [self.refreshTimer fire];
+
 }
 
 - (void)loadEvents {

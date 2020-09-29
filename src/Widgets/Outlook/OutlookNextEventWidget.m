@@ -153,7 +153,7 @@
         [view.titleView setStringValue:SafeStringValue(self.event.title)];
         
         // join button
-        if (self.event.isCurrent == NO || self.event.joinUrl == nil) {
+        if (self.event.canBeJoined == NO || self.event.joinUrl == nil) {
             
             // hide the join button
             [view.joinButtonWidthConstraint setConstant:0];
@@ -365,7 +365,7 @@
 
     // check
     if (abs(delta) > 10) {
-        [self navigate:(delta < 0 ? -1 : 1) cycle:NO showTitle:YES];
+        [self navigate:(delta < 0 ? 1 : -1) cycle:NO showTitle:YES];
         self.startSlidePoint = point;
         self.scrolled = YES;
     }

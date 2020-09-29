@@ -7,9 +7,11 @@
 //
 
 #import "OutlookEvent.h"
+#import "NSDate+Utils.h"
 
-#define EVENT_NOW_DELTA 3*60
-#define EVENT_CURRENT_DELTA 5*60
+#define EVENT_STARTING_DELTA_MINUTES 3
+#define EVENT_NOW_DELTA EVENT_STARTING_DELTA_MINUTES*60
+#define EVENT_IN_PROGRESS_FOR 10*60
 #define EVENT_SOON_DELTA 1*60*60
 #define EVENT_CLOSE_DELTA 4*60*60
 
@@ -142,7 +144,41 @@
 }
 
 - (NSString*) startTimeDesc {
-    return [OutlookEvent dateDiffDescriptionBetween:[NSDate date] and:self.startTime];
+    
+    // now
+    if ([self isInProgress]) {
+        return @"Now";
+    }
+    
+    // needed to compare
+    NSDate* date = self.startTime;
+    NSDate* reference = [[NSDate date] dateBySettingSeconds:0];
+    NSTimeInterval interval = [date timeIntervalSinceDate:reference];
+    
+    // soon
+    if (interval > 0 && interval <= EVENT_SOON_DELTA) {
+        return [NSString stringWithFormat:@"In %@", [OutlookEvent formatDuration:interval longMinutes:YES]];
+    }
+    
+    // get components
+    NSDateComponents* nowComponents = [reference components];
+    NSDateComponents* eventComponents = [date components];;
+    
+    // need a date formatter
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    // final
+    if (eventComponents.day == nowComponents.day) {
+        return [NSString stringWithFormat:@"Today, %@", [dateFormatter stringFromDate:date]];
+    } else if (eventComponents.day == nowComponents.day + 1) {
+        return [NSString stringWithFormat:@"Tomorrow, %@", [dateFormatter stringFromDate:date]];
+    } else {
+        // default
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        return [dateFormatter stringFromDate:date];
+    }
 }
 
 - (NSString*) durationDesc {
@@ -150,14 +186,20 @@
     // need an end time
     if (self.endTime == nil) {
         return nil;
+    } else {
+        return [OutlookEvent formatDuration:[self.endTime timeIntervalSinceDate:self.startTime] longMinutes:NO];
     }
+}
+
++ (NSString*) formatDuration:(NSTimeInterval) duration longMinutes:(BOOL) longMinutes {
     
-    // calc
-    NSTimeInterval duration = [self.endTime timeIntervalSinceDate:self.startTime] / 60;
-    int hours = duration / 60;
+    duration = round(duration / 60);
+    int hours = floor(duration / 60);
     int minutes = duration - hours * 60;
     if (hours == 0) {
-        return [NSString stringWithFormat:@"%d min", minutes];
+        minutes = MAX(1, minutes);
+        NSString* suffix = longMinutes ? (minutes == 1 ? @"minute" : @"minutes") : @"min";
+        return [NSString stringWithFormat:@"%d %@", minutes, suffix];
     } else {
         if (minutes == 0) {
             return [NSString stringWithFormat:@"%dh", hours];
@@ -165,12 +207,27 @@
             return [NSString stringWithFormat:@"%dh%02d", hours, minutes];
         }
     }
+
 }
 
 - (NSString*) timingDesc {
     
+    // progress
+    if ([self isInProgress]) {
+        
+        NSString* timeLeft = [OutlookEvent formatDuration:[self.endTime timeIntervalSinceMinuteStart] longMinutes:YES];
+        if ([self isStarting]) {
+            return [NSString stringWithFormat:@"Now, %@ left", timeLeft];
+        } else {
+            return [NSString stringWithFormat:@"%@ left", timeLeft];
+        }
+    }
+    
+    // needed
     NSString* startDesc = [self startTimeDesc];
     NSString* durationDesc = [self durationDesc];
+
+    // else
     if (durationDesc == nil) {
         return startDesc;
     } else {
@@ -180,15 +237,27 @@
 }
 
 - (NSTimeInterval) intervalWithNow {
-    return [self.startTime timeIntervalSinceNow];
+    return [self.startTime timeIntervalSinceMinuteStart];
 }
 
-- (BOOL) isCurrent {
-    return [self intervalWithNow] <= EVENT_CURRENT_DELTA;
+- (BOOL) canBeJoined {
+    return [self isStarting] || [self isInProgress];
+}
+
+- (BOOL) isStarting {
+    return [self.startTime isNowWithinMinutes:EVENT_STARTING_DELTA_MINUTES];
+}
+
+- (BOOL) isStarted {
+    return [self.startTime isInPast];
 }
 
 - (BOOL) isEnded {
-    return [self.endTime timeIntervalSinceNow] < 0;
+    return [self.endTime isInPast];
+}
+
+- (BOOL) isInProgress {
+    return [self isStarted] == YES && [self isEnded] == NO;
 }
 
 - (BOOL) isTeams {
@@ -235,7 +304,6 @@
     
 }
 
-
 + (NSArray*) listFromJson:(NSArray*) jsonArray {
     NSMutableArray* array = [NSMutableArray array];
     if (jsonArray != nil) {
@@ -255,53 +323,6 @@
     return [NSArray arrayWithArray:array];
 }
 
-+ (NSString*) dateDiffDescriptionBetween:(NSDate*) reference and:(NSDate*) date {
-    
-    // needed to compare
-    NSTimeInterval interval = [date timeIntervalSinceDate:reference];
-    
-    // now
-    if (interval <= EVENT_NOW_DELTA) {
-        return @"Now";
-    }
-    
-    // soon
-    if (interval <= EVENT_SOON_DELTA) {
-        
-        int minutes = interval / 60;
-        int hours = minutes / 60;
-        minutes = minutes - hours * 60;
-        if (hours == 0) {
-            return [NSString stringWithFormat:@"In %d minutes", minutes];
-        } else if (minutes == 0) {
-            return [NSString stringWithFormat:@"In %dh", hours];
-        } else {
-            return [NSString stringWithFormat:@"In %dh%02d", hours, minutes];
-        }
-        
-    }
-    
-    // get components
-    NSDateComponents* nowComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:reference];
-    NSDateComponents* eventComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date];
-    
-    // need a date formatter
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterNoStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    
-    // final
-    if (eventComponents.day == nowComponents.day) {
-        return [NSString stringWithFormat:@"Today, %@", [dateFormatter stringFromDate:date]];
-    } else if (eventComponents.day == nowComponents.day + 1) {
-        return [NSString stringWithFormat:@"Tomorrow, %@", [dateFormatter stringFromDate:date]];
-    } else {
-        // default
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        return [dateFormatter stringFromDate:date];
-    }
-
-}
 
 + (OutlookEvent*) findSoonestEvent:(NSArray*) events busyOnly:(BOOL)busyOnly {
     
@@ -316,7 +337,7 @@
         
         // discard old events
         NSTimeInterval interval = [event intervalWithNow];
-        if (interval < -EVENT_CURRENT_DELTA) {
+        if (interval < -EVENT_IN_PROGRESS_FOR) {
             continue;
         }
         

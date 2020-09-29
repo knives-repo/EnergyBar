@@ -36,10 +36,8 @@ typedef enum {
 @property (retain,nullable) NSString* webLink;
 @property (retain,nullable) NSString* joinUrl;
 
-@property (readonly) BOOL isCurrent;
+@property (readonly) BOOL canBeJoined;
 @property (readonly) BOOL isEnded;
-
-+ (NSString*) dateDiffDescriptionBetween:(NSDate*) reference and:(NSDate*) date;
 
 + (NSArray*) listFromJson:(NSArray*) jsonArray;
 
@@ -47,8 +45,6 @@ typedef enum {
 
 - (id) initWithJson:(NSDictionary*) jsonEvent;
 
-- (NSString*) startTimeDesc;
-- (NSString*) durationDesc;
 - (NSString*) timingDesc;
 - (NSString*) directJoinUrl;
 

@@ -55,7 +55,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
         }
         
         if (error == nil && account != nil) {
-            NSLog(@"[ACCOUNT] Success!");
+            //NSLog(@"[ACCOUNT] Success!");
             self.currentAccount = account;
             self.accessToken = nil;
         }
@@ -113,7 +113,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
         }
         
         if (error == nil && result != nil) {
-            NSLog(@"[SILENT] Success!");
+            //NSLog(@"[SILENT] Success!");
             self.currentAccount = result.account;
             self.accessToken = result.accessToken;
         }
@@ -144,7 +144,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
         }
         
         if (error == nil && result != nil) {
-            NSLog(@"[INTER] Success!");
+            //NSLog(@"[INTER] Success!");
             self.currentAccount = result.account;
             self.accessToken = result.accessToken;
         }
@@ -275,7 +275,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     // filter
     NSString* filter = [NSString stringWithFormat:@"startDateTime=%@&endDateTime=%@",
                         [dateFormatter stringFromDate:start], [dateFormatter stringFromDate:end]];
-    NSLog(@"[CALENDAR] Filter = %@", filter);
+    //NSLog(@"[CALENDAR] Filter = %@", filter);
 
     // done
     NSString* uri = [NSString stringWithFormat:@"https://graph.microsoft.com/%@?%@&%@&%@&%@", path, filter, select, orderBy, count];
