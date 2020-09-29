@@ -99,6 +99,7 @@
     // reload to make sure something happened
     mute = [AudioControl sharedInstanceInput].mute;
     [BezelWindow showWithType:(mute ? kAudioInputMute : kAudioInputOn) andValue:-1];
+    [self setMicMuteImage];
 
 }
 
