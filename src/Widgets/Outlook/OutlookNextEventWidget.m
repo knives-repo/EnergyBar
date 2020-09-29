@@ -191,12 +191,15 @@
         }
         
         // show as
+        [view.showAsView.layer setBorderWidth:0];
         switch (self.event.showAs) {
             case ShowAsUnknown:
                 [view.showAsView.layer setBackgroundColor:[[NSColor grayColor] CGColor]];
                 break;
             case ShowAsFree:
-                [view.showAsView.layer setBackgroundColor:[[NSColor whiteColor] CGColor]];
+                [view.showAsView.layer setBackgroundColor:[[NSColor clearColor] CGColor]];
+                [view.showAsView.layer setBorderColor:[[NSColor whiteColor] CGColor]];
+                [view.showAsView.layer setBorderWidth:1];
                 break;
             case ShowAsTentative:
                 [view.showAsView.layer setBackgroundColor:[[NSColor colorFromHex:0x7fb2ee] CGColor]];
@@ -260,7 +263,7 @@
         }
         
         // now open it
-        NSLog(@"%@", joinUrl);
+        //NSLog(@"%@", joinUrl);
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:joinUrl]];
     }
 }
