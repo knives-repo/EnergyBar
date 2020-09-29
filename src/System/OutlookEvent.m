@@ -47,18 +47,27 @@
     self.webLink = [jsonEvent getJsonValue:@"webLink"];
     
     // show as
-    self.showAs = Unknown;
+    self.showAs = ShowAsUnknown;
     NSString* jsonShowAs = [jsonEvent getJsonValue:@"showAs"];
     if ([jsonShowAs caseInsensitiveCompare:@"free"] == NSOrderedSame) {
-        self.showAs = Free;
+        self.showAs = ShowAsFree;
     } else if ([jsonShowAs caseInsensitiveCompare:@"busy"] == NSOrderedSame) {
-        self.showAs = Busy;
+        self.showAs = ShowAsBusy;
     } else if ([jsonShowAs caseInsensitiveCompare:@"tentative"] == NSOrderedSame) {
-        self.showAs = Tentative;
+        self.showAs = ShowAsTentative;
     } else if ([jsonShowAs caseInsensitiveCompare:@"oof"] == NSOrderedSame) {
-        self.showAs = OutOfOffice;
+        self.showAs = ShowAsOutOfOffice;
     } else if ([jsonShowAs caseInsensitiveCompare:@"workingelsewhere"] == NSOrderedSame) {
-        self.showAs = Busy;
+        self.showAs = ShowAsBusy;
+    }
+    
+    // importance
+    self.importance = ImportanceNormal;
+    NSString* jsonImportance = [jsonEvent getJsonValue:@"importance"];
+    if ([jsonImportance caseInsensitiveCompare:@"low"] == NSOrderedSame) {
+        self.importance = ImportanceLow;
+    } else if ([jsonImportance caseInsensitiveCompare:@"high"] == NSOrderedSame) {
+        self.importance = ImportanceHigh;
     }
     
     // start date: 2020-09-28T01:00:00.0000000
@@ -71,6 +80,9 @@
     
     // categories
     self.categories = [jsonEvent getJsonValue:@"categories"];
+    if ([self.categories isKindOfClass:[NSArray class]] == NO) {
+        self.categories = [NSArray array];
+    }
 
     // join url basic info
     self.joinUrl = [jsonEvent getJsonValue:@"onlineMeetingUrl"];
@@ -112,6 +124,20 @@
 
     // done
     return self;
+    
+}
+
+- (void) dealloc {
+    
+    [self.uid release];
+    [self.title release];
+    [self.categories release];
+    [self.startTime release];
+    [self.endTime release];
+    [self.webLink release];
+    [self.joinUrl release];
+    
+    [super dealloc];
     
 }
 
@@ -295,7 +321,7 @@
         }
         
         // only busy
-        if (busyOnly && event.showAs != Busy) {
+        if (busyOnly && event.showAs != ShowAsBusy) {
             continue;
         }
         

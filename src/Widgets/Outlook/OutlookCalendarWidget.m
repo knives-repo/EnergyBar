@@ -125,12 +125,12 @@
             self.lastFetch = [NSDate date];
             NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
             NSArray* events = [OutlookEvent listFromJson:jsonEvents];
+            [self.nextEventWidget showEvents:[events sortedArrayUsingSelector:@selector(compare:)]];
             #if DUMP
                 for (OutlookEvent* event in events) {
                     NSLog(@"%@", event);
                 }
             #endif
-            [self.nextEventWidget showEvents:[events sortedArrayUsingSelector:@selector(compare:)]];
             if (self.nextEventWidget.event != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self setActiveIndex:EVENT_INDEX];

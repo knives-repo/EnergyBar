@@ -11,12 +11,18 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum {
-    Unknown,
-    Free,
-    Tentative,
-    Busy,
-    OutOfOffice,
+    ShowAsUnknown,
+    ShowAsFree,
+    ShowAsTentative,
+    ShowAsBusy,
+    ShowAsOutOfOffice,
 } ShowAs;
+
+typedef enum {
+    ImportanceLow,
+    ImportanceNormal,
+    ImportanceHigh,
+} Importance;
 
 @interface OutlookEvent : NSObject
 
@@ -25,7 +31,8 @@ typedef enum {
 @property (retain) NSDate* startTime;
 @property (retain) NSDate* endTime;
 @property (assign) ShowAs showAs;
-@property (assign) NSArray* categories;
+@property (assign) Importance importance;
+@property (retain) NSArray* categories;
 @property (retain,nullable) NSString* webLink;
 @property (retain,nullable) NSString* joinUrl;
 

@@ -7,6 +7,7 @@
 //
 
 #import "OutlookNextEventWidget.h"
+#import "BezelWindow.h"
 #import "NSColor+Hex.h"
 #import "Outlook.h"
 
@@ -74,6 +75,9 @@
 @property (retain) NSArray* events;
 @property (retain) NSTimer* resetTimer;
 
+@property (assign) NSPoint startSlidePoint;
+@property (assign) BOOL scrolled;
+
 @end
 
 @implementation OutlookNextEventWidget
@@ -100,9 +104,10 @@
     [view.busyWellView addGestureRecognizer:busyTapRecognizer];
     
     // busy tap well
-    NSGestureRecognizer* linkTapRecognizer = [[[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(onLink:)] autorelease];
-    linkTapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
-    [view.linkWellView addGestureRecognizer:linkTapRecognizer];
+    NSPressGestureRecognizer* textPressRecognizer = [[[NSPressGestureRecognizer alloc] initWithTarget:self action:@selector(onTextPress:)] autorelease];
+    textPressRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
+    textPressRecognizer.minimumPressDuration = 0;
+    [view.linkWellView addGestureRecognizer:textPressRecognizer];
     
     // join joins
     [view.joinButton setTarget:self];
@@ -187,19 +192,19 @@
         
         // show as
         switch (self.event.showAs) {
-            case Unknown:
+            case ShowAsUnknown:
                 [view.showAsView.layer setBackgroundColor:[[NSColor grayColor] CGColor]];
                 break;
-            case Free:
+            case ShowAsFree:
                 [view.showAsView.layer setBackgroundColor:[[NSColor whiteColor] CGColor]];
                 break;
-            case Tentative:
+            case ShowAsTentative:
                 [view.showAsView.layer setBackgroundColor:[[NSColor colorFromHex:0x7fb2ee] CGColor]];
                 break;
-            case Busy:
+            case ShowAsBusy:
                 [view.showAsView.layer setBackgroundColor:[[self colorForBusyEvent:self.event] CGColor]];
                 break;
-            case OutOfOffice:
+            case ShowAsOutOfOffice:
                 [view.showAsView.layer setBackgroundColor:[[NSColor purpleColor] CGColor]];
                 break;
         }
@@ -207,6 +212,11 @@
 }
 
 - (NSColor*) colorForBusyEvent:(OutlookEvent*) event {
+    
+    // importance
+    if (event.importance == ImportanceHigh || (event.categories != nil && [event.categories containsObject:@"Important"])) {
+        return [NSColor redColor];
+    }
     
     // default
     if (self.categories != nil && event.categories != nil && event.categories.count > 0) {
@@ -264,6 +274,11 @@
 }
 
 - (void) onNext:(id) sender {
+    [self navigate:1 cycle:YES showTitle:NO];
+}
+
+- (void) navigate:(int) direction cycle:(BOOL) cycle showTitle:(BOOL) showTitle
+{
     
     // first clear reset timer
     [self.resetTimer invalidate];
@@ -275,31 +290,90 @@
     
     // find current event
     BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
-    NSUInteger index = [self.events indexOfObject:self.event];
-    NSUInteger curr = index + 1;
+    long index = [self.events indexOfObject:self.event];
+    long curr = index + direction;
     while (true) {
         
         // check
-        if (curr > self.events.count - 1) {
+        if (curr > (long) self.events.count - 1) {
+            if (cycle == NO) {
+                return;
+            }
             curr = 0;
+        }
+        if (curr == -1) {
+            if (cycle == NO) {
+                return;
+            }
+            curr = self.events.count - 1;
         }
         if (curr == index) {
             // nothing found
             return;
         }
-        
+
         // now get info
         OutlookEvent* event = [self.events objectAtIndex:curr];
-        if (event.isEnded == NO && (busyOnly == NO || event.showAs == Busy)) {
+        if (event.isEnded == NO && (busyOnly == NO || event.showAs == ShowAsBusy)) {
+            //[BezelWindow showWithMessage:[NSString stringWithFormat:@"%@\n%@", event.startTimeDesc, event.title]];
+            [BezelWindow showWithMessage:event.title];
             self->_event = event;
             [self update];
             return;
         }
         
         // increment
-        curr++;
+        curr += direction;
     }
     
+}
+
+- (void)onTextPress:(NSGestureRecognizer *)recognizer
+{
+    switch (recognizer.state)
+    {
+    case NSGestureRecognizerStateBegan:
+        [self shortPressBegan:recognizer];
+        break;
+    case NSGestureRecognizerStateChanged:
+        [self shortPressChanged:recognizer];
+        break;
+    case NSGestureRecognizerStateEnded:
+        [self shortPressEnded:recognizer];
+        break;
+    default:
+        return;
+    }
+}
+
+- (void)shortPressBegan:(NSGestureRecognizer *)recognizer
+{
+    NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
+    NSPoint point = [recognizer locationInView:view.contentView];
+    self.startSlidePoint = point;
+    self.scrolled = NO;
+}
+
+- (void)shortPressChanged:(NSGestureRecognizer *)recognizer
+{
+    // get new point
+    NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
+    NSPoint point = [recognizer locationInView:view.contentView];
+    int delta = point.x - self.startSlidePoint.x;
+
+    // check
+    if (abs(delta) > 10) {
+        [self navigate:(delta < 0 ? -1 : 1) cycle:NO showTitle:YES];
+        self.startSlidePoint = point;
+        self.scrolled = YES;
+    }
+}
+
+- (void)shortPressEnded:(NSGestureRecognizer *)recognizer
+{
+    if (self.scrolled == NO) {
+        [self onLink:recognizer];
+    }
 }
 
 @end
