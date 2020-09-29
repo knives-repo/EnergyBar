@@ -22,6 +22,7 @@
 
 #define ALERT_WIDTH 600
 #define ALERT_HEIGHT 60
+#define ALERT_MARGIN 16
 
 static BezelWindow* instance = nil;
 static NSTimer* timer = nil;
@@ -141,11 +142,11 @@ static NSTimer* timer = nil;
 
     self = [self initWithFrame:contentRect forDarkMode:YES];
     
-    NSTextField* text = [[NSTextField alloc] initWithFrame:NSMakeRect(0, -12, ALERT_WIDTH, ALERT_HEIGHT)];
-    [text setTextColor:[NSColor whiteColor]];
+    NSTextField* text = [[NSTextField alloc] initWithFrame:NSMakeRect(ALERT_MARGIN, -12, ALERT_WIDTH-2*ALERT_MARGIN, ALERT_HEIGHT)];
     [text setBackgroundColor:[NSColor clearColor]];
     [text setFont:[NSFont fontWithName:@"Avenir Next" size:20]];
     [text setAlignment:NSTextAlignmentCenter];
+    [text setTextColor:[NSColor whiteColor]];
     [text setStringValue:message];
     [text setEditable:NO];
     [text setBezeled:NO];
