@@ -176,8 +176,10 @@
                 icon = [NSImage imageNamed:@"TeamsLogo"];
             } else if (self.event.isSkype) {
                 icon = [NSImage imageNamed:@"SkypeLogo"];
+            } else if (self.event.isGoogleMeet) {
+                icon = [NSImage imageNamed:@"GoogleMeetLogo"];
             }
-            
+
             // update
             if (icon != nil) {
                 [view.joinButton setBezelStyle:NSBezelStyleRegularSquare];

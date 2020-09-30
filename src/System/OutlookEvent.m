@@ -146,6 +146,21 @@
 
     }
     
+    // parse body for google meet
+    if (IsValidString(self.joinUrl) == NO) {
+        NSString* body = [jsonEvent getJsonValue:@"body" sub:@"content"];
+        NSRegularExpression *regex = [NSRegularExpression
+            regularExpressionWithPattern:@"https://meet.google.com/.*[^\"]*"
+            options:NSRegularExpressionCaseInsensitive
+            error:nil];
+        [regex enumerateMatchesInString:body options:0 range:NSMakeRange(0, body.length)
+                             usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
+            self.joinUrl = [[[body substringWithRange:match.range] componentsSeparatedByString:@"\""] objectAtIndex:0];
+            *stop = YES;
+        }];
+
+    }
+
     // check
     if (IsValidString(self.joinUrl) == NO) {
         [self setJoinUrl:nil];
@@ -300,6 +315,11 @@
 - (BOOL) isWebEx {
     return [self.joinUrl localizedCaseInsensitiveContainsString:@"webex.com"];
 }
+
+- (BOOL) isGoogleMeet {
+    return [self.joinUrl localizedCaseInsensitiveContainsString:@"meet.google.com"];
+}
+
 
 - (NSString*) directJoinUrl {
     

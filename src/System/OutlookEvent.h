@@ -56,6 +56,7 @@ typedef enum {
 - (BOOL) isSkype;
 - (BOOL) isTeams;
 - (BOOL) isWebEx;
+- (BOOL) isGoogleMeet;
 
 - (NSString*) description;
 
