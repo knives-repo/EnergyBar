@@ -174,6 +174,8 @@
                 icon = [NSImage imageNamed:@"WebexLogo"];
             } else if (self.event.isTeams) {
                 icon = [NSImage imageNamed:@"TeamsLogo"];
+            } else if (self.event.isSkype) {
+                icon = [NSImage imageNamed:@"SkypeLogo"];
             }
             
             // update

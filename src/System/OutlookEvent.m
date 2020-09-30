@@ -110,6 +110,9 @@
         self.categories = [NSArray array];
     }
 
+    // online provider
+    self.onlineProvider = [jsonEvent getJsonValue:@"onlineMeetingProvider"];
+
     // join url basic info
     self.joinUrl = [jsonEvent getJsonValue:@"onlineMeetingUrl"];
     if (IsValidString(self.joinUrl) == NO) {
@@ -284,8 +287,14 @@
     return [self isStarted] == YES && [self isEnded] == NO;
 }
 
+- (BOOL) isSkype {
+    return [self.onlineProvider isEqualToString:@"skypeForBusiness"];
+}
+
 - (BOOL) isTeams {
-    return [self.joinUrl localizedCaseInsensitiveContainsString:@"teams.microsoft.com"];
+    return
+        [self.onlineProvider isEqualToString:@"teamsForBusiness"] ||
+        [self.joinUrl localizedCaseInsensitiveContainsString:@"teams.microsoft.com"];
 }
 
 - (BOOL) isWebEx {

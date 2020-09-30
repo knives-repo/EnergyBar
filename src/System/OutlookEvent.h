@@ -37,6 +37,7 @@ typedef enum {
 @property (retain) NSArray* categories;
 @property (retain) NSString* organizerName;
 @property (retain) NSString* organizerEmail;
+@property (retain,nullable) NSString* onlineProvider;
 @property (retain,nullable) NSString* webLink;
 @property (retain,nullable) NSString* joinUrl;
 
@@ -52,6 +53,7 @@ typedef enum {
 - (NSString*) timingDesc;
 - (NSString*) directJoinUrl;
 
+- (BOOL) isSkype;
 - (BOOL) isTeams;
 - (BOOL) isWebEx;
 
