@@ -104,6 +104,7 @@ static NSImage *weatherImage(uint64_t conditionCode)
 
 @interface WeatherWidget () <CLLocationManagerDelegate>
 @property (retain) CLLocationManager *manager;
+@property (retain) CLLocation* location;
 @property (retain) NSTimer *timer;
 @end
 
@@ -125,6 +126,11 @@ static NSImage *weatherImage(uint64_t conditionCode)
     view.subtitleLineBreakMode = NSLineBreakByTruncatingTail;
     self.view = view;
 
+    NSClickGestureRecognizer *tapRecognizer = [[[NSClickGestureRecognizer alloc]
+                                                initWithTarget:self action:@selector(tapAction:)] autorelease];
+    tapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
+    [self.view addGestureRecognizer:tapRecognizer];
+
     [self updateWeather:nil];
 
     self.manager = [[[CLLocationManager alloc] init] autorelease];
@@ -133,6 +139,7 @@ static NSImage *weatherImage(uint64_t conditionCode)
 - (void)dealloc
 {
     self.manager = nil;
+    self.location = nil;
     self.timer = nil;
 
     [super dealloc];
@@ -193,16 +200,16 @@ static NSImage *weatherImage(uint64_t conditionCode)
     [self.manager stopUpdatingLocation];
     self.manager.delegate = nil;
 
-    CLLocation *location = [locations lastObject];
+    self.location = [[locations lastObject] copy];
     CLGeocoder *geocoder = [[[CLGeocoder alloc] init] autorelease];
     [geocoder
-        reverseGeocodeLocation:location
+        reverseGeocodeLocation:self.location
         completionHandler:^(NSArray<CLPlacemark *> *placemarks, NSError *error)
         {
             WeatherData *data = [[[WeatherData alloc] init] autorelease];
             data.placeName = [[placemarks firstObject] locality];
             [[WMWeatherStore sharedWeatherStore]
-                currentConditionsForCoordinate:location.coordinate
+                currentConditionsForCoordinate:self.location.coordinate
                 result:^(WMWeatherData *wmdata)
                 {
                     [self performBlockOnMainThread:^
@@ -276,6 +283,18 @@ static NSImage *weatherImage(uint64_t conditionCode)
 
     [self stop];
     [self start];
+}
+
+- (void) tapAction:(id) sender
+{
+    if (self.location != nil) {
+        
+        NSString* weatherUrlPrefix = @"https://weather.com/weather/today/l";
+        NSString* weatherUrlSuffix = @"&par=apple_todayosx";
+        NSString* url = [NSString stringWithFormat:@"%@/%.2f,%.2f?temp=%@%@", weatherUrlPrefix, self.location.coordinate.latitude, self.location.coordinate.longitude, 'F' == self.temperatureUnit ? @"f" : @"c", weatherUrlSuffix];
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+        
+    }
 }
 
 - (void)performBlockOnMainThread:(void (^)(void))block
