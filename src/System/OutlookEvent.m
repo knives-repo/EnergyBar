@@ -15,6 +15,12 @@
 #define EVENT_SOON_DELTA 1*60*60
 #define EVENT_CLOSE_DELTA 4*60*60
 
+#define PROVIDER_TEAMS @"teamsForBusiness"
+//#define PROVIDER_WEBEX @""
+#define PROVIDER_SKYPE @"skypeForBusiness"
+//#define PROVIDER_ZOOM @""
+//#define PROVIDER_GOOGLE @""
+
 @interface NSDictionary(Json)
 - (id) getJsonValue:(NSString*) key;
 - (id) getJsonValue:(NSString*) key sub:(NSString*) subkey;
@@ -121,24 +127,31 @@
 
     // parse body specific urls
     if (IsValidString(self.joinUrl) == NO) {
-
-        NSString* body = [jsonEvent getJsonValue:@"body" sub:@"content"];
     
         // teams
         if (IsValidString(self.joinUrl) == NO) {
-            self.joinUrl = [self extractUrlMatching:@"https://teams.microsoft.com/l/meetup-join/[^\"]*" from:body];
+            self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
+                                                withPattern:@"https://teams.microsoft.com/l/meetup-join/[^\"]*"];
         }
 
         // webex
         if (IsValidString(self.joinUrl) == NO) {
-            self.joinUrl = [self extractUrlMatching:@"https://.*\\.webex.com/.*/j.php[^\"]*" from:body];
+            self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
+                                                withPattern:@"https://.*\\.webex.com/.*/j.php[^\"]*"];
         }
         
-        // google meet
+        // zoom
         if (IsValidString(self.joinUrl) == NO) {
-            self.joinUrl = [self extractUrlMatching:@"https://meet.google.com/.*[^\"]*" from:body];
+            self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
+                                                withPattern:@"https://zoom.us/j/[^\"]*"];
         }
 
+        // run google meet last as it can embed other systems (zoom for instance)
+        if (IsValidString(self.joinUrl) == NO) {
+            self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
+                                                withPattern:@"https://meet.google.com/[^\"]*"];
+        }
+        
         // check
         if (IsValidString(self.joinUrl) == NO) {
             [self setJoinUrl:nil];
@@ -147,14 +160,39 @@
     }
     
     // debug
-    //NSLog(@"%@", self.joinUrl);
+    NSLog(@"%@", self.joinUrl);
 
     // done
     return self;
     
 }
 
-- (NSString*) extractUrlMatching:(NSString*) pattern from:(NSString*) string {
++ (NSString*) lookForOnlineUrlIn:(NSDictionary*) jsonEvent withPattern:(NSString*) pattern {
+    
+    // first check in location
+    NSString* location = [jsonEvent getJsonValue:@"location" sub:@"displayName"];
+    if (location != nil) {
+        NSString* url = [OutlookEvent extractUrlMatching:pattern from:location];
+        if (url != nil) {
+            return url;
+        }
+    }
+    
+    // look in body
+    NSString* body = [jsonEvent getJsonValue:@"body" sub:@"content"];
+    if (body != nil) {
+        NSString *url = [OutlookEvent extractUrlMatching:pattern from:body];
+        if (url != nil) {
+            return url;
+        }
+    }
+    
+    // too bad
+    return nil;
+    
+}
+
++ (NSString*) extractUrlMatching:(NSString*) pattern from:(NSString*) string {
     
     // build regex
     NSRegularExpression *regex = [NSRegularExpression
@@ -312,23 +350,32 @@
 }
 
 - (BOOL) isSkype {
-    return [self.onlineProvider isEqualToString:@"skypeForBusiness"];
+    return [self.onlineProvider isEqualToString:PROVIDER_SKYPE];
 }
 
 - (BOOL) isTeams {
     return
-        [self.onlineProvider isEqualToString:@"teamsForBusiness"] ||
+        [self.onlineProvider isEqualToString:PROVIDER_TEAMS] ||
         [self.joinUrl localizedCaseInsensitiveContainsString:@"teams.microsoft.com"];
 }
 
 - (BOOL) isWebEx {
-    return [self.joinUrl localizedCaseInsensitiveContainsString:@"webex.com"];
+    return
+        /*[self.onlineProvider isEqualToString:PROVIDER_WEBEX] ||*/
+        [self.joinUrl localizedCaseInsensitiveContainsString:@"webex.com"];
 }
 
 - (BOOL) isGoogleMeet {
-    return [self.joinUrl localizedCaseInsensitiveContainsString:@"meet.google.com"];
+    return
+        /*[self.onlineProvider isEqualToString:PROVIDER_GOOGLE] |||*/
+        [self.joinUrl localizedCaseInsensitiveContainsString:@"meet.google.com"];
 }
 
+- (BOOL) isZoom {
+    return
+        /*[self.onlineProvider isEqualToString:PROVIDER_ZOOM] |||*/
+        [self.joinUrl localizedCaseInsensitiveContainsString:@"zoom.us"];
+}
 
 - (NSString*) directJoinUrl {
     

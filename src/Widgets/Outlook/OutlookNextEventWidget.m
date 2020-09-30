@@ -178,6 +178,8 @@
                 icon = [NSImage imageNamed:@"SkypeLogo"];
             } else if (self.event.isGoogleMeet) {
                 icon = [NSImage imageNamed:@"GoogleMeetLogo"];
+            } else if (self.event.isZoom) {
+                icon = [NSImage imageNamed:@"ZoomLogo"];
             }
 
             // update

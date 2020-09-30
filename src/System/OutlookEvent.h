@@ -53,6 +53,7 @@ typedef enum {
 - (NSString*) timingDesc;
 - (NSString*) directJoinUrl;
 
+- (BOOL) isZoom;
 - (BOOL) isSkype;
 - (BOOL) isTeams;
 - (BOOL) isWebEx;
