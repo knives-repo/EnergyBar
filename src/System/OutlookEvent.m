@@ -251,7 +251,8 @@
     
     // get components
     NSDateComponents* nowComponents = [reference components];
-    NSDateComponents* eventComponents = [date components];;
+    NSDateComponents* eventComponents = [date components];
+    NSDateComponents* dayAfterComponents = [[reference dateByAddingTimeInterval:24*60*60] components];
     
     // need a date formatter
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
@@ -261,7 +262,7 @@
     // final
     if (eventComponents.day == nowComponents.day) {
         return [NSString stringWithFormat:@"Today, %@", [dateFormatter stringFromDate:date]];
-    } else if (eventComponents.day == nowComponents.day + 1) {
+    } else if (eventComponents.day == dayAfterComponents.day) {
         return [NSString stringWithFormat:@"Tomorrow, %@", [dateFormatter stringFromDate:date]];
     } else {
         // default
