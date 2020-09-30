@@ -77,6 +77,7 @@
 		8D9EA3D02523F0DE00646126 /* OutlookEventDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EA3CF2523F0DE00646126 /* OutlookEventDetails.m */; };
 		8D9EA3D52523FD9200646126 /* OutlookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EA3D42523FD9200646126 /* OutlookUtils.m */; };
 		8D9EA3D9252403F100646126 /* VolumeAllInOneWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EA3D7252403F000646126 /* VolumeAllInOneWidget.m */; };
+		8DCB91562525467900968D94 /* MediaWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB91552525467900968D94 /* MediaWidget.m */; };
 		8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */; };
 		AF95C8ADCA2ED9B5705D7BB6 /* Pods_EnergyBars_EnergyBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */; };
 /* End PBXBuildFile section */
@@ -232,6 +233,8 @@
 		8D9EA3D42523FD9200646126 /* OutlookUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookUtils.m; sourceTree = "<group>"; };
 		8D9EA3D7252403F000646126 /* VolumeAllInOneWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeAllInOneWidget.m; sourceTree = "<group>"; };
 		8D9EA3D8252403F000646126 /* VolumeAllInOneWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeAllInOneWidget.h; sourceTree = "<group>"; };
+		8DCB91542525467900968D94 /* MediaWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaWidget.h; sourceTree = "<group>"; };
+		8DCB91552525467900968D94 /* MediaWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaWidget.m; sourceTree = "<group>"; };
 		8DE31D11251EFE7E004E835B /* BrightnessWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessWidget.h; sourceTree = "<group>"; };
 		8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrigthnessWidget.m; sourceTree = "<group>"; };
 		A7C49C788382A2D1AD12F453 /* Pods-EnergyBars-EnergyBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBars-EnergyBar.release.xcconfig"; path = "Target Support Files/Pods-EnergyBars-EnergyBar/Pods-EnergyBars-EnergyBar.release.xcconfig"; sourceTree = "<group>"; };
@@ -413,6 +416,8 @@
 				8D4DC4ED2522903F0042A22A /* LightWidget.m */,
 				405B4679219A3CCA0006DC16 /* LockWidget.h */,
 				405B4678219A3CCA0006DC16 /* LockWidget.m */,
+				8DCB91542525467900968D94 /* MediaWidget.h */,
+				8DCB91552525467900968D94 /* MediaWidget.m */,
 				8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */,
 				8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */,
 				3CA1DD84212D3DB200D95DE1 /* NowPlayingWidget.h */,
@@ -673,6 +678,7 @@
 				8D9EA3D9252403F100646126 /* VolumeAllInOneWidget.m in Sources */,
 				3C1F652122B1BF4E00F795D3 /* NSObject+MethodSwizzling.m in Sources */,
 				8D8260072523A1CD006006EB /* NSDate+Utils.m in Sources */,
+				8DCB91562525467900968D94 /* MediaWidget.m in Sources */,
 				3C8ED9F4213E3974006C11A3 /* EdgeWindowController.m in Sources */,
 				8D9EA3D02523F0DE00646126 /* OutlookEventDetails.m in Sources */,
 				8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */,
