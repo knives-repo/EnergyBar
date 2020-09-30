@@ -33,14 +33,26 @@ static OSStatus SystemObjectPropertyListener(
     return kAudioHardwareNoError;
 }
 
-static OSStatus AudioDevicePropertyListener(
+static OSStatus AudioDeviceMuteListener(
     AudioObjectID device,
     UInt32 count, const AudioObjectPropertyAddress* addresses,
     void *data)
 {
     [(id)data
         performSelectorOnMainThread:@selector(audioDevicePropertyDidChange)
-        withObject:nil
+        withObject:@"mute"
+        waitUntilDone:NO];
+    return kAudioHardwareNoError;
+}
+
+static OSStatus AudioDeviceVolumeListener(
+    AudioObjectID device,
+    UInt32 count, const AudioObjectPropertyAddress* addresses,
+    void *data)
+{
+    [(id)data
+        performSelectorOnMainThread:@selector(audioDevicePropertyDidChange)
+        withObject:@"volume"
         waitUntilDone:NO];
     return kAudioHardwareNoError;
 }
@@ -223,9 +235,17 @@ static OSStatus AudioDevicePropertyListener(
             };
 
             status = AudioObjectAddPropertyListener(
-                device, &address, AudioDevicePropertyListener, self);
+                device, &address, AudioDeviceMuteListener, self);
             if (kAudioHardwareNoError != status)
                 LOG("AudioObjectAddPropertyListener = %d", status);
+
+            address.mSelector = kAudioDevicePropertyVolumeScalar;
+
+            status = AudioObjectAddPropertyListener(
+                device, &address, AudioDeviceVolumeListener, self);
+            if (kAudioHardwareNoError != status)
+                LOG("AudioObjectAddPropertyListener = %d", status);
+
         }
     }
 
@@ -245,7 +265,14 @@ static OSStatus AudioDevicePropertyListener(
         OSStatus status;
 
         status = AudioObjectRemovePropertyListener(
-            _audiodev, &address, AudioDevicePropertyListener, self);
+            _audiodev, &address, AudioDeviceMuteListener, self);
+        if (kAudioHardwareNoError != status)
+            LOG("AudioObjectRemovePropertyListener = %d", status);
+
+        address.mSelector = kAudioDevicePropertyVolumeScalar;
+        
+        status = AudioObjectRemovePropertyListener(
+            _audiodev, &address, AudioDeviceVolumeListener, self);
         if (kAudioHardwareNoError != status)
             LOG("AudioObjectRemovePropertyListener = %d", status);
     }

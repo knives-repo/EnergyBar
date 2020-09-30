@@ -60,6 +60,7 @@
         @"Backlight",
         @"Light",
         @"Volume",
+        @"VolumeAllInOne",
         @"Weather",
         @"Clock",
         @"Lock",
