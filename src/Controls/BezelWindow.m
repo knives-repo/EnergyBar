@@ -20,9 +20,10 @@
 #define HUD_INDICATOR_MARGIN 20
 #define HUD_INDICATOR_HEIGHT 8
 
-#define ALERT_WIDTH 600
-#define ALERT_HEIGHT 60
-#define ALERT_MARGIN 16
+#define ALERT_WIDTH 400
+#define ALERT_HEIGHT 26
+
+#define VIEW_MARGIN 16
 
 static BezelWindow* instance = nil;
 static NSTimer* timer = nil;
@@ -52,6 +53,10 @@ static NSTimer* timer = nil;
 
 + (void) showWithMessage:(NSString*) message {
     [BezelWindow show:[[BezelWindow alloc] initWithMessage:message]];
+}
+
++ (void) showWithView:(NSView*) view {
+    [BezelWindow show:[[BezelWindow alloc] initWithView:view]];
 }
 
 + (void) show:(BezelWindow*) window {
@@ -135,26 +140,44 @@ static NSTimer* timer = nil;
     
 }
 
-- (id) initWithMessage:(NSString*) message {
+- (id) initWithView:(NSView*) view {
+    
+    // get dimensions
+    NSRect frame = view.frame;
+    int width = frame.size.width + 2 * VIEW_MARGIN;
+    int height = frame.size.height + 2 * VIEW_MARGIN;
     
     NSRect screenRect = [[NSScreen mainScreen] frame];
-    NSRect contentRect = NSMakeRect((screenRect.size.width-ALERT_WIDTH)/2, BOTTOM_MARGIN, ALERT_WIDTH, ALERT_HEIGHT);
+    NSRect contentRect = NSMakeRect((screenRect.size.width-width)/2, BOTTOM_MARGIN, width, height);
 
     BOOL darkMode = YES;
     self = [self initWithFrame:contentRect forDarkMode:darkMode];
     
-    NSTextField* text = [[NSTextField alloc] initWithFrame:NSMakeRect(ALERT_MARGIN, -12, ALERT_WIDTH-2*ALERT_MARGIN, ALERT_HEIGHT)];
+    // center
+    frame.origin.x = VIEW_MARGIN;
+    frame.origin.y = VIEW_MARGIN;
+    [view setFrame:frame];
+    [self.contentView addSubview:view];
+    
+    return self;
+
+}
+
+- (id) initWithMessage:(NSString*) message {
+    
+    BOOL darkMode = YES;
+    NSTextField* text = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, ALERT_WIDTH, ALERT_HEIGHT)];
     [text setTextColor:(darkMode ? [NSColor whiteColor] : [NSColor blackColor])];
-    [text setFont:[NSFont fontWithName:@"Avenir Next" size:20]];
+    [text setFont:[NSFont systemFontOfSize:20]];
     [text setBackgroundColor:[NSColor clearColor]];
     [text setAlignment:NSTextAlignmentCenter];
     [text setMaximumNumberOfLines:1];
     [text setStringValue:message];
     [text setEditable:NO];
     [text setBezeled:NO];
-
-    [self.contentView addSubview:text];
     
+    self = [self initWithView:text];
+
     return self;
 
 }

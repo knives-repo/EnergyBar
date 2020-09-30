@@ -29,6 +29,7 @@ typedef enum {
 
 + (void) showWithType:(BezelType) type andValue:(float) value;
 + (void) showWithMessage:(NSString*) message;
++ (void) showWithView:(NSView*) view;
 
 + (void) hide;
 

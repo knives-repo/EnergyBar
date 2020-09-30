@@ -9,6 +9,8 @@
 #import "OutlookNextEventWidget.h"
 #import "BezelWindow.h"
 #import "NSColor+Hex.h"
+#import "OutlookEventDetails.h"
+#import "OutlookUtils.h"
 #import "Outlook.h"
 
 #define RESET_AFTER_USER_NEXT 5
@@ -45,8 +47,8 @@
     return self;
 }
 
-- (void) setup {
-    
+- (void) setup
+{
     // load nib
     NSNib *nib = [[[NSNib alloc] initWithNibNamed:@"OutlookEvents" bundle:nil] autorelease];
     [nib instantiateWithOwner:self topLevelObjects:nil];
@@ -63,7 +65,8 @@
     return NSMakeSize(280, NSViewNoIntrinsicMetric);
 }
 
-- (void) layout {
+- (void) layout
+{
     [super layout];
     [contentView setFrame:self.bounds];
 }
@@ -88,8 +91,8 @@
     [super dealloc];
 }
 
-- (void)commonInit {
-    
+- (void)commonInit
+{
     // view
     self.customizationLabel = @"Outlook Calendar";
     NextEventsWidgetView *view = [[[NextEventsWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
@@ -119,12 +122,14 @@
     
 }
 
-- (void) showEvents:(NSArray*) events {
+- (void) showEvents:(NSArray*) events
+{
     self.events = events;
     [self selectEvent];
 }
 
-- (void) selectEvent {
+- (void) selectEvent
+{
     
     // select event to show
     BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
@@ -135,7 +140,8 @@
     [self update];
 }
 
-- (void) refresh {
+- (void) refresh
+{
     if (self.resetTimer == nil || self.resetTimer.isValid == NO) {
         [self selectEvent];
     } else {
@@ -143,7 +149,8 @@
     }
 }
 
-- (void) update {
+- (void) update
+{
     
     // update
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -192,68 +199,20 @@
         }
         
         // show as
-        [view.showAsView.layer setBorderWidth:0];
-        switch (self.event.showAs) {
-            case ShowAsUnknown:
-                [view.showAsView.layer setBackgroundColor:[[NSColor grayColor] CGColor]];
-                break;
-            case ShowAsFree:
-                [view.showAsView.layer setBackgroundColor:[[NSColor clearColor] CGColor]];
-                [view.showAsView.layer setBorderColor:[[NSColor whiteColor] CGColor]];
-                [view.showAsView.layer setBorderWidth:1];
-                break;
-            case ShowAsTentative:
-                [view.showAsView.layer setBackgroundColor:[[NSColor colorFromHex:0x7fb2ee] CGColor]];
-                break;
-            case ShowAsBusy:
-                [view.showAsView.layer setBackgroundColor:[[self colorForBusyEvent:self.event] CGColor]];
-                break;
-            case ShowAsOutOfOffice:
-                [view.showAsView.layer setBackgroundColor:[[NSColor purpleColor] CGColor]];
-                break;
-        }
+        [OutlookUtils styleShowAsIndicator:view.showAsView forEvent:self.event];
+    
     });
 }
 
-- (NSColor*) colorForBusyEvent:(OutlookEvent*) event {
-    
-    // importance
-    if (event.importance == ImportanceHigh || (event.categories != nil && [event.categories containsObject:@"Important"])) {
-        return [NSColor redColor];
-    }
-    
-    // default
-    if (self.categories != nil && event.categories != nil && event.categories.count > 0) {
-
-        // 1st category
-        NSString* category = [event.categories firstObject];
-        
-        // iterate
-        for (NSDictionary* categoryDefinition in self.categories) {
-            if ([[categoryDefinition objectForKey:@"displayName"] isEqualToString:category]) {
-                NSString* color = [categoryDefinition objectForKey:@"color"];
-                NSDictionary* presetColors = [Outlook presetColors];
-                if ([[presetColors allKeys] containsObject:color]) {
-                    return [presetColors objectForKey:color];
-                }
-            }
-        }
-
-    }
-    
-    // default
-    return [NSColor colorFromHex:0x0078d4];
-
-    
-}
-
-- (void) onLink:(id) sender {
+- (void) onLink:(id) sender
+{
     if (self.event.webLink != nil) {
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.webLink]];
     }
 }
 
-- (void) onJoin:(id)sender {
+- (void) onJoin:(id)sender
+{
     if (self.event.joinUrl != nil) {
         
         // try direct first
@@ -269,7 +228,8 @@
     }
 }
 
-- (void) onToggleBusy:(id) sender {
+- (void) onToggleBusy:(id) sender
+{
     
     BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
     [[NSUserDefaults standardUserDefaults] setBool:!busyOnly forKey:@"outlookBusyOnly"];
@@ -277,13 +237,14 @@
 
 }
 
-- (void) onNext:(id) sender {
-    if ([self navigate:1 cycle:YES showTitle:NO] == NO) {
+- (void) onNext:(id) sender
+{
+    if ([self navigate:1 cycle:YES showDetail:NO] == NO) {
         [BezelWindow showWithMessage:@"No more events"];
     }
 }
 
-- (BOOL) navigate:(int) direction cycle:(BOOL) cycle showTitle:(BOOL) showTitle
+- (BOOL) navigate:(int) direction cycle:(BOOL) cycle showDetail:(BOOL) showDetail
 {
     // first clear reset timer
     [self.resetTimer invalidate];
@@ -320,9 +281,8 @@
         // now get info
         OutlookEvent* event = [self.events objectAtIndex:curr];
         if (event.isEnded == NO && (busyOnly == NO || event.showAs == ShowAsBusy)) {
-            if (showTitle) {
-                //[BezelWindow showWithMessage:[NSString stringWithFormat:@"%@\n%@", event.startTimeDesc, event.title]];
-                [BezelWindow showWithMessage:event.title];
+            if (showDetail) {
+                [self showEventDetail:event];
             }
             self->_event = event;
             [self update];
@@ -333,6 +293,19 @@
         curr += direction;
     }
     
+}
+
+- (void)showEventDetail:(OutlookEvent*) event
+{
+    OutlookEventDetails* details = [[OutlookEventDetails alloc] initWithFrame:NSMakeRect(0, 0, 400, 61) forEvent:event];
+    if (details != nil) {
+        [BezelWindow showWithView:details];
+        return;
+    }
+
+    // in case it was not loaded properly
+    [BezelWindow showWithMessage:event.title];
+
 }
 
 - (void)onTextPress:(NSGestureRecognizer *)recognizer
@@ -371,7 +344,7 @@
     // check
     if (abs(delta) > 10) {
         int direction = (delta < 0 ? 1 : -1);
-        if ([self navigate:direction cycle:NO showTitle:YES] == NO) {
+        if ([self navigate:direction cycle:NO showDetail:YES] == NO) {
             if (self.scrolled == NO) {
                 if (direction == -1) {
                     [BezelWindow showWithMessage:@"No previous event"];
