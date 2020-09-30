@@ -346,11 +346,7 @@
         int direction = (delta < 0 ? 1 : -1);
         if ([self navigate:direction cycle:NO showDetail:YES] == NO) {
             if (self.scrolled == NO) {
-                if (direction == -1) {
-                    [BezelWindow showWithMessage:@"No previous event"];
-                } else if (direction == 1) {
-                    [BezelWindow showWithMessage:@"No next event"];
-                }
+                [self notifyScrollEnd:(direction == -1) ? @"No previous event" :@"No next event"];
             }
         }
         self.startSlidePoint = point;
@@ -363,6 +359,14 @@
     if (self.scrolled == NO) {
         [self onLink:recognizer];
     }
+}
+
+- (void)notifyScrollEnd:(NSString*) message {
+    OutlookEvent* event = [[OutlookEvent alloc] init];
+    [event setTitle:message];
+    [event setImportance:ImportanceHigh];
+    [event setShowAs:ShowAsBusy];
+    [self showEventDetail:event];
 }
 
 @end

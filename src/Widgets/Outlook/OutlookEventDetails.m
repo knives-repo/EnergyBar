@@ -29,9 +29,9 @@
     //[self setFrame:self.contentView.frame];
 
     // update
-    [self.timeView setStringValue:event.timingDesc];
-    [self.titleView setStringValue:event.title];
-    [self.organizerView setStringValue:event.organizerName];
+    [self.timeView setStringValue:SafeStringValue(event.timingDesc)];
+    [self.titleView setStringValue:SafeStringValue(event.title)];
+    [self.organizerView setStringValue:SafeStringValue(event.organizerName)];
     
     [self.showAsView setWantsLayer:YES];
     [self.showAsView.layer setCornerRadius:4];

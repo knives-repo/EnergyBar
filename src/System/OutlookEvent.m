@@ -51,10 +51,17 @@
     return [NSString stringWithFormat:@"[EVENT] %@: %@ (%@)", self.startTime, self.title, [self.categories componentsJoinedByString:@"/"]];
 }
 
+- (id) init {
+    self = [super init];
+    self.showAs = ShowAsUnknown;
+    self.importance = ImportanceNormal;
+    return self;
+}
+
 - (id) initWithJson:(NSDictionary*) jsonEvent {
     
     // start with easy one
-    self = [super init];
+    self = [self init];
     self.uid = [jsonEvent getJsonValue:@"id"];
     self.title = [jsonEvent getJsonValue:@"subject"];
     self.webLink = [jsonEvent getJsonValue:@"webLink"];
