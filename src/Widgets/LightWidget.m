@@ -21,7 +21,6 @@
     int lastSlidePosition;
     BOOL modified;
 }
-
 @end
 
 @implementation LightWidget
