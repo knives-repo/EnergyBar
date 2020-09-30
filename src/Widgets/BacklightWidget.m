@@ -35,7 +35,7 @@
     
     [control setSegmentsWidth:WIDGET_STANDARD_WIDTH];
     
-    self.customizationLabel = @"Backlight";
+    self.customizationLabel = @"Keyboard Brightness";
     self.view = control;
     
 }
