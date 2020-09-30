@@ -109,6 +109,7 @@ static NSImage *weatherImage(uint64_t conditionCode)
 @end
 
 @implementation WeatherWidget
+
 - (void)commonInit
 {
     self.customizationLabel = @"Weather";
@@ -130,7 +131,7 @@ static NSImage *weatherImage(uint64_t conditionCode)
                                                 initWithTarget:self action:@selector(tapAction:)] autorelease];
     tapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
     [self.view addGestureRecognizer:tapRecognizer];
-
+    
     [self updateWeather:nil];
 
     self.manager = [[[CLLocationManager alloc] init] autorelease];
@@ -153,6 +154,10 @@ static NSImage *weatherImage(uint64_t conditionCode)
 - (void)viewDidDisappear
 {
     [self stop];
+}
+
+- (void)setEmbedded {
+    [self.view removeGestureRecognizer:[self.view.gestureRecognizers objectAtIndex:0]];
 }
 
 - (void)start
@@ -287,14 +292,10 @@ static NSImage *weatherImage(uint64_t conditionCode)
 
 - (void) tapAction:(id) sender
 {
-    if (self.location != nil) {
-        
-        NSString* weatherUrlPrefix = @"https://weather.com/weather/today/l";
-        NSString* weatherUrlSuffix = @"&par=apple_todayosx";
-        NSString* url = [NSString stringWithFormat:@"%@/%.2f,%.2f?temp=%@%@", weatherUrlPrefix, self.location.coordinate.latitude, self.location.coordinate.longitude, 'F' == self.temperatureUnit ? @"f" : @"c", weatherUrlSuffix];
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
-        
-    }
+    NSString* weatherUrlPrefix = @"https://weather.com/weather/today/l";
+    NSString* weatherUrlSuffix = @"&par=apple_todayosx";
+    NSString* url = [NSString stringWithFormat:@"%@/%.2f,%.2f?temp=%@%@", weatherUrlPrefix, self.location.coordinate.latitude, self.location.coordinate.longitude, 'F' == self.temperatureUnit ? @"f" : @"c", weatherUrlSuffix];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
 - (void)performBlockOnMainThread:(void (^)(void))block

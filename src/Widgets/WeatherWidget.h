@@ -16,5 +16,6 @@
 
 @interface WeatherWidget : CustomWidget
 - (void)resetWeather;
+- (void)setEmbedded;
 @property (atomic, assign) NSUInteger temperatureUnit;
 @end

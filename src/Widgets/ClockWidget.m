@@ -265,6 +265,7 @@
     {
         WeatherWidget *widget = [[[WeatherWidget alloc]
             initWithIdentifier:@"_Weather"] autorelease];
+        [widget setEmbedded];
         widget.temperatureUnit = _temperatureUnit;
         [self addWidget:widget];
     }
