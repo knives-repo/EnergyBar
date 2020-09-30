@@ -86,7 +86,7 @@
 - (NSImage *)volumeMuteImage
 {
     BOOL mute = [AudioControl sharedInstanceOutput].mute;
-    return [NSImage imageNamed:mute ? @"VolumeMuteOn" : @"VolumeMuteOff"];
+    return [NSImage imageNamed:mute ? @"VolumeMuteOnAccent" : @"VolumeMuteOff"];
 }
 
 - (void)audioControlNotification:(NSNotification *)notification

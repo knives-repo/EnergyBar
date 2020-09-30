@@ -43,7 +43,7 @@
     self.volumeLow = [NSImage imageNamed:@"AudioVolumeLow"];
     self.volumeMedium = [NSImage imageNamed:@"AudioVolumeMed"];
     self.volumeHigh = [NSImage imageNamed:@"AudioVolumeHigh"];
-    self.volumeMute = [NSImage imageNamed:@"VolumeMuteOnAccent"];
+    self.volumeMute = [NSImage imageNamed:@"AudioVolumeMute"];
 
     ImageTitleView *view = [[[VolumeAllInOneWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
     view.wantsLayer = YES;
