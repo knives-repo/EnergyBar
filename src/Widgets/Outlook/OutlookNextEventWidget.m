@@ -230,10 +230,13 @@
 
 - (void) onToggleBusy:(id) sender
 {
-    
-    BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
-    [[NSUserDefaults standardUserDefaults] setBool:!busyOnly forKey:@"outlookBusyOnly"];
+    // update
+    BOOL busyOnly = ![[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
+    [[NSUserDefaults standardUserDefaults] setBool:busyOnly forKey:@"outlookBusyOnly"];
     [self selectEvent];
+    
+    // nofity
+    [BezelWindow showWithMessage:busyOnly ? @"Showing accepted events only" : @"Showing all events"];
 
 }
 
