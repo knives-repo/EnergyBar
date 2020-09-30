@@ -52,11 +52,15 @@ static NSTimer* timer = nil;
 }
 
 + (void) showWithMessage:(NSString*) message {
-    [BezelWindow show:[[BezelWindow alloc] initWithMessage:message]];
+    if (message != nil) {
+        [BezelWindow show:[[BezelWindow alloc] initWithMessage:message]];
+    }
 }
 
 + (void) showWithView:(NSView*) view {
-    [BezelWindow show:[[BezelWindow alloc] initWithView:view]];
+    if (view != nil) {
+        [BezelWindow show:[[BezelWindow alloc] initWithView:view]];
+    }
 }
 
 + (void) show:(BezelWindow*) window {
