@@ -118,56 +118,65 @@
     if (IsValidString(self.joinUrl) == NO) {
         self.joinUrl = [jsonEvent getJsonValue:@"onlineMeeting" sub:@"joinUrl"];
     }
-    
-    // parse body for teams
+
+    // parse body specific urls
     if (IsValidString(self.joinUrl) == NO) {
+
         NSString* body = [jsonEvent getJsonValue:@"body" sub:@"content"];
-        NSRange rangeStart = [body rangeOfString:@"https://teams.microsoft.com/l/meetup-join/"];
-        if (rangeStart.location != NSNotFound) {
-            NSRange rangeEnd = [body rangeOfString:@"\"" options:0 range:NSMakeRange(rangeStart.location, body.length - rangeStart.location)];
-            if (rangeEnd.location != NSNotFound) {
-                self.joinUrl = [body substringWithRange:NSMakeRange(rangeStart.location, rangeEnd.location - rangeStart.location)];
-            }
+    
+        // teams
+        if (IsValidString(self.joinUrl) == NO) {
+            self.joinUrl = [self extractUrlMatching:@"https://teams.microsoft.com/l/meetup-join/[^\"]*" from:body];
         }
+
+        // webex
+        if (IsValidString(self.joinUrl) == NO) {
+            self.joinUrl = [self extractUrlMatching:@"https://.*\\.webex.com/.*/j.php[^\"]*" from:body];
+        }
+        
+        // google meet
+        if (IsValidString(self.joinUrl) == NO) {
+            self.joinUrl = [self extractUrlMatching:@"https://meet.google.com/.*[^\"]*" from:body];
+        }
+
+        // check
+        if (IsValidString(self.joinUrl) == NO) {
+            [self setJoinUrl:nil];
+        }
+        
     }
     
-    // parse body for webex
-    if (IsValidString(self.joinUrl) == NO) {
-        NSString* body = [jsonEvent getJsonValue:@"body" sub:@"content"];
-        NSRegularExpression *regex = [NSRegularExpression
-            regularExpressionWithPattern:@"https://.*\\.webex.com/.*/j.php[^\"]*"
-            options:NSRegularExpressionCaseInsensitive
-            error:nil];
-        [regex enumerateMatchesInString:body options:0 range:NSMakeRange(0, body.length)
-                             usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
-            self.joinUrl = [[[body substringWithRange:match.range] componentsSeparatedByString:@"\""] objectAtIndex:0];
-            *stop = YES;
-        }];
-
-    }
-    
-    // parse body for google meet
-    if (IsValidString(self.joinUrl) == NO) {
-        NSString* body = [jsonEvent getJsonValue:@"body" sub:@"content"];
-        NSRegularExpression *regex = [NSRegularExpression
-            regularExpressionWithPattern:@"https://meet.google.com/.*[^\"]*"
-            options:NSRegularExpressionCaseInsensitive
-            error:nil];
-        [regex enumerateMatchesInString:body options:0 range:NSMakeRange(0, body.length)
-                             usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
-            self.joinUrl = [[[body substringWithRange:match.range] componentsSeparatedByString:@"\""] objectAtIndex:0];
-            *stop = YES;
-        }];
-
-    }
-
-    // check
-    if (IsValidString(self.joinUrl) == NO) {
-        [self setJoinUrl:nil];
-    }
+    // debug
+    NSLog(@"%@", self.joinUrl);
 
     // done
     return self;
+    
+}
+
+- (NSString*) extractUrlMatching:(NSString*) pattern from:(NSString*) string {
+    
+    // build regex
+    NSRegularExpression *regex = [NSRegularExpression
+        regularExpressionWithPattern:pattern
+        options:NSRegularExpressionCaseInsensitive
+        error:nil];
+    
+    // find first
+    __block NSString* url = nil;
+    [regex enumerateMatchesInString:string
+                            options:0
+                              range:NSMakeRange(0, string.length)
+                         usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
+        
+        // regex may go beyond ending quote so make sure we just keep what is needed
+        url = [string substringWithRange:match.range];
+        url = [[url componentsSeparatedByString:@"\""] objectAtIndex:0];
+        *stop = YES;
+    }];
+    
+    // done
+    return url;
     
 }
 
