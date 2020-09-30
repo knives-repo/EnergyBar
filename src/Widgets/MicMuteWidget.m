@@ -1,7 +1,7 @@
 /**
  * @file MicMuteWidget.m
  *
- * @copyright 2018 Brian Hartvigsen
+ * @copyright 2020 Nicolas Bonamy
  */
 /*
  * This file is part of EnergyBar.

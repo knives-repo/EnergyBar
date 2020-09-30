@@ -3,7 +3,7 @@
 //  EnergyBar
 //
 //  Created by Nicolas Bonamy on 9/27/20.
-//  Copyright © 2020 Bill Zissimopoulos. All rights reserved.
+//  Copyright © 2020 Nicolas Bonamy. All rights reserved.
 //
 
 #import "ImageTileWidget.h"

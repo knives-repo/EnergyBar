@@ -1,7 +1,7 @@
 /**
  * @file BrightnessWidget.h
  *
- * @copyright 2018-2019 Bill Zissimopoulos
+ * @copyright 2020 Nicolas Bonamy
  */
 /*
  * This file is part of EnergyBar.
