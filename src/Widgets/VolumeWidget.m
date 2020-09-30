@@ -99,7 +99,7 @@
     vol = MAX(0, MIN(1,vol + delta));
     [AudioControl sharedInstanceOutput].volume = vol;
     [AudioControl sharedInstanceOutput].mute = (vol < VolumeAdjustIncrement*0.9);
-    [BezelWindow showWithType:([AudioControl sharedInstanceOutput].mute ? kAudioOutputMute : kAudioOutputVolume) andValue:vol];
+    [BezelWindow showLevelFor:([AudioControl sharedInstanceOutput].mute ? kAudioOutputMute : kAudioOutputVolume) withValue:vol];
 }
 
 - (void)mute {
@@ -107,7 +107,7 @@
     BOOL mute = ![AudioControl sharedInstanceOutput].mute;
     [AudioControl sharedInstanceOutput].mute = mute;
     double vol = mute ? 0 : [AudioControl sharedInstanceOutput].volume;
-    [BezelWindow showWithType:(mute ? kAudioOutputMute : kAudioOutputVolume) andValue:vol];
+    [BezelWindow showLevelFor:(mute ? kAudioOutputMute : kAudioOutputVolume) withValue:vol];
 
 }
 

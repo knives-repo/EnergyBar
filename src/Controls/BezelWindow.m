@@ -47,7 +47,7 @@ static NSTimer* timer = nil;
     }
 }
 
-+ (void) showWithType:(BezelType) type andValue:(float) value {
++ (void) showLevelFor:(BezelType) type withValue:(float) value {
     [BezelWindow show:[[BezelWindow alloc] initWithType:type andValue:value]];
 }
 

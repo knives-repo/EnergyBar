@@ -46,7 +46,7 @@
     double brgt = GetDisplayBrightness(0);
     brgt = MAX(0, MIN(1, brgt + delta));
     SetDisplayBrightness(0, brgt);
-    [BezelWindow showWithType:kBrightness andValue:brgt];
+    [BezelWindow showLevelFor:kBrightness withValue:brgt];
 }
 
 - (void)click:(id)sender
