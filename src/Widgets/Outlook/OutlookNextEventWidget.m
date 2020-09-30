@@ -249,7 +249,7 @@
 - (void) onNext:(id) sender
 {
     if ([self navigate:1 cycle:YES showDetail:NO] == NO) {
-        [BezelWindow showWithMessage:@"No more events"];
+        [BezelWindow showWithMessage:@"No more events. For now!"];
     }
 }
 
