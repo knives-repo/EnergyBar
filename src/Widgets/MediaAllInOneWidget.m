@@ -70,6 +70,9 @@
     self.view = self.imageTitleView;
         
     [NowPlaying sharedInstance];
+    
+    [self nowPlayingNotification:nil];
+
 }
 
 - (void)dealloc
