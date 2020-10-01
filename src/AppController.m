@@ -23,6 +23,7 @@
 #import "TouchBarController.h"
 #import "WeatherWidget.h"
 #import "VolumeWidget.h"
+#import "MediaWidget.h"
 #import "OutlookCalendarWidget.h"
 #import "Outlook.h"
 
@@ -446,6 +447,13 @@ static void AppControllerFSNotify(const char *path, void *data)
     VolumeWidget *widget = [self.touchBarController.touchBar itemForIdentifier:@"Volume"];
     widget.showsSmallWidget = [[NSUserDefaults standardUserDefaults]
         boolForKey:@"volumeShowsSmallWidget"];
+}
+
+- (IBAction)mediaWidgetSettingsChange:(id)sender
+{
+    VolumeWidget *widget = [self.touchBarController.touchBar itemForIdentifier:@"Media"];
+    widget.showsSmallWidget = [[NSUserDefaults standardUserDefaults]
+        boolForKey:@"mediaShowsSmallWidget"];
 }
 
 - (IBAction)nowPlayingWidgetSettingsChange:(id)sender

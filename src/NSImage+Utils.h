@@ -1,5 +1,5 @@
 //
-//  MediaWidget.h
+//  NSImage+Utils.h
 //  EnergyBar
 //
 //  Created by Nicolas Bonamy on 9/30/20.
@@ -7,12 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CustomWidget.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MediaWidget : CustomMultiWidget
-@property (nonatomic,assign) BOOL showsSmallWidget;
+@interface NSImage(Utils)
+
+- (NSImage *) tintedWithColor:(NSColor *)tint;
+
 @end
 
 NS_ASSUME_NONNULL_END
