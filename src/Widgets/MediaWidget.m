@@ -34,4 +34,9 @@
     [self.view invalidateIntrinsicContentSize];
 }
 
+- (void)tapAction:(id)sender
+{
+    // prevent widget switching from parent
+}
+
 @end

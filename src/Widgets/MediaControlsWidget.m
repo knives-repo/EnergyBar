@@ -19,17 +19,26 @@
 
 @interface MediaControlsWidget()
 @property (retain) NSString* currentTitle;
+@property (retain) NSImage* playImage;
+@property (retain) NSImage* pauseImage;
+@property (retain) NSImage* previousImage;
+@property (retain) NSImage* nextImage;
 @end
 
 @implementation MediaControlsWidget
 
 - (void)commonInit
 {
+    self.playImage = [[NSImage imageNamed:NSImageNameTouchBarPlayTemplate] tintedWithColor:[NSColor whiteColor]];
+    self.pauseImage = [[NSImage imageNamed:NSImageNameTouchBarPauseTemplate] tintedWithColor:[NSColor whiteColor]];
+    self.previousImage = [[NSImage imageNamed:NSImageNameTouchBarSkipBackTemplate] tintedWithColor:[NSColor whiteColor]];
+    self.nextImage = [[NSImage imageNamed:NSImageNameTouchBarSkipAheadTemplate] tintedWithColor:[NSColor whiteColor]];
+
     NSSegmentedControl *control = [NSSegmentedControl
         segmentedControlWithImages:[NSArray arrayWithObjects:
-            [NSImage imageNamed:NSImageNameTouchBarSkipBackTemplate],
+            [self previousImage],
             [self playPauseImage],
-            [NSImage imageNamed:NSImageNameTouchBarSkipAheadTemplate],
+            [self nextImage],
             nil]
         trackingMode:NSSegmentSwitchTrackingMomentary
         target:self
@@ -79,8 +88,7 @@
 - (NSImage *)playPauseImage
 {
     BOOL playing = [NowPlaying sharedInstance].playing;
-    return [NSImage imageNamed:playing ?
-        NSImageNameTouchBarPauseTemplate : NSImageNameTouchBarPlayTemplate];
+    return playing ? [self pauseImage] : [self playImage];
 }
 
 - (void)nowPlayingNotification:(NSNotification *)notification
