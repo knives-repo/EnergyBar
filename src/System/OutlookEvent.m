@@ -160,7 +160,7 @@
     }
     
     // debug
-    NSLog(@"%@", self.joinUrl);
+    //NSLog(@"%@", self.joinUrl);
 
     // done
     return self;

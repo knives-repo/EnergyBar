@@ -125,7 +125,6 @@
 {
     if (self.owner.dynamicSizing) {
         
-        NSLog(@"here");
         NSTouchBarItem* activeWidget = [self.owner.widgets objectAtIndex:self.owner.activeIndex];
         NSSize size = [activeWidget.view intrinsicContentSize];
         return NSMakeSize(size.width, NSViewNoIntrinsicMetric);
