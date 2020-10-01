@@ -17,9 +17,8 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="61"/>
-            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+        <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="500" height="61"/>
             <subviews>
                 <customView identifier="showas" translatesAutoresizingMaskIntoConstraints="NO" id="5cd-ne-BX6" userLabel="ShowAs">
                     <rect key="frame" x="4" y="0.0" width="8" height="61"/>
@@ -28,7 +27,7 @@
                     </constraints>
                 </customView>
                 <textField identifier="time" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ul8-0i-pA7" userLabel="Time">
-                    <rect key="frame" x="18" y="20" width="384" height="18"/>
+                    <rect key="frame" x="18" y="20" width="484" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="zsX-SJ-AP3"/>
                     </constraints>
@@ -39,8 +38,8 @@
                     </textFieldCell>
                 </textField>
                 <textField identifier="subject" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O3H-HU-OcX" userLabel="Title">
-                    <rect key="frame" x="18" y="42" width="384" height="19"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Subject" id="RnL-fd-y4r">
+                    <rect key="frame" x="18" y="42" width="484" height="19"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Subject" id="RnL-fd-y4r">
                         <font key="font" metaFont="systemBold" size="16"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -70,6 +69,7 @@
                 <constraint firstItem="l2v-bk-btZ" firstAttribute="leading" secondItem="5cd-ne-BX6" secondAttribute="trailing" constant="8" id="vyG-YG-8In"/>
                 <constraint firstItem="ul8-0i-pA7" firstAttribute="leading" secondItem="5cd-ne-BX6" secondAttribute="trailing" constant="8" id="wEd-cm-Hmh"/>
                 <constraint firstAttribute="trailing" secondItem="O3H-HU-OcX" secondAttribute="trailing" id="xXX-we-WV1"/>
+                <constraint firstAttribute="width" constant="500" id="zt3-R3-P5E"/>
                 <constraint firstItem="O3H-HU-OcX" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="zwN-sD-lqw"/>
             </constraints>
             <point key="canvasLocation" x="-129" y="172"/>
