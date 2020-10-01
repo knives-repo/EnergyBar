@@ -15,9 +15,22 @@
 
 #define RESET_AFTER_USER_NEXT 5
 
-@interface NextEventsWidgetView : NSView
 
-@property (assign) IBOutlet NSView *contentView;
+@interface NextEventsWidgetView : NSView
+@end
+
+@implementation NextEventsWidgetView
+
+- (NSSize)intrinsicContentSize
+{
+    return NSMakeSize(280, NSViewNoIntrinsicMetric);
+}
+
+@end
+
+@interface NextEventsWidgetController : NSViewController
+
+@property (assign) CustomWidget *widget;
 @property (assign) IBOutlet NSView *busyWellView;
 @property (assign) IBOutlet NSView *linkWellView;
 @property (assign) IBOutlet NSView *showAsView;
@@ -29,55 +42,33 @@
 
 @end
 
-@implementation NextEventsWidgetView
+@implementation NextEventsWidgetController
 
-@synthesize contentView;
-
-- (id)initWithFrame:(NSRect)frameRect
+- (void) viewDidLoad
 {
-    self = [super initWithFrame:frameRect];
-    [self setup];
-    return self;
-}
+    // layer for ourself
+    [self.view setWantsLayer:YES];
+    [self.view.layer setCornerRadius: 8.0];
+    [self.view.layer setBackgroundColor:[[NSColor colorWithWhite:0.0 alpha:0.5] CGColor]];
 
-- (id)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    [self setup];
-    return self;
-}
-
-- (void) setup
-{
-    // load nib
-    NSNib *nib = [[[NSNib alloc] initWithNibNamed:@"OutlookEvents" bundle:nil] autorelease];
-    [nib instantiateWithOwner:self topLevelObjects:nil];
-    [self addSubview:contentView];
-    
     // more setup
     [self.showAsView setWantsLayer:YES];
     [self.showAsView.layer setCornerRadius:4.0];
     
 }
 
-- (NSSize)intrinsicContentSize
+- (void) viewWillAppear
 {
-    return NSMakeSize(280, NSViewNoIntrinsicMetric);
-}
-
-- (void) layout
-{
-    [super layout];
-    [contentView setFrame:self.bounds];
+    [self.widget viewWillAppear];
 }
 
 @end
 
 @interface OutlookNextEventWidget()
 
+@property (retain) NextEventsWidgetController* controller;
 @property (retain) NSArray* events;
 @property (retain) NSTimer* resetTimer;
-
 @property (assign) NSPoint startSlidePoint;
 @property (assign) BOOL scrolled;
 
@@ -93,32 +84,36 @@
 
 - (void)commonInit
 {
-    // view
+    // label
     self.customizationLabel = @"Outlook Calendar";
-    NextEventsWidgetView *view = [[[NextEventsWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
-    view.wantsLayer = YES;
-    view.layer.cornerRadius = 8.0;
-    view.layer.backgroundColor = [[NSColor colorWithWhite:0.0 alpha:0.5] CGColor];
-    self.view = view;
     
+    // controller
+    self.controller = [[NextEventsWidgetController alloc] initWithNibName:@"OutlookEvents" bundle:nil];
+    self.controller.widget = self;
+    self.viewController = self.controller;
+    
+}
+
+- (void) viewWillAppear {
+
     // busy tap well
     NSGestureRecognizer* busyTapRecognizer = [[[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(onToggleBusy:)] autorelease];
     busyTapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
-    [view.busyWellView addGestureRecognizer:busyTapRecognizer];
+    [self.controller.busyWellView addGestureRecognizer:busyTapRecognizer];
     
     // busy tap well
     NSPressGestureRecognizer* textPressRecognizer = [[[NSPressGestureRecognizer alloc] initWithTarget:self action:@selector(onTextPress:)] autorelease];
     textPressRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
     textPressRecognizer.minimumPressDuration = 0;
-    [view.linkWellView addGestureRecognizer:textPressRecognizer];
+    [self.controller.linkWellView addGestureRecognizer:textPressRecognizer];
     
     // join joins
-    [view.joinButton setTarget:self];
-    [view.joinButton setAction:@selector(onJoin:)];
+    [self.controller.joinButton setTarget:self];
+    [self.controller.joinButton setAction:@selector(onJoin:)];
     
     // next nexts
-    [view.nextButton setTarget:self];
-    [view.nextButton setAction:@selector(onNext:)];
+    [self.controller.nextButton setTarget:self];
+    [self.controller.nextButton setAction:@selector(onNext:)];
     
 }
 
@@ -151,20 +146,19 @@
 
 - (void) update
 {
-    
     // update
     dispatch_async(dispatch_get_main_queue(), ^{
         
         // basic
-        NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
-        [view.timeView setStringValue:SafeStringValue(self.event.timingDesc)];
-        [view.titleView setStringValue:SafeStringValue(self.event.title)];
+        NextEventsWidgetController *controller = (NextEventsWidgetController*) self.viewController;
+        [controller.timeView setStringValue:SafeStringValue(self.event.timingDesc)];
+        [controller.titleView setStringValue:SafeStringValue(self.event.title)];
         
         // join button
         if (self.event.canBeJoined == NO || self.event.joinUrl == nil) {
             
             // hide the join button
-            [view.joinButtonWidthConstraint setConstant:0];
+            [controller.joinButtonWidthConstraint setConstant:0];
 
         } else {
             
@@ -184,28 +178,31 @@
 
             // update
             if (icon != nil) {
-                [view.joinButton setBezelStyle:NSBezelStyleRegularSquare];
-                [view.joinButton setTransparent:YES];
-                [view.joinButton setImage:icon];
-                [view.joinButton setImagePosition:NSImageOnly];
-                [view.joinButtonWidthConstraint setConstant:32];
+                [controller.joinButton setBezelStyle:NSBezelStyleRegularSquare];
+                [controller.joinButton setTransparent:YES];
+                [controller.joinButton setImage:icon];
+                [controller.joinButton setImagePosition:NSImageOnly];
+                [controller.joinButtonWidthConstraint setConstant:32];
             } else {
-                [view.joinButton setBezelStyle:NSBezelStyleRounded];
-                [view.joinButton setTransparent:NO];
-                [view.joinButton setImagePosition:NSNoImage];
-                [view.joinButtonWidthConstraint setConstant:40];
+                [controller.joinButton setBezelStyle:NSBezelStyleRounded];
+                [controller.joinButton setTransparent:NO];
+                [controller.joinButton setImagePosition:NSNoImage];
+                [controller.joinButtonWidthConstraint setConstant:40];
 
                 // text switches to a gray so force it to white with attibuted title
-                NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[view.joinButton attributedTitle]];
+                NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[controller.joinButton attributedTitle]];
                 [colorTitle addAttribute:NSForegroundColorAttributeName
                                    value:[NSColor whiteColor]
-                                   range:NSMakeRange(0, view.joinButton.attributedTitle.length)];
-                [view.joinButton setAttributedTitle:colorTitle];
+                                   range:NSMakeRange(0, controller.joinButton.attributedTitle.length)];
+                [controller.joinButton setAttributedTitle:colorTitle];
             }
         }
         
         // show as
-        [OutlookUtils styleShowAsIndicator:view.showAsView forEvent:self.event];
+        [OutlookUtils styleShowAsIndicator:controller.showAsView forEvent:self.event];
+        
+        // update
+        [controller.view setNeedsDisplay:YES];
     
     });
 }
@@ -330,8 +327,8 @@
 
 - (void)shortPressBegan:(NSGestureRecognizer *)recognizer
 {
-    NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
-    NSPoint point = [recognizer locationInView:view.contentView];
+    // store point and reset
+    NSPoint point = [recognizer locationInView:self.controller.view];
     self.startSlidePoint = point;
     self.scrolled = NO;
 }
@@ -339,8 +336,7 @@
 - (void)shortPressChanged:(NSGestureRecognizer *)recognizer
 {
     // get new point
-    NextEventsWidgetView *view = (NextEventsWidgetView*) self.view;
-    NSPoint point = [recognizer locationInView:view.contentView];
+    NSPoint point = [recognizer locationInView:self.controller.view];
     int delta = point.x - self.startSlidePoint.x;
 
     // check
