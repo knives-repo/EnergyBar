@@ -30,6 +30,7 @@
 
 @interface MicMuteWidget()
 @property (retain) NSRunningApplication* runningApplication;
+@property (retain) ImageTitleView *imageTileView;
 @property (assign) BOOL muteToRestore;
 @property (assign) BOOL restoreMute;
 @end
@@ -45,18 +46,18 @@
     self.micOnImage = [NSImage imageNamed:@"MicOn"];
     self.micOffImage = [NSImage imageNamed:@"MicOff"];
     
-    ImageTitleView *view = [[[MicMuteWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
-    view.wantsLayer = YES;
-    view.layer.cornerRadius = 6.0;
-    view.imageSize = NSMakeSize(36, 36);
-    view.layoutOptions = ImageTitleViewLayoutOptionImage;
+    self.imageTileView = [[[MicMuteWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
+    self.imageTileView.wantsLayer = YES;
+    self.imageTileView.layer.cornerRadius = 6.0;
+    self.imageTileView.imageSize = NSMakeSize(36, 36);
+    self.imageTileView.layoutOptions = ImageTitleViewLayoutOptionImage;
     
     NSClickGestureRecognizer *tapRecognizer = [[[NSClickGestureRecognizer alloc]
                                                 initWithTarget:self action:@selector(tapAction:)] autorelease];
     tapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
-    [view addGestureRecognizer:tapRecognizer];
+    [self.imageTileView addGestureRecognizer:tapRecognizer];
     
-    self.view = view;
+    self.view = self.imageTileView;
     
     [AudioControl sharedInstanceInput];
     [self setMicMuteImage];
@@ -111,8 +112,7 @@
     // when application mute we do not know the status
     if (self.applicationMute) {
         if ([self isTeamsRunning]) {
-            [((ImageTitleView*) self.view) setImage:self.micOnImage];
-            self.view.layer.backgroundColor = [[NSColor colorFromHex:0x0078d4] CGColor];
+            [self updateWithImage:self.micOnImage andBackgroundColor:[NSColor colorFromHex:0x0078d4]];
             return;
         }
     }
@@ -121,13 +121,17 @@
     BOOL mute = [AudioControl sharedInstanceInput].mute;
     NSImage* image = mute ? _micOffImage : _micOnImage;
     NSColor* bgColor = mute ? [NSColor redColor] : [NSColor colorFromHex:0x008000];
-    [((ImageTitleView*) self.view) setImage:image];
-    self.view.layer.backgroundColor = [bgColor CGColor];
+    [self updateWithImage:image andBackgroundColor:bgColor];
+}
+
+- (void)updateWithImage:(NSImage*) image andBackgroundColor:(NSColor*) bgColor {
+    [self.imageTileView setImage:image];
+    [self.imageTileView.layer setBackgroundColor:[bgColor CGColor]];
+    [self.imageTileView setNeedsDisplay:YES];
 }
 
 - (void)tapAction:(id)sender
 {
-    
     if (self.applicationMute) {
     
         if ([self isTeamsRunning]) {
