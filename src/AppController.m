@@ -22,6 +22,7 @@
 #import "TodoWidget.h"
 #import "TouchBarController.h"
 #import "WeatherWidget.h"
+#import "VolumeWidget.h"
 #import "OutlookCalendarWidget.h"
 #import "Outlook.h"
 
@@ -438,6 +439,13 @@ static void AppControllerFSNotify(const char *path, void *data)
     WeatherWidget *weather = [self.touchBarController.touchBar itemForIdentifier:@"Weather"];
     weather.temperatureUnit = temperatureUnit;
     [weather resetWeather];
+}
+
+- (IBAction)volumeWidgetSettingsChange:(id)sender
+{
+    VolumeWidget *widget = [self.touchBarController.touchBar itemForIdentifier:@"Volume"];
+    widget.showsSmallWidget = [[NSUserDefaults standardUserDefaults]
+        boolForKey:@"volumeShowsSmallWidget"];
 }
 
 - (IBAction)nowPlayingWidgetSettingsChange:(id)sender

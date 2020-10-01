@@ -123,14 +123,25 @@
 
 - (NSSize)intrinsicContentSize
 {
-    __block CGFloat maxwidth = NSViewNoIntrinsicMetric;
-    [self.owner.widgets enumerateObjectsUsingBlock:^(NSTouchBarItem *widget, NSUInteger idx, BOOL *stop)
-    {
-        NSSize size = [widget.view intrinsicContentSize];
-        if (maxwidth < size.width)
-            maxwidth = size.width;
-    }];
-    return NSMakeSize(maxwidth, NSViewNoIntrinsicMetric);
+    if (self.owner.dynamicSizing) {
+        
+        NSLog(@"here");
+        NSTouchBarItem* activeWidget = [self.owner.widgets objectAtIndex:self.owner.activeIndex];
+        NSSize size = [activeWidget.view intrinsicContentSize];
+        return NSMakeSize(size.width, NSViewNoIntrinsicMetric);
+        
+    } else {
+    
+        __block CGFloat maxwidth = NSViewNoIntrinsicMetric;
+        [self.owner.widgets enumerateObjectsUsingBlock:^(NSTouchBarItem *widget, NSUInteger idx, BOOL *stop)
+        {
+            NSSize size = [widget.view intrinsicContentSize];
+            if (maxwidth < size.width)
+                maxwidth = size.width;
+        }];
+        return NSMakeSize(maxwidth, NSViewNoIntrinsicMetric);
+        
+    }
 }
 @end
 

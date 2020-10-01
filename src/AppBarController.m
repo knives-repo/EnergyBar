@@ -63,7 +63,6 @@
         @"Brightness",
         @"Backlight",
         @"Light",
-        @"VolumeAllInOne",
         @"MicMute",
         @"Lock",
         NSTouchBarItemIdentifierFlexibleSpace,

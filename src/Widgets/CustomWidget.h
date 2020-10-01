@@ -27,6 +27,7 @@
 @interface CustomMultiWidget : CustomWidget
 @property (readonly, getter=widgets) NSArray<NSTouchBarItem *> *widgets;
 @property (getter=activeIndex, setter=setActiveIndex:) NSUInteger activeIndex;
+@property (assign) BOOL dynamicSizing;
 - (void)addWidget:(NSTouchBarItem *)widget;
 - (void)removeWidgetWithIdentifier:(NSString *)identifier;
 - (NSTouchBarItem *)widgetWithIdentifier:(NSString *)identifier;

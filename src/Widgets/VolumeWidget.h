@@ -1,18 +1,18 @@
-/**
- * @file VolumeWidget.h
- *
- * @copyright 2020 Nicolas Bonamy
- */
-/*
- * This file is part of EnergyBar.
- *
- * You can redistribute it and/or modify it under the terms of the GNU
- * General Public License version 3 as published by the Free Software
- * Foundation.
- */
+//
+//  VolumeWidget.h
+//  EnergyBar
+//
+//  Created by Nicolas Bonamy on 9/30/20.
+//  Copyright © 2020 Bill Zissimopoulos. All rights reserved.
+//
 
 #import <Cocoa/Cocoa.h>
 #import "CustomWidget.h"
 
-@interface VolumeWidget : CustomWidget
+NS_ASSUME_NONNULL_BEGIN
+
+@interface VolumeWidget : CustomMultiWidget
+@property (nonatomic,assign) BOOL showsSmallWidget;
 @end
+
+NS_ASSUME_NONNULL_END

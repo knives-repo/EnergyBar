@@ -54,7 +54,7 @@
 		405B467A219A3CCA0006DC16 /* LockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 405B4678219A3CCA0006DC16 /* LockWidget.m */; };
 		405B467C219A3D2D0006DC16 /* login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405B467B219A3D2D0006DC16 /* login.framework */; };
 		8D3015292522282500F0523D /* OutlookNextEventWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3015282522282500F0523D /* OutlookNextEventWidget.m */; };
-		8D33B986251E6BC0006AFCC9 /* VolumeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */; };
+		8D33B986251E6BC0006AFCC9 /* VolumeControlsWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeControlsWidget.m */; };
 		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; };
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
 		8D4DC4EE2522903F0042A22A /* LightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4ED2522903F0042A22A /* LightWidget.m */; };
@@ -78,6 +78,7 @@
 		8D9EA3D52523FD9200646126 /* OutlookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EA3D42523FD9200646126 /* OutlookUtils.m */; };
 		8D9EA3D9252403F100646126 /* VolumeAllInOneWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EA3D7252403F000646126 /* VolumeAllInOneWidget.m */; };
 		8DCB91562525467900968D94 /* MediaWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB91552525467900968D94 /* MediaWidget.m */; };
+		8DCB915D2525517400968D94 /* VolumeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB915C2525517400968D94 /* VolumeWidget.m */; };
 		8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */; };
 		AF95C8ADCA2ED9B5705D7BB6 /* Pods_EnergyBars_EnergyBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */; };
 /* End PBXBuildFile section */
@@ -193,8 +194,8 @@
 		79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnergyBars_EnergyBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D3015272522282500F0523D /* OutlookNextEventWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutlookNextEventWidget.h; sourceTree = "<group>"; };
 		8D3015282522282500F0523D /* OutlookNextEventWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookNextEventWidget.m; sourceTree = "<group>"; };
-		8D33B984251E6BC0006AFCC9 /* VolumeWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeWidget.h; sourceTree = "<group>"; };
-		8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeWidget.m; sourceTree = "<group>"; };
+		8D33B984251E6BC0006AFCC9 /* VolumeControlsWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeControlsWidget.h; sourceTree = "<group>"; };
+		8D33B985251E6BC0006AFCC9 /* VolumeControlsWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeControlsWidget.m; sourceTree = "<group>"; };
 		8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicMuteWidget.m; sourceTree = "<group>"; };
 		8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicMuteWidget.h; sourceTree = "<group>"; };
 		8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezelWindow.h; sourceTree = "<group>"; };
@@ -235,6 +236,8 @@
 		8D9EA3D8252403F000646126 /* VolumeAllInOneWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeAllInOneWidget.h; sourceTree = "<group>"; };
 		8DCB91542525467900968D94 /* MediaWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaWidget.h; sourceTree = "<group>"; };
 		8DCB91552525467900968D94 /* MediaWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaWidget.m; sourceTree = "<group>"; };
+		8DCB915B2525517400968D94 /* VolumeWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VolumeWidget.h; sourceTree = "<group>"; };
+		8DCB915C2525517400968D94 /* VolumeWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VolumeWidget.m; sourceTree = "<group>"; };
 		8DE31D11251EFE7E004E835B /* BrightnessWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessWidget.h; sourceTree = "<group>"; };
 		8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrigthnessWidget.m; sourceTree = "<group>"; };
 		A7C49C788382A2D1AD12F453 /* Pods-EnergyBars-EnergyBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBars-EnergyBar.release.xcconfig"; path = "Target Support Files/Pods-EnergyBars-EnergyBar/Pods-EnergyBars-EnergyBar.release.xcconfig"; sourceTree = "<group>"; };
@@ -424,10 +427,12 @@
 				3CA1DD85212D3DB200D95DE1 /* NowPlayingWidget.m */,
 				3C400078236CC6A3000261FF /* TodoWidget.h */,
 				3C400077236CC6A3000261FF /* TodoWidget.m */,
+				8DCB915B2525517400968D94 /* VolumeWidget.h */,
+				8DCB915C2525517400968D94 /* VolumeWidget.m */,
 				8D9EA3D8252403F000646126 /* VolumeAllInOneWidget.h */,
 				8D9EA3D7252403F000646126 /* VolumeAllInOneWidget.m */,
-				8D33B984251E6BC0006AFCC9 /* VolumeWidget.h */,
-				8D33B985251E6BC0006AFCC9 /* VolumeWidget.m */,
+				8D33B984251E6BC0006AFCC9 /* VolumeControlsWidget.h */,
+				8D33B985251E6BC0006AFCC9 /* VolumeControlsWidget.m */,
 				3C3464BD21465319001F45BB /* WeatherWidget.h */,
 				3C3464BE21465319001F45BB /* WeatherWidget.m */,
 			);
@@ -670,7 +675,7 @@
 				3C9E264A211E2A9F0042C2E8 /* Brightness.c in Sources */,
 				8D9D24882520381A004FF191 /* Outlook.m in Sources */,
 				3CDF1EB4211A3B9500739051 /* DockWidget.m in Sources */,
-				8D33B986251E6BC0006AFCC9 /* VolumeWidget.m in Sources */,
+				8D33B986251E6BC0006AFCC9 /* VolumeControlsWidget.m in Sources */,
 				8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */,
 				3C046013211D7C66003EB021 /* KeyEvent.c in Sources */,
 				3C38622A214989B500A8C37B /* PowerStatus.m in Sources */,
@@ -685,6 +690,7 @@
 				3C200ECF212DFF390000B04D /* FixedSizeLabel.m in Sources */,
 				8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */,
 				3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */,
+				8DCB915D2525517400968D94 /* VolumeWidget.m in Sources */,
 				8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */,
 				8D9D245F251F8D2B004FF191 /* NSColor+Hex.m in Sources */,
 				3C4013C2211BBC8D00C47B66 /* ActiveAppWidget.m in Sources */,
