@@ -123,6 +123,8 @@
             self.currentTitle = [NowPlaying sharedInstance].title;
             [BezelWindow showWithMessage:self.currentTitle];
         }
+    } else {
+        self.currentTitle = nil;
     }
 
 }
@@ -190,7 +192,6 @@
     } else if (positionDelta > ACTIVATION_DELTA) {
         PostAuxKeyPress(NX_KEYTYPE_NEXT);
     } else if (activated == NO) {
-        self.currentTitle = nil;
         PostAuxKeyPress(NX_KEYTYPE_PLAY);
     }
 }

@@ -95,6 +95,8 @@
             self.currentTitle = [NowPlaying sharedInstance].title;
             [BezelWindow showWithMessage:self.currentTitle];
         }
+    } else {
+        self.currentTitle = nil;
     }
 
 }
@@ -110,7 +112,6 @@
             break;
         case 1:
             // play
-            self.currentTitle = nil;
             PostAuxKeyPress(NX_KEYTYPE_PLAY);
             break;
         case 2:
