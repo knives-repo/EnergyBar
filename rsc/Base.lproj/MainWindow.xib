@@ -25,6 +25,7 @@
                 <outlet property="outlookStatusLabel" destination="Dbj-N5-Qmg" id="jvz-8I-oCx"/>
                 <outlet property="sourceLinkButton" destination="nK8-ls-cQK" id="g3a-cL-3hj"/>
                 <outlet property="toggleMacOSDockButton" destination="z4v-MZ-bcj" id="c73-ft-KUz"/>
+                <outlet property="toolBar" destination="ZQG-Zm-WHH" id="RLy-27-PAN"/>
                 <outlet property="touchBarController" destination="K6h-9q-8nk" id="7Zg-VL-ES5"/>
                 <outlet property="versionButton" destination="Kc9-lK-7Lx" id="U4x-KZ-gpp"/>
                 <outlet property="versionLabel" destination="ICM-FO-EZG" id="CZu-km-1Nj"/>
@@ -688,7 +689,7 @@ In general the folder should contain application aliases. The order of the folde
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="85" y="-750.5"/>
+            <point key="canvasLocation" x="78" y="-830"/>
         </customView>
         <customView id="th2-os-EZ4">
             <rect key="frame" x="0.0" y="0.0" width="480" height="473"/>
@@ -1017,7 +1018,7 @@ In general the folder should contain application aliases. The order of the folde
                     </connections>
                 </popUpButton>
             </subviews>
-            <point key="canvasLocation" x="85" y="-345.5"/>
+            <point key="canvasLocation" x="78" y="-314"/>
         </customView>
         <customView id="oZG-ix-yVe">
             <rect key="frame" x="0.0" y="0.0" width="480" height="380"/>
@@ -1152,7 +1153,7 @@ Click to acknowledge.</string>
                     </connections>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="85" y="-156"/>
+            <point key="canvasLocation" x="600" y="-868"/>
         </customView>
     </objects>
     <resources>

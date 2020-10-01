@@ -32,6 +32,7 @@ static const NSTimeInterval IgnoresAccidentalTouchesDuration = 0.3;
 @interface AppController () <NSApplicationDelegate, NSWindowDelegate>
 - (void)fsnotify:(const char *)path;
 @property (retain) NSString *standardDefaultAppsFolder;
+@property (assign) IBOutlet NSToolbar *toolBar;
 @property (assign) IBOutlet TouchBarController *touchBarController;
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSView *generalView;
@@ -247,6 +248,15 @@ static void AppControllerFSNotify(const char *path, void *data)
 
 - (IBAction)toolbarItemAction:(id)sender
 {
+    // select toolbar item
+    NSArray* toolbarIdentifiers = @[
+        @"General",
+        @"Widgets",
+        @"Advanced"
+    ];
+    [self.toolBar setSelectedItemIdentifier:[toolbarIdentifiers objectAtIndex:[sender tag]]];
+    
+    // set tab
     switch ([sender tag])
     {
     case 0:
