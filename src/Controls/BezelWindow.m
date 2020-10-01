@@ -20,7 +20,7 @@
 #define HUD_INDICATOR_MARGIN 20
 #define HUD_INDICATOR_HEIGHT 8
 
-#define ALERT_WIDTH 400
+#define ALERT_WIDTH 500
 #define ALERT_HEIGHT 26
 
 #define VIEW_MARGIN 16
@@ -172,7 +172,7 @@ static NSTimer* timer = nil;
     BOOL darkMode = YES;
     NSTextField* text = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, ALERT_WIDTH, ALERT_HEIGHT)];
     [text setTextColor:(darkMode ? [NSColor whiteColor] : [NSColor blackColor])];
-    [text setFont:[NSFont systemFontOfSize:20]];
+    [text setFont:[NSFont fontWithName:@"Helvetica" size:20]];
     [text setBackgroundColor:[NSColor clearColor]];
     [text setAlignment:NSTextAlignmentCenter];
     [text setMaximumNumberOfLines:1];
