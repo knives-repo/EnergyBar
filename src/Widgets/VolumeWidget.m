@@ -23,6 +23,11 @@
 
 }
 
+- (void)viewWillAppear {
+    BOOL showsSmallWidget = [[NSUserDefaults standardUserDefaults] boolForKey:@"volumeShowsSmallWidget"];
+    [self setShowsSmallWidget:showsSmallWidget];
+}
+
 - (void)setShowsSmallWidget:(BOOL)value
 {
     [self setActiveIndex:value ? 1 : 0];
