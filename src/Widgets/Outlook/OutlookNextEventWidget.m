@@ -9,7 +9,7 @@
 #import "OutlookNextEventWidget.h"
 #import "BezelWindow.h"
 #import "NSColor+Hex.h"
-#import "OutlookEventDetails.h"
+#import "OutlookEventDetailsController.h"
 #import "OutlookUtils.h"
 #import "Outlook.h"
 
@@ -306,15 +306,8 @@
 
 - (void)showEventDetail:(OutlookEvent*) event
 {
-    OutlookEventDetails* details = [[OutlookEventDetails alloc] initWithFrame:NSMakeRect(0, 0, 400, 61) forEvent:event];
-    if (details != nil) {
-        [BezelWindow showWithView:details];
-        return;
-    }
-
-    // in case it was not loaded properly
-    [BezelWindow showWithMessage:event.title];
-
+    OutlookEventDetailsController* controller = [[OutlookEventDetailsController alloc] initWithEvent:event];
+    [BezelWindow showWithView:controller.view];
 }
 
 - (void)onTextPress:(NSGestureRecognizer *)recognizer

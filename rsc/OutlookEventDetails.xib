@@ -6,13 +6,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="OutlookEventDetails">
+        <customObject id="-2" userLabel="File's Owner" customClass="OutlookEventDetailsController">
             <connections>
-                <outlet property="contentView" destination="c22-O7-iKe" id="HLd-oL-JuT"/>
-                <outlet property="organizerView" destination="l2v-bk-btZ" id="ZzZ-ed-1p0"/>
-                <outlet property="showAsView" destination="5cd-ne-BX6" id="FTc-3X-wIV"/>
-                <outlet property="timeView" destination="ul8-0i-pA7" id="t47-c9-IJA"/>
-                <outlet property="titleView" destination="O3H-HU-OcX" id="bYn-FB-DU9"/>
+                <outlet property="organizerView" destination="l2v-bk-btZ" id="eEL-wo-QT7"/>
+                <outlet property="showAsView" destination="5cd-ne-BX6" id="44D-sy-mq3"/>
+                <outlet property="timeView" destination="ul8-0i-pA7" id="rOI-rI-sJJ"/>
+                <outlet property="titleView" destination="O3H-HU-OcX" id="bvy-Lz-Vmo"/>
+                <outlet property="view" destination="c22-O7-iKe" id="qAj-4R-SgO"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -21,6 +21,12 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="61"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
+                <customView identifier="showas" translatesAutoresizingMaskIntoConstraints="NO" id="5cd-ne-BX6" userLabel="ShowAs">
+                    <rect key="frame" x="4" y="0.0" width="8" height="61"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="8" id="vq8-Ay-9V5"/>
+                    </constraints>
+                </customView>
                 <textField identifier="time" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ul8-0i-pA7" userLabel="Time">
                     <rect key="frame" x="18" y="20" width="384" height="18"/>
                     <constraints>
@@ -32,6 +38,14 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField identifier="subject" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O3H-HU-OcX" userLabel="Title">
+                    <rect key="frame" x="18" y="42" width="384" height="19"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Subject" id="RnL-fd-y4r">
+                        <font key="font" metaFont="systemBold" size="16"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <textField identifier="organizer" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l2v-bk-btZ">
                     <rect key="frame" x="18" y="0.0" width="64" height="18"/>
                     <constraints>
@@ -39,20 +53,6 @@
                     </constraints>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Organizer" id="Kaw-va-eX6">
                         <font key="font" usesAppearanceFont="YES"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <customView identifier="showas" translatesAutoresizingMaskIntoConstraints="NO" id="5cd-ne-BX6" userLabel="ShowAs">
-                    <rect key="frame" x="4" y="0.0" width="8" height="61"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="8" id="vq8-Ay-9V5"/>
-                    </constraints>
-                </customView>
-                <textField identifier="subject" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O3H-HU-OcX" userLabel="Title">
-                    <rect key="frame" x="18" y="42" width="384" height="19"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Subject" id="RnL-fd-y4r">
-                        <font key="font" metaFont="systemBold" size="16"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

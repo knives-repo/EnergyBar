@@ -74,15 +74,14 @@
 		8D9D24E4252124DE004FF191 /* OutlookEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24E2252124DE004FF191 /* OutlookEvent.m */; };
 		8D9D24EE2521311C004FF191 /* ImageTileWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D24ED2521311C004FF191 /* ImageTileWidget.m */; };
 		8D9EA3CC2523EC7300646126 /* OutlookEventDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9EA3CB2523EC7300646126 /* OutlookEventDetails.xib */; };
-		8D9EA3D02523F0DE00646126 /* OutlookEventDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EA3CF2523F0DE00646126 /* OutlookEventDetails.m */; };
 		8D9EA3D52523FD9200646126 /* OutlookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EA3D42523FD9200646126 /* OutlookUtils.m */; };
 		8D9EA3D9252403F100646126 /* VolumeAllInOneWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EA3D7252403F000646126 /* VolumeAllInOneWidget.m */; };
 		8DCB91562525467900968D94 /* MediaControlsWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB91552525467900968D94 /* MediaControlsWidget.m */; };
 		8DCB915D2525517400968D94 /* VolumeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB915C2525517400968D94 /* VolumeWidget.m */; };
-		8DCB91642525591B00968D94 /* Outlook in Resources */ = {isa = PBXBuildFile; fileRef = 8DCB91622525591A00968D94 /* Outlook */; };
 		8DCB91652525591B00968D94 /* MediaWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB91632525591B00968D94 /* MediaWidget.m */; };
 		8DCB916A25255A4400968D94 /* MediaAllInOneWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB916925255A4400968D94 /* MediaAllInOneWidget.m */; };
 		8DCB916F2525613600968D94 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB916E2525613600968D94 /* NSImage+Utils.m */; };
+		8DE1AD11252581F500030319 /* OutlookEventDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE1AD0F252581F500030319 /* OutlookEventDetailsController.m */; };
 		8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */; };
 		AF95C8ADCA2ED9B5705D7BB6 /* Pods_EnergyBars_EnergyBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */; };
 /* End PBXBuildFile section */
@@ -232,8 +231,6 @@
 		8D9D24EC2521311C004FF191 /* ImageTileWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageTileWidget.h; sourceTree = "<group>"; };
 		8D9D24ED2521311C004FF191 /* ImageTileWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageTileWidget.m; sourceTree = "<group>"; };
 		8D9EA3CB2523EC7300646126 /* OutlookEventDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutlookEventDetails.xib; sourceTree = "<group>"; };
-		8D9EA3CE2523F0DE00646126 /* OutlookEventDetails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutlookEventDetails.h; sourceTree = "<group>"; };
-		8D9EA3CF2523F0DE00646126 /* OutlookEventDetails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookEventDetails.m; sourceTree = "<group>"; };
 		8D9EA3D32523FD9200646126 /* OutlookUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutlookUtils.h; sourceTree = "<group>"; };
 		8D9EA3D42523FD9200646126 /* OutlookUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookUtils.m; sourceTree = "<group>"; };
 		8D9EA3D7252403F000646126 /* VolumeAllInOneWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeAllInOneWidget.m; sourceTree = "<group>"; };
@@ -243,12 +240,13 @@
 		8DCB915B2525517400968D94 /* VolumeWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VolumeWidget.h; sourceTree = "<group>"; };
 		8DCB915C2525517400968D94 /* VolumeWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VolumeWidget.m; sourceTree = "<group>"; };
 		8DCB91612525591A00968D94 /* MediaWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaWidget.h; sourceTree = "<group>"; };
-		8DCB91622525591A00968D94 /* Outlook */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Outlook; sourceTree = "<group>"; };
 		8DCB91632525591B00968D94 /* MediaWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaWidget.m; sourceTree = "<group>"; };
 		8DCB916825255A4400968D94 /* MediaAllInOneWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAllInOneWidget.h; sourceTree = "<group>"; };
 		8DCB916925255A4400968D94 /* MediaAllInOneWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaAllInOneWidget.m; sourceTree = "<group>"; };
 		8DCB916D2525613600968D94 /* NSImage+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSImage+Utils.h"; sourceTree = "<group>"; };
 		8DCB916E2525613600968D94 /* NSImage+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Utils.m"; sourceTree = "<group>"; };
+		8DE1AD0E252581F500030319 /* OutlookEventDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutlookEventDetailsController.h; sourceTree = "<group>"; };
+		8DE1AD0F252581F500030319 /* OutlookEventDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookEventDetailsController.m; sourceTree = "<group>"; };
 		8DE31D11251EFE7E004E835B /* BrightnessWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessWidget.h; sourceTree = "<group>"; };
 		8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrigthnessWidget.m; sourceTree = "<group>"; };
 		A7C49C788382A2D1AD12F453 /* Pods-EnergyBars-EnergyBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBars-EnergyBar.release.xcconfig"; path = "Target Support Files/Pods-EnergyBars-EnergyBar/Pods-EnergyBars-EnergyBar.release.xcconfig"; sourceTree = "<group>"; };
@@ -397,7 +395,6 @@
 			isa = PBXGroup;
 			children = (
 				8D3015262522280700F0523D /* Outlook */,
-				8DCB91622525591A00968D94 /* Outlook */,
 				3C4013C0211BBC8D00C47B66 /* ActiveAppWidget.h */,
 				3C4013C1211BBC8D00C47B66 /* ActiveAppWidget.m */,
 				8D9D2463251FB14D004FF191 /* BacklightWidget.h */,
@@ -481,10 +478,10 @@
 			children = (
 				8D9D248C2520BAA9004FF191 /* OutlookCalendarWidget.h */,
 				8D9D248D2520BAA9004FF191 /* OutlookCalendarWidget.m */,
+				8DE1AD0E252581F500030319 /* OutlookEventDetailsController.h */,
+				8DE1AD0F252581F500030319 /* OutlookEventDetailsController.m */,
 				8D3015272522282500F0523D /* OutlookNextEventWidget.h */,
 				8D3015282522282500F0523D /* OutlookNextEventWidget.m */,
-				8D9EA3CE2523F0DE00646126 /* OutlookEventDetails.h */,
-				8D9EA3CF2523F0DE00646126 /* OutlookEventDetails.m */,
 				8D9EA3D32523FD9200646126 /* OutlookUtils.h */,
 				8D9EA3D42523FD9200646126 /* OutlookUtils.m */,
 			);
@@ -622,7 +619,6 @@
 			files = (
 				8D9D24902520BC26004FF191 /* OutlookEvents.xib in Resources */,
 				3CD1EBBE211D680A001DC22F /* VolumeBar.xib in Resources */,
-				8DCB91642525591B00968D94 /* Outlook in Resources */,
 				3CEE0C29211D599400CFD6B2 /* BrightnessBar.xib in Resources */,
 				3CF113942138769D005B1350 /* FolderBar.xib in Resources */,
 				3C163BBF2118F1A800F015EC /* Assets.xcassets in Resources */,
@@ -712,7 +708,6 @@
 				8D8260072523A1CD006006EB /* NSDate+Utils.m in Sources */,
 				8DCB91562525467900968D94 /* MediaControlsWidget.m in Sources */,
 				3C8ED9F4213E3974006C11A3 /* EdgeWindowController.m in Sources */,
-				8D9EA3D02523F0DE00646126 /* OutlookEventDetails.m in Sources */,
 				8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */,
 				3C200ECF212DFF390000B04D /* FixedSizeLabel.m in Sources */,
 				8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */,
@@ -747,6 +742,7 @@
 				3C8E4133212F81A60010C2B3 /* AudioControl.m in Sources */,
 				3CA1DD86212D3DB200D95DE1 /* NowPlayingWidget.m in Sources */,
 				8D4DC4EE2522903F0042A22A /* LightWidget.m in Sources */,
+				8DE1AD11252581F500030319 /* OutlookEventDetailsController.m in Sources */,
 				8DCB91652525591B00968D94 /* MediaWidget.m in Sources */,
 				8DCB916A25255A4400968D94 /* MediaAllInOneWidget.m in Sources */,
 				3C102D4B21197ED700FFB2CF /* ControlWidget.m in Sources */,
