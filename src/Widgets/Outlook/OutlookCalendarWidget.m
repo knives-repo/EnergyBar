@@ -210,6 +210,9 @@
     } else if (self.activeIndex == EVENT_INDEX || self.activeIndex == EMPTY_INDEX) {
         [self.nextEventWidget selectEvent];
     }
+    
+    // recalc
+    [self.view invalidateIntrinsicContentSize];
 
 }
 
