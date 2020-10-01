@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "ZoomLogo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "ZoomLogo.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

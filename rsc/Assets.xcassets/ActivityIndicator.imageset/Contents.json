@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "ActivityIndicator.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "ActivityIndicator.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

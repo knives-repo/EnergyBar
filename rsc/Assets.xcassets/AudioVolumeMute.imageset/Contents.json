@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "AudioVolumeMute.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "AudioVolumeMute.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
