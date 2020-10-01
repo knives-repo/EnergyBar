@@ -32,6 +32,7 @@
 
 @interface MediaAllInOneWidget() {
     int initialSlidePosition;
+    BOOL activated;
 }
 @property (retain) ImageTitleView* imageTitleView;
 @property (retain) NSString* currentTitle;
@@ -47,6 +48,11 @@
 {
     self.customizationLabel = @"Media All-in-one";
     
+    self.playImage = [[NSImage imageNamed:NSImageNameTouchBarPlayTemplate] tintedWithColor:[NSColor whiteColor]];
+    self.pauseImage = [[NSImage imageNamed:NSImageNameTouchBarPauseTemplate] tintedWithColor:[NSColor whiteColor]];
+    self.previousImage = [[NSImage imageNamed:NSImageNameTouchBarSkipBackTemplate] tintedWithColor:[NSColor whiteColor]];
+    self.nextImage = [[NSImage imageNamed:NSImageNameTouchBarSkipAheadTemplate] tintedWithColor:[NSColor whiteColor]];
+
     self.imageTitleView = [[[MediaAllInOneWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
     self.imageTitleView.wantsLayer = YES;
     self.imageTitleView.layer.cornerRadius = 6.0;
@@ -62,14 +68,8 @@
     [self.imageTitleView addGestureRecognizer:shortPress];
     
     self.view = self.imageTitleView;
-    
-    [self nowPlayingNotification:nil];
-    
-    self.playImage = [[NSImage imageNamed:NSImageNameTouchBarPlayTemplate] tintedWithColor:[NSColor whiteColor]];
-    self.pauseImage = [[NSImage imageNamed:NSImageNameTouchBarPauseTemplate] tintedWithColor:[NSColor whiteColor]];
-    self.previousImage = [[NSImage imageNamed:NSImageNameTouchBarSkipBackTemplate] tintedWithColor:[NSColor whiteColor]];
-    self.nextImage = [[NSImage imageNamed:NSImageNameTouchBarSkipAheadTemplate] tintedWithColor:[NSColor whiteColor]];
-
+        
+    [NowPlaying sharedInstance];
 }
 
 - (void)dealloc
@@ -109,7 +109,7 @@
 - (NSImage *)playPauseImage
 {
     BOOL playing = [NowPlaying sharedInstance].playing;
-    return playing ? self.playImage : self.pauseImage;
+    return playing ? self.pauseImage : self.playImage;
 }
 
 - (void)nowPlayingNotification:(NSNotification *)notification
@@ -150,6 +150,7 @@
     // get active segment
     NSPoint point = [recognizer locationInView:self.view];
     initialSlidePosition = point.x;
+    activated = NO;
     
     // hide bezel window
     [BezelWindow hide];
@@ -164,11 +165,17 @@
     // set image
     if (positionDelta < -ACTIVATION_DELTA) {
         [self.imageTitleView setImage:self.previousImage];
+        activated = YES;
     } else if (positionDelta > ACTIVATION_DELTA) {
         [self.imageTitleView setImage:self.nextImage];
+        activated = YES;
     } else {
-        BOOL playing = [NowPlaying sharedInstance].playing;
-        [self.imageTitleView setImage:playing ? self.pauseImage : self.playImage];
+        if (activated == YES) {
+            [self.imageTitleView setImage:[self playPauseImage]];
+        } else {
+            BOOL playing = [NowPlaying sharedInstance].playing;
+            [self.imageTitleView setImage:playing ? self.playImage : self.pauseImage];
+        }
     }
 
 }
@@ -182,7 +189,8 @@
         PostAuxKeyPress(NX_KEYTYPE_PREVIOUS);
     } else if (positionDelta > ACTIVATION_DELTA) {
         PostAuxKeyPress(NX_KEYTYPE_NEXT);
-    } else {
+    } else if (activated == NO) {
+        self.currentTitle = nil;
         PostAuxKeyPress(NX_KEYTYPE_PLAY);
     }
 }

@@ -43,7 +43,7 @@
     self.customizationLabel = @"Media";
     self.view = control;
     
-    [self nowPlayingNotification:nil];
+    [NowPlaying sharedInstance];
 
 }
 
@@ -110,6 +110,7 @@
             break;
         case 1:
             // play
+            self.currentTitle = nil;
             PostAuxKeyPress(NX_KEYTYPE_PLAY);
             break;
         case 2:
