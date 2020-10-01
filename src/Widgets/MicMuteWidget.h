@@ -15,6 +15,7 @@
 #import "CustomWidget.h"
 
 @interface MicMuteWidget : CustomWidget
+@property (nonatomic,assign) BOOL applicationMute;
 @property (retain) NSImage *micOnImage;
 @property (retain) NSImage *micOffImage;
 @end

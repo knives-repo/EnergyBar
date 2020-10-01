@@ -23,6 +23,7 @@
 #import "TouchBarController.h"
 #import "WeatherWidget.h"
 #import "VolumeWidget.h"
+#import "MicMuteWidget.h"
 #import "MediaWidget.h"
 #import "OutlookCalendarWidget.h"
 #import "Outlook.h"
@@ -457,6 +458,13 @@ static void AppControllerFSNotify(const char *path, void *data)
     VolumeWidget *widget = [self.touchBarController.touchBar itemForIdentifier:@"Volume"];
     widget.showsSmallWidget = [[NSUserDefaults standardUserDefaults]
         boolForKey:@"volumeShowsSmallWidget"];
+}
+
+- (IBAction)micmuteWidgetSettingsChange:(id)sender
+{
+    MicMuteWidget *widget = [self.touchBarController.touchBar itemForIdentifier:@"MicMute"];
+    widget.applicationMute = [[NSUserDefaults standardUserDefaults]
+        boolForKey:@"micmuteApplicationMute"];
 }
 
 - (IBAction)mediaWidgetSettingsChange:(id)sender

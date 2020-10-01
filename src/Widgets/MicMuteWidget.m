@@ -16,6 +16,7 @@
 #import "AudioControl.h"
 #import "BezelWindow.h"
 #import "NSColor+Hex.h"
+#import "KeyEvent.h"
 
 @interface MicMuteWidgetView : ImageTitleView
 @end
@@ -27,10 +28,19 @@
 }
 @end
 
+@interface MicMuteWidget()
+@property (retain) NSRunningApplication* runningApplication;
+@property (assign) BOOL muteToRestore;
+@property (assign) BOOL restoreMute;
+@end
+
 @implementation MicMuteWidget
 
 - (void)commonInit
 {
+    // experimental
+    //self.applicationMute = NO;
+    
     self.customizationLabel = @"Mic Mute";
     self.micOnImage = [NSImage imageNamed:@"MicOn"];
     self.micOffImage = [NSImage imageNamed:@"MicOff"];
@@ -68,12 +78,27 @@
      selector:@selector(audioControlNotification:)
      name:AudioControlNotification
      object:nil];
+
+    [[[NSWorkspace sharedWorkspace] notificationCenter]
+        addObserver:self
+        selector:@selector(didActivateApplication:)
+        name:NSWorkspaceDidActivateApplicationNotification
+        object:nil];
+    
+    [self checkRunningApplication];
+
 }
 
 - (void)viewDidDisappear
 {
     [[NSNotificationCenter defaultCenter]
      removeObserver:self];
+}
+
+- (void)setApplicationMute:(BOOL)value
+{
+    self->_applicationMute = value;
+    [self checkRunningApplication];
 }
 
 - (void)audioControlNotification:(NSNotification *)notification
@@ -83,6 +108,16 @@
 
 - (void)setMicMuteImage
 {
+    // when application mute we do not know the status
+    if (self.applicationMute) {
+        if ([self isTeamsRunning]) {
+            [((ImageTitleView*) self.view) setImage:self.micOnImage];
+            self.view.layer.backgroundColor = [[NSColor colorFromHex:0x0078d4] CGColor];
+            return;
+        }
+    }
+    
+    // default
     BOOL mute = [AudioControl sharedInstanceInput].mute;
     NSImage* image = mute ? _micOffImage : _micOnImage;
     NSColor* bgColor = mute ? [NSColor redColor] : [NSColor colorFromHex:0x008000];
@@ -92,6 +127,30 @@
 
 - (void)tapAction:(id)sender
 {
+    
+    if (self.applicationMute) {
+    
+        if ([self isTeamsRunning]) {
+        
+            CGEventRef eventDown;
+            eventDown = CGEventCreateKeyboardEvent (NULL, (CGKeyCode)46, true);//or 20
+            CGEventSetFlags(eventDown, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
+            CGEventPost(kCGSessionEventTap, eventDown);
+            CFRelease(eventDown);
+
+            CGEventRef eventUp;
+            eventUp = CGEventCreateKeyboardEvent (NULL, (CGKeyCode)46, false);//or 20
+            CGEventSetFlags(eventUp, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
+            CGEventPost(kCGSessionEventTap, eventUp);
+            CFRelease(eventUp);
+            
+            // done
+            return;
+
+        }
+        
+    }
+        
     // modify
     BOOL mute = [AudioControl sharedInstanceInput].mute;
     [AudioControl sharedInstanceInput].mute = !mute;
@@ -101,6 +160,44 @@
     [BezelWindow showLevelFor:(mute ? kAudioInputMute : kAudioInputOn) withValue:-1];
     [self setMicMuteImage];
 
+}
+
+- (void)didActivateApplication:(NSNotification *)notification
+{
+    [self checkRunningApplication];
+}
+
+- (void)checkRunningApplication
+{
+    // restore
+    if (self.restoreMute) {
+        [AudioControl sharedInstanceInput].mute = self.muteToRestore;
+        self.restoreMute = NO;
+    }
+    
+    // update
+    self.runningApplication = [[NSWorkspace sharedWorkspace] menuBarOwningApplication];
+    
+    // check if we use application mute
+    if (self.applicationMute) {
+        if ([self isTeamsRunning]) {
+            
+            // save
+            self.muteToRestore = [AudioControl sharedInstanceInput].mute;
+            self.restoreMute = YES;
+            
+            // now unmute
+            [AudioControl sharedInstanceInput].mute = FALSE;
+        }
+    }
+    
+    // update
+    [self setMicMuteImage];
+
+}
+
+- (BOOL) isTeamsRunning {
+    return [self.runningApplication.bundleIdentifier isEqualToString:@"com.microsoft.teams"];
 }
 
 @end
