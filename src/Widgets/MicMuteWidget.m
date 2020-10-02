@@ -17,6 +17,7 @@
 #import "BezelWindow.h"
 #import "NSColor+Hex.h"
 #import "KeyEvent.h"
+#import "NSRunningApplication+Utils.h"
 
 @interface MicMuteWidgetView : ImageTitleView
 @end
@@ -111,7 +112,7 @@
 {
     // when application mute we do not know the status
     if (self.applicationMute) {
-        if ([self isTeamsRunning]) {
+        if ([self.runningApplication isMicrosoftTeams]) {
             [self updateWithImage:self.micOnImage andBackgroundColor:[NSColor colorFromHex:0x0078d4]];
             return;
         }
@@ -136,7 +137,7 @@
 {
     if (self.applicationMute) {
     
-        if ([self isTeamsRunning]) {
+        if ([self.runningApplication isMicrosoftTeams]) {
         
             // Cmd + Shift + M toggle mute
             PostKeyPress(46, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
@@ -177,7 +178,7 @@
     
     // check if we use application mute
     if (self.applicationMute) {
-        if ([self isTeamsRunning]) {
+        if ([self.runningApplication isMicrosoftTeams]) {
             
             // save
             self.muteToRestore = [AudioControl sharedInstanceInput].mute;
@@ -191,10 +192,6 @@
     // update
     [self setMicMuteImage];
 
-}
-
-- (BOOL) isTeamsRunning {
-    return [self.runningApplication.bundleIdentifier isEqualToString:@"com.microsoft.teams"];
 }
 
 @end

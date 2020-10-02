@@ -7,14 +7,15 @@
 //
 
 #import "OutlookNextEventWidget.h"
+#import "NSRunningApplication+Utils.h"
+#import "OutlookEventDetailsController.h"
 #import "BezelWindow.h"
 #import "NSColor+Hex.h"
-#import "OutlookEventDetailsController.h"
 #import "OutlookUtils.h"
 #import "Outlook.h"
+#import "KeyEvent.h"
 
 #define RESET_AFTER_USER_NEXT 5
-
 
 @interface NextEventsWidgetView : NSView
 @end
@@ -66,11 +67,13 @@
 
 @interface OutlookNextEventWidget()
 
+@property (retain) NSRunningApplication* runningApplication;
 @property (retain) NextEventsWidgetController* controller;
 @property (retain) NSArray* events;
 @property (retain) NSTimer* resetTimer;
 @property (assign) NSPoint startSlidePoint;
 @property (assign) BOOL scrolled;
+@property (assign) BOOL joinTeams;
 
 @end
 
@@ -115,6 +118,18 @@
     [self.controller.nextButton setTarget:self];
     [self.controller.nextButton setAction:@selector(onNext:)];
     
+    [[[NSWorkspace sharedWorkspace] notificationCenter]
+        addObserver:self
+        selector:@selector(didActivateApplication:)
+        name:NSWorkspaceDidActivateApplicationNotification
+        object:nil];
+
+}
+
+- (void)viewDidDisappear
+{
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self];
 }
 
 - (void) showEvents:(NSArray*) events
@@ -222,7 +237,17 @@
         NSString* joinUrl = self.event.directJoinUrl;
         NSURL* appURL = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:[NSURL URLWithString:joinUrl]];
         if (appURL == nil) {
+        
+            // fallback
             joinUrl = self.event.joinUrl;
+        
+        } else {
+            
+            // auto-join
+            if (self.event.isTeams) {
+                self.joinTeams = YES;
+            }
+       
         }
         
         // now open it
@@ -365,6 +390,27 @@
     [event setImportance:ImportanceHigh];
     [event setShowAs:ShowAsBusy];
     [self showEventDetail:event];
+}
+
+- (void)didActivateApplication:(id) sender
+{
+    // update
+    NSRunningApplication* runningApplication = [[NSWorkspace sharedWorkspace] menuBarOwningApplication];
+    if ([runningApplication isMicrosoftTeams]) {
+        if (self.joinTeams) {
+
+            // wait some time
+            [NSTimer scheduledTimerWithTimeInterval:1.5 repeats:NO block:^(NSTimer * _Nonnull timer) {
+                // enter
+                PostKeyPress(36, 0);
+            }];
+            
+            // done
+            self.joinTeams = NO;
+
+        }
+    }
+
 }
 
 @end

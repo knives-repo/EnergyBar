@@ -59,6 +59,7 @@
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
 		8D4DC4EE2522903F0042A22A /* LightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4ED2522903F0042A22A /* LightWidget.m */; };
 		8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */; };
+		8D5F27D52526C22B009DE863 /* NSRunningApplication+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F27D42526C22B009DE863 /* NSRunningApplication+Utils.m */; };
 		8D8260072523A1CD006006EB /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8260062523A1CD006006EB /* NSDate+Utils.m */; };
 		8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245B251F6F35004FF191 /* LevelIndicator.m */; };
 		8D9D245F251F8D2B004FF191 /* NSColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */; };
@@ -208,6 +209,8 @@
 		8D4DC4ED2522903F0042A22A /* LightWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightWidget.m; sourceTree = "<group>"; };
 		8D4DC4F02522911B0042A22A /* NSSegmentedControl+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSSegmentedControl+Utils.h"; sourceTree = "<group>"; };
 		8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSSegmentedControl+Utils.m"; sourceTree = "<group>"; };
+		8D5F27D32526C22B009DE863 /* NSRunningApplication+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSRunningApplication+Utils.h"; sourceTree = "<group>"; };
+		8D5F27D42526C22B009DE863 /* NSRunningApplication+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSRunningApplication+Utils.m"; sourceTree = "<group>"; };
 		8D8260052523A1CD006006EB /* NSDate+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		8D8260062523A1CD006006EB /* NSDate+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
 		8D9D245A251F6F35004FF191 /* LevelIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelIndicator.h; sourceTree = "<group>"; };
@@ -522,6 +525,8 @@
 				8D8260062523A1CD006006EB /* NSDate+Utils.m */,
 				8DCB916D2525613600968D94 /* NSImage+Utils.h */,
 				8DCB916E2525613600968D94 /* NSImage+Utils.m */,
+				8D5F27D32526C22B009DE863 /* NSRunningApplication+Utils.h */,
+				8D5F27D42526C22B009DE863 /* NSRunningApplication+Utils.m */,
 				8D4DC4F02522911B0042A22A /* NSSegmentedControl+Utils.h */,
 				8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */,
 				3C1F652622B1CCA900F795D3 /* NSView+TouchBarHitTest.h */,
@@ -744,6 +749,7 @@
 				8D4DC4EE2522903F0042A22A /* LightWidget.m in Sources */,
 				8DE1AD11252581F500030319 /* OutlookEventDetailsController.m in Sources */,
 				8DCB91652525591B00968D94 /* MediaWidget.m in Sources */,
+				8D5F27D52526C22B009DE863 /* NSRunningApplication+Utils.m in Sources */,
 				8DCB916A25255A4400968D94 /* MediaAllInOneWidget.m in Sources */,
 				3C102D4B21197ED700FFB2CF /* ControlWidget.m in Sources */,
 				3C163BC62118F1C500F015EC /* AppController.m in Sources */,
