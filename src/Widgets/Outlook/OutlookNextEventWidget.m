@@ -24,7 +24,7 @@
 
 - (NSSize)intrinsicContentSize
 {
-    return NSMakeSize([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookExpandWidget"] ? NSViewNoIntrinsicMetric : 280, NSViewNoIntrinsicMetric);
+    return NSMakeSize([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookExpandWidget"] ? NSViewNoIntrinsicMetric : 300, NSViewNoIntrinsicMetric);
 }
 
 @end
