@@ -140,6 +140,12 @@
                                                 withPattern:@"https://.*\\.webex.com/.*/j.php[^\"]*"];
         }
         
+        // webex room
+        if (IsValidString(self.joinUrl) == NO) {
+            self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
+                                                withPattern:@"https://.*\\.webex.com/join/[^\"]*"];
+        }
+        
         // zoom
         if (IsValidString(self.joinUrl) == NO) {
             self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
