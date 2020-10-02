@@ -169,5 +169,7 @@
 	<true/>
 	<key>outlookShowTomorrow</key>
 	<integer>2</integer>
+	<key>outlookWidgetSize</key>
+	<integer>1</integer>
 </dict>
 </plist>

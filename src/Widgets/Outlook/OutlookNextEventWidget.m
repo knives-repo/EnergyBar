@@ -24,7 +24,23 @@
 
 - (NSSize)intrinsicContentSize
 {
-    return NSMakeSize([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookExpandWidget"] ? NSViewNoIntrinsicMetric : 300, NSViewNoIntrinsicMetric);
+    // get size with default value
+    id size = [[NSUserDefaults standardUserDefaults] objectForKey:@"outlookWidgetSize"];
+    
+    // width
+    int width = 250;
+    if (size != nil) {
+        if ([size intValue] == 0) {
+            width = 200;
+        } else if ([size intValue] == 2) {
+            width = 300;
+        } else if ([size intValue] == 3) {
+            width = NSViewNoIntrinsicMetric;
+        }
+    }
+    
+    // return
+    return NSMakeSize(width, NSViewNoIntrinsicMetric);
 }
 
 @end
