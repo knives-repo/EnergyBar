@@ -12,7 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSRunningApplication(Utils)
 
+- (BOOL) isConferencingApp;
+
 - (BOOL) isMicrosoftTeams;
+- (BOOL) isWebexMeetings;
 
 @end
 

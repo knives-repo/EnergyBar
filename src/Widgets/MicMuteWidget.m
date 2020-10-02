@@ -41,7 +41,7 @@
 - (void)commonInit
 {
     // experimental
-    //self.applicationMute = NO;
+    self.applicationMute = [[NSUserDefaults standardUserDefaults] boolForKey:@"micmuteApplicationMute"];
     
     self.customizationLabel = @"Mic Mute";
     self.micOnImage = [NSImage imageNamed:@"MicOn"];
@@ -111,11 +111,9 @@
 - (void)setMicMuteImage
 {
     // when application mute we do not know the status
-    if (self.applicationMute) {
-        if ([self.runningApplication isMicrosoftTeams]) {
-            [self updateWithImage:self.micOnImage andBackgroundColor:[NSColor colorFromHex:0x0078d4]];
-            return;
-        }
+    if (self.applicationMute && [self isMutableAppRunning]) {
+        [self updateWithImage:self.micOnImage andBackgroundColor:[NSColor colorFromHex:0x0078d4]];
+        return;
     }
     
     // default
@@ -135,16 +133,16 @@
 
 - (void)tapAction:(id)sender
 {
-    if (self.applicationMute) {
-    
-        if ([self.runningApplication isMicrosoftTeams]) {
-        
+    if (self.applicationMute && [self isMutableAppRunning]) {
+
+        if ([self.runningApplication isMicrosoftTeams] || [self.runningApplication isWebexMeetings]) {
+
             // Cmd + Shift + M toggle mute
             PostKeyPress(46, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
             
             // done
             return;
-
+            
         }
         
     }
@@ -175,23 +173,27 @@
     
     // update
     self.runningApplication = [[NSWorkspace sharedWorkspace] menuBarOwningApplication];
+    NSLog(@"%@", self.runningApplication.bundleIdentifier);
     
     // check if we use application mute
-    if (self.applicationMute) {
-        if ([self.runningApplication isMicrosoftTeams]) {
-            
-            // save
-            self.muteToRestore = [AudioControl sharedInstanceInput].mute;
-            self.restoreMute = YES;
-            
-            // now unmute
-            [AudioControl sharedInstanceInput].mute = FALSE;
-        }
+    if (self.applicationMute && [self isMutableAppRunning]) {
+        
+        // save
+        self.muteToRestore = [AudioControl sharedInstanceInput].mute;
+        self.restoreMute = YES;
+        
+        // now unmute
+        [AudioControl sharedInstanceInput].mute = FALSE;
+
     }
     
     // update
     [self setMicMuteImage];
 
+}
+
+- (BOOL) isMutableAppRunning {
+    return ([self.runningApplication isMicrosoftTeams] || [self.runningApplication isWebexMeetings]);
 }
 
 @end
