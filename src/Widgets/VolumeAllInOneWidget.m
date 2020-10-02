@@ -96,22 +96,24 @@
 
 - (void)setVolumeImage
 {
-    ImageTitleView* imageTitleView = (ImageTitleView*) self.view;
-    BOOL mute = [AudioControl sharedInstanceOutput].mute;
-    if (mute) {
-        [imageTitleView setImage:self.volumeMute];
-    } else {
-        double volume = [AudioControl sharedInstanceOutput].volume;
-        if (volume < 0.25) {
-            [imageTitleView setImage:self.volumeOff];
-        } else if (volume < 0.5) {
-            [imageTitleView setImage:self.volumeLow];
-        } else if (volume < 0.75) {
-            [imageTitleView setImage:self.volumeMedium];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ImageTitleView* imageTitleView = (ImageTitleView*) self.view;
+        BOOL mute = [AudioControl sharedInstanceOutput].mute;
+        if (mute) {
+            [imageTitleView setImage:self.volumeMute];
         } else {
-            [imageTitleView setImage:self.volumeHigh];
+            double volume = [AudioControl sharedInstanceOutput].volume;
+            if (volume < 0.25) {
+                [imageTitleView setImage:self.volumeOff];
+            } else if (volume < 0.5) {
+                [imageTitleView setImage:self.volumeLow];
+            } else if (volume < 0.75) {
+                [imageTitleView setImage:self.volumeMedium];
+            } else {
+                [imageTitleView setImage:self.volumeHigh];
+            }
         }
-    }
+    });
 }
 
 - (void)shortPressAction:(NSGestureRecognizer *)recognizer

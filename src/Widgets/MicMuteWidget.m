@@ -125,9 +125,11 @@
 }
 
 - (void)updateWithImage:(NSImage*) image andBackgroundColor:(NSColor*) bgColor {
-    [self.imageTileView setImage:image];
-    [self.imageTileView.layer setBackgroundColor:[bgColor CGColor]];
-    [self.imageTileView setNeedsDisplay:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.imageTileView setImage:image];
+        [self.imageTileView.layer setBackgroundColor:[bgColor CGColor]];
+        [self.imageTileView setNeedsDisplay:YES];
+    });
 }
 
 - (void)tapAction:(id)sender

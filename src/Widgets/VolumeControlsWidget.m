@@ -91,7 +91,9 @@
 
 - (void)audioControlNotification:(NSNotification *)notification
 {
-    [self.view setImage:[self volumeMuteImage] forSegment:2];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.view setImage:[self volumeMuteImage] forSegment:2];
+    });
 }
 
 - (void)adjustVolumeBy:(double)delta {
