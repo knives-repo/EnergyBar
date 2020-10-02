@@ -16,8 +16,11 @@
 
 @interface VolumeAllInOneWidget : CustomWidget
 @property (retain) NSImage *volumeOff;
+@property (retain) NSImage *volumeOffMute;
 @property (retain) NSImage *volumeLow;
+@property (retain) NSImage *volumeLowMute;
 @property (retain) NSImage *volumeMedium;
+@property (retain) NSImage *volumeMediumMute;
 @property (retain) NSImage *volumeHigh;
-@property (retain) NSImage *volumeMute;
+@property (retain) NSImage *volumeHighMute;
 @end

@@ -17,6 +17,10 @@
 #import "BezelWindow.h"
 #import "KeyEvent.h"
 
+#define VOLUME_OFF 0.1
+#define VOLUME_LOW 0.4
+#define VOLUME_MED 0.8
+
 @interface VolumeAllInOneWidgetView : ImageTitleView
 @end
 
@@ -40,10 +44,13 @@
     self.customizationLabel = @"Volume All-in-one";
     
     self.volumeOff = [NSImage imageNamed:@"AudioVolumeOff"];
+    self.volumeOffMute = [NSImage imageNamed:@"AudioVolumeOffMute"];
     self.volumeLow = [NSImage imageNamed:@"AudioVolumeLow"];
+    self.volumeLowMute = [NSImage imageNamed:@"AudioVolumeLowMute"];
     self.volumeMedium = [NSImage imageNamed:@"AudioVolumeMed"];
+    self.volumeMediumMute = [NSImage imageNamed:@"AudioVolumeMedMute"];
     self.volumeHigh = [NSImage imageNamed:@"AudioVolumeHigh"];
-    self.volumeMute = [NSImage imageNamed:@"AudioVolumeMute"];
+    self.volumeHighMute = [NSImage imageNamed:@"AudioVolumeHighMute"];
 
     ImageTitleView *view = [[[VolumeAllInOneWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
     view.wantsLayer = YES;
@@ -98,21 +105,32 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         ImageTitleView* imageTitleView = (ImageTitleView*) self.view;
+        double volume = [AudioControl sharedInstanceOutput].volume;
         BOOL mute = [AudioControl sharedInstanceOutput].mute;
         if (mute) {
-            [imageTitleView setImage:self.volumeMute];
+            if (volume < VOLUME_OFF) {
+                [imageTitleView setImage:self.volumeOffMute];
+            } else if (volume < VOLUME_LOW) {
+                [imageTitleView setImage:self.volumeLowMute];
+            } else if (volume < VOLUME_MED) {
+                [imageTitleView setImage:self.volumeMediumMute];
+            } else {
+                [imageTitleView setImage:self.volumeHighMute];
+            }
         } else {
-            double volume = [AudioControl sharedInstanceOutput].volume;
-            if (volume < 0.25) {
+            if (volume < VOLUME_OFF) {
                 [imageTitleView setImage:self.volumeOff];
-            } else if (volume < 0.5) {
+            } else if (volume < VOLUME_LOW) {
                 [imageTitleView setImage:self.volumeLow];
-            } else if (volume < 0.75) {
+            } else if (volume < VOLUME_MED) {
                 [imageTitleView setImage:self.volumeMedium];
             } else {
                 [imageTitleView setImage:self.volumeHigh];
             }
         }
+        
+        // force update
+        [imageTitleView setNeedsDisplay:YES];
     });
 }
 
