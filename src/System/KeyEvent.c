@@ -13,6 +13,7 @@
 
 #include "KeyEvent.h"
 #include <IOKit/hidsystem/IOHIDLib.h>
+#include <CoreGraphics/CoreGraphics.h>
 #include <pthread.h>
 
 static pthread_once_t hid_conn_once = PTHREAD_ONCE_INIT;
@@ -44,7 +45,19 @@ exit:
 
 void PostKeyPress(uint16_t keyCode, uint32_t flags)
 {
-    NXEventData event = { 0 };
+    CGEventRef eventDown;
+    eventDown = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keyCode, true);
+    CGEventSetFlags(eventDown, flags);
+    CGEventPost(kCGSessionEventTap, eventDown);
+    CFRelease(eventDown);
+
+    CGEventRef eventUp;
+    eventUp = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keyCode, false);
+    CGEventSetFlags(eventUp, flags);
+    CGEventPost(kCGSessionEventTap, eventUp);
+    CFRelease(eventUp);
+
+    /*NXEventData event = { 0 };
     IOGPoint point = { 0 };
     kern_return_t ret;
 
@@ -66,6 +79,7 @@ void PostKeyPress(uint16_t keyCode, uint32_t flags)
     ret = IOHIDPostEvent(hid_conn, NX_KEYUP, point, &event, kNXEventDataVersion, flags, 0);
     if (KERN_SUCCESS != ret)
         return;
+    */
 }
 
 void PostAuxKeyPress(uint16_t auxKeyCode)

@@ -138,17 +138,8 @@
     
         if ([self isTeamsRunning]) {
         
-            CGEventRef eventDown;
-            eventDown = CGEventCreateKeyboardEvent (NULL, (CGKeyCode)46, true);//or 20
-            CGEventSetFlags(eventDown, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
-            CGEventPost(kCGSessionEventTap, eventDown);
-            CFRelease(eventDown);
-
-            CGEventRef eventUp;
-            eventUp = CGEventCreateKeyboardEvent (NULL, (CGKeyCode)46, false);//or 20
-            CGEventSetFlags(eventUp, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
-            CGEventPost(kCGSessionEventTap, eventUp);
-            CFRelease(eventUp);
+            // Cmd + Shift + M toggle mute
+            PostKeyPress(46, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
             
             // done
             return;
