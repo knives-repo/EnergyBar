@@ -15,10 +15,10 @@
 #import "KeyEvent.h"
 #import "NowPlaying.h"
 #import "BezelWindow.h"
+#import "NSImage+Utils.h"
 #import "NSSegmentedControl+Utils.h"
 
 @interface MediaControlsWidget()
-@property (retain) NSString* currentTitle;
 @property (retain) NSImage* playImage;
 @property (retain) NSImage* pauseImage;
 @property (retain) NSImage* previousImage;
@@ -97,15 +97,8 @@
     NSSegmentedControl *control = [self.view viewWithTag:'ctrl'];
     [control setImage:[self playPauseImage] forSegment:1];
     
-    // notify track change
-    if ([NowPlaying sharedInstance].playing) {
-        if (self.currentTitle == nil || [self.currentTitle isEqualToString:[NowPlaying sharedInstance].title] == NO) {
-            self.currentTitle = [NowPlaying sharedInstance].title;
-            [BezelWindow showWithMessage:self.currentTitle];
-        }
-    } else {
-        self.currentTitle = nil;
-    }
+    // parent
+    [super nowPlayingNotification:notification];
 
 }
 
@@ -120,7 +113,8 @@
             break;
         case 1:
             // play
-            PostAuxKeyPress(NX_KEYTYPE_PLAY);
+            [self playPause];
+            //PostAuxKeyPress(NX_KEYTYPE_PLAY);
             break;
         case 2:
             // next

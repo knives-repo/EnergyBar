@@ -57,6 +57,7 @@
 		8D33B986251E6BC0006AFCC9 /* VolumeControlsWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B985251E6BC0006AFCC9 /* VolumeControlsWidget.m */; };
 		8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B994251EB68C006AFCC9 /* MicMuteWidget.m */; };
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
+		8D3B0BDA2527A2DB00D662AC /* MediaWidgetBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3B0BD92527A2DB00D662AC /* MediaWidgetBase.m */; };
 		8D4DC4EE2522903F0042A22A /* LightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4ED2522903F0042A22A /* LightWidget.m */; };
 		8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */; };
 		8D5F27D52526C22B009DE863 /* NSRunningApplication+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F27D42526C22B009DE863 /* NSRunningApplication+Utils.m */; };
@@ -204,6 +205,8 @@
 		8D33B995251EB68C006AFCC9 /* MicMuteWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicMuteWidget.h; sourceTree = "<group>"; };
 		8D33B9A2251ED9E0006AFCC9 /* BezelWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezelWindow.h; sourceTree = "<group>"; };
 		8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezelWindow.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
+		8D3B0BD82527A2DB00D662AC /* MediaWidgetBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaWidgetBase.h; sourceTree = "<group>"; };
+		8D3B0BD92527A2DB00D662AC /* MediaWidgetBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaWidgetBase.m; sourceTree = "<group>"; };
 		8D4DC4E125226EF40042A22A /* EnergyBar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EnergyBar-Prefix.pch"; sourceTree = "<group>"; };
 		8D4DC4EC2522903F0042A22A /* LightWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightWidget.h; sourceTree = "<group>"; };
 		8D4DC4ED2522903F0042A22A /* LightWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightWidget.m; sourceTree = "<group>"; };
@@ -422,6 +425,8 @@
 				405B4678219A3CCA0006DC16 /* LockWidget.m */,
 				8DCB91612525591A00968D94 /* MediaWidget.h */,
 				8DCB91632525591B00968D94 /* MediaWidget.m */,
+				8D3B0BD82527A2DB00D662AC /* MediaWidgetBase.h */,
+				8D3B0BD92527A2DB00D662AC /* MediaWidgetBase.m */,
 				8DCB916825255A4400968D94 /* MediaAllInOneWidget.h */,
 				8DCB916925255A4400968D94 /* MediaAllInOneWidget.m */,
 				8DCB91542525467900968D94 /* MediaControlsWidget.h */,
@@ -734,6 +739,7 @@
 				3C163BC72118F1C500F015EC /* main.m in Sources */,
 				3C400079236CC6A3000261FF /* TodoWidget.m in Sources */,
 				3C1F652722B1CCA900F795D3 /* NSView+TouchBarHitTest.m in Sources */,
+				8D3B0BDA2527A2DB00D662AC /* MediaWidgetBase.m in Sources */,
 				405B467A219A3CCA0006DC16 /* LockWidget.m in Sources */,
 				3C080A4B2139EB0E00EED01D /* FolderController.m in Sources */,
 				3CAA9C6D2127B3E100D5B467 /* StringToUrlTransformer.m in Sources */,

@@ -12,7 +12,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "CustomWidget.h"
+#import "MediaWidgetBase.h"
 
-@interface MediaAllInOneWidget : CustomWidget
+@interface MediaAllInOneWidget : MediaWidgetBase
 @end

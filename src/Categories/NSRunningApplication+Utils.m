@@ -22,4 +22,21 @@
     return [self.bundleIdentifier isEqualToString:@"com.webex.meetingmanager"];
 }
 
+- (BOOL) isSpotify {
+    return [self.bundleIdentifier isEqualToString:@"com.spotify.client"];
+}
+
++ (BOOL) isMusicRunning {
+    return [NSRunningApplication isApplicationRunning:@"com.apple.Music"];
+}
+
++ (BOOL) isSpotifyRunning {
+    return [NSRunningApplication isApplicationRunning:@"com.spotify.client"];
+}
+
++ (BOOL) isApplicationRunning:(NSString*) bundleIdentifier {
+    NSArray* runningApplications = [NSRunningApplication runningApplicationsWithBundleIdentifier:bundleIdentifier];
+    return (runningApplications != nil && runningApplications.count > 0);
+}
+
 @end

@@ -17,6 +17,7 @@
 #import "BezelWindow.h"
 #import "KeyEvent.h"
 #import "NSImage+Utils.h"
+#import "NSRunningApplication+Utils.h"
 
 #define ACTIVATION_DELTA 32
 
@@ -35,7 +36,6 @@
     BOOL activated;
 }
 @property (retain) ImageTitleView* imageTitleView;
-@property (retain) NSString* currentTitle;
 @property (retain) NSImage* playImage;
 @property (retain) NSImage* pauseImage;
 @property (retain) NSImage* previousImage;
@@ -119,16 +119,9 @@
 {
     // first update icon
     [self.imageTitleView setImage:[self playPauseImage]];
-    
-    // notify track change
-    if ([NowPlaying sharedInstance].playing) {
-        if (self.currentTitle == nil || [self.currentTitle isEqualToString:[NowPlaying sharedInstance].title] == NO) {
-            self.currentTitle = [NowPlaying sharedInstance].title;
-            [BezelWindow showWithMessage:self.currentTitle];
-        }
-    } else {
-        self.currentTitle = nil;
-    }
+
+    // parent
+    [super nowPlayingNotification:notification];
 
 }
 
@@ -195,7 +188,7 @@
     } else if (positionDelta > ACTIVATION_DELTA) {
         PostAuxKeyPress(NX_KEYTYPE_NEXT);
     } else if (activated == NO) {
-        PostAuxKeyPress(NX_KEYTYPE_PLAY);
+        [self playPause];
     }
 }
 
