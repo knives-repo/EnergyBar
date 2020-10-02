@@ -154,9 +154,7 @@ extern NSString* kMRMediaRemoteNowPlayingInfoPlaybackRate;
         ^(NSDictionary *info)
         {
             // check if this is music
-            NSLog(@"%@", info);
             double playbackRate = [[info objectForKey:kMRMediaRemoteNowPlayingInfoPlaybackRate] doubleValue];
-            NSLog(@"%f", playbackRate);
             if (playbackRate < 1.0) {
 
                 self.album = nil;
