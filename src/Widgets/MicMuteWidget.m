@@ -173,7 +173,7 @@
     
     // update
     self.runningApplication = [[NSWorkspace sharedWorkspace] menuBarOwningApplication];
-    NSLog(@"%@", self.runningApplication.bundleIdentifier);
+    //NSLog(@"%@", self.runningApplication.bundleIdentifier);
     
     // check if we use application mute
     if (self.applicationMute && [self isMutableAppRunning]) {
