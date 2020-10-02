@@ -36,6 +36,7 @@ extern NSString *kMRMediaRemoteNowPlayingApplicationDidChangeNotification;
 extern NSString *kMRMediaRemoteNowPlayingInfoAlbum;
 extern NSString *kMRMediaRemoteNowPlayingInfoArtist;
 extern NSString *kMRMediaRemoteNowPlayingInfoTitle;
+extern NSString* kMRMediaRemoteNowPlayingInfoPlaybackRate;
 
 @implementation NowPlaying
 + (void)load
@@ -152,19 +153,37 @@ extern NSString *kMRMediaRemoteNowPlayingInfoTitle;
     MRMediaRemoteGetNowPlayingInfo(dispatch_get_main_queue(),
         ^(NSDictionary *info)
         {
-            NSString *album = [info objectForKey:kMRMediaRemoteNowPlayingInfoAlbum];
-            NSString *artist = [info objectForKey:kMRMediaRemoteNowPlayingInfoArtist];
-            NSString *title = [info objectForKey:kMRMediaRemoteNowPlayingInfoTitle];
+            // check if this is music
+            NSLog(@"%@", info);
+            double playbackRate = [[info objectForKey:kMRMediaRemoteNowPlayingInfoPlaybackRate] doubleValue];
+            NSLog(@"%f", playbackRate);
+            if (playbackRate < 1.0) {
 
-            if (self.album != album || self.artist != artist || self.title != title)
-            {
-                self.album = album;
-                self.artist = artist;
-                self.title = title;
+                self.album = nil;
+                self.artist = nil;
+                self.title = nil;
 
                 [[NSNotificationCenter defaultCenter]
                     postNotificationName:NowPlayingInfoNotification
                     object:self];
+            
+            } else {
+
+                NSString *album = [info objectForKey:kMRMediaRemoteNowPlayingInfoAlbum];
+                NSString *artist = [info objectForKey:kMRMediaRemoteNowPlayingInfoArtist];
+                NSString *title = [info objectForKey:kMRMediaRemoteNowPlayingInfoTitle];
+            
+                if (self.album != album || self.artist != artist || self.title != title)
+                {
+                    self.album = album;
+                    self.artist = artist;
+                    self.title = title;
+
+                    [[NSNotificationCenter defaultCenter]
+                        postNotificationName:NowPlayingInfoNotification
+                        object:self];
+                }
+                
             }
         });
 }
