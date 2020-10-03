@@ -13,6 +13,7 @@
 #import "NSRunningApplication+Utils.h"
 
 @interface MediaWidgetBase()
+@property (assign) BOOL autoPlay;
 @property (assign) BOOL playSpotify;
 @end
 
@@ -20,6 +21,9 @@
 
 - (void)viewWillAppear
 {
+    // init
+    self.autoPlay = NO;
+    
     [[NSNotificationCenter defaultCenter]
         addObserver:self
         selector:@selector(nowPlayingNotification:)
@@ -68,7 +72,7 @@
     // collect some info
     NSURL* spotifyURL = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:[NSURL URLWithString:@"spotify://"]];
     //BOOL spotifyPlaying = [[NowPlaying sharedInstance].appBundleIdentifier isEqualToString:@"com.spotify.client"];
-    //BOOL spotifyFrontMost = [[[NSWorkspace sharedWorkspace] frontmostApplication] isSpotify];
+    BOOL spotifyFrontMost = [[[NSWorkspace sharedWorkspace] frontmostApplication] isSpotify];
     BOOL someonePlaying = [NowPlaying sharedInstance].appBundleIdentifier != nil;
     BOOL spotifyRunning = [NSRunningApplication isSpotifyRunning];
     BOOL musicRunning = [NSRunningApplication isMusicRunning];
@@ -80,14 +84,14 @@
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mediaFavorSpotify"] && spotifyURL != nil) {
             
             // if not running, will have to play when finished launching
-            self.playSpotify = (spotifyRunning == NO);
+            self.playSpotify = (self.autoPlay && spotifyRunning == NO);
             
             // launch or bring foremost
             [[NSWorkspace sharedWorkspace] openURL:spotifyURL];
             
             // if already running, app switch will not happen
             // so we can directly tell spotify to play
-            if (spotifyRunning == YES) {
+            if (spotifyFrontMost == YES || (self.autoPlay && spotifyRunning)) {
                 [self tellSpotifyToPlay:NO];
             }
             
@@ -120,7 +124,7 @@
 - (void) tellSpotifyToPlay:(BOOL) waitLonger {
     
     // space
-    [NSTimer scheduledTimerWithTimeInterval:(waitLonger ? 3 : 0.5) repeats:NO block:^(NSTimer * _Nonnull timer) {
+    [NSTimer scheduledTimerWithTimeInterval:(waitLonger ? 3 : 0.25) repeats:NO block:^(NSTimer * _Nonnull timer) {
         PostKeyPress(49, 0);
     }];
 
