@@ -16,6 +16,9 @@
 
 - (void)nowPlayingNotification:(NSNotification *)notification
 {
+    // last app
+    //NSLog(@"%@", [NowPlaying sharedInstance].appBundleIdentifier);
+    
     // notify track change
     if ([NowPlaying sharedInstance].playing) {
         if (self.currentTitle == nil || [self.currentTitle isEqualToString:[NowPlaying sharedInstance].title] == NO) {
