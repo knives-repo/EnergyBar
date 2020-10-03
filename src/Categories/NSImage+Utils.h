@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSImage(Utils)
 
++ (NSImage*) swatchWithColor:(NSColor*) color size:(NSSize) size;
+
 - (NSImage *) tintedWithColor:(NSColor *)tint;
 
 @end

@@ -10,7 +10,17 @@
 
 @implementation NSImage(Utils)
 
-- (NSImage *) tintedWithColor:(NSColor *)tint
++ (NSImage*) swatchWithColor:(NSColor*) color size:(NSSize) size
+{
+    NSImage *image = [[NSImage alloc] initWithSize:size];
+    [image lockFocus];
+    [color set];
+    NSRectFill(NSMakeRect(0, 0, size.width, size.height));
+    [image unlockFocus];
+    return image;
+}
+
+- (NSImage*) tintedWithColor:(NSColor*) tint
 {
     [self setTemplate:NO];
     NSImage *image = [[self copy] autorelease];

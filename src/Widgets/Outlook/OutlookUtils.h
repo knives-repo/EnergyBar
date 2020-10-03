@@ -13,7 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OutlookUtils : NSObject
 
++ (NSColor*) defaultBusyColor;
+
 + (void) styleShowAsIndicator:(NSView*) showAsView forEvent:(OutlookEvent*) event;
+
++ (NSDictionary*) presetColors;
++ (NSArray*) presetColorNames;
 
 @end
 

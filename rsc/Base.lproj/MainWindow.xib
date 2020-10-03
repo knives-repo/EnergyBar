@@ -21,9 +21,7 @@
                 <outlet property="generalView" destination="LNX-xt-gFC" id="b0m-l1-kLf"/>
                 <outlet property="loginItemButton" destination="RWM-KH-Fhd" id="Oo9-Kl-2aa"/>
                 <outlet property="mailView" destination="z0Y-qB-AmT" id="Ifj-qm-tXN"/>
-                <outlet property="outlookSignInButton" destination="vzx-JL-ziX" id="Dyj-5d-GWk"/>
-                <outlet property="outlookSignOutButton" destination="yCe-IJ-UCw" id="YSG-BO-xYc"/>
-                <outlet property="outlookStatusLabel" destination="Ld8-ef-Wcn" id="FUn-sL-YNs"/>
+                <outlet property="outlookSettingsController" destination="ZQp-hs-4xH" id="vmN-9i-nbd"/>
                 <outlet property="sourceLinkButton" destination="nK8-ls-cQK" id="g3a-cL-3hj"/>
                 <outlet property="toggleMacOSDockButton" destination="z4v-MZ-bcj" id="c73-ft-KUz"/>
                 <outlet property="toolBar" destination="ZQG-Zm-WHH" id="RLy-27-PAN"/>
@@ -39,6 +37,15 @@
                 <outlet property="touchBar" destination="7g7-Is-eP5" id="Pgw-0B-ekU"/>
             </connections>
         </customObject>
+        <viewController id="ZQp-hs-4xH" customClass="OutlookSettingsController">
+            <connections>
+                <outlet property="categoriesAddRemoveButton" destination="jMb-sk-Ru4" id="2pf-wS-B7U"/>
+                <outlet property="categoriesTable" destination="LgY-ML-gy5" id="jE9-f5-Uwj"/>
+                <outlet property="signInButton" destination="vzx-JL-ziX" id="D08-hi-g5U"/>
+                <outlet property="signOutButton" destination="yCe-IJ-UCw" id="08c-dn-LBB"/>
+                <outlet property="statusLabel" destination="Ld8-ef-Wcn" id="8DO-6M-8u4"/>
+            </connections>
+        </viewController>
         <userDefaultsController representsSharedInstance="YES" id="pJh-SC-QEV"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -993,11 +1000,11 @@ In general the folder should contain application aliases. The order of the folde
             <point key="canvasLocation" x="78" y="-341.5"/>
         </customView>
         <customView id="z0Y-qB-AmT">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="171"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="376"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDy-Hq-8Xt">
-                    <rect key="frame" x="20" y="134" width="120" height="17"/>
+                    <rect key="frame" x="20" y="339" width="120" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Outlook Calendar:" id="WDK-FG-agQ">
                         <font key="font" metaFont="system"/>
@@ -1006,29 +1013,29 @@ In general the folder should contain application aliases. The order of the folde
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vzx-JL-ziX">
-                    <rect key="frame" x="152" y="98" width="107" height="32"/>
+                    <rect key="frame" x="152" y="303" width="107" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Sign In" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Nbu-OD-pdr">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="outlookSignIn:" target="Voe-Tx-rLC" id="BUN-gB-qSC"/>
+                        <action selector="outlookSignIn:" target="ZQp-hs-4xH" id="0D4-lN-gZT"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yCe-IJ-UCw">
-                    <rect key="frame" x="254" y="98" width="107" height="32"/>
+                    <rect key="frame" x="254" y="303" width="107" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Sign Out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Jr-A7-dQb">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
-                        <connections>
-                            <action selector="outlookSignOut:" target="Voe-Tx-rLC" id="rAr-xd-P6q"/>
-                        </connections>
                     </buttonCell>
+                    <connections>
+                        <action selector="outlookSignOut:" target="ZQp-hs-4xH" id="erb-MX-i7T"/>
+                    </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-ef-Wcn">
-                    <rect key="frame" x="152" y="135" width="242" height="16"/>
+                    <rect key="frame" x="152" y="340" width="242" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="wkq-PI-jfw">
                         <font key="font" metaFont="system"/>
@@ -1037,19 +1044,19 @@ In general the folder should contain application aliases. The order of the folde
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXf-ds-A7f">
-                    <rect key="frame" x="152" y="76" width="205" height="18"/>
+                    <rect key="frame" x="152" y="281" width="205" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Only show accepted meetings" bezelStyle="regularSquare" imagePosition="left" inset="2" id="kGm-mJ-nnl">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="outlookWidgetSettingsChange:" target="Voe-Tx-rLC" id="DX9-gB-bYN"/>
+                        <action selector="outlookWidgetSettingsChange:" target="ZQp-hs-4xH" id="hOw-Ch-qno"/>
                         <binding destination="pJh-SC-QEV" name="value" keyPath="values.outlookBusyOnly" id="Mkz-fL-X0C"/>
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KYe-Ys-FIK">
-                    <rect key="frame" x="152" y="52" width="163" height="16"/>
+                    <rect key="frame" x="152" y="257" width="163" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Widget size" id="0N6-Cs-X4K">
                         <font key="font" metaFont="system"/>
@@ -1058,7 +1065,7 @@ In general the folder should contain application aliases. The order of the folde
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ESn-yo-TEH">
-                    <rect key="frame" x="299" y="46" width="112" height="25"/>
+                    <rect key="frame" x="299" y="251" width="112" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Small" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="bHt-Ra-0b9" id="wOl-jU-arI">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -1073,12 +1080,12 @@ In general the folder should contain application aliases. The order of the folde
                         </menu>
                     </popUpButtonCell>
                     <connections>
-                        <action selector="outlookWidgetSettingsChange:" target="Voe-Tx-rLC" id="Gyb-bK-55F"/>
+                        <action selector="outlookWidgetSettingsChange:" target="ZQp-hs-4xH" id="Rel-Lg-sa9"/>
                         <binding destination="pJh-SC-QEV" name="selectedTag" keyPath="values.outlookWidgetSize" id="V4i-6X-yoJ"/>
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QHY-0o-uDh">
-                    <rect key="frame" x="152" y="23" width="163" height="16"/>
+                    <rect key="frame" x="152" y="228" width="163" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Show tomorrow events" id="QGZ-JH-fX4">
                         <font key="font" metaFont="system"/>
@@ -1087,7 +1094,7 @@ In general the folder should contain application aliases. The order of the folde
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b5O-9a-4kM">
-                    <rect key="frame" x="299" y="17" width="112" height="25"/>
+                    <rect key="frame" x="299" y="222" width="112" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Never" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Gwq-oK-85f" id="Vwm-dt-aNZ">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -1101,12 +1108,98 @@ In general the folder should contain application aliases. The order of the folde
                         </menu>
                     </popUpButtonCell>
                     <connections>
-                        <action selector="outlookWidgetSettingsChangeWithReload:" target="Voe-Tx-rLC" id="Bcz-K1-Ryx"/>
+                        <action selector="outlookWidgetSettingsChangeWithReload:" target="ZQp-hs-4xH" id="aDs-8O-hqF"/>
                         <binding destination="pJh-SC-QEV" name="selectedTag" keyPath="values.outlookShowTomorrow" id="Mk6-07-qCF"/>
                     </connections>
                 </popUpButton>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ptl-S3-UDr">
+                    <rect key="frame" x="152" y="192" width="242" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Categories" id="zxO-JG-lrg">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udn-Zq-iAF">
+                    <rect key="frame" x="152" y="49" width="240" height="135"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <clipView key="contentView" id="Qzg-Up-rMC">
+                        <rect key="frame" x="1" y="0.0" width="238" height="134"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="Jlc-Vh-ePy" id="LgY-ML-gy5">
+                                <rect key="frame" x="0.0" y="0.0" width="238" height="109"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <size key="intercellSpacing" width="3" height="3"/>
+                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                <tableColumns>
+                                    <tableColumn identifier="name" width="142" minWidth="40" maxWidth="1000" id="2LY-rg-vr0">
+                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Category">
+                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                        </tableHeaderCell>
+                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Test" id="MwN-li-a9r">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                    </tableColumn>
+                                    <tableColumn identifier="color" width="90" minWidth="10" maxWidth="3.4028234663852886e+38" id="wZC-co-jaZ">
+                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Color">
+                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </tableHeaderCell>
+                                        <popUpButtonCell key="dataCell" type="bevel" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="bezel" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="eHn-Aw-0pR" customClass="CategoryColorPopUpButtonCell">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <menu key="menu" id="Fbt-BD-NTd"/>
+                                        </popUpButtonCell>
+                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                    </tableColumn>
+                                </tableColumns>
+                                <connections>
+                                    <outlet property="dataSource" destination="ZQp-hs-4xH" id="6VX-B9-0Ec"/>
+                                    <outlet property="delegate" destination="ZQp-hs-4xH" id="8eD-XY-UZu"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="uVz-bT-yvv">
+                        <rect key="frame" x="1" y="118" width="238" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="ACs-cZ-pEv">
+                        <rect key="frame" x="224" y="17" width="15" height="102"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <tableHeaderView key="headerView" id="Jlc-Vh-ePy">
+                        <rect key="frame" x="0.0" y="0.0" width="238" height="25"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </tableHeaderView>
+                </scrollView>
+                <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7p-X3-aFb">
+                    <rect key="frame" x="152" y="19" width="54" height="23"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="momentary" id="jMb-sk-Ru4">
+                        <font key="font" metaFont="system"/>
+                        <segments>
+                            <segment label="+" width="26"/>
+                            <segment label="-" width="25" tag="1"/>
+                        </segments>
+                        <connections>
+                            <action selector="onCategoriesAddRemove:" target="ZQp-hs-4xH" id="o7X-69-stS"/>
+                        </connections>
+                    </segmentedCell>
+                </segmentedControl>
+                <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="9gl-JD-DO6">
+                    <rect key="frame" x="152" y="214" width="312" height="5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </box>
             </subviews>
-            <point key="canvasLocation" x="617" y="-465.5"/>
+            <point key="canvasLocation" x="617" y="-363"/>
         </customView>
         <customView id="oZG-ix-yVe">
             <rect key="frame" x="0.0" y="0.0" width="480" height="380"/>

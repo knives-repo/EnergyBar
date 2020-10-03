@@ -31,8 +31,6 @@ typedef enum {
 //- (void)getCategories:(JsonCompletionBlock) completionBlock;
 - (void)getCalendarEvents:(ShowTomorrow) showTomorrow completionBlock:(JsonCompletionBlock) completionBlock;
 
-+ (NSDictionary*) presetColors;
-
 @end
 
 NS_ASSUME_NONNULL_END

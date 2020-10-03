@@ -25,12 +25,12 @@
 #import "VolumeWidget.h"
 #import "MicMuteWidget.h"
 #import "MediaWidget.h"
+#import "OutlookSettingsController.h"
 #import "OutlookCalendarWidget.h"
-#import "Outlook.h"
 
 static const NSTimeInterval IgnoresAccidentalTouchesDuration = 0.3;
 
-@interface AppController () <NSApplicationDelegate, NSWindowDelegate>
+@interface AppController () <NSApplicationDelegate, NSWindowDelegate, OutlookSettingsDelegate>
 - (void)fsnotify:(const char *)path;
 @property (retain) NSString *standardDefaultAppsFolder;
 @property (assign) IBOutlet NSToolbar *toolBar;
@@ -45,9 +45,7 @@ static const NSTimeInterval IgnoresAccidentalTouchesDuration = 0.3;
 @property (assign) IBOutlet NSButton *toggleMacOSDockButton;
 @property (assign) IBOutlet NSButton *loginItemButton;
 @property (assign) IBOutlet NSButton *sourceLinkButton;
-@property (assign) IBOutlet NSTextField *outlookStatusLabel;
-@property (assign) IBOutlet NSButton *outlookSignInButton;
-@property (assign) IBOutlet NSButton *outlookSignOutButton;
+@property (assign) IBOutlet OutlookSettingsController *outlookSettingsController;
 @end
 
 static void AppControllerFSNotify(const char *path, void *data)
@@ -59,7 +57,6 @@ static void AppControllerFSNotify(const char *path, void *data)
 {
     void *_stream;
     id _keyEventMonitor;
-    Outlook* outlook;
 }
 
 - (void)dealloc
@@ -161,11 +158,10 @@ static void AppControllerFSNotify(const char *path, void *data)
         [NSApp terminate:nil];
     }
     
-    // init outlook
-    outlook = [[Outlook alloc] init];
-    [outlook loadCurrentAccount:^{
-        [self updateOutlookStatus];
-    }];
+    // set delegate
+    [self.outlookSettingsController setDelegate:self];
+    
+    
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
@@ -220,6 +216,9 @@ static void AppControllerFSNotify(const char *path, void *data)
     if (nil != sender) {
         [NSApp activateIgnoringOtherApps:YES];
     }
+    
+    // should find a nicer way to do this
+    [self.outlookSettingsController viewDidLoad];
 
     // fake a sender
     NSButton* view = [[NSButton alloc] init];
@@ -245,7 +244,7 @@ static void AppControllerFSNotify(const char *path, void *data)
     [self weatherWidgetSettingsChange:nil];
     [self nowPlayingWidgetSettingsChange:nil];
     [self todoWidgetSettingsChange:nil];
-    [self outlookWidgetSettingsChange:nil];
+    [self outlookSettingsUpdated:YES];
 }
 
 - (IBAction)toolbarItemAction:(id)sender
@@ -570,43 +569,14 @@ static void AppControllerFSNotify(const char *path, void *data)
     [[NSUserDefaults standardUserDefaults] setObject:version forKey:@"LastVersion"];
 }
 
-- (void)updateOutlookStatus {
-    if (outlook.currentAccount == nil) {
-        [self.outlookStatusLabel setStringValue:@"Not connected"];
-        [self.outlookSignInButton setEnabled:YES];
-        [self.outlookSignOutButton setEnabled:NO];
-    } else {
-        [self.outlookStatusLabel setStringValue:outlook.currentAccount.username];
-        [self.outlookSignInButton setEnabled:NO];
-        [self.outlookSignOutButton setEnabled:YES];
-    }
+- (void)outlookAccountUpdated
+{
+    [self updateOutlookWidgetReloadingAccount:YES reloadingEvents:YES];
 }
 
-- (IBAction)outlookSignIn:(id)sender
+- (void)outlookSettingsUpdated:(BOOL) reloadEvents
 {
-    [outlook signIn:^(NSDictionary* profile) {
-        NSLog(@"[CONNECT] %@", profile);
-        [self updateOutlookStatus];
-        [self updateOutlookWidgetReloadingAccount:YES reloadingEvents:YES];
-    }];
-}
-
-- (IBAction)outlookSignOut:(id)sender
-{
-    [outlook signOut:^() {
-        [self updateOutlookStatus];
-        [self updateOutlookWidgetReloadingAccount:YES reloadingEvents:YES];
-    }];
-}
-
-- (IBAction)outlookWidgetSettingsChange:(id)sender
-{
-    [self updateOutlookWidgetReloadingAccount:NO reloadingEvents:NO];
-}
-
-- (IBAction)outlookWidgetSettingsChangeWithReload:(id)sender
-{
-    [self updateOutlookWidgetReloadingAccount:NO reloadingEvents:YES];
+    [self updateOutlookWidgetReloadingAccount:NO reloadingEvents:reloadEvents];
 }
 
 - (void)updateOutlookWidgetReloadingAccount:(BOOL) reloadAccount reloadingEvents:(BOOL) reloadEvents {
