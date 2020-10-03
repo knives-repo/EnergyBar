@@ -15,7 +15,11 @@
     NSImage *image = [[NSImage alloc] initWithSize:size];
     [image lockFocus];
     [color set];
-    NSRectFill(NSMakeRect(0, 0, size.width, size.height));
+    
+    NSBezierPath* circlePath = [NSBezierPath bezierPath];
+    [circlePath appendBezierPathWithOvalInRect:NSMakeRect(0, 0, size.width, size.height)];
+    [circlePath fill];
+
     [image unlockFocus];
     return image;
 }

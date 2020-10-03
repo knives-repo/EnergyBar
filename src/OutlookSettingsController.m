@@ -17,12 +17,13 @@
 {
     // super
     self = [super initWithCoder:coder];
+    [self setArrowPosition:NSPopUpNoArrow];
     
     // now manually add one item for each preset color
     NSDictionary* presetColors = [OutlookUtils presetColors];
     for (NSString* key in [OutlookUtils presetColorNames]) {
         NSMenuItem* menuItem = [[NSMenuItem alloc] initWithTitle:@"" action:nil keyEquivalent:@""];
-        [menuItem setImage:[NSImage swatchWithColor:[presetColors objectForKey:key] size:NSMakeSize(60,10)]];
+        [menuItem setImage:[NSImage swatchWithColor:[presetColors objectForKey:key] size:NSMakeSize(12, 12)]];
         [menuItem setIdentifier:key];
         [self.menu addItem:menuItem];
     }
