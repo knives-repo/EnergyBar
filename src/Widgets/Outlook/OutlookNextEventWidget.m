@@ -266,9 +266,17 @@
        
         }
         
+        // if frontmost before opening
+        BOOL isActive = [[[NSWorkspace sharedWorkspace] frontmostApplication] isMicrosoftTeams];
+        
         // now open it
         //NSLog(@"%@", joinUrl);
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:joinUrl]];
+        
+        // application switch will not be triggered so let's do it ourselves
+        if (isActive) {
+            [self didActivateApplication:nil];
+        }
     }
 }
 
@@ -411,12 +419,15 @@
 - (void)didActivateApplication:(id) sender
 {
     // update
-    NSRunningApplication* runningApplication = [[NSWorkspace sharedWorkspace] menuBarOwningApplication];
+    NSRunningApplication* runningApplication = [[NSWorkspace sharedWorkspace] frontmostApplication];
     if ([runningApplication isMicrosoftTeams]) {
         if (self.joinTeams) {
 
+            // wait time depends on if this is being launched or not
+            BOOL isLaunching = (runningApplication.finishedLaunching == NO);
+            
             // wait some time
-            [NSTimer scheduledTimerWithTimeInterval:1.5 repeats:NO block:^(NSTimer * _Nonnull timer) {
+            [NSTimer scheduledTimerWithTimeInterval:(isLaunching ? 7.5 : 1.5) repeats:NO block:^(NSTimer * _Nonnull timer) {
                 // enter
                 PostKeyPress(36, 0);
             }];
