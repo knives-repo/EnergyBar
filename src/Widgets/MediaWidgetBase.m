@@ -57,10 +57,20 @@
     
     // notify track change
     if ([NowPlaying sharedInstance].playing) {
+        
+        // if different than previous
         if (self.currentTitle == nil || [self.currentTitle isEqualToString:[NowPlaying sharedInstance].title] == NO) {
+            
+            // save
             self.currentTitle = [NowPlaying sharedInstance].title;
-            [BezelWindow showWithMessage:self.currentTitle];
+            
+            // song title
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mediaShowSongTitle"] == YES) {
+                [BezelWindow showWithMessage:self.currentTitle];
+            }
+            
         }
+    
     } else {
         self.currentTitle = nil;
     }

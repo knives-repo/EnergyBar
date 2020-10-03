@@ -171,5 +171,7 @@
 	<integer>2</integer>
 	<key>outlookWidgetSize</key>
 	<integer>1</integer>
+	<key>mediaShowSongTitle</key>
+	<true/>
 </dict>
 </plist>
