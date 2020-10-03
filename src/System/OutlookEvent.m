@@ -444,8 +444,7 @@
     for (OutlookEvent* event in events) {
         
         // discard old events
-        NSTimeInterval interval = [event intervalWithNow];
-        if (interval < -EVENT_IN_PROGRESS_FOR) {
+        if ([event isEnded]) {
             continue;
         }
         
