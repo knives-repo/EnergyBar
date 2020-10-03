@@ -77,8 +77,8 @@
 
 }
 
-- (void) playPause {
-
+- (void) playPause
+{
     // collect some info
     NSURL* spotifyURL = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:[NSURL URLWithString:@"spotify://"]];
     //BOOL spotifyPlaying = [[NowPlaying sharedInstance].appBundleIdentifier isEqualToString:@"com.spotify.client"];
@@ -131,13 +131,24 @@
 
 }
 
-- (void) tellSpotifyToPlay:(BOOL) waitLonger {
-    
+- (void) tellSpotifyToPlay:(BOOL) waitLonger
+{
     // space
     [NSTimer scheduledTimerWithTimeInterval:(waitLonger ? 3 : 0.25) repeats:NO block:^(NSTimer * _Nonnull timer) {
         PostKeyPress(49, 0);
     }];
+}
 
+- (void) showLyrics
+{
+    NSString* q = [NSString stringWithFormat:@"%@ %@ lyrics", [NowPlaying sharedInstance].title, [NowPlaying sharedInstance].artist];
+    q = [q stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    q = [q stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
+    q = [q stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+    q = [q stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
+    q = [q stringByReplacingOccurrencesOfString:@"#" withString:@"%23"];
+    NSString* url = [NSString stringWithFormat:@"https://www.google.com/search?q=%@", q];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
 @end

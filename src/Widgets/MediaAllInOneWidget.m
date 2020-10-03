@@ -17,9 +17,9 @@
 #import "BezelWindow.h"
 #import "KeyEvent.h"
 #import "NSImage+Utils.h"
-#import "NSRunningApplication+Utils.h"
 
 #define ACTIVATION_DELTA 32
+#define LYRICS_TIME 1
 
 @interface MediaAllInOneWidgetView : ImageTitleView
 @end
@@ -32,8 +32,10 @@
 @end
 
 @interface MediaAllInOneWidget() {
+    NSTimeInterval pressStart;
     int initialSlidePosition;
     BOOL activated;
+    BOOL lyrics;
 }
 @property (retain) ImageTitleView* imageTitleView;
 @property (retain) NSImage* playImage;
@@ -125,12 +127,22 @@
 - (void)shortPressBegan:(NSGestureRecognizer *)recognizer
 {
     // get active segment
+    pressStart = [[NSDate date] timeIntervalSinceReferenceDate];
     NSPoint point = [recognizer locationInView:self.view];
     initialSlidePosition = point.x;
     activated = NO;
+    lyrics = NO;
     
     // hide bezel window
     [BezelWindow hide];
+    
+    // timer for lyrics
+    [NSTimer scheduledTimerWithTimeInterval:LYRICS_TIME repeats:NO block:^(NSTimer * _Nonnull timer) {
+        if (pressStart != 0 && activated == NO) {
+            [self showLyrics];
+            lyrics = YES;
+        }
+    }];
 }
 
 - (void)shortPressChanged:(NSGestureRecognizer *)recognizer
@@ -149,7 +161,7 @@
     } else {
         if (activated == YES) {
             [self.imageTitleView setImage:[self playPauseImage]];
-        } else {
+        } else if (lyrics == NO) {
             BOOL playing = [NowPlaying sharedInstance].playing;
             [self.imageTitleView setImage:playing ? self.playImage : self.pauseImage];
         }
@@ -159,6 +171,9 @@
 
 - (void)shortPressEnded:(NSGestureRecognizer *)recognizer
 {
+    // reset
+    pressStart = 0;
+    
     // key up
     NSPoint point = [recognizer locationInView:self.view];
     int positionDelta = point.x - initialSlidePosition;
@@ -167,7 +182,9 @@
     } else if (positionDelta > ACTIVATION_DELTA) {
         PostAuxKeyPress(NX_KEYTYPE_NEXT);
     } else if (activated == NO) {
-        [self playPause];
+        if (lyrics == NO) {
+            [self playPause];
+        }
     }
 }
 

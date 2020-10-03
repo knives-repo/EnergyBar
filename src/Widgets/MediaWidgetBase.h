@@ -18,4 +18,6 @@
 - (void) nowPlayingNotification:(NSNotification*) notification;
 - (void) playPause;
 
+- (void) showLyrics;
+
 @end
