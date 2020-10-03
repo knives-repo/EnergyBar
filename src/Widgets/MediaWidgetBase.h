@@ -13,6 +13,8 @@
 
 @property (retain) NSString* currentTitle;
 
+- (void) viewWillAppear;
+
 - (void) nowPlayingNotification:(NSNotification*) notification;
 - (void) playPause;
 

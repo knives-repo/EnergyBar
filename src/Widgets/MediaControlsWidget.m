@@ -64,27 +64,6 @@
     [super dealloc];
 }
 
-- (void)viewWillAppear
-{
-    [[NSNotificationCenter defaultCenter]
-        addObserver:self
-        selector:@selector(nowPlayingNotification:)
-        name:NowPlayingStateNotification
-        object:nil];
-
-    [[NSNotificationCenter defaultCenter]
-        addObserver:self
-        selector:@selector(nowPlayingNotification:)
-        name:NowPlayingInfoNotification
-        object:nil];
-}
-
-- (void)viewDidDisappear
-{
-    [[NSNotificationCenter defaultCenter]
-        removeObserver:self];
-}
-
 - (NSImage *)playPauseImage
 {
     BOOL playing = [NowPlaying sharedInstance].playing;
