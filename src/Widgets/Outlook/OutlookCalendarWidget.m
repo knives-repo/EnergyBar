@@ -84,7 +84,7 @@
     
     switch (self.activeIndex) {
         case SIGNIN_INDEX:
-            [self.target performSelector:self.action withObject:[NSNumber numberWithInt:1]];
+            [self.target performSelector:self.action withObject:[NSNumber numberWithInt:2]];
             break;
             
         case LOADING_INDEX:
@@ -203,16 +203,27 @@
         reloadEvents = YES;
     }
     
-    // reload
-    if (reloadEvents == YES) {
-        [self setActiveIndex:LOADING_INDEX];
-        [self loadEvents];
-    } else if (self.activeIndex == EVENT_INDEX || self.activeIndex == EMPTY_INDEX) {
-        [self.nextEventWidget selectEvent];
-    }
-    
-    // recalc
-    [self.view invalidateIntrinsicContentSize];
+    // main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        // do we have an account
+        if (self.outlook.currentAccount == nil) {
+            [self setActiveIndex:SIGNIN_INDEX];
+            return;
+        }
+        
+        // reload
+        if (reloadEvents == YES) {
+            [self setActiveIndex:LOADING_INDEX];
+            [self loadEvents];
+        } else if (self.activeIndex == EVENT_INDEX || self.activeIndex == EMPTY_INDEX) {
+            [self.nextEventWidget selectEvent];
+        }
+        
+        // recalc
+        [self.view invalidateIntrinsicContentSize];
+        
+    });
 
 }
 

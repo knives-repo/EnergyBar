@@ -37,6 +37,7 @@ static const NSTimeInterval IgnoresAccidentalTouchesDuration = 0.3;
 @property (assign) IBOutlet TouchBarController *touchBarController;
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSView *generalView;
+@property (assign) IBOutlet NSView *mailView;
 @property (assign) IBOutlet NSView *widgetsView;
 @property (assign) IBOutlet NSView *advancedView;
 @property (assign) IBOutlet NSTextField *versionLabel;
@@ -253,6 +254,7 @@ static void AppControllerFSNotify(const char *path, void *data)
     NSArray* toolbarIdentifiers = @[
         @"General",
         @"Widgets",
+        @"Mail",
         @"Advanced"
     ];
     [self.toolBar setSelectedItemIdentifier:[toolbarIdentifiers objectAtIndex:[sender tag]]];
@@ -267,6 +269,9 @@ static void AppControllerFSNotify(const char *path, void *data)
         [self setContentView:self.widgetsView];
         break;
     case 2:
+        [self setContentView:self.mailView];
+        break;
+    case 3:
         [self setContentView:self.advancedView];
         break;
     }
