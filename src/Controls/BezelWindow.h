@@ -27,8 +27,13 @@ typedef enum {
 
 + (BOOL) isDarkMode;
 
++ (NSColor*) labelColor;
++ (NSColor*) labelColor:(BOOL) darkMode;
+
 + (void) showLevelFor:(BezelType) type withValue:(float) value;
 + (void) showWithMessage:(NSString*) message;
+
++ (void) showWithView:(NSView*) view inDarkMode:(BOOL) darkMode;
 + (void) showWithView:(NSView*) view;
 
 + (void) hide;

@@ -22,6 +22,8 @@
 }
 
 - (void) viewDidLoad {
+    
+    // fill data
     NowPlaying* instance = [NowPlaying sharedInstance];
     [self.iconView setImage:instance.appIcon];
     [self.titleView setStringValue:SafeStringValue(instance.title)];
@@ -86,7 +88,7 @@
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mediaShowSongTitle"] == YES) {
                 if ([NowPlaying sharedInstance].title != nil) {
                     MediaNotificationController* controller = [[[MediaNotificationController alloc] init] autorelease];
-                    [BezelWindow showWithView:controller.view];
+                    [BezelWindow showWithView:controller.view inDarkMode:YES];
                 }
             }
             

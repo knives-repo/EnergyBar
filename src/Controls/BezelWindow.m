@@ -47,6 +47,14 @@ static NSTimer* timer = nil;
     }
 }
 
++ (NSColor*) labelColor {
+    return [BezelWindow labelColor:[BezelWindow isDarkMode]];
+}
+
++ (NSColor*) labelColor:(BOOL) darkMode {
+    return darkMode ? [NSColor whiteColor] : [NSColor blackColor];
+}
+
 + (void) showLevelFor:(BezelType) type withValue:(float) value {
     [BezelWindow show:[[BezelWindow alloc] initWithType:type andValue:value]];
 }
@@ -59,7 +67,17 @@ static NSTimer* timer = nil;
 
 + (void) showWithView:(NSView*) view {
     if (view != nil) {
-        [BezelWindow show:[[BezelWindow alloc] initWithView:view]];
+        [BezelWindow show:[[BezelWindow alloc] initWithView:view
+                                                inDarkMode:[BezelWindow isDarkMode]
+                                     andManagingLabelColors:YES]];
+    }
+}
+
++ (void) showWithView:(NSView*) view inDarkMode:(BOOL) darkMode {
+    if (view != nil) {
+        [BezelWindow show:[[BezelWindow alloc] initWithView:view
+                                                inDarkMode:darkMode
+                                     andManagingLabelColors:NO]];
     }
 }
 
@@ -144,7 +162,7 @@ static NSTimer* timer = nil;
     
 }
 
-- (id) initWithView:(NSView*) view {
+- (id) initWithView:(NSView*) view inDarkMode:(BOOL) darkMode andManagingLabelColors:(BOOL) manageLabelColors {
     
     // get dimensions
     NSRect frame = view.frame;
@@ -153,8 +171,16 @@ static NSTimer* timer = nil;
     
     NSRect screenRect = [[NSScreen mainScreen] frame];
     NSRect contentRect = NSMakeRect((screenRect.size.width-width)/2, BOTTOM_MARGIN, width, height);
-
-    BOOL darkMode = YES;
+    
+    // update label colors
+    if (manageLabelColors) {
+        for (NSView* subview in view.subviews) {
+            if ([subview isKindOfClass:[NSTextField class]]) {
+                [(NSTextField*)subview setTextColor:[BezelWindow labelColor:darkMode]];
+            }
+        }
+    }
+    
     self = [self initWithFrame:contentRect forDarkMode:darkMode];
     
     // center
@@ -169,9 +195,8 @@ static NSTimer* timer = nil;
 
 - (id) initWithMessage:(NSString*) message {
     
-    BOOL darkMode = YES;
+    // label color will be managed by initWithView
     NSTextField* text = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, ALERT_WIDTH, ALERT_HEIGHT)];
-    [text setTextColor:(darkMode ? [NSColor whiteColor] : [NSColor blackColor])];
     [text setFont:[NSFont fontWithName:@"Helvetica" size:20]];
     [text setBackgroundColor:[NSColor clearColor]];
     [text setAlignment:NSTextAlignmentCenter];
@@ -180,7 +205,7 @@ static NSTimer* timer = nil;
     [text setEditable:NO];
     [text setBezeled:NO];
     
-    self = [self initWithView:text];
+    self = [self initWithView:text inDarkMode:YES andManagingLabelColors:YES];
 
     return self;
 

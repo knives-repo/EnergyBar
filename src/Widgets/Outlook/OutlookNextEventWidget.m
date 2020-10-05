@@ -353,7 +353,7 @@
 - (void)showEventDetail:(OutlookEvent*) event
 {
     OutlookEventDetailsController* controller = [[OutlookEventDetailsController alloc] initWithEvent:event];
-    [BezelWindow showWithView:controller.view];
+    [BezelWindow showWithView:controller.view inDarkMode:YES];
 }
 
 - (void)onTextPress:(NSGestureRecognizer *)recognizer
