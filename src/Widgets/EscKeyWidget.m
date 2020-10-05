@@ -45,6 +45,6 @@
 
 - (void)click:(id)sender
 {
-    PostKeyPress(0x35/*kVK_Escape*/, [NSEvent modifierFlags]);
+    PostKeyPress(0x35/*kVK_Escape*/, (uint32_t) [NSEvent modifierFlags]);
 }
 @end
