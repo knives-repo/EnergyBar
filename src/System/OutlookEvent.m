@@ -459,14 +459,11 @@
             continue;
         }
         
-        // if same date
-        if ([event.startTime isEqualToDate:soonest.startTime] == NO) {
-            break;
-        }
-        
-        // compare show As
-        int delta = event.showAs - soonest.showAs;
-        if (delta > 0) {
+        // get closest or if same date higher priority
+        double eventDelta = fabs(event.intervalWithNow);
+        double soonestDelta = fabs(soonest.intervalWithNow);
+        double startDelta = fabs(eventDelta - soonestDelta);
+        if (eventDelta < soonestDelta || (startDelta < 0.1 && event.showAs > soonest.showAs)) {
             soonest = event;
         }
         
