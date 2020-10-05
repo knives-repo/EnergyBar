@@ -411,6 +411,21 @@
         return nil;
     }
     
+    // first exclude in progress
+    OutlookEvent* soonest = [OutlookEvent findSoonestEvent:events busyOnly:busyOnly excludeInProgress:YES];
+    
+    // if no more event, let's try do display the possible current in progress meeting
+    if (soonest == nil) {
+        soonest = [OutlookEvent findSoonestEvent:events busyOnly:busyOnly excludeInProgress:NO];
+    }
+    
+    // done
+    return soonest;
+
+}
+
++ (OutlookEvent*) findSoonestEvent:(NSArray*) events busyOnly:(BOOL)busyOnly excludeInProgress:(BOOL) excludeInProgress {
+
     // best
     OutlookEvent* soonest = nil;
     for (OutlookEvent* event in events) {
@@ -421,8 +436,10 @@
         }
         
         // events started for too long do not count neither
-        if ([event intervalWithNow] < - EVENT_IN_PROGRESS_FOR) {
-            continue;
+        if (excludeInProgress) {
+            if ([event intervalWithNow] < - EVENT_IN_PROGRESS_FOR) {
+                continue;
+            }
         }
         
         // only busy
