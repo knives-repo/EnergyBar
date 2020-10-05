@@ -8,6 +8,7 @@
 
 #import "OutlookEvent.h"
 #import "NSDate+Utils.h"
+#import "NSDictionary+JSON.h"
 
 #define EVENT_STARTING_DELTA_MINUTES 3
 #define EVENT_NOW_DELTA EVENT_STARTING_DELTA_MINUTES*60
@@ -20,36 +21,6 @@
 #define PROVIDER_SKYPE @"skypeForBusiness"
 //#define PROVIDER_ZOOM @""
 //#define PROVIDER_GOOGLE @""
-
-@interface NSDictionary(Json)
-- (id) getJsonValue:(NSString*) key;
-- (id) getJsonValue:(NSString*) key sub:(NSString*) subkey;
-@end
-
-@implementation NSDictionary(Json)
-
-- (id) getJsonValue:(NSString*) key {
-    id value = [self objectForKey:key];
-    return (IsValid(value) ? value : nil);
-}
-
-- (id) getJsonValue:(NSString*) key sub:(NSString*) subkey {
-    NSDictionary* dict = [self objectForKey:key];
-    return (IsValid(dict) ? [dict getJsonValue:subkey] : nil);
-}
-
-- (id) getJsonValue:(NSString*) key sub1:(NSString*) subkey1 sub2:(NSString*) subkey2 {
-    NSDictionary* dict = [self objectForKey:key];
-    if (IsValid(dict)) {
-        dict = [dict objectForKey:subkey1];
-        if (IsValid(dict)) {
-            return [dict getJsonValue:subkey2];
-        }
-    }
-    return nil;
-}
-
-@end
 
 @implementation OutlookEvent
 
