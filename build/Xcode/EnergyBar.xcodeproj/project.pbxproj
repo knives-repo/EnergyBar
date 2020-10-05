@@ -79,6 +79,7 @@
 		8D9EA3CC2523EC7300646126 /* OutlookEventDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9EA3CB2523EC7300646126 /* OutlookEventDetails.xib */; };
 		8D9EA3D52523FD9200646126 /* OutlookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EA3D42523FD9200646126 /* OutlookUtils.m */; };
 		8D9EA3D9252403F100646126 /* VolumeAllInOneWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EA3D7252403F000646126 /* VolumeAllInOneWidget.m */; };
+		8DB4F4A2252BAEA000CAF77D /* MediaNotification.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB4F4A1252BAEA000CAF77D /* MediaNotification.xib */; };
 		8DCB91562525467900968D94 /* MediaControlsWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB91552525467900968D94 /* MediaControlsWidget.m */; };
 		8DCB915D2525517400968D94 /* VolumeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB915C2525517400968D94 /* VolumeWidget.m */; };
 		8DCB91652525591B00968D94 /* MediaWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB91632525591B00968D94 /* MediaWidget.m */; };
@@ -245,6 +246,7 @@
 		8D9EA3D42523FD9200646126 /* OutlookUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookUtils.m; sourceTree = "<group>"; };
 		8D9EA3D7252403F000646126 /* VolumeAllInOneWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeAllInOneWidget.m; sourceTree = "<group>"; };
 		8D9EA3D8252403F000646126 /* VolumeAllInOneWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeAllInOneWidget.h; sourceTree = "<group>"; };
+		8DB4F4A1252BAEA000CAF77D /* MediaNotification.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaNotification.xib; sourceTree = "<group>"; };
 		8DCB91542525467900968D94 /* MediaControlsWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaControlsWidget.h; sourceTree = "<group>"; };
 		8DCB91552525467900968D94 /* MediaControlsWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaControlsWidget.m; sourceTree = "<group>"; };
 		8DCB915B2525517400968D94 /* VolumeWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VolumeWidget.h; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				3CF113962138769D005B1350 /* FolderBar.xib */,
 				8D9D248F2520BC26004FF191 /* OutlookEvents.xib */,
 				8D9EA3CB2523EC7300646126 /* OutlookEventDetails.xib */,
+				8DB4F4A1252BAEA000CAF77D /* MediaNotification.xib */,
 				3CD1EBC0211D680A001DC22F /* VolumeBar.xib */,
 				3C163BBD2118F1A800F015EC /* Info.plist */,
 				3CDF1EB5211A650700739051 /* defaults.plist */,
@@ -643,6 +646,7 @@
 				3CF113942138769D005B1350 /* FolderBar.xib in Resources */,
 				3C163BBF2118F1A800F015EC /* Assets.xcassets in Resources */,
 				3CDF1EB6211A650700739051 /* defaults.plist in Resources */,
+				8DB4F4A2252BAEA000CAF77D /* MediaNotification.xib in Resources */,
 				3C01F8EC2161B93000FFD2C6 /* BrightnessBar-Mojave.xib in Resources */,
 				3C163BCA2118F33C00F015EC /* MainWindow.xib in Resources */,
 				8D9EA3CC2523EC7300646126 /* OutlookEventDetails.xib in Resources */,

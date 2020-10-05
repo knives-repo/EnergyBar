@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "CustomWidget.h"
 
+@interface MediaNotificationController : NSViewController
+@property (assign) IBOutlet NSTextField *titleView;
+@property (assign) IBOutlet NSImageView *iconView;
+@property (assign) IBOutlet NSTextField *artistView;
+@end
+
 @interface MediaWidgetBase : CustomWidget
 
 @property (retain) NSString* currentTitle;

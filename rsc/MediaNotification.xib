@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MediaNotificationController">
+            <connections>
+                <outlet property="artistView" destination="l2v-bk-btZ" id="cd4-4Q-a5g"/>
+                <outlet property="iconView" destination="fcr-5Y-bci" id="2y1-NY-sPX"/>
+                <outlet property="titleView" destination="O3H-HU-OcX" id="YUm-77-Gog"/>
+                <outlet property="view" destination="c22-O7-iKe" id="qAj-4R-SgO"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="500" height="41"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fcr-5Y-bci">
+                    <rect key="frame" x="0.0" y="0.0" width="41" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="41" id="GTr-vj-H6F"/>
+                        <constraint firstAttribute="width" constant="41" id="gz1-3C-XiA"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSApplicationIcon" id="bIL-uC-aOD"/>
+                </imageView>
+                <textField identifier="subject" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O3H-HU-OcX" userLabel="Title">
+                    <rect key="frame" x="47" y="20" width="455" height="19"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Title" id="RnL-fd-y4r">
+                        <font key="font" metaFont="systemBold" size="16"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField identifier="organizer" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l2v-bk-btZ">
+                    <rect key="frame" x="47" y="2" width="455" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Artist" id="Kaw-va-eX6">
+                        <font key="font" usesAppearanceFont="YES"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="l2v-bk-btZ" secondAttribute="bottom" constant="2" id="CBG-hB-7H9"/>
+                <constraint firstAttribute="trailing" secondItem="l2v-bk-btZ" secondAttribute="trailing" id="Ff2-Sa-gYk"/>
+                <constraint firstItem="fcr-5Y-bci" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="K5q-LM-VJc"/>
+                <constraint firstItem="l2v-bk-btZ" firstAttribute="top" secondItem="O3H-HU-OcX" secondAttribute="bottom" constant="2" id="cCG-Er-ecY"/>
+                <constraint firstItem="l2v-bk-btZ" firstAttribute="leading" secondItem="fcr-5Y-bci" secondAttribute="trailing" constant="8" id="iUg-tL-tys"/>
+                <constraint firstItem="fcr-5Y-bci" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="lEs-wi-3Hb"/>
+                <constraint firstItem="O3H-HU-OcX" firstAttribute="leading" secondItem="fcr-5Y-bci" secondAttribute="trailing" constant="8" id="wwI-mg-qO5"/>
+                <constraint firstAttribute="trailing" secondItem="O3H-HU-OcX" secondAttribute="trailing" id="xXX-we-WV1"/>
+                <constraint firstAttribute="width" constant="500" id="zt3-R3-P5E"/>
+                <constraint firstItem="O3H-HU-OcX" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="2" id="zwN-sD-lqw"/>
+            </constraints>
+            <point key="canvasLocation" x="99" y="161.5"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="NSApplicationIcon" width="32" height="32"/>
+    </resources>
+</document>

@@ -12,6 +12,24 @@
 #import "BezelWindow.h"
 #import "NSRunningApplication+Utils.h"
 
+@implementation MediaNotificationController
+
+- (id) init
+{
+    self = [super initWithNibName:@"MediaNotification" bundle:nil];
+    [NowPlaying sharedInstance];
+    return self;
+}
+
+- (void) viewDidLoad {
+    NowPlaying* instance = [NowPlaying sharedInstance];
+    [self.iconView setImage:instance.appIcon];
+    [self.titleView setStringValue:SafeStringValue(instance.title)];
+    [self.artistView setStringValue:SafeStringValue(instance.artist)];
+}
+
+@end
+
 @interface MediaWidgetBase()
 @property (assign) BOOL autoPlay;
 @property (assign) BOOL playSpotify;
@@ -66,7 +84,10 @@
             
             // song title
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mediaShowSongTitle"] == YES) {
-                [BezelWindow showWithMessage:self.currentTitle];
+                if ([NowPlaying sharedInstance].title != nil) {
+                    MediaNotificationController* controller = [[[MediaNotificationController alloc] init] autorelease];
+                    [BezelWindow showWithView:controller.view];
+                }
             }
             
         }
