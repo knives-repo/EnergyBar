@@ -86,9 +86,17 @@
             
             // song title
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"mediaShowSongTitle"] == YES) {
+                
+                // need to have a proper title
                 if ([NowPlaying sharedInstance].title != nil) {
-                    MediaNotificationController* controller = [[[MediaNotificationController alloc] init] autorelease];
-                    [BezelWindow showWithView:controller.view inDarkMode:YES];
+                    
+                    // not if app is frontmost
+                    NSRunningApplication* frontMostApp = [[NSWorkspace sharedWorkspace] frontmostApplication];
+                    if ([frontMostApp.bundleIdentifier isEqualToString:[NowPlaying sharedInstance].appBundleIdentifier] == NO) {
+                        MediaNotificationController* controller = [[[MediaNotificationController alloc] init] autorelease];
+                        [BezelWindow showWithView:controller.view inDarkMode:YES];
+                    }
+                
                 }
             }
             
