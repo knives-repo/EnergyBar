@@ -32,6 +32,7 @@
 @interface MicMuteWidget()
 @property (retain) NSRunningApplication* runningApplication;
 @property (retain) ImageTitleView *imageTileView;
+@property (retain) NSTimer* refreshTimer;
 @property (assign) BOOL muteToRestore;
 @property (assign) BOOL restoreMute;
 @end
@@ -124,11 +125,23 @@
 }
 
 - (void)updateWithImage:(NSImage*) image andBackgroundColor:(NSColor*) bgColor {
-    dispatch_async(dispatch_get_main_queue(), ^{
+
+    // we will run this twice
+    dispatch_block_t update = ^{
         [self.imageTileView setImage:image];
         [self.imageTileView.layer setBackgroundColor:[bgColor CGColor]];
+        
+        // try everything to force a refresh
+        [self.imageTileView setNeedsLayout:YES];
         [self.imageTileView setNeedsDisplay:YES];
-    });
+        [self.imageTileView invalidateIntrinsicContentSize];
+        
+    };
+    
+    // run this on main thread
+    dispatch_async(dispatch_get_main_queue(), update);
+    //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), update);
+    //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), update);
 }
 
 - (void)tapAction:(id)sender
