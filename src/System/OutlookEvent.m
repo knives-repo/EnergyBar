@@ -10,17 +10,18 @@
 #import "NSDate+Utils.h"
 #import "NSDictionary+JSON.h"
 
+// event is starting: should start to show join icon
 #define EVENT_STARTING_DELTA_MINUTES 3
-#define EVENT_NOW_DELTA EVENT_STARTING_DELTA_MINUTES*60
-#define EVENT_IN_PROGRESS_FOR 10*60
-#define EVENT_SOON_DELTA 1*60*60
-#define EVENT_CLOSE_DELTA 4*60*60
 
+// event is in progress: still show up in the calendar
+#define EVENT_IN_PROGRESS_FOR 15*60
+
+// event is soon: display relative duration vs absolute time
+#define EVENT_SOON_DELTA 1*60*60
+
+// main online meetings providers
 #define PROVIDER_TEAMS @"teamsForBusiness"
-//#define PROVIDER_WEBEX @""
 #define PROVIDER_SKYPE @"skypeForBusiness"
-//#define PROVIDER_ZOOM @""
-//#define PROVIDER_GOOGLE @""
 
 @implementation OutlookEvent
 
@@ -419,6 +420,11 @@
             continue;
         }
         
+        // events started for too long do not count neither
+        if ([event intervalWithNow] < - EVENT_IN_PROGRESS_FOR) {
+            continue;
+        }
+        
         // only busy
         if (busyOnly && event.showAs != ShowAsBusy) {
             continue;
@@ -431,8 +437,8 @@
         }
         
         // get closest or if same date higher priority
-        double eventDelta = fabs(event.intervalWithNow);
-        double soonestDelta = fabs(soonest.intervalWithNow);
+        double eventDelta = fabs([event intervalWithNow]);
+        double soonestDelta = fabs([soonest intervalWithNow]);
         double startDelta = fabs(eventDelta - soonestDelta);
         if (eventDelta < soonestDelta || (startDelta < 0.1 && event.showAs > soonest.showAs)) {
             soonest = event;
