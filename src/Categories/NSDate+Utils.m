@@ -10,6 +10,18 @@
 
 @implementation NSDate(Utils)
 
+- (BOOL) isYesterday {
+    return [[NSCalendar currentCalendar] isDateInYesterday:self];
+}
+
+- (BOOL) isToday {
+    return [[NSCalendar currentCalendar] isDateInToday:self];
+}
+
+- (BOOL) isTomorrow {
+    return [[NSCalendar currentCalendar] isDateInTomorrow:self];
+}
+
 - (BOOL) isInPast {
     return [self timeIntervalSinceNow] < 0;
 }

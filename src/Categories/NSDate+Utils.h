@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSTimeInterval) timeIntervalSinceMinuteStart;
 
+- (BOOL) isYesterday;
+- (BOOL) isToday;
+- (BOOL) isTomorrow;
+
 - (BOOL) isInPast;
 - (BOOL) isInFuture;
 

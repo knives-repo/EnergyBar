@@ -308,6 +308,14 @@
     return [self.startTime timeIntervalSinceMinuteStart];
 }
 
+- (BOOL) isToday {
+    return [self.startTime isToday];
+}
+
+- (BOOL) isTomorrow {
+    return [self.startTime isTomorrow];
+}
+
 - (BOOL) canBeJoined {
     return [self isStarting] || [self isInProgress];
 }
@@ -415,7 +423,7 @@
     OutlookEvent* soonest = [OutlookEvent findSoonestEvent:events busyOnly:busyOnly excludeInProgress:YES];
     
     // if no more event, let's try do display the possible current in progress meeting
-    if (soonest == nil) {
+    if (soonest == nil || [soonest isTomorrow]) {
         soonest = [OutlookEvent findSoonestEvent:events busyOnly:busyOnly excludeInProgress:NO];
     }
     
