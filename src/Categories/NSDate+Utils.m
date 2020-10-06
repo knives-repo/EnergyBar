@@ -60,12 +60,12 @@
     NSDate* tick = [NSDate date];
     NSDateComponents* components = [tick components];
     
-    // to avoid triggering the past
-    NSInteger safety = 2;
-    
     // calc next second
     NSInteger seconds = components.second;
-    int next = (round((double)(seconds+safety) / (double)frequency) + 1) * frequency;
+    int next = (round((double)(seconds) / (double)(frequency)) + 1) * frequency;
+    if (next == 0) {
+        next = frequency;
+    }
     
     // add and done
     return [tick dateByAddingTimeInterval:next - seconds + delta];

@@ -101,21 +101,32 @@
 }
 
 - (void)viewWillAppear {
+    [self tick:nil];
+}
+
+- (void)tick:(NSTimer *)sender {
+
+    // update
+    if (self.lastFetch == nil || fabs([self.lastFetch timeIntervalSinceNow]) > FETCH_CALENDAR_EVERY_SECONDS) {
+        [self loadEvents];
+    } else {
+        [self.nextEventWidget refresh];
+    }
     
-    // we want this to be scheduled every 30 seconds
+    // schedule next
     NSDate* fireDate = [NSDate nextTickForEverySeconds:30 withDelta:0];
-    self.refreshTimer = [[NSTimer alloc] initWithFireDate:fireDate interval:15 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        if (self.lastFetch == nil || fabs([self.lastFetch timeIntervalSinceNow]) > FETCH_CALENDAR_EVERY_SECONDS) {
-            [self loadEvents];
-        } else {
-            [self.nextEventWidget refresh];
-        }
-    }];
+    self.refreshTimer = [[[NSTimer alloc]
+        initWithFireDate:fireDate
+        interval:30.0
+        target:self
+        selector:@selector(tick:)
+        userInfo:nil
+        repeats:NO] autorelease];
+    
+    self.refreshTimer.tolerance = 0;
+    
     [[NSRunLoop currentRunLoop] addTimer:self.refreshTimer forMode:NSDefaultRunLoopMode];
-
-    // do it now
-    [self.refreshTimer fire];
-
+    
 }
 
 - (void)loadEvents {

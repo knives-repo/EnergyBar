@@ -86,22 +86,6 @@
         name:PowerStatusNotification
         object:nil];
 
-    NSDate *date = [[NSDate date] dateByAddingTimeInterval:60.0];
-    NSDateComponents *comp = [[NSCalendar currentCalendar]
-        components:NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|
-            NSCalendarUnitHour|NSCalendarUnitMinute
-        fromDate:date];
-    date = [[NSCalendar currentCalendar] dateFromComponents:comp];
-
-    self.timer = [[[NSTimer alloc]
-        initWithFireDate:date
-        interval:60.0
-        target:self
-        selector:@selector(tick:)
-        userInfo:nil
-        repeats:YES] autorelease];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
-
     [self tick:nil];
 }
 
@@ -164,6 +148,28 @@
             ImageTitleViewLayoutOptionTitle |
             ImageTitleViewLayoutOptionSubtitle;
     }
+    
+    // schedule next iteration
+    NSDate *date = [[NSDate date] dateByAddingTimeInterval:60.0];
+    NSDateComponents *comp = [[NSCalendar currentCalendar]
+        components:NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|
+            NSCalendarUnitHour|NSCalendarUnitMinute
+        fromDate:date];
+    date = [[NSCalendar currentCalendar] dateFromComponents:comp];
+
+    self.timer = [[[NSTimer alloc]
+        initWithFireDate:date
+        interval:60.0
+        target:self
+        selector:@selector(tick:)
+        userInfo:nil
+        repeats:NO] autorelease];
+    
+    self.timer.tolerance = 0;
+    
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+
+
 }
 
 - (void)resetClock
