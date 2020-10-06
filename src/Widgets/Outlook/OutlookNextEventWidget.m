@@ -387,6 +387,11 @@
     // get new point
     NSPoint point = [recognizer locationInView:self.controller.view];
     int delta = point.x - self.startSlidePoint.x;
+    
+    // invert?
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookInvertScrubDirection"]) {
+        delta = -delta;
+    }
 
     // check
     if (abs(delta) > 10) {
