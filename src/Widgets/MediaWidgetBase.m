@@ -73,7 +73,7 @@
 - (void)nowPlayingNotification:(NSNotification *)notification
 {
     // last app
-    //NSLog(@"%@", [NowPlaying sharedInstance].appBundleIdentifier);
+    //LOG("[MEDIA] App Bundle = %@", [NowPlaying sharedInstance].appBundleIdentifier);
     
     // notify track change
     if ([NowPlaying sharedInstance].playing) {

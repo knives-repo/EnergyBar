@@ -150,7 +150,7 @@
         
         // load categories
         //[self.outlook getCategories:^(NSDictionary * jsonCategories) {
-        //    NSLog(@"%@", jsonCategories);
+        //    LOG("[CALENDAR] %@", jsonCategories);
         //    [self.nextEventWidget setCategories:[jsonCategories objectForKey:@"value"]];
         //}];
         
@@ -202,7 +202,7 @@
             }
             #if DUMP
                 for (OutlookEvent* event in filtered) {
-                    NSLog(@"%@", event);
+                    LOG("[CALENDAR] Event = %@", event);
                 }
             #endif
             

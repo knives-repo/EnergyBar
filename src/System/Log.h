@@ -16,6 +16,10 @@
 
 #include <os/log.h>
 
-#define LOG(format, ...)                os_log(OS_LOG_DEFAULT, "%s: " format, __func__, __VA_ARGS__)
+extern os_log_t logger;
+void init_logging(void);
+
+//#define LOG(format, ...)                os_log(logger, "%s: " format, __func__, __VA_ARGS__)
+#define LOG(format, ...)                os_log(logger, format, __VA_ARGS__)
 
 #endif

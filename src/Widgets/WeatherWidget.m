@@ -279,6 +279,9 @@ static NSImage *weatherImage(uint64_t conditionCode)
     view.title = title;
     view.subtitle = subtitle;
     view.layoutOptions = layoutOptions;
+    
+    // refresh
+    [view layout];
 }
 
 - (void)resetWeather

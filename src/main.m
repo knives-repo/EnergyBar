@@ -12,8 +12,10 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "Log.h"
 
 int main(int argc, const char *argv[])
 {
+    init_logging();
     return NSApplicationMain(argc, argv);
 }

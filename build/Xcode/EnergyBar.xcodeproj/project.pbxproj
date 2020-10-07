@@ -59,6 +59,7 @@
 		8D33B9A4251ED9E0006AFCC9 /* BezelWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D33B9A3251ED9E0006AFCC9 /* BezelWindow.m */; };
 		8D3B0BDA2527A2DB00D662AC /* MediaWidgetBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3B0BD92527A2DB00D662AC /* MediaWidgetBase.m */; };
 		8D402CB52528CB13002667CD /* OutlookSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D402CB42528CB13002667CD /* OutlookSettingsController.m */; };
+		8D45236D252E50B300C6CD1C /* Log.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D45236B252E506600C6CD1C /* Log.c */; };
 		8D4DC4EE2522903F0042A22A /* LightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4ED2522903F0042A22A /* LightWidget.m */; };
 		8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */; };
 		8D5F27D52526C22B009DE863 /* NSRunningApplication+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F27D42526C22B009DE863 /* NSRunningApplication+Utils.m */; };
@@ -212,6 +213,7 @@
 		8D3B0BD92527A2DB00D662AC /* MediaWidgetBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaWidgetBase.m; sourceTree = "<group>"; };
 		8D402CB32528CB13002667CD /* OutlookSettingsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutlookSettingsController.h; sourceTree = "<group>"; };
 		8D402CB42528CB13002667CD /* OutlookSettingsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookSettingsController.m; sourceTree = "<group>"; };
+		8D45236B252E506600C6CD1C /* Log.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Log.c; sourceTree = "<group>"; };
 		8D4DC4E125226EF40042A22A /* EnergyBar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EnergyBar-Prefix.pch"; sourceTree = "<group>"; };
 		8D4DC4EC2522903F0042A22A /* LightWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightWidget.h; sourceTree = "<group>"; };
 		8D4DC4ED2522903F0042A22A /* LightWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightWidget.m; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				3C04600F211D7C66003EB021 /* KeyEvent.c */,
 				3C046010211D7C66003EB021 /* KeyEvent.h */,
 				3C6944CE212E922F0082E3BF /* Log.h */,
+				8D45236B252E506600C6CD1C /* Log.c */,
 				3CFECA102122611F00BB58E9 /* LoginItem.c */,
 				3CFECA112122611F00BB58E9 /* LoginItem.h */,
 				3CA1DD8A212D3FC000D95DE1 /* NowPlaying.h */,
@@ -745,6 +748,7 @@
 				3C3464BF21465319001F45BB /* WeatherWidget.m in Sources */,
 				3CA851A0212B84B000585D29 /* NSTouchBar+SystemModal.m in Sources */,
 				8D9D24E3252124DE004FF191 /* OutlookEvent.m in Sources */,
+				8D45236D252E50B300C6CD1C /* Log.c in Sources */,
 				8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */,
 				8D9D248E2520BAA9004FF191 /* OutlookCalendarWidget.m in Sources */,
 				3C5D0FCE2119210000769A39 /* ClockWidget.m in Sources */,

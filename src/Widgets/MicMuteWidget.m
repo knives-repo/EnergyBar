@@ -131,10 +131,8 @@
         [self.imageTileView setImage:image];
         [self.imageTileView.layer setBackgroundColor:[bgColor CGColor]];
         
-        // try everything to force a refresh
-        [self.imageTileView setNeedsLayout:YES];
-        [self.imageTileView setNeedsDisplay:YES];
-        [self.imageTileView invalidateIntrinsicContentSize];
+        // force a refresh
+        [self.imageTileView layout];
         
     };
     
@@ -186,7 +184,7 @@
     
     // update
     self.runningApplication = [[NSWorkspace sharedWorkspace] menuBarOwningApplication];
-    //NSLog(@"%@", self.runningApplication.bundleIdentifier);
+    //LOG("[MICMUTE] App Bundle = %@", self.runningApplication.bundleIdentifier);
     
     // check if we use application mute
     if (self.applicationMute && [self isMutableAppRunning]) {

@@ -138,7 +138,7 @@
     }
     
     // debug
-    //NSLog(@"%@", self.joinUrl);
+    //LOG("[EVENT] %s", self.joinUrl);
 
     // done
     return self;

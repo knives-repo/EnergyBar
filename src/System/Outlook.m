@@ -49,14 +49,14 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     [self.applicationContext getCurrentAccountWithParameters:msalParameters completionBlock:^(MSALAccount * _Nullable account, MSALAccount * _Nullable previousAccount, NSError * _Nullable error) {
 
         if (error != nil) {
-            NSLog(@"[ACCOUNT] Error: %@", error);
+            LOG("[ACCOUNT] Error: %@", error);
         }
         if (account == nil) {
-            NSLog(@"[ACCOUNT] Empty result");
+            LOG("[ACCOUNT] %s", "Empty result");
         }
         
         if (error == nil && account != nil) {
-            //NSLog(@"[ACCOUNT] Success!");
+            //LOG("[ACCOUNT] %s", "Success!");
             self.currentAccount = account;
             self.accessToken = nil;
         }
@@ -79,10 +79,10 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     // need an account for this
     if (self.currentAccount == nil) {
         if (fallbackToInteractive) {
-            NSLog(@"[SILENT] Redirect to Interactive");
+            LOG("[SILENT] %s", "Redirect to Interactive");
             [self acquireTokenInteractively:completionBlock];
         } else {
-            NSLog(@"[SILENT] Interaction required but fallback disabled");
+            LOG("[SILENT] %s", "Interaction required but fallback disabled");
         }
         return;
     }
@@ -98,23 +98,23 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
                 if (error.code == MSALErrorInteractionRequired) {
                     if (fallbackToInteractive) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            NSLog(@"[SILENT] Interaction required");
+                            LOG("[SILENT] %s", "Interaction required");
                             [self acquireTokenInteractively:completionBlock];
                             return;
                         });
                     } else {
-                        NSLog(@"[SILENT] Interaction required but fallback disabled");
+                        LOG("[SILENT] %s", "Interaction required but fallback disabled");
                     }
                 }
             }
-            NSLog(@"[SILENT] Error: %@", error);
+            LOG("[SILENT] Error: %@", error);
         }
         if (result == nil) {
-            NSLog(@"[SILENT] Empty result");
+            LOG("[SILENT] %s", "Empty result");
         }
         
         if (error == nil && result != nil) {
-            //NSLog(@"[SILENT] Success!");
+            //LOG("[SILENT] %s", "Success!");
             self.currentAccount = result.account;
             self.accessToken = result.accessToken;
         }
@@ -138,14 +138,14 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     [self.applicationContext acquireTokenWithParameters:interactiveTokenParameters completionBlock:^(MSALResult * _Nullable result, NSError * _Nullable error) {
         
         if (error != nil) {
-            NSLog(@"[INTER] Error: %@", error);
+            LOG("[INTER] Error: %@", error);
         }
         if (result == nil) {
-            NSLog(@"[INTER] Empty result");
+            LOG("[INTER] %s", "Empty result");
         }
         
         if (error == nil && result != nil) {
-            //NSLog(@"[INTER] Success!");
+            //LOG("[INTER] %s", "Success!");
             self.currentAccount = result.account;
             self.accessToken = result.accessToken;
         }
@@ -163,7 +163,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     
     // need to a token
     if (self.accessToken == nil) {
-        NSLog(@"[CONTENT] No token");
+        LOG("[CONTENT] %s", "No token");
         completionBlock(nil);
         return;
     }
@@ -185,12 +185,12 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
-            NSLog(@"[CONTENT] Error: %@", error);
+            LOG("[CONTENT] Error: %@", error);
             completionBlock(nil);
             return;
         }
         if (response == nil) {
-            NSLog(@"[CONTENT] No response");
+            LOG("[CONTENT] %s", "No response");
             completionBlock(nil);
             return;
         }
@@ -223,11 +223,11 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     [self.applicationContext signoutWithAccount:self.currentAccount signoutParameters:signoutParameters completionBlock:^(BOOL success, NSError * _Nullable error) {
 
         if (error != nil) {
-            NSLog(@"[SIGNOUT] Error: %@", error);
+            LOG("[SIGNOUT] Error: %@", error);
         }
         
         if (error == nil && success == YES) {
-            NSLog(@"[SIGNOUT] Success!");
+            LOG("[SIGNOUT] %s", "Success!");
             self.currentAccount = nil;
             self.accessToken = nil;
         }
@@ -277,11 +277,11 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     // filter
     NSString* filter = [NSString stringWithFormat:@"startDateTime=%@&endDateTime=%@",
                         [dateFormatter stringFromDate:start], [dateFormatter stringFromDate:end]];
-    //NSLog(@"[CALENDAR] Filter = %@", filter);
+    //LOG("[CALENDAR] Filter = %@", filter);
 
     // done
     NSString* uri = [NSString stringWithFormat:@"https://graph.microsoft.com/%@?%@&%@&%@&%@", path, filter, select, orderBy, count];
-    //NSLog(@"%@", uri);
+    //LOG(@"[CALENDAR] Uri = %@", uri);
 
     // timezone
     NSTimeZone* timezone = [NSTimeZone localTimeZone];
@@ -290,12 +290,12 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     };
     
     // log
-    NSLog(@"Loading Outlook events from %@ to %@", start, end);
+    LOG("[CALENDAR] Loading Outlook events from %@ to %@", start, end);
     
     // now do it
     [self acquireTokenSilently:^{
         [self getContent:uri withHeaders:headers completionBlock:^(NSDictionary* jsonObject) {
-            //NSLog(@"%@", jsonObject);
+            //LOG(@"[CALENDAR] Response = %@", jsonObject);
             completionBlock(jsonObject);
         }];
     }];

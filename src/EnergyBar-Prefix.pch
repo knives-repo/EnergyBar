@@ -15,4 +15,6 @@
 
 #define WIDGET_STANDARD_WIDTH 64
 
+#import "Log.h"
+
 #endif /* EnergyBar_Prefix_pch */

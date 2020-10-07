@@ -89,7 +89,7 @@
 - (IBAction)outlookSignIn:(id)sender
 {
     [self.outlook signIn:^(NSDictionary* profile) {
-        NSLog(@"[CONNECT] %@", profile);
+        LOG("[CONNECT] %@", profile);
         [self updateStatus];
         [self.delegate outlookAccountUpdated];
     }];

@@ -238,7 +238,7 @@
         [OutlookUtils styleShowAsIndicator:controller.showAsView forEvent:self.currentEvent];
         
         // update
-        [controller.view setNeedsDisplay:YES];
+        [controller.view layout];
         
         // play sound
         if (fabs([self.currentEvent intervalWithNow]) < 5) {
@@ -287,7 +287,7 @@
         BOOL isActive = [[[NSWorkspace sharedWorkspace] frontmostApplication] isMicrosoftTeams];
         
         // now open it
-        //NSLog(@"%@", joinUrl);
+        //LOG("%@", joinUrl);
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:joinUrl]];
         
         // application switch will not be triggered so let's do it ourselves
