@@ -244,7 +244,9 @@
         if (fabs([self.currentEvent intervalWithNow]) < 5) {
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookPlayReminderSound"]) {
                 if ([self.notifiedEvents containsObject:self.currentEvent.uid] == NO) {
-                    [self.notifiedEvents addObject:self.currentEvent.uid];
+                    if (self.currentEvent.uid != nil) {
+                        [self.notifiedEvents addObject:self.currentEvent.uid];
+                    }
                     [self playReminderSound];
                 }
             }
