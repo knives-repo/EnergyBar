@@ -470,9 +470,13 @@
 
 - (void)playReminderSound {
     
-    NSURL* outlookUrl = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:@"com.microsoft.Outlook"];
-    NSURL* reminderUrl = [outlookUrl URLByAppendingPathComponent:@"Contents/Frameworks/OutlookCore.framework/Versions/A/Resources/reminder.wav"];
-    NSSound* sound = [[[NSSound alloc] initWithContentsOfURL:reminderUrl byReference:NO] autorelease];
+    //NSURL* outlookUrl = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:@"com.microsoft.Outlook"];
+    //NSURL* reminderUrl = [outlookUrl URLByAppendingPathComponent:@"Contents/Frameworks/OutlookCore.framework/Versions/A/Resources/reminder.wav"];
+    //NSSound* sound = [[[NSSound alloc] initWithContentsOfURL:reminderUrl byReference:NO] autorelease];
+    //[sound play];
+    
+    NSSound* sound = [[[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"reminder" ofType:@"mp3"] byReference:NO] autorelease];
+    sound.volume = 0.3;
     [sound play];
     
 }

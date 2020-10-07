@@ -89,6 +89,7 @@
 		8DDBF453252B53D80081EE49 /* NSDictionary+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBF452252B53D80081EE49 /* NSDictionary+JSON.m */; };
 		8DE1AD11252581F500030319 /* OutlookEventDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE1AD0F252581F500030319 /* OutlookEventDetailsController.m */; };
 		8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */; };
+		8DE6C138252E736500477469 /* reminder.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8DE6C137252E736500477469 /* reminder.mp3 */; };
 		AF95C8ADCA2ED9B5705D7BB6 /* Pods_EnergyBars_EnergyBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D79D821438F8640C364FD3 /* Pods_EnergyBars_EnergyBar.framework */; };
 /* End PBXBuildFile section */
 
@@ -265,6 +266,7 @@
 		8DE1AD0F252581F500030319 /* OutlookEventDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutlookEventDetailsController.m; sourceTree = "<group>"; };
 		8DE31D11251EFE7E004E835B /* BrightnessWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessWidget.h; sourceTree = "<group>"; };
 		8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrigthnessWidget.m; sourceTree = "<group>"; };
+		8DE6C137252E736500477469 /* reminder.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reminder.mp3; sourceTree = "<group>"; };
 		A7C49C788382A2D1AD12F453 /* Pods-EnergyBars-EnergyBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBars-EnergyBar.release.xcconfig"; path = "Target Support Files/Pods-EnergyBars-EnergyBar/Pods-EnergyBars-EnergyBar.release.xcconfig"; sourceTree = "<group>"; };
 		BA5F7D03B6732C1261166980 /* Pods_EnergyBars_EnergyBarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnergyBars_EnergyBarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF544AEAB8FD234F46D45319 /* Pods-EnergyBar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnergyBar.release.xcconfig"; path = "Target Support Files/Pods-EnergyBar/Pods-EnergyBar.release.xcconfig"; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				8D9EA3CB2523EC7300646126 /* OutlookEventDetails.xib */,
 				8DB4F4A1252BAEA000CAF77D /* MediaNotification.xib */,
 				3CD1EBC0211D680A001DC22F /* VolumeBar.xib */,
+				8DE6C137252E736500477469 /* reminder.mp3 */,
 				3C163BBD2118F1A800F015EC /* Info.plist */,
 				3CDF1EB5211A650700739051 /* defaults.plist */,
 			);
@@ -651,6 +654,7 @@
 				3CDF1EB6211A650700739051 /* defaults.plist in Resources */,
 				8DB4F4A2252BAEA000CAF77D /* MediaNotification.xib in Resources */,
 				3C01F8EC2161B93000FFD2C6 /* BrightnessBar-Mojave.xib in Resources */,
+				8DE6C138252E736500477469 /* reminder.mp3 in Resources */,
 				3C163BCA2118F33C00F015EC /* MainWindow.xib in Resources */,
 				8D9EA3CC2523EC7300646126 /* OutlookEventDetails.xib in Resources */,
 			);
