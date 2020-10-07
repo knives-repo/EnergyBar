@@ -289,6 +289,9 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
         @"Prefer": [NSString stringWithFormat:@"outlook.timezone=\"%@\"", timezone.name]
     };
     
+    // log
+    NSLog(@"Loading Outlook events from %@ to %@", start, end);
+    
     // now do it
     [self acquireTokenSilently:^{
         [self getContent:uri withHeaders:headers completionBlock:^(NSDictionary* jsonObject) {

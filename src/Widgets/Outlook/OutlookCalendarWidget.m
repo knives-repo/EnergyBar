@@ -21,6 +21,7 @@
 #define EVENT_INDEX 3
 
 #define FETCH_CALENDAR_EVERY_SECONDS 5*60
+#define FETCH_CALENDAR_EVERY_SECONDS_IF_EMPTY 60
 
 @interface OutlookCalendarWidget()
 @property (retain) OutlookNextEventWidget* nextEventWidget;
@@ -115,9 +116,10 @@
     
     // schedule next
     NSDate* fireDate = [NSDate nextTickForEverySeconds:30 withDelta:0];
+    [self.refreshTimer invalidate];
     self.refreshTimer = [[[NSTimer alloc]
         initWithFireDate:fireDate
-        interval:30.0
+        interval:0
         target:self
         selector:@selector(tick:)
         userInfo:nil
@@ -156,11 +158,21 @@
         ShowTomorrow showTomorrow = (ShowTomorrow) [[NSUserDefaults standardUserDefaults] doubleForKey:@"outlookShowTomorrow"];
         [self.outlook getCalendarEvents:showTomorrow completionBlock:^(NSDictionary * jsonCalendar) {
             
+            // check
+            NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
+            if (jsonEvents == nil || [jsonEvents count] == 0) {
+                // make sure it is reload in 60 seconds
+                self.lastFetch = [[NSDate date] dateByAddingTimeInterval:-FETCH_CALENDAR_EVERY_SECONDS + FETCH_CALENDAR_EVERY_SECONDS_IF_EMPTY];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setActiveIndex:EMPTY_INDEX];
+                });
+                return;
+            }
+            
             // record
             self.lastFetch = [NSDate date];
             
-            // load
-            NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
+            // process
             NSArray* events = [OutlookEvent listFromJson:jsonEvents];
             
             // filter

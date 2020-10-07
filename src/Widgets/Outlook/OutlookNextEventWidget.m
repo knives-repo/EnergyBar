@@ -114,7 +114,7 @@
     self.viewController = self.controller;
     
     // init
-    self.notifiedEvents = [[NSMutableSet set] autorelease];
+    self.notifiedEvents = [[[NSMutableSet alloc] init] autorelease];
     
 }
 
@@ -292,6 +292,12 @@
         if (isActive) {
             [self didActivateApplication:nil];
         }
+        
+        // do not notify
+        if (self.currentEvent.uid != nil) {
+            [self.notifiedEvents addObject:self.currentEvent.uid];
+        }
+
     }
 }
 
