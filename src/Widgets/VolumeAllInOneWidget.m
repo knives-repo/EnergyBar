@@ -17,9 +17,9 @@
 #import "BezelWindow.h"
 #import "KeyEvent.h"
 
-#define VOLUME_OFF 0.1
-#define VOLUME_LOW 0.4
-#define VOLUME_MED 0.8
+#define VOLUME_OFF 0.05
+#define VOLUME_LOW 0.333
+#define VOLUME_MED 0.666
 
 @interface VolumeAllInOneWidgetView : ImageTitleView
 @end
