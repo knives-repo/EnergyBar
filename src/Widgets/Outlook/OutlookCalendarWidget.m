@@ -20,6 +20,7 @@
 #define EMPTY_INDEX 2
 #define EVENT_INDEX 3
 
+#define REFRESH_TIMER_DELAY 30
 #define FETCH_CALENDAR_EVERY_SECONDS 5*60
 #define FETCH_CALENDAR_EVERY_SECONDS_IF_EMPTY 60
 
@@ -105,8 +106,16 @@
     [self tick:nil];
 }
 
+- (void)reloadEvents {
+    self.lastFetch = nil;
+    [self tick:nil];
+}
+
 - (void)tick:(NSTimer *)sender {
 
+    // invalidate any existing timer
+    [self.refreshTimer invalidate];
+    
     // update
     if (self.lastFetch == nil || fabs([self.lastFetch timeIntervalSinceNow]) > FETCH_CALENDAR_EVERY_SECONDS) {
         [self loadEvents];
@@ -115,8 +124,7 @@
     }
     
     // schedule next
-    NSDate* fireDate = [NSDate nextTickForEverySeconds:30 withDelta:0];
-    [self.refreshTimer invalidate];
+    NSDate* fireDate = [NSDate nextTickForEverySeconds:REFRESH_TIMER_DELAY withDelta:0];
     self.refreshTimer = [[[NSTimer alloc]
         initWithFireDate:fireDate
         interval:0
@@ -169,8 +177,8 @@
                 return;
             }
             
-            // record
-            self.lastFetch = [NSDate date];
+            // record and ensure it will be reloaded next time
+            self.lastFetch = [[NSDate date] dateByAddingTimeInterval:-REFRESH_TIMER_DELAY];
             
             // process
             NSArray* events = [OutlookEvent listFromJson:jsonEvents];
@@ -238,7 +246,7 @@
         // reload
         if (reloadEvents == YES) {
             [self setActiveIndex:LOADING_INDEX];
-            [self loadEvents];
+            [self reloadEvents];
         } else if (self.activeIndex == EVENT_INDEX || self.activeIndex == EMPTY_INDEX) {
             [self.nextEventWidget selectEvent];
         }
