@@ -11,5 +11,5 @@
 os_log_t logger;
 
 void init_logging() {
-    logger = os_log_create("fr.bonamy.energybar", "EnergyBar");
+    logger = os_log_create("billziss.EnergyBar", "EnergyBar");
 }
