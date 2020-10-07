@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OutlookNextEventWidget : CustomWidget
 
 @property (retain) NSArray* categories;
-@property (readonly,retain) OutlookEvent* event;
+@property (readonly,retain) OutlookEvent* currentEvent;
 @property (retain) id<OutlookEventWidgetDelegate> delegate;
 
 - (void) showEvents:(NSArray*) events;

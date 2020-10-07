@@ -85,18 +85,20 @@
 
 @property (retain) NSRunningApplication* runningApplication;
 @property (retain) NextEventsWidgetController* controller;
+@property (retain) NSMutableSet* notifiedEvents;
 @property (retain) NSArray* events;
 @property (retain) NSTimer* resetTimer;
 @property (assign) NSPoint startSlidePoint;
 @property (assign) BOOL scrolled;
 @property (assign) BOOL joinTeams;
-
 @end
 
 @implementation OutlookNextEventWidget
 
 - (void) dealloc
 {
+    self.notifiedEvents = nil;
+    
     [self.resetTimer invalidate];
     [super dealloc];
 }
@@ -110,6 +112,9 @@
     self.controller = [[NextEventsWidgetController alloc] initWithNibName:@"OutlookEvents" bundle:nil];
     self.controller.widget = self;
     self.viewController = self.controller;
+    
+    // init
+    self.notifiedEvents = [[NSMutableSet set] autorelease];
     
 }
 
@@ -159,8 +164,8 @@
     
     // select event to show
     BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
-    self->_event = [OutlookEvent findSoonestEvent:self.events busyOnly:busyOnly];
-    [self.delegate currentEventChanged:self.event];
+    self->_currentEvent = [OutlookEvent findSoonestEvent:self.events busyOnly:busyOnly];
+    [self.delegate currentEventChanged:self.currentEvent];
     
     // and show it
     [self update];
@@ -182,11 +187,11 @@
         
         // basic
         NextEventsWidgetController *controller = (NextEventsWidgetController*) self.viewController;
-        [controller.timeView setStringValue:SafeStringValue(self.event.timingDesc)];
-        [controller.titleView setStringValue:SafeStringValue(self.event.title)];
+        [controller.timeView setStringValue:SafeStringValue(self.currentEvent.timingDesc)];
+        [controller.titleView setStringValue:SafeStringValue(self.currentEvent.title)];
         
         // join button
-        if (self.event.canBeJoined == NO || self.event.joinUrl == nil) {
+        if (self.currentEvent.canBeJoined == NO || self.currentEvent.joinUrl == nil) {
             
             // hide the join button
             [controller.joinButtonWidthConstraint setConstant:0];
@@ -195,15 +200,15 @@
             
             // image or not
             NSImage* icon = nil;
-            if (self.event.isWebEx) {
+            if (self.currentEvent.isWebEx) {
                 icon = [NSImage imageNamed:@"WebexLogo"];
-            } else if (self.event.isTeams) {
+            } else if (self.currentEvent.isTeams) {
                 icon = [NSImage imageNamed:@"TeamsLogo"];
-            } else if (self.event.isSkype) {
+            } else if (self.currentEvent.isSkype) {
                 icon = [NSImage imageNamed:@"SkypeLogo"];
-            } else if (self.event.isGoogleMeet) {
+            } else if (self.currentEvent.isGoogleMeet) {
                 icon = [NSImage imageNamed:@"GoogleMeetLogo"];
-            } else if (self.event.isZoom) {
+            } else if (self.currentEvent.isZoom) {
                 icon = [NSImage imageNamed:@"ZoomLogo"];
             }
 
@@ -230,37 +235,47 @@
         }
         
         // show as
-        [OutlookUtils styleShowAsIndicator:controller.showAsView forEvent:self.event];
+        [OutlookUtils styleShowAsIndicator:controller.showAsView forEvent:self.currentEvent];
         
         // update
         [controller.view setNeedsDisplay:YES];
+        
+        // play sound
+        if (fabs([self.currentEvent intervalWithNow]) < 5) {
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookPlayReminderSound"]) {
+                if ([self.notifiedEvents containsObject:self.currentEvent.uid] == NO) {
+                    [self.notifiedEvents addObject:self.currentEvent.uid];
+                    [self playReminderSound];
+                }
+            }
+        }
     
     });
 }
 
 - (void) onLink:(id) sender
 {
-    if (self.event.webLink != nil) {
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.event.webLink]];
+    if (self.currentEvent.webLink != nil) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:self.currentEvent.webLink]];
     }
 }
 
 - (void) onJoin:(id)sender
 {
-    if (self.event.joinUrl != nil) {
+    if (self.currentEvent.joinUrl != nil) {
         
         // try direct first
-        NSString* joinUrl = self.event.directJoinUrl;
+        NSString* joinUrl = self.currentEvent.directJoinUrl;
         NSURL* appURL = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:[NSURL URLWithString:joinUrl]];
         if (appURL == nil) {
         
             // fallback
-            joinUrl = self.event.joinUrl;
+            joinUrl = self.currentEvent.joinUrl;
         
         } else {
             
             // auto-join
-            if (self.event.isTeams) {
+            if (self.currentEvent.isTeams) {
                 self.joinTeams = YES;
             }
        
@@ -311,7 +326,7 @@
     
     // find current event
     BOOL busyOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"outlookBusyOnly"];
-    long index = [self.events indexOfObject:self.event];
+    long index = [self.events indexOfObject:self.currentEvent];
     long curr = index + direction;
     while (true) {
         
@@ -339,7 +354,7 @@
             if (showDetail) {
                 [self showEventDetail:event];
             }
-            self->_event = event;
+            self->_currentEvent = event;
             [self update];
             return TRUE;
         }
@@ -443,6 +458,15 @@
         }
     }
 
+}
+
+- (void)playReminderSound {
+    
+    NSURL* outlookUrl = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:@"com.microsoft.Outlook"];
+    NSURL* reminderUrl = [outlookUrl URLByAppendingPathComponent:@"Contents/Frameworks/OutlookCore.framework/Versions/A/Resources/reminder.wav"];
+    NSSound* sound = [[[NSSound alloc] initWithContentsOfURL:reminderUrl byReference:NO] autorelease];
+    [sound play];
+    
 }
 
 @end

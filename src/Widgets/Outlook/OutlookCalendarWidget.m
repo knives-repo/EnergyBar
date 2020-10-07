@@ -72,7 +72,7 @@
 - (void)currentEventChanged:(nonnull OutlookEvent *)event {
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.nextEventWidget.event != nil) {
+        if (self.nextEventWidget.currentEvent != nil) {
             [self setActiveIndex:EVENT_INDEX];
         } else {
             [self setActiveIndex:EMPTY_INDEX];

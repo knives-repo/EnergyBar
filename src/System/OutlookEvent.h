@@ -50,6 +50,8 @@ typedef enum {
 
 - (id) initWithJson:(NSDictionary*) jsonEvent;
 
+- (NSTimeInterval) intervalWithNow;
+
 - (NSString*) timingDesc;
 - (NSString*) directJoinUrl;
 
