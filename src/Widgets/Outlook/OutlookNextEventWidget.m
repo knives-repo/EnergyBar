@@ -88,6 +88,7 @@
 @property (retain) NSMutableSet* notifiedEvents;
 @property (retain) NSArray* events;
 @property (retain) NSTimer* resetTimer;
+@property (retain) NSTimer* doubleTapTimer;
 @property (assign) NSPoint startSlidePoint;
 @property (assign) BOOL scrolled;
 @property (assign) BOOL joinTeams;
@@ -431,9 +432,30 @@
 
 - (void)shortPressEnded:(NSGestureRecognizer *)recognizer
 {
-    if (self.scrolled == NO) {
-        [self onLink:recognizer];
+    // if scrolled do nothing
+    if (self.scrolled == YES) {
+        return;
     }
+    
+    // log
+    //LOG("Double tap timer = %@", self.doubleTapTimer);
+
+    // if it is a double tap then reload
+    if (self.doubleTapTimer != nil) {
+        [self.doubleTapTimer invalidate];
+        [self setDoubleTapTimer:nil];
+        [self.delegate requestReload];
+        return;
+    }
+    
+    self.doubleTapTimer = [NSTimer scheduledTimerWithTimeInterval:[NSEvent doubleClickInterval]
+                                                        repeats:NO
+                                                          block:^(NSTimer * _Nonnull timer) {
+        self.doubleTapTimer = nil;
+        [self onLink:recognizer];
+
+    }];
+    
 }
 
 - (void)notifyScrollEnd:(NSString*) message {

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol OutlookEventWidgetDelegate <NSObject>
 - (void) currentEventChanged:(OutlookEvent*) event;
+- (void) requestReload;
 @end
 
 @interface OutlookNextEventWidget : CustomWidget

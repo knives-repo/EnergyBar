@@ -35,6 +35,10 @@
 
 @implementation OutlookCalendarWidget
 
+- (void)encodeWithCoder:(nonnull NSCoder *)coder {
+    [super encodeWithCoder:coder];
+}
+
 - (void)commonInit {
     
     // no connection
@@ -82,6 +86,14 @@
     });
 }
 
+- (void)requestReload {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setActiveIndex:LOADING_INDEX];
+    });
+    [self reloadEvents];
+}
+
+
 - (void)tapAction:(id)sender {
     
     switch (self.activeIndex) {
@@ -112,7 +124,7 @@
 }
 
 - (void)tick:(NSTimer *)sender {
-
+    
     // invalidate any existing timer
     [self.refreshTimer invalidate];
     
@@ -126,12 +138,12 @@
     // schedule next
     NSDate* fireDate = [NSDate nextTickForEverySeconds:REFRESH_TIMER_DELAY withDelta:0];
     self.refreshTimer = [[[NSTimer alloc]
-        initWithFireDate:fireDate
-        interval:0
-        target:self
-        selector:@selector(tick:)
-        userInfo:nil
-        repeats:NO] autorelease];
+                          initWithFireDate:fireDate
+                          interval:0
+                          target:self
+                          selector:@selector(tick:)
+                          userInfo:nil
+                          repeats:NO] autorelease];
     
     self.refreshTimer.tolerance = 0;
     
@@ -142,7 +154,7 @@
 - (void)loadEvents {
     
     [self.outlook loadCurrentAccount:^{
-
+        
         // need an account
         if (self.outlook.currentAccount == nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -196,29 +208,29 @@
                 if (event.allDay == YES) {
                     continue;
                 }
-
+                
                 // skip out of office we do not organize
                 if (event.showAs == ShowAsOutOfOffice) {
                     if ([event.organizerName isEqualTo:self.outlook.currentAccount.username] == NO) {
                         continue;
                     }
                 }
-
+                
                 // valid
                 [filtered addObject:event];
                 
             }
-            #if DUMP
-                for (OutlookEvent* event in filtered) {
-                    LOG("[CALENDAR] Event = %@", event);
-                }
-            #endif
+#if DUMP
+            for (OutlookEvent* event in filtered) {
+                LOG("[CALENDAR] Event = %@", event);
+            }
+#endif
             
             // now load
             [self.nextEventWidget showEvents:[filtered sortedArrayUsingSelector:@selector(compare:)]];
-
+            
         }];
-
+        
     }];
 }
 
@@ -227,7 +239,7 @@
 }
 
 - (void)updateReloadingAccount:(BOOL) reloadAccount reloadingEvents:(BOOL) reloadEvents {
-
+    
     // clear previous account
     if (reloadAccount == YES) {
         self.outlook = [[[Outlook alloc] init] autorelease];
@@ -236,7 +248,7 @@
     
     // main thread
     dispatch_async(dispatch_get_main_queue(), ^{
-
+        
         // do we have an account
         if (self.outlook.currentAccount == nil) {
             [self setActiveIndex:SIGNIN_INDEX];
@@ -255,7 +267,7 @@
         [self.view invalidateIntrinsicContentSize];
         
     });
-
+    
 }
 
 @end
