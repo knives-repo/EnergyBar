@@ -26,6 +26,7 @@
 
 @interface OutlookCalendarWidget()
 @property (retain) OutlookNextEventWidget* nextEventWidget;
+@property (retain) NSTimer* doubleTapTimer;
 @property (retain) NSTimer* refreshTimer;
 @property (retain) Outlook* outlook;
 @property (retain) NSDate* lastFetch;
@@ -95,9 +96,10 @@
 
 
 - (void)tapAction:(id)sender {
-    
+
     switch (self.activeIndex) {
         case SIGNIN_INDEX:
+            // show configuration
             [self.target performSelector:self.action withObject:[NSNumber numberWithInt:2]];
             break;
             
@@ -105,7 +107,17 @@
             break;
             
         case EMPTY_INDEX:
-            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://outlook.office.com/calendar/"]];
+            // handle double tap
+            if (self.doubleTapTimer != nil && [self.doubleTapTimer isValid]) {
+                [self.doubleTapTimer invalidate];
+                self.doubleTapTimer = nil;
+                [self requestReload];
+            } else {
+                self.doubleTapTimer = [NSTimer scheduledTimerWithTimeInterval:[NSEvent doubleClickInterval] repeats:NO block:^(NSTimer * _Nonnull timer) {
+                    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://outlook.office.com/calendar/"]];
+                    self.doubleTapTimer = nil;
+                }];
+            }
             break;
             
         case EVENT_INDEX:
