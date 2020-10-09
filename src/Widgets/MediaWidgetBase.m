@@ -170,16 +170,26 @@
     }];
 }
 
-- (void) showLyrics
+- (BOOL) showLyrics
 {
-    NSString* q = [NSString stringWithFormat:@"%@ %@ lyrics", [NowPlaying sharedInstance].title, [NowPlaying sharedInstance].artist];
-    q = [q stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    q = [q stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
-    q = [q stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
-    q = [q stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
-    q = [q stringByReplacingOccurrencesOfString:@"#" withString:@"%23"];
+    // get and check
+    NSString* title = [NowPlaying sharedInstance].title;
+    NSString* artist = [NowPlaying sharedInstance].artist;
+    if (title == nil) {
+        return NO;
+    }
+    
+    // build query url and escape
+    NSString* q = [NSString stringWithFormat:@"%@ %@ lyrics", SafeStringValue(title), SafeStringValue(artist)];
+    q = [q stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    // open
     NSString* url = [NSString stringWithFormat:@"https://www.google.com/search?q=%@", q];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+    
+    // done
+    return YES;
+
 }
 
 @end

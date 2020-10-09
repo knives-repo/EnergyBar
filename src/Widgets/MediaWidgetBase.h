@@ -24,6 +24,6 @@
 - (void) nowPlayingNotification:(NSNotification*) notification;
 - (void) playPause;
 
-- (void) showLyrics;
+- (BOOL) showLyrics;
 
 @end

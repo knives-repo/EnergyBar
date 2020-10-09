@@ -21,6 +21,14 @@
 #define ACTIVATION_DELTA 32
 #define LYRICS_TIME 1
 
+typedef enum {
+    ActionPlayPause,
+    ActionNext,
+    ActionPrev,
+    //ActionLyrics,
+    ActionCancelled
+} Action;
+
 @interface MediaAllInOneWidgetView : ImageTitleView
 @end
 
@@ -32,16 +40,16 @@
 @end
 
 @interface MediaAllInOneWidget() {
-    NSTimeInterval pressStart;
     int initialSlidePosition;
-    BOOL activated;
-    BOOL lyrics;
+    Action action;
 }
+
 @property (retain) ImageTitleView* imageTitleView;
 @property (retain) NSImage* playImage;
 @property (retain) NSImage* pauseImage;
 @property (retain) NSImage* previousImage;
 @property (retain) NSImage* nextImage;
+
 @end
 
 @implementation MediaAllInOneWidget
@@ -106,6 +114,25 @@
 
 }
 
+-(void)setPressActionIcon {
+    
+    BOOL playing = [NowPlaying sharedInstance].playing;
+    switch (action) {
+        case ActionNext:
+            [self.imageTitleView setImage:self.nextImage];
+            break;
+        case ActionPrev:
+            [self.imageTitleView setImage:self.previousImage];
+            break;
+        case ActionPlayPause:
+            playing = !playing;
+        default:
+            [self.imageTitleView setImage:playing ? self.pauseImage : self.playImage];
+            break;
+    }
+    
+}
+
 - (void)shortPressAction:(NSGestureRecognizer *)recognizer
 {
     switch (recognizer.state)
@@ -127,22 +154,25 @@
 - (void)shortPressBegan:(NSGestureRecognizer *)recognizer
 {
     // get active segment
-    pressStart = [[NSDate date] timeIntervalSinceReferenceDate];
     NSPoint point = [recognizer locationInView:self.view];
     initialSlidePosition = point.x;
-    activated = NO;
-    lyrics = NO;
+    action = ActionPlayPause;
     
     // hide bezel window
     [BezelWindow hide];
     
     // timer for lyrics
     [NSTimer scheduledTimerWithTimeInterval:LYRICS_TIME repeats:NO block:^(NSTimer * _Nonnull timer) {
-        if (pressStart != 0 && activated == NO) {
+        if (action == ActionPlayPause) {
             [self showLyrics];
-            lyrics = YES;
+            action = ActionCancelled;
+            [self setPressActionIcon];
         }
     }];
+    
+    // update icon now
+    [self setPressActionIcon];
+
 }
 
 - (void)shortPressChanged:(NSGestureRecognizer *)recognizer
@@ -151,41 +181,49 @@
     NSPoint point = [recognizer locationInView:self.view];
     int positionDelta = point.x - initialSlidePosition;
     
-    // set image
-    if (positionDelta < -ACTIVATION_DELTA) {
-        [self.imageTitleView setImage:self.previousImage];
-        activated = YES;
-    } else if (positionDelta > ACTIVATION_DELTA) {
-        [self.imageTitleView setImage:self.nextImage];
-        activated = YES;
-    } else {
-        if (activated == YES) {
-            [self.imageTitleView setImage:[self playPauseImage]];
-        } else if (lyrics == NO) {
-            BOOL playing = [NowPlaying sharedInstance].playing;
-            [self.imageTitleView setImage:playing ? self.playImage : self.pauseImage];
+    // cancelled
+    if (action != ActionCancelled) {
+
+        // set image
+        if (positionDelta < -ACTIVATION_DELTA) {
+            action = ActionPrev;
+        } else if (positionDelta > ACTIVATION_DELTA) {
+            action = ActionNext;
+        } else if (action == ActionPrev || action == ActionNext) {
+            action = ActionCancelled;
         }
+        
     }
+    
+    // update icon now
+    [self setPressActionIcon];
 
 }
 
 - (void)shortPressEnded:(NSGestureRecognizer *)recognizer
 {
-    // reset
-    pressStart = 0;
+    // save and reset
+    Action actionToPerform = action;
+    action = ActionCancelled;
     
     // key up
-    NSPoint point = [recognizer locationInView:self.view];
-    int positionDelta = point.x - initialSlidePosition;
-    if (positionDelta < -ACTIVATION_DELTA) {
-        PostAuxKeyPress(NX_KEYTYPE_PREVIOUS);
-    } else if (positionDelta > ACTIVATION_DELTA) {
-        PostAuxKeyPress(NX_KEYTYPE_NEXT);
-    } else if (activated == NO) {
-        if (lyrics == NO) {
+    switch (actionToPerform) {
+        case ActionNext:
+            PostAuxKeyPress(NX_KEYTYPE_NEXT);
+            break;
+        case ActionPrev:
+            PostAuxKeyPress(NX_KEYTYPE_PREVIOUS);
+            break;
+        case ActionPlayPause:
             [self playPause];
-        }
-    }
+            break;
+        default:
+            break;
+    };
+
+    // update icon now
+    //[self setPressActionIcon];
+
 }
 
 @end
