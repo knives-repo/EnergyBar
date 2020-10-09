@@ -182,6 +182,7 @@
     // build query url and escape
     NSString* q = [NSString stringWithFormat:@"%@ %@ lyrics", SafeStringValue(title), SafeStringValue(artist)];
     q = [q stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    q = [q stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
     
     // open
     NSString* url = [NSString stringWithFormat:@"https://www.google.com/search?q=%@", q];
