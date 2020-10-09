@@ -246,7 +246,7 @@
         [controller.view layout];
         
         // play sound
-        if (fabs([self.currentEvent intervalWithNow]) < 5) {
+        if (self.currentEvent != nil && fabs([self.currentEvent intervalWithNow]) < 5) {
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookPlayReminderSound"]) {
                 if ([self.notifiedEvents containsObject:self.currentEvent.uid] == NO) {
                     if (self.currentEvent.uid != nil) {
