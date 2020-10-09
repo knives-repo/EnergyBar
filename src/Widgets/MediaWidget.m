@@ -19,7 +19,7 @@
 
     // add widgets
     [self addWidget:[[MediaControlsWidget alloc] initWithIdentifier:@"_mediaControls"]];
-    [self addWidget:[[MediaAllInOneWidget alloc] initWithIdentifier:@"_volumeAllInOne"]];
+    [self addWidget:[[MediaAllInOneWidget alloc] initWithIdentifier:@"_mediaAllInOne"]];
 
 }
 
