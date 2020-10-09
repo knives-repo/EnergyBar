@@ -171,6 +171,8 @@
 	<integer>2</integer>
 	<key>outlookWidgetSize</key>
 	<integer>1</integer>
+	<key>outlookPauseMediaOnJoin</key>
+	<true/>
 	<key>mediaShowSongTitle</key>
 	<true/>
 </dict>

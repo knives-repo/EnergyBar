@@ -9,6 +9,7 @@
 #import "OutlookNextEventWidget.h"
 #import "NSRunningApplication+Utils.h"
 #import "OutlookEventDetailsController.h"
+#import "NowPlaying.h"
 #import "BezelWindow.h"
 #import "NSColor+Hex.h"
 #import "OutlookUtils.h"
@@ -116,6 +117,9 @@
     
     // init
     self.notifiedEvents = [[[NSMutableSet alloc] init] autorelease];
+    
+    // now playing
+    [NowPlaying sharedInstance];
     
 }
 
@@ -282,6 +286,13 @@
                 self.joinTeams = YES;
             }
        
+        }
+        
+        // pause any music
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookPauseMediaOnJoin"]) {
+            if ([NowPlaying sharedInstance].playing) {
+                PostAuxKeyPress(NX_KEYTYPE_PLAY);
+            }
         }
         
         // if frontmost before opening
