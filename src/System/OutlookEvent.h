@@ -34,7 +34,7 @@ typedef enum {
 @property (retain) NSDate* endTime;
 @property (assign) ShowAs showAs;
 @property (assign) Importance importance;
-@property (retain) NSArray* categories;
+@property (retain) NSArray<NSString*>* categories;
 @property (retain) NSString* organizerName;
 @property (retain) NSString* organizerEmail;
 @property (retain,nullable) NSString* onlineProvider;
@@ -44,9 +44,9 @@ typedef enum {
 @property (readonly) BOOL canBeJoined;
 @property (readonly) BOOL isEnded;
 
-+ (NSArray*) listFromJson:(NSArray*) jsonArray;
++ (NSArray<OutlookEvent*>*) listFromJson:(NSArray<NSDictionary*>*) jsonArray;
 
-+ (OutlookEvent*) findSoonestEvent:(NSArray*) events busyOnly:(BOOL) busyOnly;
++ (OutlookEvent*) findSoonestEvent:(NSArray<OutlookEvent*>*) events busyOnly:(BOOL) busyOnly;
 
 - (id) initWithJson:(NSDictionary*) jsonEvent;
 

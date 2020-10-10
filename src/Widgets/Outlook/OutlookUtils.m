@@ -78,7 +78,7 @@
 
 }
 
-+ (NSDictionary*) presetColors {
++ (NSDictionary<NSString*, NSColor*>*) presetColors {
     
     //
     // TODO
@@ -114,7 +114,7 @@
 
 }
 
-+ (NSArray*) presetColorNames
++ (NSArray<NSString*>*) presetColorNames
 {
     return [[[OutlookUtils presetColors] allKeys] sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         int num1 = [[obj1 stringByReplacingOccurrencesOfString:@"preset" withString:@""] intValue];

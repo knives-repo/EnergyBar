@@ -191,7 +191,7 @@
         [self.outlook getCalendarEvents:showTomorrow completionBlock:^(NSDictionary * jsonCalendar) {
             
             // check
-            NSArray* jsonEvents = [jsonCalendar objectForKey:@"value"];
+            NSArray<NSDictionary*>* jsonEvents = [jsonCalendar objectForKey:@"value"];
             if (jsonEvents == nil || [jsonEvents count] == 0) {
                 // make sure it is reload in 60 seconds
                 self.lastFetch = [[NSDate date] dateByAddingTimeInterval:-FETCH_CALENDAR_EVERY_SECONDS + FETCH_CALENDAR_EVERY_SECONDS_IF_EMPTY];
@@ -205,10 +205,10 @@
             self.lastFetch = [[NSDate date] dateByAddingTimeInterval:-REFRESH_TIMER_DELAY];
             
             // process
-            NSArray* events = [OutlookEvent listFromJson:jsonEvents];
+            NSArray<OutlookEvent*>* events = [OutlookEvent listFromJson:jsonEvents];
             
             // filter
-            NSMutableArray* filtered = [NSMutableArray array];
+            NSMutableArray<OutlookEvent*>* filtered = [NSMutableArray<OutlookEvent*> array];
             for (OutlookEvent* event in events) {
                 
                 // skip cancelled

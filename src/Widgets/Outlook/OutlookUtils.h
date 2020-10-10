@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void) styleShowAsIndicator:(NSView*) showAsView forEvent:(OutlookEvent*) event;
 
-+ (NSDictionary*) presetColors;
-+ (NSArray*) presetColorNames;
++ (NSDictionary<NSString*, NSColor*>*) presetColors;
++ (NSArray<NSString*>*) presetColorNames;
 
 @end
 

@@ -400,8 +400,8 @@
     
 }
 
-+ (NSArray*) listFromJson:(NSArray*) jsonArray {
-    NSMutableArray* array = [NSMutableArray array];
++ (NSArray<OutlookEvent*>*) listFromJson:(NSArray<NSDictionary*>*) jsonArray {
+    NSMutableArray<OutlookEvent*>* array = [NSMutableArray<OutlookEvent*> array];
     if (jsonArray != nil) {
         for (NSDictionary* dict in jsonArray) {
             OutlookEvent* event = [[OutlookEvent alloc] initWithJson:dict];
@@ -412,7 +412,7 @@
 }
 
 
-+ (OutlookEvent*) findSoonestEvent:(NSArray*) events busyOnly:(BOOL)busyOnly {
++ (OutlookEvent*) findSoonestEvent:(NSArray<OutlookEvent*>*) events busyOnly:(BOOL)busyOnly {
     
     // check
     if (events == nil || events.count == 0) {

@@ -158,7 +158,7 @@
      removeObserver:self];
 }
 
-- (void) showEvents:(NSArray*) events
+- (void) showEvents:(NSArray<OutlookEvent*>*) events
 {
     self.events = events;
     [self selectEvent];
