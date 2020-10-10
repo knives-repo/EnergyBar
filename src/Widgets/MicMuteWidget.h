@@ -12,10 +12,8 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "CustomWidget.h"
+#import "ButtonWidget.h"
 
-@interface MicMuteWidget : CustomWidget
+@interface MicMuteWidget : ButtonWidget
 @property (nonatomic,assign) BOOL applicationMute;
-@property (retain) NSImage *micOnImage;
-@property (retain) NSImage *micOffImage;
 @end

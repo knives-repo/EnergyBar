@@ -64,6 +64,7 @@
 		8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DC4F12522911B0042A22A /* NSSegmentedControl+Utils.m */; };
 		8D5F27D52526C22B009DE863 /* NSRunningApplication+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F27D42526C22B009DE863 /* NSRunningApplication+Utils.m */; };
 		8D8260072523A1CD006006EB /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8260062523A1CD006006EB /* NSDate+Utils.m */; };
+		8D83250225323DDA00D1C1AB /* ButtonWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D83250125323DDA00D1C1AB /* ButtonWidget.m */; };
 		8D9D245C251F6F35004FF191 /* LevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245B251F6F35004FF191 /* LevelIndicator.m */; };
 		8D9D245F251F8D2B004FF191 /* NSColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D245E251F8D2B004FF191 /* NSColor+Hex.m */; };
 		8D9D2465251FB14D004FF191 /* BacklightWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9D2464251FB14D004FF191 /* BacklightWidget.m */; };
@@ -224,6 +225,8 @@
 		8D5F27D42526C22B009DE863 /* NSRunningApplication+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSRunningApplication+Utils.m"; sourceTree = "<group>"; };
 		8D8260052523A1CD006006EB /* NSDate+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		8D8260062523A1CD006006EB /* NSDate+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
+		8D83250025323DDA00D1C1AB /* ButtonWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonWidget.h; sourceTree = "<group>"; };
+		8D83250125323DDA00D1C1AB /* ButtonWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonWidget.m; sourceTree = "<group>"; };
 		8D9D245A251F6F35004FF191 /* LevelIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelIndicator.h; sourceTree = "<group>"; };
 		8D9D245B251F6F35004FF191 /* LevelIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelIndicator.m; sourceTree = "<group>"; };
 		8D9D245D251F8D2B004FF191 /* NSColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Hex.h"; sourceTree = "<group>"; };
@@ -424,6 +427,8 @@
 				8D9D2464251FB14D004FF191 /* BacklightWidget.m */,
 				8DE31D11251EFE7E004E835B /* BrightnessWidget.h */,
 				8DE31D12251EFE7E004E835B /* BrigthnessWidget.m */,
+				8D83250025323DDA00D1C1AB /* ButtonWidget.h */,
+				8D83250125323DDA00D1C1AB /* ButtonWidget.m */,
 				3C5D0FCC2119210000769A39 /* ClockWidget.h */,
 				3C5D0FCD2119210000769A39 /* ClockWidget.m */,
 				3C102D4921197ED700FFB2CF /* ControlWidget.h */,
@@ -742,6 +747,7 @@
 				8D4DC4F22522911B0042A22A /* NSSegmentedControl+Utils.m in Sources */,
 				3C200ECF212DFF390000B04D /* FixedSizeLabel.m in Sources */,
 				8D33B996251EB68C006AFCC9 /* MicMuteWidget.m in Sources */,
+				8D83250225323DDA00D1C1AB /* ButtonWidget.m in Sources */,
 				3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */,
 				8DCB915D2525517400968D94 /* VolumeWidget.m in Sources */,
 				8DE31D13251EFE7E004E835B /* BrigthnessWidget.m in Sources */,

@@ -12,27 +12,17 @@
  */
 
 #import "MicMuteWidget.h"
-#import "ImageTitleView.h"
 #import "AudioControl.h"
 #import "BezelWindow.h"
 #import "NSColor+Hex.h"
 #import "KeyEvent.h"
 #import "NSRunningApplication+Utils.h"
 
-@interface MicMuteWidgetView : ImageTitleView
-@end
-
-@implementation MicMuteWidgetView
-- (NSSize)intrinsicContentSize
-{
-    return NSMakeSize(WIDGET_STANDARD_WIDTH, NSViewNoIntrinsicMetric);
-}
-@end
-
 @interface MicMuteWidget()
 @property (retain) NSRunningApplication* runningApplication;
-@property (retain) ImageTitleView *imageTileView;
 @property (retain) NSTimer* refreshTimer;
+@property (retain) NSImage *micOnImage;
+@property (retain) NSImage *micOffImage;
 @property (assign) BOOL muteToRestore;
 @property (assign) BOOL restoreMute;
 @end
@@ -41,25 +31,16 @@
 
 - (void)commonInit
 {
+    // super
+    [super commonInit];
+    
     // experimental
     self.applicationMute = [[NSUserDefaults standardUserDefaults] boolForKey:@"micmuteApplicationMute"];
-    
+
+    // customization
     self.customizationLabel = @"Mic Mute";
     self.micOnImage = [NSImage imageNamed:@"MicOn"];
     self.micOffImage = [NSImage imageNamed:@"MicOff"];
-    
-    self.imageTileView = [[[MicMuteWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
-    self.imageTileView.wantsLayer = YES;
-    self.imageTileView.layer.cornerRadius = 6.0;
-    self.imageTileView.imageSize = NSMakeSize(36, 36);
-    self.imageTileView.layoutOptions = ImageTitleViewLayoutOptionImage;
-    
-    NSClickGestureRecognizer *tapRecognizer = [[[NSClickGestureRecognizer alloc]
-                                                initWithTarget:self action:@selector(tapAction:)] autorelease];
-    tapRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
-    [self.imageTileView addGestureRecognizer:tapRecognizer];
-    
-    self.view = self.imageTileView;
     
     [AudioControl sharedInstanceInput];
     [self setMicMuteImage];
@@ -128,12 +109,8 @@
 
     // we will run this twice
     dispatch_block_t update = ^{
-        [self.imageTileView setImage:image];
-        [self.imageTileView.layer setBackgroundColor:[bgColor CGColor]];
-        
-        // force a refresh
-        [self.imageTileView layout];
-        
+        [self setImage:image];
+        [self setBackgroundColor:bgColor];
     };
     
     // run this on main thread
