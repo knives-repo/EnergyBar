@@ -35,12 +35,23 @@
     int lastSlidePosition;
     BOOL modified;
 }
+@property (retain) NSImage *volumeOff;
+@property (retain) NSImage *volumeOffMute;
+@property (retain) NSImage *volumeLow;
+@property (retain) NSImage *volumeLowMute;
+@property (retain) NSImage *volumeMedium;
+@property (retain) NSImage *volumeMediumMute;
+@property (retain) NSImage *volumeHigh;
+@property (retain) NSImage *volumeHighMute;
 @end
 
 @implementation VolumeAllInOneWidget
 
 - (void)commonInit
 {
+    [super commonInit:YES];
+    [self setImageSize:WIDGET_STANDARD_IMAGE_SIZE];
+    
     self.customizationLabel = @"Volume All-in-one";
     
     self.volumeOff = [NSImage imageNamed:@"AudioVolumeOff"];
@@ -51,22 +62,6 @@
     self.volumeMediumMute = [NSImage imageNamed:@"AudioVolumeMedMute"];
     self.volumeHigh = [NSImage imageNamed:@"AudioVolumeHigh"];
     self.volumeHighMute = [NSImage imageNamed:@"AudioVolumeHighMute"];
-
-    ImageTitleView *view = [[[VolumeAllInOneWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
-    view.wantsLayer = YES;
-    view.layer.cornerRadius = 6.0;
-    view.layer.backgroundColor = [[NSColor colorWithWhite:0.2109 alpha:1.0] CGColor];
-    view.imageSize = NSMakeSize(36, 36);
-    view.layoutOptions = ImageTitleViewLayoutOptionImage;
-    
-    NSPressGestureRecognizer *shortPress = [[[NSPressGestureRecognizer alloc]
-        initWithTarget:self action:@selector(shortPressAction:)] autorelease];
-    shortPress.allowedTouchTypes = NSTouchTypeMaskDirect;
-    shortPress.minimumPressDuration = 0;
-
-    [view addGestureRecognizer:shortPress];
-    
-    self.view = view;
     
     [AudioControl sharedInstanceOutput];
     [self setVolumeImage];
@@ -104,53 +99,30 @@
 - (void)setVolumeImage
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        ImageTitleView* imageTitleView = (ImageTitleView*) self.view;
         double volume = [AudioControl sharedInstanceOutput].volume;
         BOOL mute = [AudioControl sharedInstanceOutput].mute;
         if (mute) {
             if (volume < VOLUME_OFF) {
-                [imageTitleView setImage:self.volumeOffMute];
+                [self setImage:self.volumeOffMute];
             } else if (volume < VOLUME_LOW) {
-                [imageTitleView setImage:self.volumeLowMute];
+                [self setImage:self.volumeLowMute];
             } else if (volume < VOLUME_MED) {
-                [imageTitleView setImage:self.volumeMediumMute];
+                [self setImage:self.volumeMediumMute];
             } else {
-                [imageTitleView setImage:self.volumeHighMute];
+                [self setImage:self.volumeHighMute];
             }
         } else {
             if (volume < VOLUME_OFF) {
-                [imageTitleView setImage:self.volumeOff];
+                [self setImage:self.volumeOff];
             } else if (volume < VOLUME_LOW) {
-                [imageTitleView setImage:self.volumeLow];
+                [self setImage:self.volumeLow];
             } else if (volume < VOLUME_MED) {
-                [imageTitleView setImage:self.volumeMedium];
+                [self setImage:self.volumeMedium];
             } else {
-                [imageTitleView setImage:self.volumeHigh];
+                [self setImage:self.volumeHigh];
             }
         }
-        
-        // force update
-        [imageTitleView setNeedsDisplay:YES];
     });
-}
-
-- (void)shortPressAction:(NSGestureRecognizer *)recognizer
-{
-    switch (recognizer.state)
-    {
-    case NSGestureRecognizerStateBegan:
-        [self shortPressBegan:recognizer];
-        break;
-    case NSGestureRecognizerStateChanged:
-        [self shortPressChanged:recognizer];
-        break;
-    case NSGestureRecognizerStateEnded:
-    case NSGestureRecognizerStateCancelled:
-        [self shortPressEnded:recognizer];
-        break;
-    default:
-        return;
-    }
 }
 
 - (void)shortPressBegan:(NSGestureRecognizer *)recognizer

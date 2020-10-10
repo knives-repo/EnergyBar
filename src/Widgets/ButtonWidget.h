@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) commonInit:(BOOL) gestureRecognizer;
 
 - (void) setImage:(NSImage*) image;
+- (void) setImageSize:(NSSize) size;
 - (void) setBackgroundColor:(NSColor*) color;
 
 @end

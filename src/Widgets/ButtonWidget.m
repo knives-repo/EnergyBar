@@ -8,6 +8,33 @@
 
 #import "ButtonWidget.h"
 
+@interface ButtonWidgetCell : NSButtonCell
+@property (assign) NSSize imageSize;
+@end
+
+@implementation ButtonWidgetCell
+
+- (void)drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
+    
+    // adjust size
+    if (self.imageSize.width != 0 && self.imageSize.height != 0) {
+
+        // calc rect
+        float width = MAX(self.imageSize.width, controlView.frame.size.width);
+        float height = MAX(self.imageSize.height, controlView.frame.size.height);
+        float x = (controlView.frame.size.width - width) / 2;
+        float y = (controlView.frame.size.height - height) / 2;
+        frame = NSMakeRect(x, y, width, height);
+        //NSLog(@"%@",CGRectCreateDictionaryRepresentation(frame));
+        
+    }
+
+    // draw
+    [super drawImage:image withFrame:frame inView:controlView];
+}
+
+@end
+
 @interface ButtonWidgetView : NSButton
 @end
 
@@ -32,6 +59,7 @@
 - (void) commonInit:(BOOL) gestureRecognizer
 {
     self.buttonView = [[[ButtonWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
+    [self.buttonView setCell:[[ButtonWidgetCell alloc] init]];
     [self.buttonView setBezelStyle:NSRoundedBezelStyle];
     [self.buttonView setButtonType:NSButtonTypeMomentaryPushIn];
     [self.buttonView setImagePosition:NSImageOnly];
@@ -57,6 +85,13 @@
 - (void) setImage:(NSImage*) image
 {
     [self.buttonView setImage:image];
+    [self.buttonView layout];
+}
+
+- (void) setImageSize:(NSSize) size
+{
+    ButtonWidgetCell* cell = self.buttonView.cell;
+    [cell setImageSize:size];
     [self.buttonView layout];
 }
 
