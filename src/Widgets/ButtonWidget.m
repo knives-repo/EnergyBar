@@ -60,12 +60,13 @@
 {
     self.buttonView = [[[ButtonWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
     [self.buttonView setCell:[[ButtonWidgetCell alloc] init]];
-    [self.buttonView setBezelStyle:NSRoundedBezelStyle];
+    [self.buttonView setBezelStyle:NSBezelStyleRounded];
     [self.buttonView setButtonType:NSButtonTypeMomentaryPushIn];
     [self.buttonView setImagePosition:NSImageOnly];
     [self.buttonView setImageScaling:NSImageScaleProportionallyUpOrDown];
     [self.buttonView setWantsLayer:YES];
     [self.buttonView.layer setCornerRadius:6.0];
+    //[self setBackgroundColor:WIDGET_STANDARD_BG_COLOR];
     
     self.view = self.buttonView;
 
@@ -90,14 +91,14 @@
 
 - (void) setImageSize:(NSSize) size
 {
-    ButtonWidgetCell* cell = self.buttonView.cell;
-    [cell setImageSize:size];
+    [self.buttonView.cell setImageSize:size];
     [self.buttonView layout];
 }
 
 - (void) setBackgroundColor:(NSColor*) color
 {
     [self.buttonView setBezelColor:color];
+    [self.buttonView.cell setHighlightsBy:0];
     [self.buttonView layout];
 }
 

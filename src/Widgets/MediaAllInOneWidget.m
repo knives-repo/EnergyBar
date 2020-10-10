@@ -66,7 +66,7 @@ typedef enum {
     self.imageTitleView = [[[MediaAllInOneWidgetView alloc] initWithFrame:NSZeroRect] autorelease];
     self.imageTitleView.wantsLayer = YES;
     self.imageTitleView.layer.cornerRadius = 6.0;
-    self.imageTitleView.layer.backgroundColor = [[NSColor colorWithWhite:0.2109 alpha:1.0] CGColor];
+    self.imageTitleView.layer.backgroundColor = [WIDGET_STANDARD_BG_COLOR CGColor];
     self.imageTitleView.imageSize = WIDGET_STANDARD_IMAGE_SIZE;
     self.imageTitleView.layoutOptions = ImageTitleViewLayoutOptionImage;
     
