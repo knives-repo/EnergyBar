@@ -101,7 +101,7 @@
     // default
     BOOL mute = [AudioControl sharedInstanceInput].mute;
     NSImage* image = mute ? _micOffImage : _micOnImage;
-    NSColor* bgColor = mute ? [NSColor redColor] : [NSColor colorFromHex:0x008000];
+    NSColor* bgColor = mute ? [NSColor colorFromHex:0xE00000] : [NSColor colorFromHex:0x008000];
     [self updateWithImage:image andBackgroundColor:bgColor];
 }
 
