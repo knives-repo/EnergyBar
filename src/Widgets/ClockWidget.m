@@ -107,7 +107,19 @@
 {
     ImageTitleView *view = self.view;
 
-    if (!self.showsBatteryStatus)
+    // get battery info
+    NSDictionary *info = [[PowerStatus sharedInstance] providingSourceInfoDictionary];
+    NSNumber *currentCapacity = [info objectForKey:PowerStatusCurrentCapacity];
+    NSNumber *maxCapacity = [info objectForKey:PowerStatusMaxCapacity];
+    double capacity = 100 * [currentCapacity doubleValue] / [maxCapacity doubleValue];
+    //BOOL charging = [[info objectForKey:PowerStatusIsCharging] boolValue];
+    BOOL charging = ![[[PowerStatus sharedInstance] providingSource]
+        isEqualToString:PowerStatusBatteryPower];
+    BOOL charged = [[info objectForKey:PowerStatusIsCharged] boolValue];
+    NSTimeInterval timeRemaining = [[PowerStatus sharedInstance] remainingTime];
+
+
+    if (!self.showsBatteryStatus || (charging && capacity > 99.9))
     {
         view.image = nil;
         view.titleFont = [NSFont systemFontOfSize:0];
@@ -116,16 +128,6 @@
     }
     else
     {
-        NSDictionary *info = [[PowerStatus sharedInstance] providingSourceInfoDictionary];
-        NSNumber *currentCapacity = [info objectForKey:PowerStatusCurrentCapacity];
-        NSNumber *maxCapacity = [info objectForKey:PowerStatusMaxCapacity];
-        double capacity = 100 * [currentCapacity doubleValue] / [maxCapacity doubleValue];
-        //BOOL charging = [[info objectForKey:PowerStatusIsCharging] boolValue];
-        BOOL charging = ![[[PowerStatus sharedInstance] providingSource]
-            isEqualToString:PowerStatusBatteryPower];
-        BOOL charged = [[info objectForKey:PowerStatusIsCharged] boolValue];
-        NSTimeInterval timeRemaining = [[PowerStatus sharedInstance] remainingTime];
-
         NSString *clockString = [self.formatter stringFromDate:[NSDate date]];
         NSString *batteryString = isnan(capacity) || isinf(capacity) ?
             @"--" :
