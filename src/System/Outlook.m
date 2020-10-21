@@ -11,7 +11,7 @@
 
 #define CALENDAR_LIST_OFFSET_START -10*60
 #define CALENDAR_LIST_OFFSET_END 24*60*60
-#define CALENDAR_SHOW_TOMMOROW_HOUR_THRESHOLD 17
+#define CALENDAR_SHOW_TOMORROW_HOUR_THRESHOLD 17
 
 NSString* kClientID = @"82ac6221-a570-439c-a965-040443a5036c";
 NSString* kAuthority = @"https://login.microsoftonline.com/common";
@@ -269,7 +269,7 @@ NSString* kRedirectUri = @"msauth.billziss.EnergyBar://auth";
     
     // end date: depends on option
     NSDate* end = now;
-    if (showTomorrow == ShowAlways || (showTomorrow == ShowEvening && [now components].hour >= CALENDAR_SHOW_TOMMOROW_HOUR_THRESHOLD)) {
+    if (showTomorrow == ShowAlways || (showTomorrow == ShowEvening && [now components].hour >= CALENDAR_SHOW_TOMORROW_HOUR_THRESHOLD)) {
         end = [end dateByAddingTimeInterval:24*60*60];
     }
     end = [[NSCalendar currentCalendar] dateBySettingHour:23 minute:59 second:59 ofDate:end options:0];
