@@ -108,6 +108,9 @@
 
 - (void)commonInit
 {
+    // init
+    self.scrubbing = NO;
+    
     // label
     self.customizationLabel = @"Outlook Calendar";
     
