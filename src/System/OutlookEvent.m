@@ -305,7 +305,7 @@
 }
 
 - (NSTimeInterval) intervalWithNow {
-    return [self.startTime timeIntervalSinceMinuteStart];
+    return round([self.startTime timeIntervalSinceMinuteStart]);
 }
 
 - (BOOL) isToday {
@@ -466,7 +466,10 @@
         double soonestDelta = fabs([soonest intervalWithNow]);
         double startDelta = fabs(eventDelta - soonestDelta);
         if (eventDelta < soonestDelta || (startDelta < 0.1 && event.showAs > soonest.showAs)) {
+            //LOG("%@ %d > %@ %d (%f, %f)", event.title, event.showAs, soonest.title, soonest.showAs, eventDelta, soonestDelta);
             soonest = event;
+        } else {
+            //LOG("%@ %d < %@ %d (%f, %f)", event.title, event.showAs, soonest.title, soonest.showAs, eventDelta, soonestDelta);
         }
         
     }
