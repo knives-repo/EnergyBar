@@ -91,6 +91,7 @@
 @property (retain) NSTimer* resetTimer;
 @property (retain) NSTimer* doubleTapTimer;
 @property (assign) NSPoint startSlidePoint;
+@property (assign) BOOL scrubbing;
 @property (assign) BOOL scrolled;
 @property (assign) BOOL joinTeams;
 @end
@@ -246,7 +247,7 @@
         [controller.view layout];
         
         // play sound
-        if (self.currentEvent != nil && fabs([self.currentEvent intervalWithNow]) < 5) {
+        if (self.scrubbing == NO && self.currentEvent != nil && fabs([self.currentEvent intervalWithNow]) < 5) {
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookPlayReminderSound"]) {
                 if ([self.notifiedEvents containsObject:self.currentEvent.uid] == NO) {
                     if (self.currentEvent.uid != nil) {
@@ -414,6 +415,7 @@
     // store point and reset
     NSPoint point = [recognizer locationInView:self.controller.view];
     self.startSlidePoint = point;
+    self.scrubbing = YES;
     self.scrolled = NO;
 }
 
@@ -448,6 +450,9 @@
         return;
     }
     
+    // reset
+    self.scrubbing = NO;
+
     // log
     //LOG("Double tap timer = %@", self.doubleTapTimer);
 
