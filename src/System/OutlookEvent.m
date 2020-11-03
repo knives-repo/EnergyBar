@@ -103,31 +103,37 @@
         // teams
         if (IsValidString(self.joinUrl) == NO) {
             self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
-                                                withPattern:@"https://teams.microsoft.com/l/meetup-join/[^\"]*"];
+                                                withPattern:@"https://teams.microsoft.com/l/meetup-join/[^\"<]*"];
         }
 
         // webex
         if (IsValidString(self.joinUrl) == NO) {
             self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
-                                                withPattern:@"https://.*\\.webex.com/.*/j.php[^\"]*"];
+                                                withPattern:@"https://.*\\.webex.com/.*/j.php[^\"<]*"];
         }
         
         // webex room
         if (IsValidString(self.joinUrl) == NO) {
             self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
-                                                withPattern:@"https://.*\\.webex.com/join/[^\"]*"];
+                                                withPattern:@"https://.*\\.webex.com/join/[^\"<]*"];
+        }
+        
+        // webex room
+        if (IsValidString(self.joinUrl) == NO) {
+            self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
+                                                withPattern:@"https://.*\\.webex.com/meet/[^\"<]*"];
         }
         
         // zoom
         if (IsValidString(self.joinUrl) == NO) {
             self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
-                                                withPattern:@"https://zoom.us/j/[^\"]*"];
+                                                withPattern:@"https://zoom.us/j/[^\"<]*"];
         }
 
         // run google meet last as it can embed other systems (zoom for instance)
         if (IsValidString(self.joinUrl) == NO) {
             self.joinUrl = [OutlookEvent lookForOnlineUrlIn:jsonEvent
-                                                withPattern:@"https://meet.google.com/[^\"]*"];
+                                                withPattern:@"https://meet.google.com/[^\"<]*"];
         }
         
         // check
