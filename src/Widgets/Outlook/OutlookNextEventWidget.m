@@ -408,6 +408,10 @@
     case NSGestureRecognizerStateEnded:
         [self shortPressEnded:recognizer];
         break;
+    case NSGestureRecognizerStateFailed:
+    case NSGestureRecognizerStateCancelled:
+        self.scrubbing = NO;
+        break;
     default:
         return;
     }
