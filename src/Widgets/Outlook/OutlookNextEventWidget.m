@@ -400,17 +400,20 @@
     switch (recognizer.state)
     {
     case NSGestureRecognizerStateBegan:
+        [self setScrubbing:YES];
         [self shortPressBegan:recognizer];
         break;
     case NSGestureRecognizerStateChanged:
+        [self setScrubbing:YES];
         [self shortPressChanged:recognizer];
         break;
     case NSGestureRecognizerStateEnded:
+        [self setScrubbing:NO];
         [self shortPressEnded:recognizer];
         break;
     case NSGestureRecognizerStateFailed:
     case NSGestureRecognizerStateCancelled:
-        self.scrubbing = NO;
+        [self setScrubbing:NO];
         break;
     default:
         return;
@@ -422,7 +425,6 @@
     // store point and reset
     NSPoint point = [recognizer locationInView:self.controller.view];
     self.startSlidePoint = point;
-    self.scrubbing = YES;
     self.scrolled = NO;
 }
 
@@ -457,9 +459,6 @@
         return;
     }
     
-    // reset
-    self.scrubbing = NO;
-
     // log
     //LOG("Double tap timer = %@", self.doubleTapTimer);
 
@@ -471,6 +470,7 @@
         return;
     }
     
+    // timer for double tap
     self.doubleTapTimer = [NSTimer scheduledTimerWithTimeInterval:[NSEvent doubleClickInterval]
                                                         repeats:NO
                                                           block:^(NSTimer * _Nonnull timer) {
