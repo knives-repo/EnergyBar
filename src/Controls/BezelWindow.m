@@ -279,9 +279,9 @@ static NSTimer* timer = nil;
         case kAudioOutputMute:
             return NSImageNameTouchBarAudioOutputMuteTemplate;
         case kAudioInputOn:
-            return NSImageNameTouchBarAudioInputTemplate;
+            return @"AudioInputTemplate";
         case kAudioInputMute:
-            return NSImageNameTouchBarAudioInputMuteTemplate;
+            return @"AudioInputMuteTemplate";
         case kBrightness:
             return @"BrightnessIndicator";
         case kBacklight:
