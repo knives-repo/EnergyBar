@@ -224,7 +224,11 @@
             // update
             if (icon != nil) {
                 [controller.joinButton setBezelStyle:NSBezelStyleRegularSquare];
-                [controller.joinButton setTransparent:YES];
+                if (@available(macOS 11, *)) {
+                    [controller.joinButton setTransparent:NO];
+                } else {
+                    [controller.joinButton setTransparent:YES];
+                }
                 [controller.joinButton setImage:icon];
                 [controller.joinButton setImagePosition:NSImageOnly];
                 [controller.joinButtonWidthConstraint setConstant:32];
