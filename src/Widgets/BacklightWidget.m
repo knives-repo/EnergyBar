@@ -1,8 +1,11 @@
-/**
- * @file BacklightWidget.m
- *
- * @copyright 2020 Nicolas Bonamy
- */
+//
+//  BacklightWidget.m
+//  EnergyBar
+//
+//  Created by Nicolas Bonamy on 9/30/20.
+//  Copyright © 2020 Nicolas Bonamy. All rights reserved.
+//
+
 /*
  * This file is part of EnergyBar.
  *
@@ -33,8 +36,8 @@
     control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     control.tag = 'ctrl';
     
-    [control setSegmentsWidth:WIDGET_STANDARD_WIDTH];
-    
+    [control style];
+
     self.customizationLabel = @"Keyboard Brightness";
     self.view = control;
     

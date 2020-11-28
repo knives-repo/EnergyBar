@@ -49,7 +49,7 @@
     control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     control.tag = 'ctrl';
     
-    [control setSegmentsWidth:WIDGET_STANDARD_WIDTH];
+    [control style];
 
     [control addGestureRecognizer:shortPress];
 

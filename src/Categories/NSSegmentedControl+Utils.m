@@ -10,6 +10,13 @@
 
 @implementation NSSegmentedControl(Utils)
 
+- (void) style {
+    [self setSegmentsWidth:WIDGET_STANDARD_WIDTH];
+    if (@available(macOS 11, *)) {
+        [self setSegmentStyle:NSSegmentStyleSeparated];
+    }
+}
+
 - (void)setSegmentsWidth:(int)w {
     for (int i=0; i<self.segmentCount; i++) {
         [self setWidth:w forSegment:i];

@@ -1,15 +1,10 @@
-/**
- * @file LightWidget.m
- *
- * @copyright 2018-2019 Nicolas Bonamy
- */
-/*
- * This file is part of EnergyBar.
- *
- * You can redistribute it and/or modify it under the terms of the GNU
- * General Public License version 3 as published by the Free Software
- * Foundation.
- */
+//
+//  LightWidget.m
+//  EnergyBar
+//
+//  Created by Nicolas Bonamy on 9/30/20.
+//  Copyright © 2020 Nicolas Bonamy. All rights reserved.
+//
 
 #import "LightWidget.h"
 #import "KeyEvent.h"
@@ -42,8 +37,8 @@
     control.translatesAutoresizingMaskIntoConstraints = NO;
     control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     control.tag = 'ctrl';
-    
-    [control setSegmentsWidth:WIDGET_STANDARD_WIDTH];
+
+    [control style];
     
     [control addGestureRecognizer:shortPress];
 

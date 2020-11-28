@@ -1,8 +1,11 @@
-/**
- * @file BacklightWidget.h
- *
- * @copyright 2020 Nicolas Bonamy
- */
+//
+//  BacklightWidget.h
+//  EnergyBar
+//
+//  Created by Nicolas Bonamy on 9/30/20.
+//  Copyright © 2020 Nicolas Bonamy. All rights reserved.
+//
+
 /*
  * This file is part of EnergyBar.
  *

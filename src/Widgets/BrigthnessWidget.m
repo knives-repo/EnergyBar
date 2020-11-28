@@ -35,7 +35,7 @@
     control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     control.tag = 'ctrl';
     
-    [control setSegmentsWidth:WIDGET_STANDARD_WIDTH];
+    [control style];
 
     self.customizationLabel = @"Brigthness";
     self.view = control;

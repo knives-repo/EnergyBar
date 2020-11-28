@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSSegmentedControl(Utils)
 
+- (void) style;
 - (void)setSegmentsWidth:(int)w;
 - (NSInteger)segmentForX:(CGFloat)x;
 
