@@ -505,8 +505,15 @@
             
             // wait some time
             [NSTimer scheduledTimerWithTimeInterval:(isLaunching ? 7.5 : 1.5) repeats:NO block:^(NSTimer * _Nonnull timer) {
+                
+                // 7 tabs
+                for (int i=0; i<7; i++) {
+                    PostKeyPress(48, 0);
+                }
+
                 // enter
                 PostKeyPress(36, 0);
+                
             }];
             
             // done
