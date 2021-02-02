@@ -44,7 +44,6 @@ static const NSTimeInterval IgnoresAccidentalTouchesDuration = 0.3;
 @property (assign) IBOutlet NSButton *versionButton;
 @property (assign) IBOutlet NSButton *toggleMacOSDockButton;
 @property (assign) IBOutlet NSButton *loginItemButton;
-@property (assign) IBOutlet NSButton *sourceLinkButton;
 @property (assign) IBOutlet OutlookSettingsController *outlookSettingsController;
 @end
 
@@ -107,14 +106,6 @@ static void AppControllerFSNotify(const char *path, void *data)
     self.window.toolbar.selectedItemIdentifier = @"General";
     NSMutableParagraphStyle *sourceLinkPara = [[[NSParagraphStyle defaultParagraphStyle]
         mutableCopy] autorelease];
-    sourceLinkPara.alignment = self.sourceLinkButton.alignment;
-    NSDictionary *sourceLinkAttr = [NSDictionary dictionaryWithObjectsAndKeys:
-        [NSColor linkColor], NSForegroundColorAttributeName,
-        self.sourceLinkButton.font, NSFontAttributeName,
-        sourceLinkPara, NSParagraphStyleAttributeName,
-        nil];
-    self.sourceLinkButton.attributedTitle = [[[NSAttributedString alloc]
-        initWithString:self.sourceLinkButton.title attributes:sourceLinkAttr] autorelease];
     [self updateToggleMacOSDockButton];
     self.loginItemButton.state = IsLoginItem([[NSBundle mainBundle] bundleURL]) ?
         NSControlStateValueOn : NSControlStateValueOff;
@@ -274,11 +265,6 @@ static void AppControllerFSNotify(const char *path, void *data)
         [self setContentView:self.advancedView];
         break;
     }
-}
-
-- (IBAction)sourceItemAction:(id)sender
-{
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/billziss-gh"]];
 }
 
 - (IBAction)appsFolderAction:(id)sender
