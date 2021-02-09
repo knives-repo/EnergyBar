@@ -277,50 +277,62 @@
 
 - (void) onJoin:(id)sender
 {
-    if (self.currentEvent.joinUrl != nil) {
-        
-        // try direct first
-        NSString* joinUrl = self.currentEvent.directJoinUrl;
-        NSURL* appURL = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:[NSURL URLWithString:joinUrl]];
-        if (appURL == nil) {
-        
-            // fallback
-            joinUrl = self.currentEvent.joinUrl;
-        
-        } else {
-            
-            // auto-join
-            if (self.currentEvent.isTeams) {
-                self.joinTeams = YES;
-            }
-       
-        }
-        
-        // pause any music
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookPauseMediaOnJoin"]) {
-            if ([NowPlaying sharedInstance].playing) {
-                PostAuxKeyPress(NX_KEYTYPE_PLAY);
-            }
-        }
-        
-        // if frontmost before opening
-        BOOL isActive = [[[NSWorkspace sharedWorkspace] frontmostApplication] isMicrosoftTeams];
-        
-        // now open it
-        //LOG("%@", joinUrl);
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:joinUrl]];
-        
-        // application switch will not be triggered so let's do it ourselves
-        if (isActive) {
-            [self didActivateApplication:nil];
-        }
-        
-        // do not notify
-        if (self.currentEvent.uid != nil) {
-            [self.notifiedEvents addObject:self.currentEvent.uid];
-        }
+    // we need to find the url
+    NSString* joinUrl = self.currentEvent.joinUrl;
 
+    // try direct
+    NSString* directJoinUrl = self.currentEvent.directJoinUrl;
+    if (directJoinUrl != nil) {
+        NSURL* url = [NSURL URLWithString:directJoinUrl];
+        if (url != nil) {
+            NSURL* appUrl = [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:url];
+            if (appUrl != nil) {
+                
+                // direct works
+                joinUrl = directJoinUrl;
+
+                // auto-join
+                if (self.currentEvent.isTeams) {
+                    self.joinTeams = YES;
+                }
+            }
+        }
     }
+
+    // now we can join
+    //LOG("[JOIN] %@", joinUrl);
+    if (joinUrl == nil) {
+        return;
+    }
+    
+        
+    // pause any music
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"outlookPauseMediaOnJoin"]) {
+        if ([NowPlaying sharedInstance].playing) {
+            PostAuxKeyPress(NX_KEYTYPE_PLAY);
+        }
+    }
+    
+    // if frontmost before opening
+    BOOL isActive = [[[NSWorkspace sharedWorkspace] frontmostApplication] isMicrosoftTeams];
+    
+    // now open it
+    NSURL* url = [NSURL URLWithString:joinUrl];
+    if ([[NSWorkspace sharedWorkspace] openURL:url] == FALSE) {
+        LOG("[JOIN] openURL failed for %@", url);
+        return;
+    }
+    
+    // application switch will not be triggered so let's do it ourselves
+    if (isActive) {
+        [self didActivateApplication:nil];
+    }
+    
+    // do not notify
+    if (self.currentEvent.uid != nil) {
+        [self.notifiedEvents addObject:self.currentEvent.uid];
+    }
+
 }
 
 - (void) onToggleBusy:(id) sender

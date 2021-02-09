@@ -149,8 +149,20 @@
         
     }
     
+    // clean-up
+    if (IsValidString(self.joinUrl) == YES) {
+        
+        // trim
+        self.joinUrl = [self.joinUrl stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        // remove invalid end character
+        if ([self.joinUrl hasSuffix:@";"]) {
+            self.joinUrl = [self.joinUrl substringToIndex:[self.joinUrl length]-1];
+        }
+    }
+    
     // debug
-    //LOG("[EVENT] %s", self.joinUrl);
+    LOG("[EVENT] %@", self.joinUrl);
 
     // done
     return self;
@@ -387,7 +399,7 @@
     }
     
     // default
-    return self.joinUrl;
+    return nil;
     
 }
 
