@@ -16,4 +16,7 @@
 
 @interface MicMuteWidget : ButtonWidget
 @property (nonatomic,assign) BOOL applicationMute;
+
++ (BOOL) isAppMuteSupported:(NSRunningApplication*) application;
+
 @end

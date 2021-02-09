@@ -29,6 +29,10 @@
 
 @implementation MicMuteWidget
 
++ (BOOL) isAppMuteSupported:(NSRunningApplication*) application {
+    return ([application isMicrosoftTeams] || [application isWebexMeetings]);
+}
+
 - (void)commonInit
 {
     // super
@@ -181,7 +185,7 @@
 }
 
 - (BOOL) isMutableAppRunning {
-    return ([self.runningApplication isMicrosoftTeams] || [self.runningApplication isWebexMeetings]);
+    return [MicMuteWidget isAppMuteSupported:self.runningApplication];
 }
 
 @end
