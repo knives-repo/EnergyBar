@@ -104,8 +104,6 @@ static void AppControllerFSNotify(const char *path, void *data)
         object:nil];
 
     self.window.toolbar.selectedItemIdentifier = @"General";
-    NSMutableParagraphStyle *sourceLinkPara = [[[NSParagraphStyle defaultParagraphStyle]
-        mutableCopy] autorelease];
     [self updateToggleMacOSDockButton];
     self.loginItemButton.state = IsLoginItem([[NSBundle mainBundle] bundleURL]) ?
         NSControlStateValueOn : NSControlStateValueOff;
