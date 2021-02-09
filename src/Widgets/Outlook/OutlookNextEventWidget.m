@@ -495,31 +495,38 @@
 
 - (void)didActivateApplication:(id) sender
 {
-    // update
+    // get front application
     NSRunningApplication* runningApplication = [[NSWorkspace sharedWorkspace] frontmostApplication];
-    if ([runningApplication isMicrosoftTeams]) {
-        if (self.joinTeams) {
-
+    
+    // specific join
+    if (self.joinTeams) {
+        
+        if ([runningApplication isMicrosoftTeams]) {
+        
             // wait time depends on if this is being launched or not
             BOOL isLaunching = (runningApplication.finishedLaunching == NO);
+            if (isLaunching == FALSE) {
             
-            // wait some time
-            [NSTimer scheduledTimerWithTimeInterval:(isLaunching ? 7.5 : 1.5) repeats:NO block:^(NSTimer * _Nonnull timer) {
-                
-                // 7 tabs
-                for (int i=0; i<7; i++) {
-                    PostKeyPress(48, 0);
-                }
+                // wait some time
+                [NSTimer scheduledTimerWithTimeInterval:1.5 repeats:NO block:^(NSTimer * _Nonnull timer) {
+                    
+                    // 7 tabs
+                    for (int i=0; i<7; i++) {
+                        PostKeyPress(48, 0);
+                    }
 
-                // enter
-                PostKeyPress(36, 0);
+                    // enter
+                    PostKeyPress(36, 0);
+                    
+                }];
                 
-            }];
+            }
             
-            // done
-            self.joinTeams = NO;
-
         }
+        
+        // done
+        self.joinTeams = NO;
+
     }
 
 }
