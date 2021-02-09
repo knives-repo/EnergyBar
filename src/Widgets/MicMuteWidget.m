@@ -30,7 +30,7 @@
 @implementation MicMuteWidget
 
 + (BOOL) isAppMuteSupported:(NSRunningApplication*) application {
-    return ([application isMicrosoftTeams] || [application isWebexMeetings]);
+    return ([application isMicrosoftTeams] || [application isWebexMeetings] || [application isZoom]);
 }
 
 - (void)commonInit
@@ -135,6 +135,14 @@
             // done
             return;
             
+        } else if ([self.runningApplication isZoom]) {
+            
+            // Cmd + Shift + A toggle mute
+            PostKeyPress(0, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
+            
+            // done
+            return;
+
         }
         
     }

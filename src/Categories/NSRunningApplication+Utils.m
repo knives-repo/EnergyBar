@@ -22,6 +22,10 @@
     return [self.bundleIdentifier isEqualToString:@"com.webex.meetingmanager"];
 }
 
+- (BOOL) isZoom {
+    return [self.bundleIdentifier isEqualToString:@"us.zoom.xos"];
+}
+
 - (BOOL) isSpotify {
     return [self.bundleIdentifier isEqualToString:@"com.spotify.client"];
 }

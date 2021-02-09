@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL) isMicrosoftTeams;
 - (BOOL) isWebexMeetings;
+- (BOOL) isZoom;
 
 - (BOOL) isSpotify;
 
