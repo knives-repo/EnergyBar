@@ -166,10 +166,10 @@
 - (void)checkRunningApplication
 {
     // restore
-    if (self.restoreMute) {
-        [AudioControl sharedInstanceInput].mute = self.muteToRestore;
-        self.restoreMute = NO;
-    }
+    //if (self.restoreMute) {
+    //    [AudioControl sharedInstanceInput].mute = self.muteToRestore;
+    //    self.restoreMute = NO;
+    //}
     
     // update
     self.runningApplication = [[NSWorkspace sharedWorkspace] menuBarOwningApplication];
