@@ -22,6 +22,8 @@
 @property (retain) NSImage *albumArt;
 @property (retain) NSString *artist;
 @property (retain) NSString *title;
+/* for Safari icon support, as WebKit doesn't return a Safari icon*/
+@property (retain) NSImage *safariIcon;
 @property (assign) BOOL playing;
 @end
 

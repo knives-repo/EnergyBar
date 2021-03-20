@@ -159,6 +159,12 @@ extern NSString *kMRMediaRemoteNowPlayingInfoArtworkData;
                     [[NSUserDefaults standardUserDefaults] synchronize];
                 }
             }
+        /* for Safari icon*/
+        self.safariIcon = [[NSWorkspace sharedWorkspace] iconForFile:@"/Applications/Safari.app"];
+        if ([self.appBundleIdentifier isEqualToString:@"com.apple.WebKit.WebContent"])
+            {
+                self.appIcon = self.safariIcon;
+            }
         });
 }
 
