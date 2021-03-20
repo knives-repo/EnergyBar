@@ -91,19 +91,19 @@
     {
         title = @"";
     }
-       else if (nil == title && nil == subtitle)
-       {
-           title = appName;
-       }
-    
-       else if (nil == subtitle && nil != icon && nil != title)
+        else if (nil == title && nil == subtitle)
         {
-            subtitle = appName;
-            if (appName == nil)
-            {
-                subtitle = appBundleIdentifier;
-            }
+            title = appName;
         }
+     
+        else if (nil == subtitle && nil != icon && nil != title)
+         {
+             subtitle = appName;
+             if (appName == nil)
+             {
+                 subtitle = appBundleIdentifier;
+             }
+         }
         
     ImageTitleViewLayoutOptions layoutOptions = 0;
     if (nil != icon || nil != albumArt)

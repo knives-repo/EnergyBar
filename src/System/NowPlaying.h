@@ -22,9 +22,9 @@
 @property (retain) NSImage *albumArt;
 @property (retain) NSString *artist;
 @property (retain) NSString *title;
-@property (assign) BOOL playing;
 /* for Safari icon support, as WebKit doesn't return a Safari icon*/
 @property (retain) NSImage *safariIcon;
+@property (assign) BOOL playing;
 @end
 
 extern NSString *NowPlayingInfoNotification;
