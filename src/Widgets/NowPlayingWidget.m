@@ -292,7 +292,7 @@
     [(id)[self.widgets objectAtIndex:0] setShowsAlbumArt:value];
     [(id)[self.widgets objectAtIndex:0] resetNowPlaying];
 }
-
+/*
 - (void)superLongPressAction:(id)sender
 {
     NSString *appBundleIdentifier = [NowPlaying sharedInstance].appBundleIdentifier;
@@ -305,4 +305,5 @@
             launchIdentifier:nil];
     }
 }
+ */
 @end

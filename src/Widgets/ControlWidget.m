@@ -347,7 +347,7 @@
     if (nil == foregroundColor)
     {
         if (@available(macOS 10.14, *))
-            foregroundColor = [NSColor controlAccentColor];
+            foregroundColor = [NSColor controlAccentColor/*can change to white potentially*/];
         else
             foregroundColor = [NSColor systemBlueColor];
     }
