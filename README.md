@@ -12,7 +12,9 @@ This version of the app revamps the look of certain widgets to achieve a more mi
 - Realigned to the right (instead of the centre)
 
 ### Now Playing Widget
-- Added album art support (Spotify, Music, etc.)
+- Added **album art support** (Spotify, Music, Podcasts etc.)       
+    -  Added compatibility with Safari to show Safari icon
+    -  Now displays appBundleID as a subtitle if no artist/appName is available
 - Realigned to the left (instead of the centre)
 - Removed long tap function
 
@@ -28,7 +30,7 @@ This version of the app revamps the look of certain widgets to achieve a more mi
 - Removed long touch function
 
 ### Dock
-- Reduced size of icon and changed spacing
+- Changed spacing and icon size
 
 ## Developer Notes
 
