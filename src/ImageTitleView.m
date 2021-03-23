@@ -218,7 +218,7 @@ static const CGFloat DefaultSpacerWidth = 4;
 
     CGFloat totalWidth = imageSpacerWidth + MAX(titleSize.width, subtitleSize.width);
     NSRect imageRect = NSMakeRect(
-        round((bounds.size.width - totalWidth) / 2),
+        round((bounds.size.width - totalWidth) / 2), //Width of the widget's bounds minus width of the content within the widget. If you divide that by 2, ostensibly you get the middle of the widget! This sets where the content should be horizontally.
         round((bounds.size.height - imageSize.height) / 2),
         imageSize.width,
         imageSize.height);
@@ -266,13 +266,13 @@ static const CGFloat DefaultSpacerWidth = 4;
 
     self.titleView = [NSTextField labelWithString:@""];
     self.titleView.autoresizingMask = 0;
-    self.titleView.alignment = NSTextAlignmentRight;
+    self.titleView.alignment = NSTextAlignmentLeft;
     self.titleView.maximumNumberOfLines = 2;
     self.titleView.cell.truncatesLastVisibleLine = YES;
 
     self.subtitleView = [NSTextField labelWithString:@""];
     self.subtitleView.autoresizingMask = 0;
-    self.subtitleView.alignment = NSTextAlignmentRight;
+    self.subtitleView.alignment = NSTextAlignmentLeft;
     self.subtitleView.maximumNumberOfLines = 2;
     self.subtitleView.cell.truncatesLastVisibleLine = YES;
 
@@ -440,9 +440,9 @@ static const CGFloat DefaultSpacerWidth = 4;
     titleSize = showsTitle ? [self.titleView.cell cellSizeForBounds:adjusted] : NSZeroSize;
     subtitleSize = showsSubtitle ? [self.subtitleView.cell cellSizeForBounds:adjusted] : NSZeroSize;
 
-    CGFloat totalWidth = MAX(titleSize.width, subtitleSize.width);
+    /* CGFloat totalWidth = MAX(titleSize.width, subtitleSize.width); */ //not necessary here
     NSRect imageRect = NSMakeRect(
-        round((bounds.size.width / totalWidth)),
+        round(0), //horizontal coordinate
         round((bounds.size.height - imageSize.height) / 2),
         imageSize.width,
         imageSize.height);
@@ -666,7 +666,7 @@ static const CGFloat DefaultSpacerWidth = 4;
 
     CGFloat totalWidth = MAX(titleSize.width, subtitleSize.width);
     NSRect imageRect = NSMakeRect(
-        round((bounds.size.width - totalWidth) - 4),
+        round((bounds.size.width - totalWidth) - 4), //Width of widget's bounds minus width of the content, necessary to calculate this way since it's aligned from the left (i.e: imagining pushing this right)! - 4 is to push it 4 pixels left.
         round((bounds.size.height - imageSize.height) / 2),
         imageSize.width,
         imageSize.height);
@@ -685,4 +685,6 @@ static const CGFloat DefaultSpacerWidth = 4;
     self.titleView.frame = titleRect;
     self.subtitleView.frame = subtitleRect;
 }
+
+//probably possible to just make 3 different (void)layout under 1 ImageTitleViewLayoutOptions, look into that next
 @end
