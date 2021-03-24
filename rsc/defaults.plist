@@ -14,111 +14,21 @@
 		</dict>
 		<dict>
 			<key>NSApplicationName</key>
-			<string>Siri</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Siri.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Launchpad</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Launchpad.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
 			<string>Safari</string>
 			<key>NSApplicationPath</key>
 			<string>/Applications/Safari.app</string>
 		</dict>
 		<dict>
 			<key>NSApplicationName</key>
+			<string>Music</string>
+			<key>NSApplicationPath</key>
+			<string>/Applications/Music.app</string>
+		</dict>
+		<dict>
+			<key>NSApplicationName</key>
 			<string>Mail</string>
 			<key>NSApplicationPath</key>
 			<string>/Applications/Mail.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Contacts</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Contacts.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Calendar</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Calendar.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Notes</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Notes.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Reminders</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Reminders.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Maps</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Maps.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Photos</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Photos.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Messages</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Messages.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>FaceTime</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/FaceTime.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Pages</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Pages.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Numbers</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Numbers.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>Keynote</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/Keynote.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>iTunes</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/iTunes.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>iBooks</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/iBooks.app</string>
-		</dict>
-		<dict>
-			<key>NSApplicationName</key>
-			<string>App Store</string>
-			<key>NSApplicationPath</key>
-			<string>/Applications/App Store.app</string>
 		</dict>
 		<dict>
 			<key>NSApplicationName</key>
@@ -140,7 +50,7 @@
 	<key>clockShowsWeatherOnTap</key>
 	<false/>
 	<key>dockMagnification</key>
-	<true/>
+	<false/>
 	<key>ignoresAccidentalTouches</key>
 	<false/>
 	<key>nowPlayingShowsSmallWidget</key>
@@ -152,17 +62,17 @@
 	<key>showsTodoOnTap</key>
 	<false/>
 	<key>showsFoldersInTouchBar</key>
-	<true/>
-	<key>showsRunningApps</key>
-	<true/>
-	<key>showsTrash</key>
-	<true/>
-	<key>todoShowsEvents</key>
 	<false/>
-	<key>todoShowsEventsHours</key>
-	<integer>2</integer>
-	<key>todoShowsReminders</key>
+	<key>showsRunningApps</key>
+	<false/>
+	<key>showsTrash</key>
+	<false/>
+	<key>todoShowsEvents</key>
 	<true/>
+	<key>todoShowsEventsHours</key>
+	<integer>24</integer>
+	<key>todoShowsReminders</key>
+	<false/>
 	<key>weatherShowsFahrenheit</key>
 	<false/>
 	<key>showsAlbumArt</key>

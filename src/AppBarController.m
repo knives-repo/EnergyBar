@@ -41,12 +41,13 @@
 
 - (void)awakeFromNib
 {
-    self.touchBar.defaultItemIdentifiers = [NSArray arrayWithObjects:
-        @"EscKey",
-        @"ActiveApp",
+    self.touchBar.defaultItemIdentifiers = [NSArray arrayWithObjects: //Default Set
+        @"NowPlaying",
         @"Dock",
+        @"Todo",
         @"Control",
-        @"Clock",
+        @"Weather",
+        @"Lock",
         nil];
     self.touchBar.customizationAllowedItemIdentifiers = [NSArray arrayWithObjects:
         @"Dock",
