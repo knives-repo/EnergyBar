@@ -89,11 +89,20 @@
     
     if (nil == icon && nil == title && nil == subtitle)
     {
-        title = @"";
+        title = nil;
     }
         else if (nil == title && nil == subtitle)
         {
             title = appName;
+            if (appName == nil)
+            {
+                title = appBundleIdentifier;
+                if (appBundleIdentifier == nil)
+                {
+                    icon = nil;
+                    title = nil;
+                }
+            }
         }
      
         else if (nil == subtitle && nil != icon && nil != title)
@@ -102,8 +111,17 @@
              if (appName == nil)
              {
                  subtitle = appBundleIdentifier;
+                 if (appBundleIdentifier == nil)
+                 {
+                     subtitle = nil;
+                 }
              }
          }
+       
+        else if ([subtitle isEqualToString:@""])
+        {
+            subtitle = nil;
+        }
         
     ImageTitleViewLayoutOptions layoutOptions = 0;
     if (nil != icon || nil != albumArt)
