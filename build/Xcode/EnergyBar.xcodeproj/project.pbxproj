@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AB3D1B4260BE31C009F12DB /* DndWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3D1B3260BE31C009F12DB /* DndWidget.m */; };
+		0ADEDBF9260C12FF0090B479 /* NumiWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADEDBF8260C12FF0090B479 /* NumiWidget.m */; };
 		3C01F8F02161CE7400FFD2C6 /* SkyLight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C01F8EF2161CE7400FFD2C6 /* SkyLight.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3C01F8F32161D07800FFD2C6 /* Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01F8F22161D07800FFD2C6 /* Appearance.m */; };
 		3C046013211D7C66003EB021 /* KeyEvent.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C04600F211D7C66003EB021 /* KeyEvent.c */; };
@@ -67,6 +69,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0AB3D1B2260BE2FC009F12DB /* DndWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DndWidget.h; sourceTree = "<group>"; };
+		0AB3D1B3260BE31C009F12DB /* DndWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DndWidget.m; sourceTree = "<group>"; };
+		0ADEDBF8260C12FF0090B479 /* NumiWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NumiWidget.m; sourceTree = "<group>"; };
+		0ADEDBFA260C130D0090B479 /* NumiWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumiWidget.h; sourceTree = "<group>"; };
 		3C01F8EF2161CE7400FFD2C6 /* SkyLight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkyLight.framework; path = ../../../../../../System/Library/PrivateFrameworks/SkyLight.framework; sourceTree = "<group>"; };
 		3C01F8F12161D07800FFD2C6 /* Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appearance.h; sourceTree = "<group>"; };
 		3C01F8F22161D07800FFD2C6 /* Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appearance.m; sourceTree = "<group>"; };
@@ -283,6 +289,10 @@
 				3C400077236CC6A3000261FF /* TodoWidget.m */,
 				3C3464BD21465319001F45BB /* WeatherWidget.h */,
 				3C3464BE21465319001F45BB /* WeatherWidget.m */,
+				0AB3D1B2260BE2FC009F12DB /* DndWidget.h */,
+				0AB3D1B3260BE31C009F12DB /* DndWidget.m */,
+				0ADEDBFA260C130D0090B479 /* NumiWidget.h */,
+				0ADEDBF8260C12FF0090B479 /* NumiWidget.m */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -414,12 +424,14 @@
 				3C5D0FCE2119210000769A39 /* ClockWidget.m in Sources */,
 				3C6CCA38211B824000D019F4 /* TouchBarController.m in Sources */,
 				3C5032E32139C8E900305593 /* ImageTitleView.m in Sources */,
+				0ADEDBF9260C12FF0090B479 /* NumiWidget.m in Sources */,
 				3C163BC72118F1C500F015EC /* main.m in Sources */,
 				3C400079236CC6A3000261FF /* TodoWidget.m in Sources */,
 				3C1F652722B1CCA900F795D3 /* NSView+TouchBarHitTest.m in Sources */,
 				405B467A219A3CCA0006DC16 /* LockWidget.m in Sources */,
 				3C080A4B2139EB0E00EED01D /* FolderController.m in Sources */,
 				3CAA9C6D2127B3E100D5B467 /* StringToUrlTransformer.m in Sources */,
+				0AB3D1B4260BE31C009F12DB /* DndWidget.m in Sources */,
 				3C1A5678211D6B7D008E1F9F /* AppBarController.m in Sources */,
 				3CA8519D212B832100585D29 /* NSWorkspace+Finder.m in Sources */,
 				3C01F8F32161D07800FFD2C6 /* Appearance.m in Sources */,
