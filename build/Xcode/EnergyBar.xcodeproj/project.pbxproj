@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C01F8EC2161B93000FFD2C6 /* BrightnessBar-Mojave.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C01F8EE2161B93000FFD2C6 /* BrightnessBar-Mojave.xib */; };
 		3C01F8F02161CE7400FFD2C6 /* SkyLight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C01F8EF2161CE7400FFD2C6 /* SkyLight.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3C01F8F32161D07800FFD2C6 /* Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01F8F22161D07800FFD2C6 /* Appearance.m */; };
 		3C046013211D7C66003EB021 /* KeyEvent.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C04600F211D7C66003EB021 /* KeyEvent.c */; };
@@ -44,11 +43,9 @@
 		3CA851A0212B84B000585D29 /* NSTouchBar+SystemModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA8519E212B84B000585D29 /* NSTouchBar+SystemModal.m */; };
 		3CAA9C6D2127B3E100D5B467 /* StringToUrlTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAA9C6C2127B3E000D5B467 /* StringToUrlTransformer.m */; };
 		3CACC7632126772700662AB1 /* FSNotify.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CACC7612126772700662AB1 /* FSNotify.c */; };
-		3CD1EBBE211D680A001DC22F /* VolumeBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CD1EBC0211D680A001DC22F /* VolumeBar.xib */; };
 		3CDF1EB4211A3B9500739051 /* DockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF1EB2211A3B9400739051 /* DockWidget.m */; };
 		3CDF1EB6211A650700739051 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CDF1EB5211A650700739051 /* defaults.plist */; };
 		3CE58CE72162B79700633D5D /* DisplayServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE58CE62162B79700633D5D /* DisplayServices.framework */; };
-		3CEE0C29211D599400CFD6B2 /* BrightnessBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CEE0C2B211D599400CFD6B2 /* BrightnessBar.xib */; };
 		3CF113942138769D005B1350 /* FolderBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF113962138769D005B1350 /* FolderBar.xib */; };
 		3CFECA122122611F00BB58E9 /* LoginItem.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CFECA102122611F00BB58E9 /* LoginItem.c */; };
 		405B467A219A3CCA0006DC16 /* LockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 405B4678219A3CCA0006DC16 /* LockWidget.m */; };
@@ -70,7 +67,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3C01F8ED2161B93000FFD2C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/BrightnessBar-Mojave.xib"; sourceTree = "<group>"; };
 		3C01F8EF2161CE7400FFD2C6 /* SkyLight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkyLight.framework; path = ../../../../../../System/Library/PrivateFrameworks/SkyLight.framework; sourceTree = "<group>"; };
 		3C01F8F12161D07800FFD2C6 /* Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appearance.h; sourceTree = "<group>"; };
 		3C01F8F22161D07800FFD2C6 /* Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appearance.m; sourceTree = "<group>"; };
@@ -140,12 +136,10 @@
 		3CACC7612126772700662AB1 /* FSNotify.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FSNotify.c; sourceTree = "<group>"; };
 		3CACC7622126772700662AB1 /* FSNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSNotify.h; sourceTree = "<group>"; };
 		3CBBF7CA237A26D4001376F8 /* EnergyBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EnergyBar.entitlements; sourceTree = "<group>"; };
-		3CD1EBBF211D680A001DC22F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/VolumeBar.xib; sourceTree = "<group>"; };
 		3CDF1EB2211A3B9400739051 /* DockWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockWidget.m; sourceTree = "<group>"; };
 		3CDF1EB3211A3B9500739051 /* DockWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockWidget.h; sourceTree = "<group>"; };
 		3CDF1EB5211A650700739051 /* defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
 		3CE58CE62162B79700633D5D /* DisplayServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DisplayServices.framework; path = ../../../../../../System/Library/PrivateFrameworks/DisplayServices.framework; sourceTree = "<group>"; };
-		3CEE0C2A211D599400CFD6B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BrightnessBar.xib; sourceTree = "<group>"; };
 		3CF113952138769D005B1350 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FolderBar.xib; sourceTree = "<group>"; };
 		3CFECA102122611F00BB58E9 /* LoginItem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LoginItem.c; sourceTree = "<group>"; };
 		3CFECA112122611F00BB58E9 /* LoginItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginItem.h; sourceTree = "<group>"; };
@@ -229,10 +223,7 @@
 			children = (
 				3C163BBC2118F1A800F015EC /* Assets.xcassets */,
 				3C163BC82118F33C00F015EC /* MainWindow.xib */,
-				3CEE0C2B211D599400CFD6B2 /* BrightnessBar.xib */,
-				3C01F8EE2161B93000FFD2C6 /* BrightnessBar-Mojave.xib */,
 				3CF113962138769D005B1350 /* FolderBar.xib */,
-				3CD1EBC0211D680A001DC22F /* VolumeBar.xib */,
 				3C163BBD2118F1A800F015EC /* Info.plist */,
 				3CDF1EB5211A650700739051 /* defaults.plist */,
 			);
@@ -374,12 +365,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CD1EBBE211D680A001DC22F /* VolumeBar.xib in Resources */,
-				3CEE0C29211D599400CFD6B2 /* BrightnessBar.xib in Resources */,
 				3CF113942138769D005B1350 /* FolderBar.xib in Resources */,
 				3C163BBF2118F1A800F015EC /* Assets.xcassets in Resources */,
 				3CDF1EB6211A650700739051 /* defaults.plist in Resources */,
-				3C01F8EC2161B93000FFD2C6 /* BrightnessBar-Mojave.xib in Resources */,
 				3C163BCA2118F33C00F015EC /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,36 +435,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3C01F8EE2161B93000FFD2C6 /* BrightnessBar-Mojave.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C01F8ED2161B93000FFD2C6 /* Base */,
-			);
-			name = "BrightnessBar-Mojave.xib";
-			sourceTree = "<group>";
-		};
 		3C163BC82118F33C00F015EC /* MainWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				3C163BC92118F33C00F015EC /* Base */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		3CD1EBC0211D680A001DC22F /* VolumeBar.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3CD1EBBF211D680A001DC22F /* Base */,
-			);
-			name = VolumeBar.xib;
-			sourceTree = "<group>";
-		};
-		3CEE0C2B211D599400CFD6B2 /* BrightnessBar.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3CEE0C2A211D599400CFD6B2 /* Base */,
-			);
-			name = BrightnessBar.xib;
 			sourceTree = "<group>";
 		};
 		3CF113962138769D005B1350 /* FolderBar.xib */ = {

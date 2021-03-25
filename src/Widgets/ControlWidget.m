@@ -59,6 +59,7 @@
 }
 @end
 
+/* Brightness Bar
 @interface ControlWidgetBrightnessBarController : TouchBarController
     <NSScrubberDataSource, NSScrubberDelegate>
 @property (retain) CBBlueLightClient *blueLightClient;
@@ -128,6 +129,7 @@
     [super awakeFromNib];
 }
 
+ 
 - (BOOL)presentWithPlacement:(NSInteger)placement
 {
     NSScrubber *scrubber;
@@ -241,7 +243,9 @@
 }
 #endif
 @end
+*/
 
+/* Volume Bar
 @interface ControlWidgetVolumeBarController : TouchBarController
 @property (retain) NSTimer *timer;
 @end
@@ -313,6 +317,7 @@
     [AudioControl sharedInstance].mute = item.slider.doubleValue < 1.0 / (16 * 4);
 }
 @end
+*/
 
 @interface ControlWidgetLevelView : NSView
 @property (getter=value, setter=setValue:) double value;
@@ -439,12 +444,12 @@
     view.frame = rect;
 }
 @end
-
+/*
 @interface ControlWidget ()
 @property (retain) ControlWidgetBrightnessBarController *brightnessBarController;
 @property (retain) ControlWidgetVolumeBarController *volumeBarController;
 @end
-
+*/
 @implementation ControlWidget
 {
     NSInteger _pressKind;
@@ -500,7 +505,7 @@
     [NowPlaying sharedInstance];
     [AudioControl sharedInstance];
 }
-
+/*
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter]
@@ -511,7 +516,7 @@
 
     [super dealloc];
 }
-
+*/
 - (void)viewWillAppear
 {
     [[NSNotificationCenter defaultCenter]
@@ -557,6 +562,7 @@
     [control setImage:[self volumeMuteImage] forSegment:3];
 }
 
+
 - (void)click:(id)sender
 {
     NSSegmentedControl *control = sender;
@@ -565,18 +571,13 @@
     case 0:
         PostAuxKeyPress(NX_KEYTYPE_PLAY);
         break;
-    case 1:
-        [self.brightnessBarController present];
-        break;
-    case 2:
-        [self.volumeBarController present];
-        break;
     case 3:
         [AudioControl sharedInstance].mute = ![AudioControl sharedInstance].mute;
         break;
     }
 }
 
+ 
 - (void)shortPressAction:(NSGestureRecognizer *)recognizer
 {
     switch (recognizer.state)
