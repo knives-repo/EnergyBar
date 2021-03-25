@@ -59,6 +59,8 @@
         @"Weather",
         @"Clock",
         @"Lock",
+        @"Dnd",
+        @"Numi",
         NSTouchBarItemIdentifierFlexibleSpace,
         nil];
 

@@ -16,4 +16,5 @@
 
 @interface LockWidget : CustomWidget
 @property (retain) NSImage *lockImage;
+@property (retain) NSImage *coffeeIcon;
 @end
