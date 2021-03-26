@@ -4,7 +4,7 @@
 
 This version of the app revamps the look of certain widgets to achieve a more minimal design.
 
-![Touchbar](doc/TouchbarExample.png)
+![Touchbar](doc/touchbarmockup.png)
 
 ## Changes
 ### To-Do Widget
