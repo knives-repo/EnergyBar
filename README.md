@@ -2,6 +2,8 @@
     A customized (personalised) fork of EnergyBar<br/>
 </h1>
 
+EnergyBar is an app which replaces native touchbar functionality with widgets. It is lighter and less resource-intensive than most existing alternatives currently (e.g: Pock, BTT).
+
 This version of the app revamps the look of certain widgets to achieve a more minimal design.
 
 ![Touchbar](doc/touchbarmockup.png)
