@@ -8,6 +8,19 @@ This version of the app revamps the look of certain widgets to achieve a more mi
 
 ![Touchbar](doc/touchbarmockup.png)
 
+## FAQs
+### How do I toggle next/previous to skip tracks/music?
+Touch and hold the play/pause button, then swipe left or right. The icon will change accordingly.
+
+### How do I change keyboard brightness?
+Working on it!
+
+### Lock widget isn't working
+Touch and hold the coffee icon.
+
+### Access calendar from touchbar?
+Touch and hold the events widget.
+
 ## Changes
 ### To-Do Widget
 - Removed calendar icon
