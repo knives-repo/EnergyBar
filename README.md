@@ -34,6 +34,17 @@ This version of the app revamps the look of certain widgets to achieve a more mi
 ### Dock
 - Changed spacing and icon size
 
+## To Do
+- [x] Album Art support
+- [x] Safari Now Playing support
+- [x] Smoother control widget (removed long-press etc.)
+- [x] Long-press lock widget (prevent accidental taps)
+- [ ] To-do widget - get time + location info
+- [ ] Add 2nd to-do widget
+- [ ] DND widget (need to look into observers for NSUserDefault)
+- [ ] Keyboard light adjustment
+- [ ] Reused function for dock space (the dock is seemingly not that useful...)
+
 ## Developer Notes
 
 The project source code is organised as follows:
