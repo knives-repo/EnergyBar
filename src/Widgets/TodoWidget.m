@@ -58,7 +58,7 @@ static EKEventStore *eventStore;
     NSPressGestureRecognizer *longPressRecognizer = [[[NSPressGestureRecognizer alloc]
         initWithTarget:self action:@selector(longPressAction_:)] autorelease];
     longPressRecognizer.allowedTouchTypes = NSTouchTypeMaskDirect;
-    longPressRecognizer.minimumPressDuration = SuperLongPressDuration;
+    longPressRecognizer.minimumPressDuration = LongPressDuration;
     [self.view addGestureRecognizer:longPressRecognizer];
 
 }

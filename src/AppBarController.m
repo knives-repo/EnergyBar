@@ -39,7 +39,7 @@
     [super dealloc];
 }
 
-- (void)awakeFromNib
+- (void)awakeFromNib //add stuff here to set new defaults or widgets
 {
     self.touchBar.defaultItemIdentifiers = [NSArray arrayWithObjects: //Default Set
         @"NowPlaying",
@@ -49,7 +49,7 @@
         @"Weather",
         @"Lock",
         nil];
-    self.touchBar.customizationAllowedItemIdentifiers = [NSArray arrayWithObjects:
+    self.touchBar.customizationAllowedItemIdentifiers = [NSArray arrayWithObjects: //add new widgets here
         @"Dock",
         @"EscKey",
         @"ActiveApp",

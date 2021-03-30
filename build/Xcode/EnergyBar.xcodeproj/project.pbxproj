@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A01202226137B38007AAB26 /* OctoFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C665D0021619E7A0004D9EC /* OctoFeed.framework */; };
+		0A01202326137B38007AAB26 /* OctoFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C665D0021619E7A0004D9EC /* OctoFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AB3D1B4260BE31C009F12DB /* DndWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3D1B3260BE31C009F12DB /* DndWidget.m */; };
 		0ADEDBF9260C12FF0090B479 /* NumiWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADEDBF8260C12FF0090B479 /* NumiWidget.m */; };
 		3C01F8F02161CE7400FFD2C6 /* SkyLight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C01F8EF2161CE7400FFD2C6 /* SkyLight.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -31,8 +33,6 @@
 		3C4013C2211BBC8D00C47B66 /* ActiveAppWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4013C1211BBC8D00C47B66 /* ActiveAppWidget.m */; };
 		3C5032E32139C8E900305593 /* ImageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5032E12139C8E900305593 /* ImageTitleView.m */; };
 		3C5D0FCE2119210000769A39 /* ClockWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5D0FCD2119210000769A39 /* ClockWidget.m */; };
-		3C665D0221619E870004D9EC /* OctoFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C665D0021619E7A0004D9EC /* OctoFeed.framework */; };
-		3C665D0321619E870004D9EC /* OctoFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C665D0021619E7A0004D9EC /* OctoFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C6CCA38211B824000D019F4 /* TouchBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6CCA37211B824000D019F4 /* TouchBarController.m */; };
 		3C83DB48211D851700FC2F53 /* CoreBrightness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C83DB47211D851700FC2F53 /* CoreBrightness.framework */; };
 		3C8E4133212F81A60010C2B3 /* AudioControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8E4132212F81A60010C2B3 /* AudioControl.m */; };
@@ -55,13 +55,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3C665D0421619E880004D9EC /* Embed Frameworks */ = {
+		0A01202426137B38007AAB26 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3C665D0321619E870004D9EC /* OctoFeed.framework in Embed Frameworks */,
+				0A01202326137B38007AAB26 /* OctoFeed.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,7 +165,7 @@
 				3CA1DD88212D3F7A00D95DE1 /* MediaRemote.framework in Frameworks */,
 				3C01F8F02161CE7400FFD2C6 /* SkyLight.framework in Frameworks */,
 				3C3464C221471797001F45BB /* WeatherKit.framework in Frameworks */,
-				3C665D0221619E870004D9EC /* OctoFeed.framework in Frameworks */,
+				0A01202226137B38007AAB26 /* OctoFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,8 +321,8 @@
 				3C163B912118EF2900F015EC /* Sources */,
 				3C163B922118EF2900F015EC /* Frameworks */,
 				3C163B932118EF2900F015EC /* Resources */,
-				3C665D0421619E880004D9EC /* Embed Frameworks */,
 				3C3545AD212A990500C476AB /* Set Build Number */,
+				0A01202426137B38007AAB26 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -573,6 +573,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -583,9 +584,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = EnergyBar.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development: kevsperanza@gmail.com (RKNP668BNP)";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = D746DYEVHB;
@@ -614,9 +615,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = EnergyBar.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development: kevsperanza@gmail.com (RKNP668BNP)";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = D746DYEVHB;
