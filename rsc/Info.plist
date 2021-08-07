@@ -39,7 +39,7 @@
 	<key>NSRemindersUsageDescription</key>
 	<string>EnergyBar needs access to your Reminders to get the next TODO item.</string>
 	<key>OctoRepository</key>
-	<string>https://github.com/knives-repo/EnergyBar</string>
+	<string>https://github.com/knives-repo/EnergyBar-Minimal</string>
 	<key>OctoCheckPeriod</key>
 	<integer>86400</integer>
 </dict>

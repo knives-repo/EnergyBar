@@ -229,7 +229,7 @@ static void AppControllerFSNotify(const char *path, void *data)
 
 - (IBAction)sourceItemAction:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/knives-repo/EnergyBar"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/knives-repo/EnergyBar-Minimal"]];
 }
 
 - (IBAction)appsFolderAction:(id)sender

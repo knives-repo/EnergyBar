@@ -33,5 +33,5 @@
 - (NSTouchBarItem *)widgetWithIdentifier:(NSString *)identifier;
 - (void)tapAction:(id)sender;
 - (void)longPressAction:(id)sender;
-- (void)superLongPressAction:(id)sender;
+//- (void)superLongPressAction:(id)sender;
 @end
