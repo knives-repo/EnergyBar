@@ -9,13 +9,13 @@ This version of the app revamps the look of certain widgets to achieve a more mi
 ![Touchbar](doc/touchbarmockup2.png)
 
 ## Widgets
-### Now Playing
-### App Dock
-### Calendar/Reminders
-### Universal Mic Mute
-### Control (Media controls, brightness, keyboard brightness, volume)
-### Weather
-### Lock screen (coffee break)
+- Now Playing
+- App Dock
+- Calendar/Reminders
+- Universal Mic Mute
+- Control (Media controls, brightness, keyboard brightness, volume)
+- Weather
+- Lock screen (coffee break)
 
 ## FAQs
 ### How do I change the apps displayed on the Dock?
