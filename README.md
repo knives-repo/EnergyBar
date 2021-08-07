@@ -70,11 +70,12 @@ You may have to remove the native Control Strip buttons in System Preferences>Ke
 - [x] Safari Now Playing support
 - [x] Smoother control widget (removed long-press etc.)
 - [x] Long-press lock widget (prevent accidental taps)
-- [ ] To-do widget - get time + location info
-- [ ] Add 2nd to-do widget, OR show 2 events in the same widget (Title **bold** current event, subtitle next event), look into the timing
-- [ ] DND widget (need to look into observers for NSUserDefault)
 - [x] Keyboard light adjustment
 - [x] Reused function for dock space (the dock is seemingly not that useful...)
+- [ ] - [ ] To-do widget - get time + location info
+- [ ] Add 2nd to-do widget, OR show 2 events in the same widget (Title **bold** current event, subtitle next event), look into the timing
+- [ ] DND widget (need to look into observers for NSUserDefault)
+- [ ] Add language change button
 
 ## Developer Notes
 
