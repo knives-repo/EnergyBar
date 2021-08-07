@@ -9,17 +9,23 @@ This version of the app revamps the look of certain widgets to achieve a more mi
 ![Touchbar](doc/touchbarmockup.png)
 
 ## FAQs
+### How do I change the apps displayed on the Dock?
+Go to **General**, and click **Show Folder**. Here, you can add the **aliases** of the apps you want to populate the Dock with. Alternatively, you can click **From macOS Dock** to just replicate your current Dock.
+
 ### How do I toggle next/previous to skip tracks/music?
 Touch and hold the play/pause button, then swipe left or right. The icon will change accordingly.
 
 ### How do I change keyboard brightness?
-Working on it!
+Touch and hold the keyboard brightness button, then swipe left to toggle off, or right to toggle on.
 
 ### Lock widget isn't working
 Touch and hold the coffee icon.
 
 ### Access calendar from touchbar?
 Touch and hold the events widget.
+
+### How do I get album art?
+Go to **Widgets** and check off **[x] Show album art**.
 
 ## Changes
 ### To-Do Widget
