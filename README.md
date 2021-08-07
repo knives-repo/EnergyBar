@@ -36,6 +36,9 @@ Touch and hold the events widget.
 ### How do I get album art?
 Go to **Widgets** and check off **[x] Show album art**.
 
+### There doesn't seem to be enough space for the widgets?
+You may have to remove the native Control Strip buttons in System Preferences>Keyboard before adding the widgets in EnergyBar. After adding the widgets you want in EnergyBar, you can re-add the Control Strip buttons.
+
 ## Changes
 ### To-Do Widget
 - Removed calendar icon
