@@ -59,6 +59,8 @@
         @"Weather",
         @"Clock",
         @"Lock",
+        @"Backlight",
+        @"MicMute",
         @"Dnd",
         @"Numi",
         NSTouchBarItemIdentifierFlexibleSpace,

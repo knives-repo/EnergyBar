@@ -1,0 +1,24 @@
+//
+//  EnergyBar-Prefix.pch
+//  EnergyBar
+//
+//  Created by Nicolas Bonamy on 9/28/20.
+//  Copyright © 2020 Nicolas Bonamy. All rights reserved.
+//
+
+#ifndef EnergyBar_Prefix_pch
+#define EnergyBar_Prefix_pch
+
+#define IsValid(x) (x != nil && [x isKindOfClass:[NSNull class]] == NO)
+#define IsValidString(x) (IsValid(x) && [x length] > 0)
+#define SafeStringValue(x) (x == nil ? @"" : x)
+
+#define WIDGET_STANDARD_WIDTH 64
+#define WIDGET_STANDARD_IMAGE_WIDTH 36
+#define WIDGET_STANDARD_IMAGE_HEIGHT 36
+#define WIDGET_STANDARD_IMAGE_SIZE NSMakeSize(WIDGET_STANDARD_IMAGE_WIDTH, WIDGET_STANDARD_IMAGE_HEIGHT)
+#define WIDGET_STANDARD_BG_COLOR [NSColor colorWithWhite:0.2109 alpha:1.0]
+
+#import "Log.h"
+
+#endif /* EnergyBar_Prefix_pch */
