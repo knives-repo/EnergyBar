@@ -7,6 +7,7 @@ EnergyBar is an app which replaces native touchbar functionality with widgets. I
 This version of the app revamps the look of certain widgets to achieve a more minimal design.
 
 ![Touchbar](doc/touchbarmockup.png)
+![Touchbar](doc/TouchbarExample2.png)
 
 ## FAQs
 ### How do I change the apps displayed on the Dock?
