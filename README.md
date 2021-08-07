@@ -8,6 +8,15 @@ This version of the app revamps the look of certain widgets to achieve a more mi
 
 ![Touchbar](doc/touchbarmockup2.png)
 
+## Widgets
+### Now Playing
+### App Dock
+### Calendar/Reminders
+### Universal Mic Mute
+### Control (Media controls, brightness, keyboard brightness, volume)
+### Weather
+### Lock screen (coffee break)
+
 ## FAQs
 ### How do I change the apps displayed on the Dock?
 Go to **General**, and click **Show Folder**. Here, you can add the **aliases** of the apps you want to populate the Dock with. Alternatively, you can click **From macOS Dock** to just replicate your current Dock.
