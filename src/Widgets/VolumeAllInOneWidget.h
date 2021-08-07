@@ -1,7 +1,7 @@
 /**
- * @file ControlWidget.h
+ * @file VolumeAllInOneWidget.h
  *
- * @copyright 2018-2019 Bill Zissimopoulos
+ * @copyright 2020 Nicolas Bonamy
  */
 /*
  * This file is part of EnergyBar.
@@ -12,9 +12,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "CustomWidget.h"
+#import "ButtonWidget.h"
 
-@interface ControlWidget : CustomWidget
-@property (retain) NSImage *KeyboardBrightnessMax;
-@property (retain) NSImage *KeyboardBrightnessDown;
+@interface VolumeAllInOneWidget : ButtonWidget
 @end

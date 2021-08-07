@@ -1,8 +1,11 @@
-/**
- * @file ControlWidget.h
- *
- * @copyright 2018-2019 Bill Zissimopoulos
- */
+//
+//  BacklightWidget.h
+//  EnergyBar
+//
+//  Created by Nicolas Bonamy on 9/30/20.
+//  Copyright © 2020 Nicolas Bonamy. All rights reserved.
+//
+
 /*
  * This file is part of EnergyBar.
  *
@@ -14,7 +17,5 @@
 #import <Cocoa/Cocoa.h>
 #import "CustomWidget.h"
 
-@interface ControlWidget : CustomWidget
-@property (retain) NSImage *KeyboardBrightnessMax;
-@property (retain) NSImage *KeyboardBrightnessDown;
+@interface BacklightWidget : CustomWidget
 @end

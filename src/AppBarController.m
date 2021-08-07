@@ -52,15 +52,14 @@
     self.touchBar.customizationAllowedItemIdentifiers = [NSArray arrayWithObjects: //add new widgets here
         @"Dock",
         @"EscKey",
-        @"ActiveApp",
         @"NowPlaying",
         @"Todo",
         @"Control",
         @"Weather",
         @"Clock",
         @"Lock",
-        @"Dnd",
-        @"Numi",
+        @"Backlight",
+        @"MicMute",
         NSTouchBarItemIdentifierFlexibleSpace,
         nil];
 
