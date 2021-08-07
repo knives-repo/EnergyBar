@@ -55,8 +55,8 @@ Touch and hold the events widget.
 - [ ] To-do widget - get time + location info
 - [ ] Add 2nd to-do widget, OR show 2 events in the same widget (Title **bold** current event, subtitle next event), look into the timing
 - [ ] DND widget (need to look into observers for NSUserDefault)
-- [ ] Keyboard light adjustment
-- [ ] Reused function for dock space (the dock is seemingly not that useful...)
+- [x] Keyboard light adjustment
+- [x] Reused function for dock space (the dock is seemingly not that useful...)
 
 ## Developer Notes
 
