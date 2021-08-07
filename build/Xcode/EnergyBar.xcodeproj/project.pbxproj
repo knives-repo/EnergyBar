@@ -17,8 +17,8 @@
 		0A04453326BE523F00EBE4C2 /* ButtonWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A04453126BE523F00EBE4C2 /* ButtonWidget.m */; };
 		0A04453C26BE5CDE00EBE4C2 /* MicMuteWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A04453A26BE5CDE00EBE4C2 /* MicMuteWidget.m */; };
 		0A04453F26BE5CF200EBE4C2 /* NSRunningApplication+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A04453D26BE5CF200EBE4C2 /* NSRunningApplication+Utils.m */; };
-		0AB3D1B4260BE31C009F12DB /* DndWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3D1B3260BE31C009F12DB /* DndWidget.m */; };
-		0ADEDBF9260C12FF0090B479 /* NumiWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADEDBF8260C12FF0090B479 /* NumiWidget.m */; };
+		0A04454426BE7F0900EBE4C2 /* VolumeAllInOneWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A04454326BE7F0900EBE4C2 /* VolumeAllInOneWidget.m */; };
+		0A04455326BE802F00EBE4C2 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A04455226BE802F00EBE4C2 /* NSImage+Utils.m */; };
 		3C01F8F02161CE7400FFD2C6 /* SkyLight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C01F8EF2161CE7400FFD2C6 /* SkyLight.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3C01F8F32161D07800FFD2C6 /* Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01F8F22161D07800FFD2C6 /* Appearance.m */; };
 		3C046013211D7C66003EB021 /* KeyEvent.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C04600F211D7C66003EB021 /* KeyEvent.c */; };
@@ -94,10 +94,10 @@
 		0A04453B26BE5CDE00EBE4C2 /* MicMuteWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicMuteWidget.h; sourceTree = "<group>"; };
 		0A04453D26BE5CF200EBE4C2 /* NSRunningApplication+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRunningApplication+Utils.m"; sourceTree = "<group>"; };
 		0A04453E26BE5CF200EBE4C2 /* NSRunningApplication+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRunningApplication+Utils.h"; sourceTree = "<group>"; };
-		0AB3D1B2260BE2FC009F12DB /* DndWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DndWidget.h; sourceTree = "<group>"; };
-		0AB3D1B3260BE31C009F12DB /* DndWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DndWidget.m; sourceTree = "<group>"; };
-		0ADEDBF8260C12FF0090B479 /* NumiWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NumiWidget.m; sourceTree = "<group>"; };
-		0ADEDBFA260C130D0090B479 /* NumiWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumiWidget.h; sourceTree = "<group>"; };
+		0A04454226BE7F0900EBE4C2 /* VolumeAllInOneWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeAllInOneWidget.h; sourceTree = "<group>"; };
+		0A04454326BE7F0900EBE4C2 /* VolumeAllInOneWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeAllInOneWidget.m; sourceTree = "<group>"; };
+		0A04455126BE802F00EBE4C2 /* NSImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Utils.h"; sourceTree = "<group>"; };
+		0A04455226BE802F00EBE4C2 /* NSImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Utils.m"; sourceTree = "<group>"; };
 		3C01F8EF2161CE7400FFD2C6 /* SkyLight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkyLight.framework; path = ../../../../../../System/Library/PrivateFrameworks/SkyLight.framework; sourceTree = "<group>"; };
 		3C01F8F12161D07800FFD2C6 /* Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appearance.h; sourceTree = "<group>"; };
 		3C01F8F22161D07800FFD2C6 /* Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appearance.m; sourceTree = "<group>"; };
@@ -292,6 +292,8 @@
 				3C1F652522B1CCA800F795D3 /* NSView+TouchBarHitTest.m */,
 				0A04453E26BE5CF200EBE4C2 /* NSRunningApplication+Utils.h */,
 				0A04453D26BE5CF200EBE4C2 /* NSRunningApplication+Utils.m */,
+				0A04455126BE802F00EBE4C2 /* NSImage+Utils.h */,
+				0A04455226BE802F00EBE4C2 /* NSImage+Utils.m */,
 				3CAA9C6B2127B3E000D5B467 /* StringToUrlTransformer.h */,
 				3CAA9C6C2127B3E000D5B467 /* StringToUrlTransformer.m */,
 				3C6CCA36211B824000D019F4 /* TouchBarController.h */,
@@ -331,10 +333,8 @@
 				3C400077236CC6A3000261FF /* TodoWidget.m */,
 				3C3464BD21465319001F45BB /* WeatherWidget.h */,
 				3C3464BE21465319001F45BB /* WeatherWidget.m */,
-				0AB3D1B2260BE2FC009F12DB /* DndWidget.h */,
-				0AB3D1B3260BE31C009F12DB /* DndWidget.m */,
-				0ADEDBFA260C130D0090B479 /* NumiWidget.h */,
-				0ADEDBF8260C12FF0090B479 /* NumiWidget.m */,
+				0A04454226BE7F0900EBE4C2 /* VolumeAllInOneWidget.h */,
+				0A04454326BE7F0900EBE4C2 /* VolumeAllInOneWidget.m */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -454,6 +454,7 @@
 				0A04452C26BE519A00EBE4C2 /* NSSegmentedControl+Utils.m in Sources */,
 				3CDF1EB4211A3B9500739051 /* DockWidget.m in Sources */,
 				3C046013211D7C66003EB021 /* KeyEvent.c in Sources */,
+				0A04455326BE802F00EBE4C2 /* NSImage+Utils.m in Sources */,
 				0A04453026BE51FA00EBE4C2 /* NSColor+Hex.m in Sources */,
 				3C38622A214989B500A8C37B /* PowerStatus.m in Sources */,
 				0A04452926BE511100EBE4C2 /* LevelIndicator.m in Sources */,
@@ -472,14 +473,13 @@
 				0A04453C26BE5CDE00EBE4C2 /* MicMuteWidget.m in Sources */,
 				3C6CCA38211B824000D019F4 /* TouchBarController.m in Sources */,
 				3C5032E32139C8E900305593 /* ImageTitleView.m in Sources */,
-				0ADEDBF9260C12FF0090B479 /* NumiWidget.m in Sources */,
+				0A04454426BE7F0900EBE4C2 /* VolumeAllInOneWidget.m in Sources */,
 				3C163BC72118F1C500F015EC /* main.m in Sources */,
 				3C400079236CC6A3000261FF /* TodoWidget.m in Sources */,
 				3C1F652722B1CCA900F795D3 /* NSView+TouchBarHitTest.m in Sources */,
 				405B467A219A3CCA0006DC16 /* LockWidget.m in Sources */,
 				3C080A4B2139EB0E00EED01D /* FolderController.m in Sources */,
 				3CAA9C6D2127B3E100D5B467 /* StringToUrlTransformer.m in Sources */,
-				0AB3D1B4260BE31C009F12DB /* DndWidget.m in Sources */,
 				3C1A5678211D6B7D008E1F9F /* AppBarController.m in Sources */,
 				0A04452626BE50D900EBE4C2 /* BezelWindow.m in Sources */,
 				3CA8519D212B832100585D29 /* NSWorkspace+Finder.m in Sources */,

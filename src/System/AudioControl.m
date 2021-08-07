@@ -33,38 +33,62 @@ static OSStatus SystemObjectPropertyListener(
     return kAudioHardwareNoError;
 }
 
-static OSStatus AudioDevicePropertyListener(
+static OSStatus AudioDeviceMuteListener(
     AudioObjectID device,
     UInt32 count, const AudioObjectPropertyAddress* addresses,
     void *data)
 {
     [(id)data
         performSelectorOnMainThread:@selector(audioDevicePropertyDidChange)
-        withObject:nil
+        withObject:@"mute"
+        waitUntilDone:NO];
+    return kAudioHardwareNoError;
+}
+
+static OSStatus AudioDeviceVolumeListener(
+    AudioObjectID device,
+    UInt32 count, const AudioObjectPropertyAddress* addresses,
+    void *data)
+{
+    [(id)data
+        performSelectorOnMainThread:@selector(audioDevicePropertyDidChange)
+        withObject:@"volume"
         waitUntilDone:NO];
     return kAudioHardwareNoError;
 }
 
 @implementation AudioControl
 {
+    AudioObjectPropertySelector _selector;
+    AudioObjectPropertyScope _scope;
     AudioDeviceID _audiodev;
 }
 
-+ (AudioControl *)sharedInstance
++ (AudioControl *)sharedInstanceOutput
 {
     static AudioControl *instance = 0;
     if (0 == instance)
-        instance = [[AudioControl alloc] init];
+        instance = [[AudioControl alloc] init:TRUE];
     return instance;
 }
 
-- (id)init
++ (AudioControl *)sharedInstanceInput
+{
+    static AudioControl *instance = 0;
+    if (0 == instance)
+        instance = [[AudioControl alloc] init:FALSE];
+    return instance;
+}
+
+- (id)init:(BOOL) output
 {
     self = [super init];
     if (nil == self)
         return nil;
 
     _audiodev = kAudioObjectUnknown;
+    _selector = output ? kAudioHardwarePropertyDefaultOutputDevice : kAudioHardwarePropertyDefaultInputDevice;
+    _scope = output ? kAudioDevicePropertyScopeOutput : kAudioDevicePropertyScopeInput;
 
     [self registerSystemObjectListener:YES];
     [self getAudioDevice:YES];
@@ -85,7 +109,7 @@ static OSStatus AudioDevicePropertyListener(
     AudioObjectPropertyAddress address =
     {
         .mSelector = kAudioHardwareServiceDeviceProperty_VirtualMasterVolume,
-        .mScope = kAudioDevicePropertyScopeOutput,
+        .mScope = _scope,
         .mElement = kAudioObjectPropertyElementMaster,
     };
     __block Float32 volume = NAN;
@@ -110,7 +134,7 @@ static OSStatus AudioDevicePropertyListener(
     AudioObjectPropertyAddress address =
     {
         .mSelector = kAudioHardwareServiceDeviceProperty_VirtualMasterVolume,
-        .mScope = kAudioDevicePropertyScopeOutput,
+        .mScope = _scope,
         .mElement = kAudioObjectPropertyElementMaster,
     };
     Float32 volume = value;
@@ -129,7 +153,7 @@ static OSStatus AudioDevicePropertyListener(
     AudioObjectPropertyAddress address =
     {
         .mSelector = kAudioDevicePropertyMute,
-        .mScope = kAudioDevicePropertyScopeOutput,
+        .mScope = _scope,
         .mElement = kAudioObjectPropertyElementMaster,
     };
     __block UInt32 mute = 0;
@@ -154,7 +178,7 @@ static OSStatus AudioDevicePropertyListener(
     AudioObjectPropertyAddress address =
     {
         .mSelector = kAudioDevicePropertyMute,
-        .mScope = kAudioDevicePropertyScopeOutput,
+        .mScope = _scope,
         .mElement = kAudioObjectPropertyElementMaster,
     };
     UInt32 mute = !!value;
@@ -188,7 +212,7 @@ static OSStatus AudioDevicePropertyListener(
     {
         AudioObjectPropertyAddress address =
         {
-            .mSelector = kAudioHardwarePropertyDefaultOutputDevice,
+            .mSelector = _selector,
             .mScope = kAudioObjectPropertyScopeGlobal,
             .mElement = kAudioObjectPropertyElementMaster,
         };
@@ -206,14 +230,22 @@ static OSStatus AudioDevicePropertyListener(
             AudioObjectPropertyAddress address =
             {
                 .mSelector = kAudioDevicePropertyMute,
-                .mScope = kAudioDevicePropertyScopeOutput,
+                .mScope = _scope,
                 .mElement = kAudioObjectPropertyElementMaster,
             };
 
             status = AudioObjectAddPropertyListener(
-                device, &address, AudioDevicePropertyListener, self);
+                device, &address, AudioDeviceMuteListener, self);
             if (kAudioHardwareNoError != status)
                 LOG("AudioObjectAddPropertyListener = %d", status);
+
+            address.mSelector = kAudioDevicePropertyVolumeScalar;
+
+            status = AudioObjectAddPropertyListener(
+                device, &address, AudioDeviceVolumeListener, self);
+            if (kAudioHardwareNoError != status)
+                LOG("AudioObjectAddPropertyListener = %d", status);
+
         }
     }
 
@@ -227,13 +259,20 @@ static OSStatus AudioDevicePropertyListener(
         AudioObjectPropertyAddress address =
         {
             .mSelector = kAudioDevicePropertyMute,
-            .mScope = kAudioDevicePropertyScopeOutput,
+            .mScope = _scope,
             .mElement = kAudioObjectPropertyElementMaster,
         };
         OSStatus status;
 
         status = AudioObjectRemovePropertyListener(
-            _audiodev, &address, AudioDevicePropertyListener, self);
+            _audiodev, &address, AudioDeviceMuteListener, self);
+        if (kAudioHardwareNoError != status)
+            LOG("AudioObjectRemovePropertyListener = %d", status);
+
+        address.mSelector = kAudioDevicePropertyVolumeScalar;
+        
+        status = AudioObjectRemovePropertyListener(
+            _audiodev, &address, AudioDeviceVolumeListener, self);
         if (kAudioHardwareNoError != status)
             LOG("AudioObjectRemovePropertyListener = %d", status);
     }
@@ -243,7 +282,7 @@ static OSStatus AudioDevicePropertyListener(
 {
     AudioObjectPropertyAddress address =
     {
-        .mSelector = kAudioHardwarePropertyDefaultOutputDevice,
+        .mSelector = _selector,
         .mScope = kAudioObjectPropertyScopeGlobal,
         .mElement = kAudioObjectPropertyElementMaster,
     };

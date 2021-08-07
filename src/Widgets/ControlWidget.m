@@ -20,6 +20,7 @@
 #import "NSTouchBar+SystemModal.h"
 #import "NowPlaying.h"
 #import "TouchBarController.h"
+#import "NSSegmentedControl+Utils.h"
 
 #define MaxPanDistance                  50.0
 
@@ -59,7 +60,6 @@
 }
 @end
 
-/* Brightness Bar
 @interface ControlWidgetBrightnessBarController : TouchBarController
     <NSScrubberDataSource, NSScrubberDelegate>
 @property (retain) CBBlueLightClient *blueLightClient;
@@ -129,7 +129,6 @@
     [super awakeFromNib];
 }
 
- 
 - (BOOL)presentWithPlacement:(NSInteger)placement
 {
     NSScrubber *scrubber;
@@ -243,9 +242,7 @@
 }
 #endif
 @end
-*/
 
-/* Volume Bar
 @interface ControlWidgetVolumeBarController : TouchBarController
 @property (retain) NSTimer *timer;
 @end
@@ -277,7 +274,7 @@
 
 - (BOOL)presentWithPlacement:(NSInteger)placement
 {
-    double value = [AudioControl sharedInstance].volume;
+    double value = [AudioControl sharedInstanceOutput].volume;
     if (isnan(value))
         value = 0.5;
 
@@ -313,11 +310,10 @@
     [self resetTimer];
 
     NSSliderTouchBarItem *item = [self.touchBar itemForIdentifier:@"VolumeSlider"];
-    [AudioControl sharedInstance].volume = item.slider.doubleValue;
-    [AudioControl sharedInstance].mute = item.slider.doubleValue < 1.0 / (16 * 4);
+    [AudioControl sharedInstanceOutput].volume = item.slider.doubleValue;
+    [AudioControl sharedInstanceOutput].mute = item.slider.doubleValue < 1.0 / (16 * 4);
 }
 @end
-*/
 
 @interface ControlWidgetLevelView : NSView
 @property (getter=value, setter=setValue:) double value;
@@ -352,7 +348,7 @@
     if (nil == foregroundColor)
     {
         if (@available(macOS 10.14, *))
-            foregroundColor = [NSColor controlAccentColor/*can change to white potentially*/];
+            foregroundColor = [NSColor controlAccentColor];
         else
             foregroundColor = [NSColor systemBlueColor];
     }
@@ -444,12 +440,12 @@
     view.frame = rect;
 }
 @end
-/*
+
 @interface ControlWidget ()
 @property (retain) ControlWidgetBrightnessBarController *brightnessBarController;
 @property (retain) ControlWidgetVolumeBarController *volumeBarController;
 @end
-*/
+
 @implementation ControlWidget
 {
     NSInteger _pressKind;
@@ -458,9 +454,8 @@
 
 - (void)commonInit
 {
-/*    self.brightnessBarController = [ControlWidgetBrightnessBarController controller];
+    self.brightnessBarController = [ControlWidgetBrightnessBarController controller];
     self.volumeBarController = [ControlWidgetVolumeBarController controller];
- */
 
     NSPressGestureRecognizer *shortPress = [[[NSPressGestureRecognizer alloc]
         initWithTarget:self action:@selector(shortPressAction:)] autorelease];
@@ -468,8 +463,10 @@
     shortPress.minimumPressDuration = ShortPressDuration;
 
     NSSegmentedControl *control = [NSSegmentedControl
+       //you can add more buttons here (add to the array)
         segmentedControlWithImages:[NSArray arrayWithObjects:
             [self playPauseImage],
+            [NSImage imageNamed:@"KeyboardBrightnessUp"],
             [NSImage imageNamed:@"BrightnessUp"],
             [NSImage imageNamed:NSImageNameTouchBarAudioOutputVolumeHighTemplate],
             [self volumeMuteImage],
@@ -503,9 +500,9 @@
     self.view = view;
 
     [NowPlaying sharedInstance];
-    [AudioControl sharedInstance];
+    [AudioControl sharedInstanceOutput];
 }
-/*
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter]
@@ -516,7 +513,7 @@
 
     [super dealloc];
 }
-*/
+
 - (void)viewWillAppear
 {
     [[NSNotificationCenter defaultCenter]
@@ -546,22 +543,23 @@
 
 - (NSImage *)volumeMuteImage
 {
-    BOOL mute = [AudioControl sharedInstance].mute;
+    BOOL mute = [AudioControl sharedInstanceOutput].mute;
     return [NSImage imageNamed:mute ? @"VolumeMuteOn" : @"VolumeMuteOff"];
 }
 
 - (void)nowPlayingNotification:(NSNotification *)notification
 {
     NSSegmentedControl *control = [self.view viewWithTag:'ctrl'];
+    //change which segment (button) displays the play/pause image
     [control setImage:[self playPauseImage] forSegment:0];
 }
 
 - (void)audioControlNotification:(NSNotification *)notification
 {
     NSSegmentedControl *control = [self.view viewWithTag:'ctrl'];
-    [control setImage:[self volumeMuteImage] forSegment:3];
+    //change which segment (button) displays the mute/unmute image
+    [control setImage:[self volumeMuteImage] forSegment:4];
 }
-
 
 - (void)click:(id)sender
 {
@@ -571,13 +569,20 @@
     case 0:
         PostAuxKeyPress(NX_KEYTYPE_PLAY);
         break;
+    case 1:
+        break;
+    case 2:
+        [self.brightnessBarController present];
+        break;
     case 3:
-        [AudioControl sharedInstance].mute = ![AudioControl sharedInstance].mute;
+        [self.volumeBarController present];
+        break;
+    case 4:
+        [AudioControl sharedInstanceOutput].mute = ![AudioControl sharedInstanceOutput].mute;
         break;
     }
 }
 
- 
 - (void)shortPressAction:(NSGestureRecognizer *)recognizer
 {
     switch (recognizer.state)
@@ -605,7 +610,7 @@
     NSSegmentedControl *control = [self.view viewWithTag:'ctrl'];
     ControlWidgetLevelView *level = [self.view viewWithTag:'levl'];
     NSPoint point = [recognizer locationInView:control];
-    NSInteger segment = [self segmentForX:point.x];
+    NSInteger segment = [control segmentForX:point.x];
     double value;
 
     switch (segment)
@@ -615,12 +620,16 @@
         value = 0.5;
         break;
     case 1:
+        _pressKind = 'keyb';
+        value = 0.5;
+        break;
+    case 2:
         _pressKind = 'brgt';
         value = GetDisplayBrightness(0);
         break;
-    case 2:
+    case 3:
         _pressKind = 'audi';
-        value = [AudioControl sharedInstance].volume;
+        value = [AudioControl sharedInstanceOutput].volume;
         break;
     default:
         return;
@@ -631,7 +640,8 @@
     _xmin = point.x - MaxPanDistance * value;
     _xmax = _xmin + MaxPanDistance;
 
-    if ('play' == _pressKind)
+    //if no sliders, remember to insert here
+    if ('play' == _pressKind || 'keyb' == _pressKind)
         return;
 
     control.hidden = YES;
@@ -651,8 +661,18 @@
     point.x = MIN(point.x, _xmax);
     double value = (point.x - _xmin) / MaxPanDistance;
 
+    //modify this for different 'slide' buttons
     switch (_pressKind)
     {
+            //remember to change segments!
+    case 'keyb':
+        if (0.25 > value)
+            [control setImage:[NSImage imageNamed:@"KeyboardBrightnessDown"] forSegment:1];
+        else if (0.25 <= value && value <= 0.75)
+            [control setImage:[NSImage imageNamed:@"KeyboardBrightnessUp"] forSegment:1];
+        else
+            [control setImage:[NSImage imageNamed:@"KeyboardBrightnessMax"] forSegment:1];
+        break;
     case 'play':
         if (0.25 > value)
             [control setImage:[NSImage imageNamed:NSImageNameTouchBarSkipBackTemplate] forSegment:0];
@@ -667,8 +687,8 @@
         break;
     case 'audi':
         level.value = isnan(value) ? 0.5 : value;
-        [AudioControl sharedInstance].volume = value;
-        [AudioControl sharedInstance].mute = value < 1.0 / (16 * 4);
+        [AudioControl sharedInstanceOutput].volume = value;
+        [AudioControl sharedInstanceOutput].mute = value < 1.0 / (16 * 4);
         break;
     }
 }
@@ -687,6 +707,49 @@
 
     switch (_pressKind)
     {
+    case 'keyb':
+        if (0.25 > value)
+        {
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_DOWN);
+        }
+        else if (0.25 <= value && value <= 0.75)
+            ;
+        else
+        {
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+            PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
+        }
+        [control setImage:[NSImage imageNamed:@"KeyboardBrightnessUp"] forSegment:1];
+        break;
     case 'play':
         if (0.25 > value)
             PostAuxKeyPress(NX_KEYTYPE_PREVIOUS);
@@ -705,61 +768,4 @@
     _pressKind = 0;
 }
 
-- (NSInteger)segmentForX:(CGFloat)x
-{
-    /* HACK:
-     * There does not appear to be a direct way to determine the segment from a point.
-     *
-     * One would think that the -[NSSegmentedControl widthForSegment:] method on the
-     * first segment (which happens to be the Play/Pause button) would do the trick.
-     * Unfortunately this method returns 0 for automatically sized segments. Arrrrr!
-     *
-     * So I am adapting here some code that I wrote a long time for "DarwinKit"...
-     */
-    NSSegmentedControl *control = [self.view viewWithTag:'ctrl'];
-    NSRect rect = control.bounds;
-    CGFloat widths[16] = { 0 }, totalWidth = 0;
-    NSInteger count = control.segmentCount, zeroWidthCells = 0;
-    for (NSInteger i = 0; count > i; i++)
-    {
-        widths[i] = [control widthForSegment:i];
-        if (0 == widths[i])
-            zeroWidthCells++;
-        else
-            totalWidth += widths[i];
-    }
-    if (0 < zeroWidthCells)
-    {
-        totalWidth = rect.size.width - totalWidth;
-        for (NSInteger i = 0; count > i; i++)
-            if (0 == widths[i])
-                widths[i] = totalWidth / zeroWidthCells;
-    }
-    else
-    {
-        if (2 <= count)
-        {
-            CGFloat remWidth = rect.size.width - totalWidth;
-            widths[0] += remWidth / 2;
-            widths[count - 1] += remWidth / 2;
-        }
-        else if (1 <= count)
-        {
-            CGFloat remWidth = rect.size.width - totalWidth;
-            widths[0] += remWidth;
-        }
-    }
-
-    /* now that we have the widths go ahead and figure out which segment has X */
-    totalWidth = 0;
-    for (NSInteger i = 0; count > i; i++)
-    {
-        if (totalWidth <= x && x < totalWidth + widths[i])
-            return i;
-
-        totalWidth += widths[i];
-    }
-
-    return -1;
-}
 @end

@@ -14,7 +14,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AudioControl : NSObject
-+ (AudioControl *)sharedInstance;
++ (AudioControl*) sharedInstanceOutput;
++ (AudioControl*) sharedInstanceInput;
 @property (getter=volume, setter=setVolume:) double volume;
 @property (getter=isMute, setter=setMute:) BOOL mute;
 @end

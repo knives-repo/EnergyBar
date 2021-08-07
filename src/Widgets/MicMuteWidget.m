@@ -125,27 +125,27 @@
 
 - (void)tapAction:(id)sender
 {
-    if (self.applicationMute && [self isMutableAppRunning]) {
-
-        if ([self.runningApplication isMicrosoftTeams] || [self.runningApplication isWebexMeetings]) {
-
-            // Cmd + Shift + M toggle mute
-            PostKeyPress(46, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
-            
-            // done
-            return;
-            
-        } else if ([self.runningApplication isZoom]) {
-            
-            // Cmd + Shift + A toggle mute
-            PostKeyPress(0, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
-            
-            // done
-            return;
-
-        }
-        
-    }
+//    if (self.applicationMute && [self isMutableAppRunning]) {
+//
+//        if ([self.runningApplication isMicrosoftTeams] || [self.runningApplication isWebexMeetings]) {
+//
+//            // Cmd + Shift + M toggle mute
+//            PostKeyPress(46, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
+//
+//            // done
+//            return;
+//
+//        } else if ([self.runningApplication isZoom]) {
+//
+//            // Cmd + Shift + A toggle mute
+//            PostKeyPress(0, kCGEventFlagMaskShift | kCGEventFlagMaskCommand);
+//
+//            // done
+//            return;
+//
+//        }
+//
+//    }
         
     // modify
     BOOL mute = [AudioControl sharedInstanceInput].mute;
