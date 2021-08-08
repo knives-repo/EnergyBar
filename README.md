@@ -4,7 +4,7 @@
 
 EnergyBar is an app which replaces native touchbar functionality with widgets. It is lighter and less resource-intensive than most existing alternatives currently (e.g: Pock, BTT).
 
-This version of the app revamps the look of certain widgets to achieve a more minimal design.
+This version of the app adds widgets and revamps the look of certain widgets to achieve a more minimal design.
 
 ![Touchbar](doc/touchbarmockup2.png)
 
@@ -39,32 +39,6 @@ Go to **Widgets** and check off **[x] Show album art**.
 ### There doesn't seem to be enough space for the widgets?
 You may have to remove the native Control Strip buttons in System Preferences>Keyboard before adding the widgets in EnergyBar. After adding the widgets you want in EnergyBar, you can re-add the Control Strip buttons.
 
-## Changes
-### To-Do Widget
-- Removed calendar icon
-- Realigned to the right (instead of the centre)
-
-### Now Playing Widget
-- Added **album art support** (Spotify, Music, Podcasts etc.)       
-    -  Added compatibility with Safari to show Safari icon
-    -  Now displays appBundleID as a subtitle if no artist/appName is available
-- Realigned to the left (instead of the centre)
-- Removed long tap function
-
-### Weather Widget
-- Removed area information
-- Changed font size and spacing
-
-### Lock Widget
-- Made widget smaller
-
-### Control Widget
-- Increased responsiveness
-- Removed long touch function
-
-### Dock
-- Changed spacing and icon size
-
 ## To Do
 - [x] Album Art support
 - [x] Safari Now Playing support
@@ -72,7 +46,7 @@ You may have to remove the native Control Strip buttons in System Preferences>Ke
 - [x] Long-press lock widget (prevent accidental taps)
 - [x] Keyboard light adjustment
 - [x] Reused function for dock space (the dock is seemingly not that useful...)
-- [ ] To-do widget - get time + location info
+- [ ] Add time + location info to to-do widget
 - [ ] Add 2nd to-do widget, OR show 2 events in the same widget (Title **bold** current event, subtitle next event), look into the timing
 - [ ] DND widget (need to look into observers for NSUserDefault)
 - [ ] Add language change button
