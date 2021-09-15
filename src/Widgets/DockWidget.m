@@ -16,7 +16,7 @@
 #import "FolderController.h"
 #import "NSWorkspace+Finder.h"
 
-static NSSize dockItemSize = { 45, 28 };
+static NSSize dockItemSize = { 43, 28 };
 static CGFloat dockDotHeight = 1;
 static CGFloat dockItemBounce = 5;
 static const NSUInteger maxPersistentItemCount = 8;
