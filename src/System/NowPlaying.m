@@ -222,13 +222,14 @@ extern NSString *kMRMediaRemoteNowPlayingInfoArtworkData;
 - (void)infoDidChange:(NSNotification *)notification
 {
     /*
-     The delay is necessary for album art to update correctly.
+     The delay might be necessary for album art to update correctly.
      Potentially, one can experiment with placing another [self updateInfo] before the delay to repeat this action, but this results in some wonky icon changes.
      */
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(50 * NSEC_PER_MSEC)), dispatch_get_main_queue(),
-       ^{
-        [self updateInfo];
-        });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(50 * NSEC_PER_MSEC)), dispatch_get_main_queue(),
+//       ^{
+//        [self updateInfo];
+//        });
+    [self updateInfo];
 }
 
 - (void)playingDidChange:(NSNotification *)notification
