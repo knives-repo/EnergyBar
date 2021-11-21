@@ -461,12 +461,17 @@
         initWithTarget:self action:@selector(shortPressAction:)] autorelease];
     shortPress.allowedTouchTypes = NSTouchTypeMaskDirect;
     shortPress.minimumPressDuration = ShortPressDuration;
+    
+    NSPressGestureRecognizer *longPress = [[[NSPressGestureRecognizer alloc]
+        initWithTarget:self action:@selector(longPressAction:)] autorelease];
+    longPress.allowedTouchTypes = NSTouchTypeMaskDirect;
+    longPress.minimumPressDuration = SuperLongPressDuration;
 
     NSSegmentedControl *control = [NSSegmentedControl
-       //you can add more buttons here (add to the array)
+       //you can add more buttons here (add to the array), this is where you arrange button icons
         segmentedControlWithImages:[NSArray arrayWithObjects:
-            [self playPauseImage],
             [NSImage imageNamed:@"KeyboardBrightnessUp"],
+            [self playPauseImage],
             [NSImage imageNamed:@"BrightnessUp"],
             [NSImage imageNamed:NSImageNameTouchBarAudioOutputVolumeHighTemplate],
             [self volumeMuteImage],
@@ -551,7 +556,7 @@
 {
     NSSegmentedControl *control = [self.view viewWithTag:'ctrl'];
     //change which segment (button) displays the play/pause image
-    [control setImage:[self playPauseImage] forSegment:0];
+    [control setImage:[self playPauseImage] forSegment:1];
 }
 
 - (void)audioControlNotification:(NSNotification *)notification
@@ -567,9 +572,9 @@
     switch (control.selectedSegment)
     {
     case 0:
-        PostAuxKeyPress(NX_KEYTYPE_PLAY);
         break;
     case 1:
+        PostAuxKeyPress(NX_KEYTYPE_PLAY);
         break;
     case 2:
         [self.brightnessBarController present];
@@ -616,11 +621,11 @@
     switch (segment)
     {
     case 0:
-        _pressKind = 'play';
+        _pressKind = 'keyb';
         value = 0.5;
         break;
     case 1:
-        _pressKind = 'keyb';
+        _pressKind = 'play';
         value = 0.5;
         break;
     case 2:
@@ -667,19 +672,19 @@
             //remember to change segments!
     case 'keyb':
         if (0.25 > value)
-            [control setImage:[NSImage imageNamed:@"KeyboardBrightnessDown"] forSegment:1];
+            [control setImage:[NSImage imageNamed:@"KeyboardBrightnessDown"] forSegment:0];
         else if (0.25 <= value && value <= 0.75)
-            [control setImage:[NSImage imageNamed:@"KeyboardBrightnessUp"] forSegment:1];
+            [control setImage:[NSImage imageNamed:@"KeyboardBrightnessUp"] forSegment:0];
         else
-            [control setImage:[NSImage imageNamed:@"KeyboardBrightnessMax"] forSegment:1];
+            [control setImage:[NSImage imageNamed:@"KeyboardBrightnessMax"] forSegment:0];
         break;
     case 'play':
         if (0.25 > value)
-            [control setImage:[NSImage imageNamed:NSImageNameTouchBarSkipBackTemplate] forSegment:0];
+            [control setImage:[NSImage imageNamed:NSImageNameTouchBarSkipBackTemplate] forSegment:1];
         else if (0.25 <= value && value <= 0.75)
-            [control setImage:[self playPauseImage] forSegment:0];
+            [control setImage:[self playPauseImage] forSegment:1];
         else
-            [control setImage:[NSImage imageNamed:NSImageNameTouchBarSkipAheadTemplate] forSegment:0];
+            [control setImage:[NSImage imageNamed:NSImageNameTouchBarSkipAheadTemplate] forSegment:1];
         break;
     case 'brgt':
         level.value = isnan(value) ? 0.5 : value;
@@ -748,7 +753,7 @@
             PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
             PostAuxKeyPress(NX_KEYTYPE_ILLUMINATION_UP);
         }
-        [control setImage:[NSImage imageNamed:@"KeyboardBrightnessUp"] forSegment:1];
+        [control setImage:[NSImage imageNamed:@"KeyboardBrightnessUp"] forSegment:0];
         break;
     case 'play':
         if (0.25 > value)
@@ -757,7 +762,7 @@
             ;
         else
             PostAuxKeyPress(NX_KEYTYPE_NEXT);
-        [control setImage:[self playPauseImage] forSegment:0];
+        [control setImage:[self playPauseImage] forSegment:1];
         break;
     default:
         control.hidden = NO;
